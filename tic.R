@@ -10,10 +10,8 @@
 library(tic, warn.conflicts = FALSE)
 source("./.app/tic/helpers.R")
 
-
 # Macros ------------------------------------------------------------------
 # if(is_master_branch()
-do_pkgdown(orphan = TRUE)
 
 # Stage: Before Script ----------------------------------------------------
 get_stage("before_script") %>%
@@ -35,8 +33,8 @@ get_stage("before_deploy")
 
 # Stage: Deploy -----------------------------------------------------------
 get_stage("deploy") %>%
+    tic::step_build_pkgdown() %>%
     publish_package_coverage()
-
 
 # Stage: After Deploy -----------------------------------------------------
 get_stage("after_deploy")
