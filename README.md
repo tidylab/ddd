@@ -1,5 +1,5 @@
 
-# `ddd` <img src='https://i.imgur.com/sdsO73r.png' align="right" height="75"/>
+# `ddd` <img src='https://i.imgur.com/1dE1Ar9.png' align="right" height="75"/>
 
 <!-- badges: start -->
 
@@ -7,14 +7,14 @@
 [![code-coverage](https://codecov.io/gh/tidylab/ddd/branch/master/graph/badge.svg)](https://codecov.io/github/tidylab/ddd/?branch=master)
 <!-- badges: end -->
 
-## Domain Driven Design
+## `Domain-driven Design (ddd)`
 
-<img src="https://i.imgur.com/RLEQkhe.png" width="75%" style="display: block; margin: auto;" />
+<img src="https://i.imgur.com/RLEQkhe.png" width="100%" style="display: block; margin: auto;" />
 
 ## Overview
 
-Put Domain Driven Design (DDD) to practice on analytic projects in R.
-This package inclued key DDD clasess for intantitaing Domain Events,
+Put Domain-driven Design (DDD) to practice on analytic projects in R.
+This package includes key DDD classes for instantiating Domain Events,
 Commands, Entities, Value Objects, Domain Services and Aggregates.
 
 ## Installation
