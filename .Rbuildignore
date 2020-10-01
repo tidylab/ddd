@@ -1,0 +1,17 @@
+# Folders
+.app/
+
+# Files
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.travis\.yml$
+^codecov\.yml$
+^tic\.R$
+^README\.Rmd$
+^LICENSE\.md$
+
+# Docker
+^\.dockerignore$
+^docker-compose\.yml$
+^R/docker-DockerCompose\.R$
+^tests/testthat/test-docker-DockerCompose\.R$
