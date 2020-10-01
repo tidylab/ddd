@@ -33,9 +33,9 @@ get_stage("before_deploy") %>%
 
 # Stage: Deploy -----------------------------------------------------------
 get_stage("deploy") %>%
-    publish_package_coverage() %>%
+    # publish_package_coverage() %>%
     add_step(step_build_pkgdown()) %>%
-    add_step(step_push_deploy())
+    add_step(step_do_push_deploy())
 
 # Stage: After Deploy -----------------------------------------------------
 get_stage("after_deploy")
