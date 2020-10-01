@@ -1,5 +1,6 @@
 # Folders
 man/
+renv/
 
 # Files
 .Rproj.user
@@ -7,3 +8,4 @@ man/
 .RData
 .Ruserdata
 *.png
+
