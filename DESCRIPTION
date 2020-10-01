@@ -8,7 +8,7 @@ Date: 2020-06-22
 Authors@R: c(person("Harel", "Lustiger", email = "tidylab@gmail.com", role = c("aut", "cre")))
 Maintainer: Harel Lustiger <tidylab@gmail.com>
 Description: Put Domain Driven Design (DDD) to practice on analytic projects in 
-    R. This package inclued key DDD clasess for intantitaing Domain Events, 
+    R. This package inclued key DDD classes for intantitaing Domain Events, 
     Commands, Entities, Value Objects, Domain Services and Aggregates.
 License: MIT + file LICENSE
 Encoding: UTF-8
