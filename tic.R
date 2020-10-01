@@ -23,10 +23,6 @@ get_stage("script") %>%
     build_steps() %>%
     test_suite_steps()
 
-if(TRUE)
-    get_stage("script") %>%
-    add_step(step_build_pkgdown())
-
 # Stage: After Success ----------------------------------------------------
 get_stage("after_success")
 
@@ -39,6 +35,10 @@ get_stage("before_deploy")
 # Stage: Deploy -----------------------------------------------------------
 get_stage("deploy") %>%
     publish_package_coverage()
+
+get_stage("deploy") %>%
+    add_step(step_build_pkgdown()) %>%
+    add_step(step_push_deploy())
 
 # Stage: After Deploy -----------------------------------------------------
 get_stage("after_deploy")
