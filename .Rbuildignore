@@ -1,11 +1,13 @@
 # Folders
 .app/
+renv/
 
 # Files
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.travis\.yml$
 ^codecov\.yml$
+^renv\.lock$
 ^tic\.R$
 ^README\.Rmd$
 ^LICENSE\.md$

@@ -53,6 +53,6 @@ ENV ROOT true
 
 # Run Rproject -----------------------------------------------------------------
 RUN touch .env .Rprofile
-RUN echo "setwd('./rproject')" >> .Rprofile
+RUN echo "try(setwd('./rproject'))" >> .Rprofile
 RUN echo "try(source('.Rprofile'))" >> .Rprofile
 RUN cp .Rprofile home/rstudio/.Rprofile
