@@ -19,21 +19,22 @@ get_stage("before_script") %>%
     add_code_step(try(devtools::uninstall(), silent = TRUE))
 
 # Stage: Script -----------------------------------------------------------
-get_stage("script") %>% build_steps() %>% test_suite_steps()
+get_stage("script") %>%
+    build_steps() %>%
+    test_suite_steps()
 
 # Stage: After Success ----------------------------------------------------
 get_stage("after_success")
 
 # Stage: After Failure ----------------------------------------------------
-get_stage("after_failure") %>%
-    add_code_step(print(sessioninfo::session_info(include_base = FALSE)))
+get_stage("after_failure")
 
 # Stage: Before Deploy ----------------------------------------------------
 get_stage("before_deploy")
 
 # Stage: Deploy -----------------------------------------------------------
 get_stage("deploy") %>%
-    tic::step_build_pkgdown() %>%
+    add_step(step_build_pkgdown()) %>%
     publish_package_coverage()
 
 # Stage: After Deploy -----------------------------------------------------
