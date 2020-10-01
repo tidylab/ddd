@@ -23,7 +23,6 @@ Suggests:
     withr
 Imports: 
     stringr,
-    yaml,
     purrr,
     fs,
     R6
