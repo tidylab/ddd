@@ -10,12 +10,9 @@
 library(tic, warn.conflicts = FALSE)
 source("./.app/tic/helpers.R")
 
-# Helpers -----------------------------------------------------------------
-uninstall_local <- function(pkg = ".") try(devtools::uninstall(pkg), silent = TRUE)
-
 # Stage: Before Script ----------------------------------------------------
 get_stage("before_script") %>%
-    add_code_step(uninstall_local()) %>%
+    add_code_step(try(devtools::uninstall(), silent = TRUE)) %>%
     add_code_step()
 
 # Stage: Script -----------------------------------------------------------
@@ -34,9 +31,7 @@ get_stage("before_deploy")
 
 # Stage: Deploy -----------------------------------------------------------
 get_stage("deploy") %>%
-    publish_package_coverage()
-
-get_stage("deploy") %>%
+    publish_package_coverage() %>%
     add_step(step_build_pkgdown()) %>%
     add_step(step_push_deploy())
 
