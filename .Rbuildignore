@@ -8,6 +8,10 @@
 ^codecov\.yml$
 ^tic\.R$
 ^README\.Rmd$
-^docker-compose\.yml$
 ^LICENSE\.md$
+
+# Docker
 ^\.dockerignore$
+^docker-compose\.yml$
+^R/docker-DockerCompose\.R$
+^tests/testthat/test-docker-DockerCompose\.R$
