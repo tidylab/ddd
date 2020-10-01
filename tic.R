@@ -28,7 +28,8 @@ get_stage("after_failure")
 
 # Stage: Before Deploy ----------------------------------------------------
 get_stage("before_deploy") %>%
-    add_step(step_setup_ssh(private_key_name = "TIC_DEPLOY_KEY"))
+    add_step(step_install_ssh_keys()) %>%
+    add_step(step_add_to_known_hosts())
 
 # Stage: Deploy -----------------------------------------------------------
 get_stage("deploy") %>%
