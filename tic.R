@@ -10,18 +10,18 @@
 library(tic, warn.conflicts = FALSE)
 source("./.app/tic/helpers.R")
 
-# Macros ------------------------------------------------------------------
-# if(is_master_branch()
+# Helpers -----------------------------------------------------------------
+uninstall_local <- function(pkg = ".") try(devtools::uninstall(pkg), silent = TRUE)
 
 # Stage: Before Script ----------------------------------------------------
 get_stage("before_script") %>%
-    add_code_step(install_deps()) %>%
-    add_code_step(try(devtools::uninstall(), silent = TRUE))
+    add_code_step(uninstall_local()) %>%
+    add_code_step()
 
 # Stage: Script -----------------------------------------------------------
 get_stage("script") %>%
-    build_steps() %>%
-    test_suite_steps()
+    check_package() %>%
+    run_unit_tests()
 
 # Stage: After Success ----------------------------------------------------
 get_stage("after_success")
