@@ -30,7 +30,8 @@ get_stage("after_success")
 get_stage("after_failure")
 
 # Stage: Before Deploy ----------------------------------------------------
-get_stage("before_deploy")
+get_stage("before_deploy") %>%
+    add_step(step_setup_ssh())
 
 # Stage: Deploy -----------------------------------------------------------
 get_stage("deploy") %>%
