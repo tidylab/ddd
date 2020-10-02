@@ -27,15 +27,11 @@ get_stage("after_success")
 get_stage("after_failure")
 
 # Stage: Before Deploy ----------------------------------------------------
-get_stage("before_deploy") %>%
-    add_step(step_install_ssh_keys()) %>%
-    add_step(step_add_to_known_hosts())
+get_stage("before_deploy")
 
 # Stage: Deploy -----------------------------------------------------------
 get_stage("deploy") %>%
-    # publish_package_coverage() %>%
-    add_step(step_build_pkgdown()) %>%
-    add_step(step_do_push_deploy())
+    publish_package_coverage()
 
 # Stage: After Deploy -----------------------------------------------------
 get_stage("after_deploy")
