@@ -17,3 +17,4 @@ renv/
 ^docker-compose\.yml$
 ^R/docker-DockerCompose\.R$
 ^tests/testthat/test-docker-DockerCompose\.R$
+^\.github/workflows$
