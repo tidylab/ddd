@@ -10,7 +10,6 @@
 library(tic, warn.conflicts = FALSE)
 source("./.app/tic/helpers.R")
 
-
 # Macros ------------------------------------------------------------------
 if (ci_on_ghactions()) do_pkgdown()
 
