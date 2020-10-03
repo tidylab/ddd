@@ -13,7 +13,7 @@ source("./.app/tic/helpers.R")
 # Macros ------------------------------------------------------------------
 # tic::use_ghactions_deploy()
 if (ci_on_ghactions()){
-    do_pkgdown <- function(...) do_pkgdown(..., deploy = TRUE, orphan = TRUE)
+    do_pkgdown <- function(...) tic::do_pkgdown(..., deploy = TRUE, orphan = TRUE)
     if(is_master_branch()){
         do_pkgdown(branch = "gh-pages")
     } else if (is_develop_branch()) {
