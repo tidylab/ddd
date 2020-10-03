@@ -76,7 +76,7 @@ jobs:
       - name: "[Stage] Prepare"
         run: |
           echo "" > .Rprofile
-          Rscript -e "if(!"remotes" %in% rownames(utils::installed.packages())) utils::install.packages("remotes")"
+          Rscript -e "if(!'remotes' %in% rownames(utils::installed.packages())) utils::install.packages('remotes')"
 
       - name: "[Stage] [Linux] Install curl"
         if: runner.os == 'Linux'
