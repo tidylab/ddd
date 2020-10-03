@@ -3,7 +3,7 @@
 
 <!-- badges: start -->
 
-[![continuous-integration](https://travis-ci.org/tidylab/ddd.svg?branch=master)](https://travis-ci.org/tidylab/ddd)
+[![tic](https://github.com/tidylab/ddd/workflows/tic/badge.svg)](https://github.com/tidylab/ddd/actions)
 [![code-coverage](https://codecov.io/gh/tidylab/ddd/branch/master/graph/badge.svg)](https://codecov.io/github/tidylab/ddd/?branch=master)
 <!-- badges: end -->
 

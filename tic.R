@@ -34,7 +34,7 @@ get_stage("after_failure")
 get_stage("before_deploy")
 
 # Stage: Deploy -----------------------------------------------------------
-if(ci_on_travis()) get_stage("deploy") %>% publish_package_coverage()
+get_stage("deploy") %>% publish_package_coverage()
 
 # Stage: After Deploy -----------------------------------------------------
 get_stage("after_deploy")
