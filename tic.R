@@ -11,6 +11,7 @@ library(tic, warn.conflicts = FALSE)
 source("./.app/tic/helpers.R")
 
 # Macros ------------------------------------------------------------------
+# tic::use_ghactions_deploy()
 if (ci_on_ghactions()) do_pkgdown(deploy = TRUE)
 
 # Stage: Before Script ----------------------------------------------------
