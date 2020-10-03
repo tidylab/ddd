@@ -20,7 +20,8 @@ Depends:
     R (>= 3.5)
 Suggests: 
     testthat,
-    withr
+    withr,
+    rmarkdown
 Imports: 
     stringr,
     purrr,

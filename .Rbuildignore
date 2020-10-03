@@ -20,3 +20,5 @@ renv/
 ^\.github/workflows$
 ^\.ccache$
 ^\.github$
+^vignettes/articles$
+^docs$
