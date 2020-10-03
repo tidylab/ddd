@@ -10,34 +10,31 @@
 library(tic, warn.conflicts = FALSE)
 source("./.app/tic/helpers.R")
 
+# Macros ------------------------------------------------------------------
+# tic::use_ghactions_deploy()
+if (ci_on_ghactions()) do_pkgdown(deploy = TRUE)
+
 # Stage: Before Script ----------------------------------------------------
 get_stage("before_script") %>%
-    add_code_step(install_deps()) %>%
-    add_code_step(try(devtools::uninstall(), silent = TRUE))
+    add_code_step(try(devtools::uninstall(), silent = TRUE)) %>%
+    add_code_step()
 
 # Stage: Script -----------------------------------------------------------
-if(is_master_branch() | is_hotfix_branch()){
-    get_stage("script") %>% build_steps() %>% test_suite_steps()
-} else if (is_develop_branch() | is_release_branch()){
-    get_stage("script") %>% build_steps() %>% test_suite_steps()
-
-} else if (is_feature_branch()){
-    get_stage("script") %>% test_suite_steps()
-}
+get_stage("script") %>%
+    check_package() %>%
+    run_unit_tests()
 
 # Stage: After Success ----------------------------------------------------
 get_stage("after_success")
 
 # Stage: After Failure ----------------------------------------------------
-get_stage("after_failure") %>%
-    add_code_step(print(sessioninfo::session_info(include_base = FALSE)))
+get_stage("after_failure")
 
 # Stage: Before Deploy ----------------------------------------------------
 get_stage("before_deploy")
 
 # Stage: Deploy -----------------------------------------------------------
-get_stage("deploy") %>%
-    publish_package_coverage()
+get_stage("deploy") %>% publish_package_coverage()
 
 # Stage: After Deploy -----------------------------------------------------
 get_stage("after_deploy")

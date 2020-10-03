@@ -88,6 +88,18 @@ assign(".Rprofile", new.env(), envir = globalenv())
     .Rprofile$utils$run_script(path_script, job_name)
 }
 
+# pkgdown -----------------------------------------------------------------
+.Rprofile$pkgdown$build_site <- function(){
+    path_script <- tempfile("system-", fileext = ".R")
+    job_name <- "Rendering Package Website"
+    writeLines("pkgdown::build_site(new_process = TRUE)", path_script)
+    .Rprofile$utils$run_script(path_script, job_name)
+}
+
+.Rprofile$pkgdown$browse_url <- function(){
+    on.exit(try(browseURL('./docs/index.html')))
+}
+
 # Utils -------------------------------------------------------------------
 .Rprofile$utils$run_script <- function(path, name){
     withr::with_envvar(
