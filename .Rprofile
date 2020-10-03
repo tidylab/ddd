@@ -34,7 +34,6 @@ assign(".Rprofile", new.env(), envir = globalenv())
     try(if(testthat::is_testing()) return())
 
     unlink("./renv")
-    try(pkgdown::clean_site())
     try(system('docker-compose down'))
 }
 
