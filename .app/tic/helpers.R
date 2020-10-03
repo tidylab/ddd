@@ -24,7 +24,7 @@ run_unit_tests <- unit_test_steps <- function(stage){
 run_code_coverage <- function(stage){
     stage %>%
         add_step(step_message(c(sep(), "\n## Analyzing Code: Code-Coverage", sep()))) %>%
-        add_code_step(covr::package_coverage(type = c("tests"), pre_clean = FALSE, quiet = FALSE))
+        add_code_step(print(covr::package_coverage(type = c("tests"), pre_clean = FALSE, quiet = FALSE)))
 }
 
 component_test_steps <- function(stage){
