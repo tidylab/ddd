@@ -28,7 +28,8 @@ get_stage("before_script") %>%
 # Stage: Script -----------------------------------------------------------
 get_stage("script") %>%
     check_package() %>%
-    run_unit_tests()
+    run_unit_tests() %>%
+    run_code_coverage()
 
 # Stage: After Success ----------------------------------------------------
 get_stage("after_success")
@@ -40,7 +41,8 @@ get_stage("after_failure")
 get_stage("before_deploy")
 
 # Stage: Deploy -----------------------------------------------------------
-get_stage("deploy") %>%
+if(is_master_branch() | is_develop_branch())
+    get_stage("deploy") %>%
     publish_package_coverage()
 
 # Stage: After Deploy -----------------------------------------------------
