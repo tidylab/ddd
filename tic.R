@@ -12,14 +12,7 @@ source("./.app/tic/helpers.R")
 
 # Macros ------------------------------------------------------------------
 # tic::use_ghactions_deploy()
-if (ci_on_ghactions()){
-    do_pkgdown <- function(...) tic::do_pkgdown(..., deploy = TRUE, orphan = TRUE)
-    if(is_master_branch()){
-        do_pkgdown(branch = "gh-pages")
-    } else if (is_develop_branch()) {
-        do_pkgdown(branch = "gh-preview")
-    }
-}
+if (ci_on_ghactions() & is_master_branch()) do_pkgdown(deploy = TRUE, orphan = TRUE)
 
 # Stage: Before Script ----------------------------------------------------
 get_stage("before_script") %>%
