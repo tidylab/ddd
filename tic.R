@@ -43,7 +43,7 @@ get_stage("before_deploy")
 # Stage: Deploy -----------------------------------------------------------
 if(is_master_branch() | is_develop_branch())
     get_stage("deploy") %>%
-    publish_package_coverage()
+    add_step(step_publish_package_coverage())
 
 # Stage: After Deploy -----------------------------------------------------
 get_stage("after_deploy")
