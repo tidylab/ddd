@@ -12,12 +12,12 @@ source("./.app/tic/helpers.R")
 
 # Macros ------------------------------------------------------------------
 # tic::use_ghactions_deploy()
-if (ci_on_ghactions()) do_pkgdown(deploy = TRUE)
+if (ci_on_ghactions() & is_master_branch())
+    do_pkgdown(deploy = TRUE, orphan = TRUE)
 
 # Stage: Before Script ----------------------------------------------------
 get_stage("before_script") %>%
-    add_code_step(try(devtools::uninstall(), silent = TRUE)) %>%
-    add_code_step()
+    add_code_step(try(devtools::uninstall(), silent = TRUE))
 
 # Stage: Script -----------------------------------------------------------
 get_stage("script") %>%
@@ -34,7 +34,8 @@ get_stage("after_failure")
 get_stage("before_deploy")
 
 # Stage: Deploy -----------------------------------------------------------
-get_stage("deploy") %>% publish_package_coverage()
+get_stage("deploy") %>%
+    publish_package_coverage()
 
 # Stage: After Deploy -----------------------------------------------------
 get_stage("after_deploy")
