@@ -10,9 +10,6 @@
 library(tic, warn.conflicts = FALSE)
 source("./.app/tic/helpers.R")
 
-# Macros ------------------------------------------------------------------
-if (ci_on_ghactions()) do_pkgdown(deploy = TRUE)
-
 # Stage: Before Script ----------------------------------------------------
 get_stage("before_script") %>%
     add_code_step(try(devtools::uninstall(), silent = TRUE)) %>%
@@ -34,6 +31,7 @@ get_stage("before_deploy")
 
 # Stage: Deploy -----------------------------------------------------------
 if(ci_on_travis()) get_stage("deploy") %>% publish_package_coverage()
+if (ci_on_ghactions())get_stage("deploy") %>% add_code_step(pkgdown::deploy_to_branch())
 
 # Stage: After Deploy -----------------------------------------------------
 get_stage("after_deploy")
