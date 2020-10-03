@@ -14,8 +14,8 @@ PublishPackageCoverage <- R6::R6Class(
             coverage <- covr::package_coverage(type = c("tests"), pre_clean = FALSE, quiet = FALSE)
             print(coverage)
 
-            if(ci_on_travis()){
-                covr::codecov(coverage = coverage, quiet = FALSE)
+            if(ci_on_travis() | ci_is_ghactions()){
+                print(covr::codecov(coverage = coverage, quiet = FALSE))
             } else if (ci_on_gitlab()){
                 covr::gitlab(coverage = coverage, quiet = FALSE)
             } else {
