@@ -16,7 +16,7 @@ if (ci_on_ghactions()){
     do_pkgdown <- function(...) do_pkgdown(..., deploy = TRUE, orphan = TRUE)
     if(is_master_branch()){
         do_pkgdown(branch = "gh-pages")
-    } else {
+    } else if (is_develop_branch()) {
         do_pkgdown(branch = "gh-preview")
     }
 }
