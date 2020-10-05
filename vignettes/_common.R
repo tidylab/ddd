@@ -27,3 +27,8 @@ knitr::opts_chunk$set(
     fig.show = "hold",
     eval.after = 'fig.cap' # so captions can use link to demos
 )
+
+# helpers -----------------------------------------------------------------
+system.file <- purrr::partial(base::system.file, package = devtools::loaded_packages()[1,1])
+
+

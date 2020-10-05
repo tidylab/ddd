@@ -1,6 +1,7 @@
 # Folders
 man/
 renv/
+*_cache/
 
 # Files
 .Rproj.user
@@ -10,3 +11,6 @@ renv/
 *.png
 
 docs/
+*.RData
+*.rdx
+*.rdb
