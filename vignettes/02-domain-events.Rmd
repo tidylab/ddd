@@ -1,5 +1,5 @@
 ---
-title: "Domain Events"
+title: "Step 1: Create a Series of Domain Events"
 ---
 
 ```{r, include = FALSE}
@@ -13,12 +13,14 @@ What activities do experts from the Pizza ordering domain care about? Think like
 a pizzeria employee at the counter. How does the business process - ordering a
 pizza - look like?
 
-1. *New pizza requested*
-1. *Size decided* (say, medium) 
+1. *Order issued*
+1. *Pizza added to order*
+1. *Pizza size decided* (say, medium) 
 1. *Topping added* (say, olives)
 1. *Topping added* (say, anchovy but only on the right half)
 1. *Topping removed* (say, no olives)
-1. *Pizza confirmed*
+1. *Pizza reviewed*
+1. *Order confirmed*
 
 We can add these domain events to our application by using `add_domain_event()`.
 The function takes two arguments (1) `name` - domain event name; and (2)
@@ -26,5 +28,3 @@ The function takes two arguments (1) `name` - domain event name; and (2)
 
 ```{r code=readLines(system.file("inst", "snippets", "pizza-domain-events.R")), eval=FALSE, echo=TRUE}
 ```
-
-

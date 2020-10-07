@@ -1,0 +1,12 @@
+---
+title: "Step 3: Create Entities and Aggregates"
+---
+
+```{r, include = FALSE}
+source("_common.R")
+```
+
+text
+
+```{r code=readLines(system.file("inst", "snippets", "pizza-domain-model.R")), eval=FALSE, echo=TRUE}
+```
