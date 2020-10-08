@@ -16,7 +16,8 @@ pizza - look like?
 
 ```{r domain-event-table}
 cache$load("event_storming") %>% 
-    dplyr::select(`#`, Event, Example) %>% 
+    dplyr::select(Event, Example) %>% 
+    tibble::rowid_to_column("#") %>% 
     kable(caption = "Pizza-Ordering Event Table")
 ```
 

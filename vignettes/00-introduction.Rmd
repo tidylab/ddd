@@ -10,17 +10,16 @@ source(file.path(usethis::proj_get(), "R",  "_common.R"))
 ```{r event-storming-table}
 event_storming <- 
     tibble::tribble(
-        ~Event,                 ~Example,
-        "Order issued",         "",
-        "Pizza added to order", "",
-        "Pizza size decided",   "medium",
-        "Topping added",        "olives",
-        "Topping added",        "anchovy, but only on the right half",
-        "Topping removed",      "no olives",
-        "Pizza reviewed",       "",
-        "Order confirmed",      ""
-    ) %>% 
-    tibble::rowid_to_column("#")
+        ~Event,                 ~Command,             ~Example,
+        "Order issued",         "Start order",        "",
+        "Pizza added to order", "Add pizza to order", "",
+        "Pizza size selected",  "Select pizza size",  "medium",
+        "Topping added",        "Add topping",        "olives",
+        "Topping added",        "Add topping",        "anchovy, but only on the right half",
+        "Topping removed",      "Remove topping",     "no olives",
+        "Pizza reviewed",       "Review pizza",       "",
+        "Order confirmed",      "Confirm order",      ""
+    )
 cache$save(event_storming)
 ```
 
