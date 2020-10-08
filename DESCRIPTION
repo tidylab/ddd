@@ -21,9 +21,11 @@ Depends:
 Suggests: 
     testthat,
     withr,
-    rmarkdown
+    rmarkdown,
+    R.cache
 Imports: 
-    stringr,
-    purrr,
+    tidyverse,
     fs,
-    R6
+    R6,
+    purrr,
+    snakecase

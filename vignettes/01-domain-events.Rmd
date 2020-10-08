@@ -1,0 +1,39 @@
+---
+title: "Step 1: Create a Series of Domain Events"
+---
+
+```{r, include = FALSE}
+source(file.path(usethis::proj_get(), "R",  "_common.R"))
+```
+
+The first step of modelling a domain is thinking about what are the activities
+that domain experts care about.
+
+What activities do experts from the Pizza ordering domain care about? Think like
+a pizzeria employee at the counter. How does the business process - ordering a
+pizza - look like?
+
+
+```{r domain-event-table}
+cache$load("event_storming") %>% 
+    dplyr::select(Event, Example) %>% 
+    tibble::rowid_to_column("#") %>% 
+    kable(caption = "Pizza-Ordering Event Table")
+```
+
+We can add these domain events to our application by using `add_domain_event()`.
+The function takes two arguments:
+
+(1) `name` - domain event name; and 
+(2) `domain` - the domain name.
+
+```{r domain-event-code}
+domain_event_snippet <- 
+    cache$load("event_storming") %>% 
+    dplyr::mutate(Event = to_snake_case(Event)) %>% 
+    dplyr::distinct(Event) %>% 
+    stringr::str_glue_data('add_domain_event("{Event}", domain = "pizza_ordering")')
+```
+
+```{r code=domain_event_snippet, eval=FALSE, echo=TRUE}
+```

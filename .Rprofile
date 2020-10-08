@@ -92,7 +92,7 @@ assign(".Rprofile", new.env(), envir = globalenv())
 .Rprofile$pkgdown$build_site <- function(){
     path_script <- tempfile("system-", fileext = ".R")
     job_name <- "Rendering Package Website"
-    writeLines("pkgdown::build_site(new_process = TRUE)", path_script)
+    writeLines("pkgdown::build_site(devel = TRUE)", path_script)
     .Rprofile$utils$run_script(path_script, job_name)
 }
 

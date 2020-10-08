@@ -1,0 +1,7 @@
+add_domain_event("order_issued",         domain = "pizza_ordering")
+add_domain_event("pizza_added_to_order", domain = "pizza_ordering")
+add_domain_event("pizza_size_decided",   domain = "pizza_ordering")
+add_domain_event("topping_added",        domain = "pizza_ordering")
+add_domain_event("topping_removed",      domain = "pizza_ordering")
+add_domain_event("pizza_reviewed",       domain = "pizza_ordering")
+add_domain_event("order_confirmed",      domain = "pizza_ordering")

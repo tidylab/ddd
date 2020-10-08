@@ -1,0 +1,26 @@
+---
+title: "Step 2: Create the Commands that Cause Each Domain Event"
+---
+
+```{r, include = FALSE}
+source(file.path(usethis::proj_get(), "R",  "_common.R"))
+```
+
+```{r domain-command-table}
+cache$load("event_storming") %>% 
+    dplyr::select(Command, Event) %>% 
+    dplyr::distinct(Command, Event) %>% 
+    tibble::rowid_to_column("#") %>% 
+    kable(caption = "Pizza-Ordering Steps")
+```
+
+```{r domain-command-code}
+domain_command_snippet <- 
+    cache$load("event_storming") %>% 
+    dplyr::mutate(Command = to_snake_case(Command)) %>% 
+    dplyr::distinct(Command) %>% 
+    stringr::str_glue_data('add_step("{Command}", domain = "pizza_ordering")')
+```
+
+```{r code=domain_command_snippet, eval=FALSE, echo=TRUE}
+```

@@ -1,8 +1,0 @@
----
-title: "Domain Events"
----
-
-```{r, include = FALSE}
-source("_common.R")
-```
-

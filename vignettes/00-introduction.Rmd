@@ -1,0 +1,25 @@
+---
+title: "Introduction to Domain-driven Design (ddd)"
+---
+
+```{r, include = FALSE}
+source(file.path(usethis::proj_get(), "R",  "_common.R"))
+```
+
+
+```{r event-storming-table}
+event_storming <- 
+    tibble::tribble(
+        ~Entity, ~Event,                 ~Command,             ~Example,
+        "Order", "Order issued",         "Start order",        "",
+        "Order", "Pizza added to order", "Add pizza to order", "",
+        "Pizza", "Pizza size selected",  "Select pizza size",  "medium",
+        "Pizza", "Topping added",        "Add topping",        "olives",
+        "Pizza", "Topping added",        "Add topping",        "anchovy, but only on the right half",
+        "Pizza", "Topping removed",      "Remove topping",     "no olives",
+        "Pizza", "Pizza reviewed",       "Review pizza",       "",
+        "Order", "Order confirmed",      "Confirm order",      ""
+    )
+cache$save(event_storming)
+```
+
