@@ -6,12 +6,12 @@ title: "Step 2: Create the Commands that Cause Each Domain Event"
 source(file.path(usethis::proj_get(), "R",  "_common.R"))
 ```
 
-```{r domain-event-command-table}
+```{r domain-command-table}
 cache$load("event_storming") %>% 
     dplyr::select(Command, Event) %>% 
     dplyr::distinct(Command, Event) %>% 
     tibble::rowid_to_column("#") %>% 
-    kable(caption = "Pizza-Ordering Command Table")
+    kable(caption = "Pizza-Ordering Steps")
 ```
 
 ```{r domain-command-code}

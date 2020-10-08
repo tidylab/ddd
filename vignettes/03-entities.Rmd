@@ -6,7 +6,10 @@ title: "Step 3: Create Entities and Aggregates"
 source(file.path(usethis::proj_get(), "R",  "_common.R"))
 ```
 
-text
-
-```{r code=readLines(system.file("inst", "snippets", "pizza-domain-model.R")), eval=FALSE, echo=TRUE}
+```{r domain-entity-table}
+cache$load("event_storming") %>% 
+    dplyr::select(Entity, Command, Event) %>% 
+    dplyr::distinct(Entity, Command, Event) %>% 
+    tibble::rowid_to_column("#") %>% 
+    kable(caption = "Pizza-Ordering Entities")
 ```
