@@ -15,21 +15,9 @@ pizza - look like?
 
 
 ```{r domain-event-table}
-domain_event <- 
-    tibble::tribble(
-        ~Event,                 ~Example,
-        "Order issued",         "",
-        "Pizza added to order", "",
-        "Pizza size decided",   "medium",
-        "Topping added",        "olives",
-        "Topping added",        "anchovy, but only on the right half",
-        "Topping removed",      "no olives",
-        "Pizza reviewed",       "",
-        "Order confirmed",      ""
-    ) %>% 
-    tibble::rowid_to_column("#")
-cache$save(domain_event)
-kable(domain_event, caption = "Pizza-Ordering Event Table")
+cache$load("event_storming") %>% 
+    dplyr::select(`#`, Event, Example) %>% 
+    kable(caption = "Pizza-Ordering Event Table")
 ```
 
 We can add these domain events to our application by using `add_domain_event()`.
@@ -39,12 +27,12 @@ The function takes two arguments:
 (2) `domain` - the domain name.
 
 ```{r domain-event-code}
-create_domain_event <- 
-    domain_event %>% 
+domain_event_snippet <- 
+    cache$load("event_storming") %>% 
     dplyr::mutate(Event = to_snake_case(Event)) %>% 
     dplyr::distinct(Event) %>% 
     stringr::str_glue_data('add_domain_event("{Event}", domain = "pizza_ordering")')
 ```
 
-```{r code=read_snippet("pizza-domain-events"), eval=FALSE, echo=TRUE}
+```{r code=domain_event_snippet, eval=FALSE, echo=TRUE}
 ```
