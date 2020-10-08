@@ -79,6 +79,7 @@ jobs:
           echo "require(remotes)" >> .Rprofile
           echo "options(repos = 'https://mran.microsoft.com/snapshot/2020-06-22')" >> .Rprofile
           Rscript -e "if(!'remotes' %in% rownames(utils::installed.packages())) utils::install.packages('remotes')"
+          Rscript -e "remotes::install_deps(dependencies = TRUE)"
 
       - name: "[Stage] [Linux] Install curl"
         if: runner.os == 'Linux'
