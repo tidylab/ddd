@@ -23,7 +23,7 @@ Suggests:
     withr,
     rmarkdown
 Imports: 
-    stringr,
-    purrr,
+    tidyverse,
     fs,
-    R6
+    R6,
+    purrr

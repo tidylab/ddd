@@ -1,5 +1,5 @@
 ---
-title: "Step 1: Create a Series of Domain Events"
+title: "Step 2: Create the Commands that cause each Domain Event"
 ---
 
 ```{r, include = FALSE}
@@ -14,11 +14,6 @@ a pizzeria employee at the counter. How does the business process - ordering a
 pizza - look like?
 
 
-```{r}
-domain_event <- tibble::tribble(
-    
-)
-```
 
 1. *Order issued*
 1. *Pizza added to order*
@@ -28,6 +23,8 @@ domain_event <- tibble::tribble(
 1. *Topping removed* (say, no olives)
 1. *Pizza reviewed*
 1. *Order confirmed*
+
+
 
 We can add these domain events to our application by using `add_domain_event()`.
 The function takes two arguments (1) `name` - domain event name; and (2)

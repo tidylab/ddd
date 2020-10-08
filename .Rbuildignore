@@ -1,5 +1,15 @@
+# Docker
+^\.dockerignore$
+^docker-compose\.yml$
+^R/docker-DockerCompose\.R$
+^tests/testthat/test-docker-DockerCompose\.R$
+
 # Folders
-.app/
+.*_cache/
+^\.app/
+^\.ccache$
+^\.github
+docs/
 renv/
 
 # Files
@@ -12,13 +22,3 @@ renv/
 ^README\.Rmd$
 ^LICENSE\.md$
 
-# Docker
-^\.dockerignore$
-^docker-compose\.yml$
-^R/docker-DockerCompose\.R$
-^tests/testthat/test-docker-DockerCompose\.R$
-^\.github/workflows$
-^\.ccache$
-^\.github$
-^vignettes/articles$
-^docs$
