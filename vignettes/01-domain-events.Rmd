@@ -17,7 +17,7 @@ pizza - look like?
 
 
 ```{r domain-event-table}
-cache$load("event_storming") %>% 
+ddd::event_storming %>% 
     dplyr::select(Event, Example) %>% 
     tibble::rowid_to_column("#") %>% 
     kable(caption = "Pizza-Ordering Event Table")
@@ -33,7 +33,7 @@ The function takes two arguments:
 
 ```{r domain-event-code}
 domain_event_snippet <- 
-    cache$load("event_storming") %>% 
+    ddd::event_storming %>% 
     dplyr::mutate(Event = title$event(Event)) %>% 
     dplyr::distinct(Event) %>% 
     stringr::str_glue_data('add_domain_event("{Event}", domain = "pizza_ordering")')

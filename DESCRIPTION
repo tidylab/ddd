@@ -21,8 +21,7 @@ Depends:
 Suggests: 
     testthat,
     withr,
-    rmarkdown,
-    R.cache
+    rmarkdown
 Imports: 
     tidyverse,
     fs,
