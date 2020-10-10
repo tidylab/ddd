@@ -6,6 +6,7 @@
 #' @references
 #' \href{https://testthat.r-lib.org/}{`testthat` package information}
 #' \href{https://covr.r-lib.org/}{`covr` package information}
+#' @includeRmd vignettes/02-commands.Rmd
 #' @family domain driven design
 #' @export
 add_step <- function(name, subdomain = NULL, testthat_exemption = FALSE, covr_exemption = testthat_exemption){
