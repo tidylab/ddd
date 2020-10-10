@@ -8,7 +8,7 @@
 #' \href{https://covr.r-lib.org/}{`covr` package information}
 #' @family domain driven design
 #' @export
-add_command <- function(name, subdomain = NULL, testthat_exemption = FALSE, covr_exemption = testthat_exemption){
+add_step <- function(name, subdomain = NULL, testthat_exemption = FALSE, covr_exemption = testthat_exemption){
     stopifnot(
         is.character(name),
         is.null(subdomain) | is.character(subdomain),
@@ -16,18 +16,18 @@ add_command <- function(name, subdomain = NULL, testthat_exemption = FALSE, covr
         is.logical(covr_exemption)
     )
 
-    .add_command$script(name, subdomain, covr_exemption)
-    if(!testthat_exemption) .add_command$test(name, subdomain)
+    .add_step$script(name, subdomain, covr_exemption)
+    if(!testthat_exemption) .add_step$test(name, subdomain)
 
     invisible()
 }
 
 # Low-lever Functions -----------------------------------------------------
-.add_command <- new.env()
-.add_command$script <- function(name, subdomain, covr_exemption){
+.add_step <- new.env()
+.add_step$script <- function(name, subdomain, covr_exemption){
     proj_path <- fs::path_wd
     `%||%` <- function(a,b) if(is.null(a)) b else a
-    slug <- .add_command$slug(name, subdomain)
+    slug <- .add_step$slug(name, subdomain)
     dir.create(proj_path("R"), recursive = TRUE, showWarnings = FALSE)
 
     start_comments <- ifelse(covr_exemption, "# nocov start", "")
@@ -67,10 +67,10 @@ add_command <- function(name, subdomain = NULL, testthat_exemption = FALSE, covr
     invisible()
 }
 
-.add_command$test <- function(name, subdomain){
+.add_step$test <- function(name, subdomain){
     proj_path <- fs::path_wd
     dir.create(proj_path("tests", "testthat"), recursive = TRUE, showWarnings = FALSE)
-    slug <- .add_command$slug(name, subdomain)
+    slug <- .add_step$slug(name, subdomain)
     writeLines(
         stringr::str_glue("
         context('unit test for {fct_name}')
@@ -92,7 +92,7 @@ add_command <- function(name, subdomain = NULL, testthat_exemption = FALSE, covr
     invisible()
 }
 
-.add_command$slug <- function(name, subdomain){
+.add_step$slug <- function(name, subdomain){
     is.not.null <- Negate(is.null)
     `%+%` <- base::paste0
 
