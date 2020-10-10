@@ -3,7 +3,7 @@ title: "Step 2: Create the Commands that Cause Each Domain Event"
 ---
 
 ```{r, include = FALSE}
-source(file.path(usethis::proj_get(), "R",  "_common.R"))
+source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ```
 
 ## Conceptual Level

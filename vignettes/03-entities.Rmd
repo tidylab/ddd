@@ -3,7 +3,7 @@ title: "Step 3: Create Entities and Aggregates"
 ---
 
 ```{r, include = FALSE}
-source(file.path(usethis::proj_get(), "R",  "_common.R"))
+source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ```
 
 ```{r domain-entity-table}
