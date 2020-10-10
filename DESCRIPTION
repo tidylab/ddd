@@ -1,7 +1,7 @@
 Package: ddd
 Type: Package
 Title: Domain Driven Design
-URL: https://github.com/tidylab/ddd
+URL: https://tidylab.github.io/ddd/, https://github.com/tidylab/ddd
 BugReports: https://github.com/tidylab/ddd/issues
 Version: 0.1.0
 Date: 2020-06-22
