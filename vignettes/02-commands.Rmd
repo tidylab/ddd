@@ -3,8 +3,10 @@ title: "Step 2: Create the Commands that Cause Each Domain Event"
 ---
 
 ```{r, include = FALSE}
-source(file.path(usethis::proj_get(), "R",  "_common.R"))
+source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ```
+
+## Conceptual Level
 
 ```{r domain-command-table}
 cache$load("event_storming") %>% 
@@ -14,7 +16,11 @@ cache$load("event_storming") %>%
     kable(caption = "Pizza-Ordering Steps")
 ```
 
-```{r domain-command-code}
+## Implementation Level
+
+### Add Steps
+
+```{r domain-command-add_steps}
 domain_command_snippet <- 
     cache$load("event_storming") %>% 
     dplyr::mutate(Command = to_snake_case(Command)) %>% 
@@ -23,4 +29,20 @@ domain_command_snippet <-
 ```
 
 ```{r code=domain_command_snippet, eval=FALSE, echo=TRUE}
+```
+
+### Organize Steps in a Process
+
+```{r domain-command-organize_steps}
+header <- paste0(c("pkgload::load_all()", "session <- new.env()", ""), collapse = "\n")
+
+body <- 
+    cache$load("event_storming") %>% 
+    dplyr::mutate(Command = to_snake_case(Command)) %>% 
+    dplyr::distinct(Command) %>% 
+    stringr::str_glue_data('    {Command}()')
+
+domain_command_workflow <- paste0(header, "\nsession %>%\n", paste(body, collapse = " %>%\n"))
+```
+```{r code=domain_command_workflow, eval=FALSE, echo=TRUE}
 ```

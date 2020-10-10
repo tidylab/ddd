@@ -1,4 +1,4 @@
-context("unit test for add_command")
+context("unit test for add_step")
 
 # Setup -------------------------------------------------------------------
 testthat::setup({
@@ -13,7 +13,7 @@ testthat::setup({
 # Create R script ---------------------------------------------------------
 test_that("create R script without unit test", {
     attach(test_env)
-    expect_silent(add_command(name, subdomain, testthat_exemption = TRUE))
+    expect_silent(add_step(name, subdomain, testthat_exemption = TRUE))
 
     path <- proj_path("R", subdomain %+% "-" %+% name, ext = "R")
     expect_true(file.exists(path))
@@ -26,7 +26,7 @@ test_that("create R script without unit test", {
 # Create R script and unit-test --------------------------------------------
 test_that("create R script with unit test", {
     attach(test_env)
-    expect_silent(add_command(name, subdomain))
+    expect_silent(add_step(name, subdomain))
 
     path <- proj_path("R", subdomain %+% "-" %+% name, ext = "R")
     expect_true(file.exists(path))
