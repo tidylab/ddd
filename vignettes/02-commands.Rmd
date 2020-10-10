@@ -42,7 +42,7 @@ body <-
     dplyr::distinct(Command) %>% 
     stringr::str_glue_data('    {Command}()')
 
-domain_command_snippet <- paste0(header, "\nsession %>%\n", paste(body, collapse = " %>%\n"))
+domain_command_workflow <- paste0(header, "\nsession %>%\n", paste(body, collapse = " %>%\n"))
 ```
-```{r code=domain_command_snippet, eval=FALSE, echo=TRUE}
+```{r code=domain_command_workflow, eval=FALSE, echo=TRUE}
 ```
