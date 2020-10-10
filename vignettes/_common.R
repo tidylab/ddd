@@ -1,7 +1,7 @@
 suppressPackageStartupMessages(
     withr::with_dir(
         usethis::proj_get(),
-        pkgload::load_all(export_all = FALSE, helpers = FALSE, quiet = TRUE, warn_conflicts = FALSE)
+        pkgload::load_all(export_all = !FALSE, helpers = FALSE, quiet = TRUE, warn_conflicts = FALSE)
     )
 )
 
@@ -33,7 +33,7 @@ knitr::opts_chunk$set(
 cache <- new.env()
 cache$initilize <- function() {
     path <- file.path(usethis::proj_set(), "vignettes", "_cache")
-    dir.create(path, F, T)
+    if(!dir.exists(path)) dir.create(path, F, T)
     options(R.cache.rootPath = path)
     invisible()
 }

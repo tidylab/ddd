@@ -1,15 +1,32 @@
 ---
-title: "Step 3: Create Entities and Aggregates"
+title: "Step 3: Associate the Entity with Commands and Events"
 ---
+
 
 ```{r, include = FALSE}
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ```
 
+## Conceptual Level
+
 ```{r domain-entity-table}
 cache$load("event_storming") %>% 
-    dplyr::select(Entity, Command, Event) %>% 
+    dplyr::select(Command, Event, Entity) %>% 
     dplyr::distinct(Entity, Command, Event) %>% 
     tibble::rowid_to_column("#") %>% 
     kable(caption = "Pizza-Ordering Entities")
+```
+
+## Implementation Level
+
+```{r domain-entity-add_entity}
+# entities <- 
+domain_entity_snippet <- 
+    cache$load("event_storming") %>% 
+    dplyr::mutate(Command = title$command(Command)) %>% 
+    dplyr::distinct(Command) %>% 
+    stringr::str_glue_data('add_step("{Command}", domain = "pizza_ordering")')
+```
+
+```{r code=domain_entity_snippet, eval=FALSE, echo=TRUE}
 ```

@@ -10,7 +10,7 @@ source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 
 ```{r domain-command-table}
 cache$load("event_storming") %>% 
-    dplyr::select(Command, Event) %>% 
+    dplyr::select(Event, Command) %>% 
     dplyr::distinct(Command, Event) %>% 
     tibble::rowid_to_column("#") %>% 
     kable(caption = "Pizza-Ordering Steps")
@@ -38,11 +38,12 @@ header <- paste0(c("pkgload::load_all()", "session <- new.env()", ""), collapse 
 
 body <- 
     cache$load("event_storming") %>% 
-    dplyr::mutate(Command = to_snake_case(Command)) %>% 
+    dplyr::mutate(Command = title$command(Command)) %>% 
     dplyr::distinct(Command) %>% 
     stringr::str_glue_data('    {Command}()')
 
 domain_command_workflow <- paste0(header, "\nsession %>%\n", paste(body, collapse = " %>%\n"))
 ```
+
 ```{r code=domain_command_workflow, eval=FALSE, echo=TRUE}
 ```

@@ -32,7 +32,7 @@ RUN R -q -e "install_cran('tidyverse', dependencies = TRUE)"
 RUN R -q -e "update_packages(upgrade  = 'always')"
 
 RUN R -q -e "install_cran(c('odbc', 'profvis', 'renv'))"
-RUN R -q -e "install_cran(c('devtools', 'testthat', 'covr', 'roxygen2'))"
+RUN R -q -e "install_cran(c('devtools', 'testthat', 'covr', 'roxygen2', 'pkgdown'))"
 RUN R -q -e "install_cran(('tinytex')); tinytex::install_tinytex()"
 
 # Install Project Dependencies -------------------------------------------------
