@@ -1,33 +1,33 @@
-#' @title Add Command
+#' @title Add a Command as a Process Step
+#' @description Represent a command as a step in a sequential process.
+#' @aliases add_command
 #' @param name (`character`) Command name.
-#' @param subdomain (`character`) Command sub-domain name.
-#' @param testthat_exemption (`logical`) Should the function be excluded from unit-testing? see \code{testthat} ref.
-#' @param covr_exemption (`logical`) Should the function be excluded from code-coverage? see \code{covr} ref.
-#' @references
-#' \href{https://testthat.r-lib.org/}{`testthat` package information}
-#' \href{https://covr.r-lib.org/}{`covr` package information}
+#' @param domain (`character`) Command domain name.
+#' @param testthat_exemption (`logical`) Should the function be excluded from unit-testing?
+#' @param covr_exemption (`logical`) Should the function be excluded from code-coverage?
+#' @includeRmd vignettes/02-commands.Rmd
 #' @family domain driven design
 #' @export
-add_command <- function(name, subdomain = NULL, testthat_exemption = FALSE, covr_exemption = testthat_exemption){
+add_step <- function(name, domain = NULL, testthat_exemption = FALSE, covr_exemption = testthat_exemption){
     stopifnot(
         is.character(name),
-        is.null(subdomain) | is.character(subdomain),
+        is.null(domain) | is.character(domain),
         is.logical(testthat_exemption),
         is.logical(covr_exemption)
     )
 
-    .add_command$script(name, subdomain, covr_exemption)
-    if(!testthat_exemption) .add_command$test(name, subdomain)
+    .add_step$script(name, domain, covr_exemption)
+    if(!testthat_exemption) .add_step$test(name, domain)
 
     invisible()
 }
 
 # Low-lever Functions -----------------------------------------------------
-.add_command <- new.env()
-.add_command$script <- function(name, subdomain, covr_exemption){
+.add_step <- new.env()
+.add_step$script <- function(name, domain, covr_exemption){
     proj_path <- fs::path_wd
     `%||%` <- function(a,b) if(is.null(a)) b else a
-    slug <- .add_command$slug(name, subdomain)
+    slug <- .add_step$slug(name, domain)
     dir.create(proj_path("R"), recursive = TRUE, showWarnings = FALSE)
 
     start_comments <- ifelse(covr_exemption, "# nocov start", "")
@@ -39,7 +39,7 @@ add_command <- function(name, subdomain = NULL, testthat_exemption = FALSE, covr
         ~ @description  TODO: Write description for`{fct_name}`.
         ~ @param session (`environment`) A shared environment.
         ~ @return session
-        ~ @family {subdomain} subdomain
+        ~ @family {domain} domain
         ~ @export
         {fct_name} <- function(session) {{ {start_comments}
             stopifnot(is.environment(session))
@@ -57,7 +57,7 @@ add_command <- function(name, subdomain = NULL, testthat_exemption = FALSE, covr
         .{fct_name}$dummy_step <- function(...) NULL
         ", "~", "#'"),
         fct_name = name,
-        subdomain = subdomain %||% "",
+        domain = domain %||% "",
         start_comments = start_comments,
         end_comments = end_comments
     )
@@ -67,10 +67,10 @@ add_command <- function(name, subdomain = NULL, testthat_exemption = FALSE, covr
     invisible()
 }
 
-.add_command$test <- function(name, subdomain){
+.add_step$test <- function(name, domain){
     proj_path <- fs::path_wd
     dir.create(proj_path("tests", "testthat"), recursive = TRUE, showWarnings = FALSE)
-    slug <- .add_command$slug(name, subdomain)
+    slug <- .add_step$slug(name, domain)
     writeLines(
         stringr::str_glue("
         context('unit test for {fct_name}')
@@ -92,11 +92,11 @@ add_command <- function(name, subdomain = NULL, testthat_exemption = FALSE, covr
     invisible()
 }
 
-.add_command$slug <- function(name, subdomain){
+.add_step$slug <- function(name, domain){
     is.not.null <- Negate(is.null)
     `%+%` <- base::paste0
 
     slug <- name
-    slug <- if(is.not.null(subdomain)) subdomain %+% "-" %+% slug
+    slug <- if(is.not.null(domain)) domain %+% "-" %+% slug
     return(slug)
 }

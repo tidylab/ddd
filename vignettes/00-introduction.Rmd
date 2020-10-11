@@ -1,0 +1,10 @@
+---
+title: "Introduction to Domain-driven Design (ddd)"
+bibliography: [references.bib]
+biblio-style: apalike
+link-citations: yes
+---
+
+```{r, include = FALSE}
+source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
+```

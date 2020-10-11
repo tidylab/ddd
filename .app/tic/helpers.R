@@ -21,6 +21,12 @@ run_unit_tests <- unit_test_steps <- function(stage){
         add_code_step(testthat::test_dir("./tests/testthat", stop_on_failure = TRUE))
 }
 
+run_code_coverage <- function(stage){
+    stage %>%
+        add_step(step_message(c(sep(), "\n## Analyzing Code: Code-Coverage", sep()))) %>%
+        add_code_step(print(covr::package_coverage(type = c("tests"), pre_clean = FALSE, quiet = FALSE)))
+}
+
 component_test_steps <- function(stage){
     if(dir.exists("./tests/component-tests"))
         stage <-
@@ -32,7 +38,7 @@ component_test_steps <- function(stage){
 }
 
 
-publish_package_coverage <- function(stage){
+publish_code_coverage <- function(stage){
     stage %>%
         add_step(step_message(c(sep(), "\n## Publish Package Coverage Report", sep()))) %>%
         add_step(step_publish_package_coverage())
