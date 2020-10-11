@@ -9,6 +9,7 @@
 ^\.app/
 ^\.ccache$
 ^\.github
+data-raw/
 docs/
 renv/
 
