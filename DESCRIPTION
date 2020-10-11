@@ -21,7 +21,8 @@ Depends:
 Suggests: 
     testthat,
     withr,
-    rmarkdown
+    rmarkdown,
+    tidyverse
 Imports: 
     fs,
     R6,
