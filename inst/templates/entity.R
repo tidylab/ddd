@@ -2,7 +2,6 @@
 #'
 #' @description TODO: Describe how this entity models unique things
 #'
-#'
 #' @examples
 #' \dontrun{
 #' entity <- Entity$new(id = uuid::UUIDgenerate())
@@ -10,6 +9,9 @@
 #' entity$command()
 #' entity$query()
 #' }
+#'
+#' @export
+#' @family Domain Name
 Entity <- R6::R6Class("Entity", public = list(
     #' @field  Entity unique identifier.
     uid = character(0),
