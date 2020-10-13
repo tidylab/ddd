@@ -10,7 +10,7 @@
 #' @includeRmd vignettes/03-entities.Rmd
 #' @family domain driven design
 #' @export
-add_entity <- function(name, domain = NULL, commands = NULL, queries = TRUE, testthat_exemption = FALSE, covr_exemption = testthat_exemption){
+add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL, testthat_exemption = FALSE, covr_exemption = testthat_exemption){
     stopifnot(
         is.character(name),
         is.null(domain) | is.character(domain),
