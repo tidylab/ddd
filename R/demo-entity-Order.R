@@ -12,8 +12,3 @@ Order$set("public", "items", R6DS::RSet$new(equal = function(x, y) return(x$uid 
 # Order$set("public", "review_order", function(){
 # return(self$items$to)
 #     })
-
-
-# Pizza -------------------------------------------------------------------
-Pizza <- R6::R6Class("Pizza", inherit = Entity)
-

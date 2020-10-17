@@ -13,3 +13,10 @@ test_that("calling Pizza$new instantiates an object with unique id", {
     expect_identical(pizza$uid, pizza_uid)
     test_env$pizza <- pizza
 })
+
+# Public Methods ----------------------------------------------------------
+test_that('calling Pizza$select_size changes the state of pizza', {
+    attach(test_env)
+    expect_is(pizza$select_size("M"), "Pizza")
+    expect_identical(pizza$size, "medium")
+})
