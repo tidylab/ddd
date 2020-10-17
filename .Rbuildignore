@@ -23,3 +23,7 @@ renv/
 ^README\.Rmd$
 ^LICENSE\.md$
 
+# Demo
+demo-.*\.R$
+
+
