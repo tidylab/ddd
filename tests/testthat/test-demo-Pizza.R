@@ -20,3 +20,11 @@ test_that('calling Pizza$select_size changes the state of pizza', {
     expect_is(pizza$select_size("M"), "Pizza")
     expect_identical(pizza$size, "medium")
 })
+
+test_that('calling Pizza$add_topping changes the state of pizza', {
+    attach(test_env)
+    expect_false(pizza$toppings$has("olives"))
+    expect_is(pizza$add_topping(name = "olives", side = "both"), "Pizza")
+    expect_true(pizza$toppings$has("olives"))
+})
+

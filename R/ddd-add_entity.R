@@ -1,6 +1,5 @@
 #' @title Add an Entity to a Domain
 #' @description Represent a command as a step in a sequential process.
-#' @aliases add_command
 #' @param name (`character`) \code{Entity} name.
 #' @param domain (`character`) \code{Entity} domain name.
 #' @param commands (`character`)
