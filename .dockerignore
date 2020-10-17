@@ -11,3 +11,7 @@ vignettes/_cache/
 ^docker-compose.yml$
 ^/.Rprofile$
 ^/.Renviron$
+
+# Demo
+./R/demo-*
+./tests/testthat/test-demo-*

@@ -26,5 +26,6 @@ Suggests:
 Imports: 
     fs,
     R6,
+    R6DS,
     purrr,
     snakecase
