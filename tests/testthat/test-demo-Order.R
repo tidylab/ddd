@@ -1,4 +1,4 @@
-context("unit test for Order")
+context("unit test for entity Order")
 
 # Setup -------------------------------------------------------------------
 testthat::setup({
