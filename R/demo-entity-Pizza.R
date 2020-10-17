@@ -26,3 +26,9 @@ Pizza$set("public", "add_topping", function(name, side){
     return(self)
 })
 
+Pizza$set("public", "remove_topping", function(name){
+    name <- match.arg(tolower(name), c("olives"))
+    do.call(self$toppings$delete, args = list(key = name))
+    return(self)
+})
+

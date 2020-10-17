@@ -28,3 +28,9 @@ test_that('calling Pizza$add_topping changes the state of pizza', {
     expect_true(pizza$toppings$has("olives"))
 })
 
+test_that('calling Pizza$add_topping changes the state of pizza', {
+    attach(test_env)
+    expect_true(pizza$toppings$has("olives"))
+    expect_is(pizza$remove_topping(name = "olives"), "Pizza")
+    expect_false(pizza$toppings$has("olives"))
+})
