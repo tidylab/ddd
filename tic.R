@@ -16,7 +16,8 @@ if (ci_on_ghactions() & is_master_branch()) do_pkgdown(deploy = TRUE, orphan = T
 
 # Stage: Before Script ----------------------------------------------------
 get_stage("before_script") %>%
-    add_code_step(try(devtools::uninstall(), silent = TRUE))
+    add_code_step(try(devtools::uninstall(), silent = TRUE)) %>%
+    add_code_step(unlink(list.files(".", "demo-.*.R", full.names = TRUE, recursive = TRUE)))
 
 # Stage: Script -----------------------------------------------------------
 get_stage("script") %>%

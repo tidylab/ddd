@@ -6,8 +6,7 @@ testthat::setup({
     test_env$order_uid <- "910e87ed-7565-4dc3-bfba-8aa072852f8d"
 })
 
-
-# Constructors ------------------------------------------------------------
+# General -----------------------------------------------------------------
 test_that("calling Order$new instantiates an object with unique id", {
     attach(test_env)
     expect_is(order <- Order$new(uid = order_uid), "Order")
