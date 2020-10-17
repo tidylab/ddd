@@ -1,16 +1,10 @@
 #' @title Dictionary Data Structure
-#' @seealso \link[R6DS]{Dictionary}
-#' @examples
-#' GDP <- Dictionary()
-#' GDP$add("new_zealand", 204.9)
-#' GDP$add("canada", 1713)
-#' GDP$keys
+#' @seealso \href{https://en.wikipedia.org/wiki/Associative_array}{What is a dictionary?}
+#' @noRd
 #' @export
-dictionary <- function() Dictionary$new()
-
-# Methods -----------------------------------------------------------------
 Dictionary <- R6::R6Class("Dictionary", portable = FALSE, class = FALSE)
 
+# Methods -----------------------------------------------------------------
 Dictionary$set("private", ".elem", list())
 
 Dictionary$set("active", "size", function(){ return(length(.elem)) })

@@ -8,7 +8,7 @@ testthat::setup({
 # General -----------------------------------------------------------------
 test_that("calling Dictionary instantiates a dictionary", {
     attach(test_env)
-    expect_is(test_env$dict <- dictionary(), "environment")
+    expect_is(test_env$dict <- Dictionary$new(), "environment")
 })
 
 # Add items to the dictionary ---------------------------------------------
@@ -48,3 +48,13 @@ test_that('add multiple key-value pairs to the dictionary', {
     expect_true(all(c("Cardamon", "Garlic") %in% dict$keys))
 })
 
+# Delete items ------------------------------------------------------------
+test_that('deleting fixed key-value pair to the dictionary', {
+    attach(test_env)
+
+    try(dict$add("Spinach", "right"))
+    expect_true(dict$has("Spinach"))
+
+    try(dict$delete("Spinach"))
+    expect_false(dict$has("Spinach"))
+})
