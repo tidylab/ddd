@@ -1,12 +1,12 @@
 #' @title Pizza
 #' @family Pizza Ordering
 #' @noRd
-Pizza <- R6::R6Class("Pizza", inherit = Entity, lock_objects = TRUE)
+Pizza <- R6::R6Class("Pizza", inherit = Entity, lock_objects = FALSE)
 
 
 # Public Methods ----------------------------------------------------------
-Pizza$set("public", "initialize", overwrite = TRUE, function(...){
-    super$initialize(...)
+Pizza$set("public", "initialize", overwrite = TRUE, function(uid){
+    super$initialize(uid)
     self$size <- "small"
     self$toppings <- R6DS::RDict$new()
     return(self)
