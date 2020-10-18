@@ -4,11 +4,6 @@
 Pizza <- R6::R6Class("Pizza", inherit = Entity, lock_objects = TRUE)
 
 
-# Public Fields -----------------------------------------------------------
-Pizza$set("public", "size", "small")
-Pizza$set("public", "toppings", R6DS::RDict$new())
-
-
 # Public Methods ----------------------------------------------------------
 Pizza$set("public", "initialize", overwrite = TRUE, function(...){
     super$initialize(...)
