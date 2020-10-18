@@ -1,12 +1,12 @@
 ## tic GitHub Actions template: linux-deploy
 ## revision date: 2020-06-14
-# on:
-#   push:
-#   pull_request:
-#   # for now, CRON jobs only run on the default branch of the repo (i.e. usually on master)
-#   schedule:
-#     # * is a special character in YAML so you have to quote this string
-#     - cron: "0 4 * * *"
+on:
+  push:
+  pull_request:
+  # for now, CRON jobs only run on the default branch of the repo (i.e. usually on master)
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron: "0 0 * * 1"
 name: ${GITHUB_EVENT_NAME}
 
 jobs:
