@@ -10,6 +10,13 @@ Pizza$set("public", "toppings", R6DS::RDict$new())
 
 
 # Public Methods ----------------------------------------------------------
+Pizza$set("public", "initialize", overwrite = TRUE, function(...){
+    super$initialize(...)
+    self$size <- "small"
+    self$toppings <- R6DS::RDict$new()
+    return(self)
+})
+
 Pizza$set("public", "select_size", function(size){
     size <- match.arg(tolower(size), ValueObject$get("sizes"))
     self$size <- size
