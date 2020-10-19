@@ -13,7 +13,14 @@ Order$set("public", "initialize", overwrite = TRUE, function(uid){
 
 # Order Methods -----------------------------------------------------------
 Order$set("public", "summary", function(uid){
-    order_slip <- data.frame()
+    pizza_slips <- tibble::tibble()
+    for(k in seq_len(self$items$get("pizza")$size)){
+        pizza <- self$items$get("pizza")$values[[k]]
+        pizza_slips <- dplyr::bind_rows(pizza_slips, pizza$summary())
+    }
+    pizza_slips <- pizza_slips %>% tibble::add_column(item = "Pizza")
+
+    order_slip <- pizza_slips
     return(order_slip)
 })
 

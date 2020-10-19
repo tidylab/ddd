@@ -13,7 +13,7 @@ Pizza$set("public", "initialize", overwrite = TRUE, function(uid){
 })
 
 Pizza$set("public", "summary", function(size){
-    pizza_slip <- data.frame()
+    pizza_slip <- data.frame(uid = self$uid)
     return(pizza_slip)
 })
 
