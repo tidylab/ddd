@@ -11,16 +11,26 @@ Order$set("public", "initialize", overwrite = TRUE, function(uid){
     return(self)
 })
 
+# Order Methods -----------------------------------------------------------
+Order$set("public", "review_order", function(uid){
+    order_slip <- data.frame()
+    return(order_slip)
+})
+
+# Pizza CRUD Methods ------------------------------------------------------
 Order$set("public", "add_pizza", function(Pizza){
     stopifnot("Pizza" %in% class(Pizza))
-
-    do.call(self$items$get("pizza")$delete, args = list(key = Pizza$uid))
+    self$remove_pizza(Pizza$uid)
     do.call(self$items$get("pizza")$add, args = list(key = Pizza$uid, val = Pizza))
-
     return(self)
 })
 
 Order$set("public", "get_pizza", function(uid){
     Pizza <- do.call(self$items$get("pizza")$get, args = list(key = uid))
     return(Pizza)
+})
+
+Order$set("public", "remove_pizza", function(uid){
+    do.call(self$items$get("pizza")$delete, args = list(key = uid))
+    return(self)
 })
