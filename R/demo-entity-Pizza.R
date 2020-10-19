@@ -12,6 +12,11 @@ Pizza$set("public", "initialize", overwrite = TRUE, function(uid){
     return(self)
 })
 
+Pizza$set("public", "summary", function(size){
+    pizza_slip <- data.frame()
+    return(pizza_slip)
+})
+
 Pizza$set("public", "select_size", function(size){
     size <- match.arg(tolower(size), ValueObject$get("sizes"))
     self$size <- size

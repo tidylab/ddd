@@ -35,6 +35,10 @@ test_that('calling Pizza$add_topping changes the state of pizza', {
     expect_false(pizza$toppings$has("olives"))
 })
 
+test_that('calling pizza$summary returns the desired results', {
+    attach(test_env)
+    expect_is(pizza_slip <- pizza$summary(), "data.frame")
+})
 
 # Factory -----------------------------------------------------------------
 test_that('calling Pizza$add_topping changes the state of pizza', {

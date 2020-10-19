@@ -12,7 +12,7 @@ Order$set("public", "initialize", overwrite = TRUE, function(uid){
 })
 
 # Order Methods -----------------------------------------------------------
-Order$set("public", "review_order", function(uid){
+Order$set("public", "summary", function(uid){
     order_slip <- data.frame()
     return(order_slip)
 })
