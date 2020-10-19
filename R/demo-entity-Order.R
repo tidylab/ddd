@@ -6,19 +6,21 @@ Order <- R6::R6Class("Order", inherit = Entity, lock_objects = FALSE, cloneable 
 # Public Methods ----------------------------------------------------------
 Order$set("public", "initialize", overwrite = TRUE, function(uid){
     super$initialize(uid)
-    self$items <- R6DS::RSet$new(equal = function(x, y) return(x$uid == y$uid))
+    self$items <- R6DS::RDict$new()
+    self$items$add("pizza", R6DS::RDict$new())
     return(self)
 })
 
 Order$set("public", "add_pizza", function(Pizza){
     stopifnot("Pizza" %in% class(Pizza))
 
-    # do.call(self$items$delete, args = list(val = Pizza))
-    # do.call(self$items$add, args = list(val = Pizza))
+    do.call(self$items$get("pizza")$delete, args = list(key = Pizza$uid))
+    do.call(self$items$get("pizza")$add, args = list(key = Pizza$uid, val = Pizza))
 
     return(self)
 })
 
-# Order$set("public", "review_order", function(){
-# return(self$items$to)
-#     })
+Order$set("public", "get_pizza", function(uid){
+    Pizza <- do.call(self$items$get("pizza")$get, args = list(key = uid))
+    return(Pizza)
+})
