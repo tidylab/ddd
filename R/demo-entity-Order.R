@@ -8,7 +8,7 @@ Order$set("public", "initialize", overwrite = TRUE, function(uid){
     super$initialize(uid)
     self$items <- R6DS::RDict$new()
     self$items$add("pizza", R6DS::RDict$new())
-    return(self)
+    invisible(self)
 })
 
 # Order Methods -----------------------------------------------------------
@@ -18,7 +18,7 @@ Order$set("public", "summary", function(uid){
         pizza <- self$items$get("pizza")$values[[k]]
         pizza_slips <- dplyr::bind_rows(pizza_slips, pizza$summary())
     }
-    pizza_slips <- pizza_slips %>% tibble::add_column(item = "Pizza")
+    pizza_slips <- pizza_slips %>% tibble::add_column(item = "Pizza", .before = 0)
 
     order_slip <- pizza_slips
     return(order_slip)
@@ -29,7 +29,7 @@ Order$set("public", "add_pizza", function(Pizza){
     stopifnot("Pizza" %in% class(Pizza))
     self$remove_pizza(Pizza$uid)
     do.call(self$items$get("pizza")$add, args = list(key = Pizza$uid, val = Pizza))
-    return(self)
+    invisible(self)
 })
 
 Order$set("public", "get_pizza", function(uid){
@@ -39,5 +39,5 @@ Order$set("public", "get_pizza", function(uid){
 
 Order$set("public", "remove_pizza", function(uid){
     do.call(self$items$get("pizza")$delete, args = list(key = uid))
-    return(self)
+    invisible(self)
 })

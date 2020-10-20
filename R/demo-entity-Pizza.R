@@ -9,18 +9,25 @@ Pizza$set("public", "initialize", overwrite = TRUE, function(uid){
     super$initialize(uid)
     self$size <- "small"
     self$toppings <- R6DS::RDict$new()
-    return(self)
+    invisible(self)
 })
 
 Pizza$set("public", "summary", function(size){
-    pizza_slip <- data.frame(uid = self$uid)
+    pizza_slip <-
+        tibble::tribble(
+            ~attribute, ~value,
+            "toppings", serialize(self$toppings$toList),
+            "size",     serialize(self$size)
+        ) %>%
+        tibble::add_column(entity = self$uid, .before = 0)
+
     return(pizza_slip)
 })
 
 Pizza$set("public", "select_size", function(size){
     size <- match.arg(tolower(size), ValueObject$get("sizes"))
     self$size <- size
-    return(self)
+    invisible(self)
 })
 
 Pizza$set("public", "add_topping", function(name, side){
@@ -30,12 +37,12 @@ Pizza$set("public", "add_topping", function(name, side){
     do.call(self$toppings$delete, args = list(key = name))
     do.call(self$toppings$add, args = list(key = name, val = side))
 
-    return(self)
+    invisible(self)
 })
 
 Pizza$set("public", "remove_topping", function(name){
     name <- match.arg(tolower(name), ValueObject$get("toppings"))
     do.call(self$toppings$delete, args = list(key = name))
-    return(self)
+    invisible(self)
 })
 
