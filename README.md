@@ -1,9 +1,9 @@
 
-# `ddd` <img src='https://i.imgur.com/1dE1Ar9.png' align="right" height="75"/>
+# `ddd` <img src='https://i.imgur.com/M8Jk1AL.png' align="right" height="75"/>
 
 <!-- badges: start -->
 
-[![tic](https://github.com/tidylab/ddd/workflows/tic/badge.svg)](https://github.com/tidylab/ddd/actions)
+[![test-suite](https://github.com/tidylab/ddd/workflows/test-suite/badge.svg)](https://github.com/tidylab/ddd/actions)
 [![code-coverage](https://codecov.io/gh/tidylab/ddd/branch/master/graph/badge.svg)](https://codecov.io/github/tidylab/ddd/?branch=master)
 <!-- badges: end -->
 

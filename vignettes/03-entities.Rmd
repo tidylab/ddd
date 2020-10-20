@@ -2,7 +2,6 @@
 title: "Step 3: Associate the Entity with Commands and Events"
 ---
 
-
 ```{r, include = FALSE}
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ```
@@ -11,22 +10,18 @@ source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 
 ```{r domain-entity-table}
 ddd::event_storming %>% 
-    dplyr::select(Command, Event, Entity) %>% 
-    dplyr::distinct(Entity, Command, Event) %>% 
+    dplyr::transmute(
+        Entity = title$entity(Entity), 
+        Event = title$event(Event),
+        Command = title$command(Command),
+        Method = title$command(Method)
+    ) %>% 
+    dplyr::distinct(Entity, Command, Event, .keep_all = TRUE) %>% 
     tibble::rowid_to_column("#") %>% 
     kable(caption = "Pizza-Ordering Entities")
 ```
 
 ## Implementation Level
 
-```{r domain-entity-add_entity}
-# entities <- 
-domain_entity_snippet <- 
-    ddd::event_storming %>% 
-    dplyr::mutate(Command = title$command(Command)) %>% 
-    dplyr::distinct(Command) %>% 
-    stringr::str_glue_data('add_step("{Command}", domain = "pizza_ordering")')
-```
-
-```{r code=domain_entity_snippet, eval=FALSE, echo=TRUE}
+```{r code=read_snippet("pizza-domain-entity"), eval=FALSE, echo=TRUE}
 ```

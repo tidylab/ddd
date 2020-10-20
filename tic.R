@@ -1,17 +1,7 @@
-#' Job Lifecycle
-#'
-#' 1. before_script
-#' 2. script
-#' 3. after_success or after_failure
-#' 4. OPTIONAL before_deploy
-#' 5. OPTIONAL deploy
-#' 6. OPTIONAL after_deploy
-#'
 library(tic, warn.conflicts = FALSE)
 source("./.app/tic/helpers.R")
 
 # Macros ------------------------------------------------------------------
-# tic::use_ghactions_deploy()
 if (ci_on_ghactions() & is_master_branch()) do_pkgdown(deploy = TRUE, orphan = TRUE)
 
 # Stage: Before Script ----------------------------------------------------
@@ -20,6 +10,7 @@ get_stage("before_script") %>%
 
 # Stage: Script -----------------------------------------------------------
 get_stage("script") %>%
+    add_code_step(unlink(list.files(pattern = "demo-.*.R", full.names = TRUE, recursive = TRUE))) %>%
     check_package() %>%
     run_unit_tests() %>%
     run_code_coverage()
@@ -34,7 +25,7 @@ get_stage("after_failure")
 get_stage("before_deploy")
 
 # Stage: Deploy -----------------------------------------------------------
-if(is_master_branch() | is_develop_branch())
+if (ci_on_ghactions() & is_master_branch())
     get_stage("deploy") %>%
     add_step(step_publish_package_coverage())
 
