@@ -22,7 +22,7 @@ RUN apt-get update -qq && apt-get -y --no-install-recommends install \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Configure RStudio Server -----------------------------------------------------
-ARG R_REPOS=\'https://mran.microsoft.com/snapshot/2020-06-22\'
+ARG R_REPOS=\'https://mran.microsoft.com/snapshot/2020-07-25\'
 RUN touch .env .Rprofile
 RUN echo "options(repos = ${R_REPOS})" >> .Rprofile
 RUN R -q -e "if(!require(remotes)) install.packages('remotes')"

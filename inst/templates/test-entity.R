@@ -1,4 +1,4 @@
-context('unit test for Entity')
+context('unit test for entity Entity')
 
 # Setup -------------------------------------------------------------------
 testthat::setup({
