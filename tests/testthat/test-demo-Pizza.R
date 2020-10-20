@@ -38,7 +38,7 @@ test_that('calling Pizza$add_topping changes the state of pizza', {
 test_that('calling pizza$summary returns the desired results', {
     attach(test_env)
     expect_is(pizza_slip <- pizza$summary(), "data.frame")
-    expect_has_columns(pizza_slip, c("uid", "attribute", "value"))
+    expect_has_columns(pizza_slip, c("entity", "attribute", "value"))
 })
 
 # Factory -----------------------------------------------------------------

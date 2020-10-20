@@ -18,7 +18,7 @@ Order$set("public", "summary", function(uid){
         pizza <- self$items$get("pizza")$values[[k]]
         pizza_slips <- dplyr::bind_rows(pizza_slips, pizza$summary())
     }
-    pizza_slips <- pizza_slips %>% tibble::add_column(item = "Pizza")
+    pizza_slips <- pizza_slips %>% tibble::add_column(item = "Pizza", .before = 0)
 
     order_slip <- pizza_slips
     return(order_slip)

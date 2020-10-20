@@ -19,7 +19,7 @@ Pizza$set("public", "summary", function(size){
             "toppings", serialize(self$toppings$toList),
             "size",     serialize(self$size)
         ) %>%
-        tibble::add_column(uid = self$uid, .before = 0)
+        tibble::add_column(entity = self$uid, .before = 0)
 
     return(pizza_slip)
 })
