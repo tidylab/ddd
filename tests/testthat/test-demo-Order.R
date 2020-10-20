@@ -27,5 +27,4 @@ test_that('calling Order$summary returns the desired results', {
     attach(test_env)
     expect_is(order_slip <- pizza_order$summary(), "data.frame")
     expect_has_columns(order_slip, c("item", "entity", "attribute", "value"))
-
 })
