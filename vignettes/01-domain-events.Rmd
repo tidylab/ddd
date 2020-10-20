@@ -14,7 +14,7 @@ What activities do experts from the Pizza ordering domain care about? Think like
 
 ```{r domain-event-table}
 ddd::event_storming %>% 
-    dplyr::select(Event, Example) %>% 
+    dplyr::transmute(Event = title$event(Event), Example = title$exammple(Example)) %>% 
     tibble::rowid_to_column("#") %>% 
     kable(caption = "Pizza-Ordering Event Table")
 ```
