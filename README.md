@@ -3,7 +3,7 @@
 
 <!-- badges: start -->
 
-[![tic](https://github.com/tidylab/ddd/workflows/tic/badge.svg)](https://github.com/tidylab/ddd/actions)
+[![test-suite](https://github.com/tidylab/ddd/workflows/test-suite/badge.svg)](https://github.com/tidylab/ddd/actions)
 [![code-coverage](https://codecov.io/gh/tidylab/ddd/branch/master/graph/badge.svg)](https://codecov.io/github/tidylab/ddd/?branch=master)
 <!-- badges: end -->
 

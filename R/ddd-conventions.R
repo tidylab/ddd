@@ -9,8 +9,9 @@
 #' @keywords internal
 title <- new.env()
 
-title$event <- function(string) snakecase::to_upper_camel_case(string)
-title$handler <- function(string) snakecase::to_snake_case(string)
-title$command <- function(string) snakecase::to_snake_case(string)
-title$entity <- function(string) snakecase::to_upper_camel_case(string)
-title$domain <- function(string) snakecase::to_title_case(string)
+title$event <- snakecase::to_upper_camel_case
+title$handler <- snakecase::to_snake_case
+title$command <- snakecase::to_snake_case
+title$entity <- snakecase::to_upper_camel_case
+title$domain <-  snakecase::to_title_case
+title$exammple <- snakecase::to_sentence_case

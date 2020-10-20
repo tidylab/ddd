@@ -10,8 +10,13 @@ source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 
 ```{r domain-entity-table}
 ddd::event_storming %>% 
-    dplyr::select(Entity, Command, Event) %>% 
-    dplyr::distinct(Entity, Command, Event) %>% 
+    dplyr::transmute(
+        Entity = title$entity(Entity), 
+        Event = title$event(Event),
+        Command = title$command(Command),
+        Method = title$command(Method)
+    ) %>% 
+    dplyr::distinct(Entity, Command, Event, .keep_all = TRUE) %>% 
     tibble::rowid_to_column("#") %>% 
     kable(caption = "Pizza-Ordering Entities")
 ```
