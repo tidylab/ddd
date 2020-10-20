@@ -9,6 +9,7 @@ event_storming <-
         "Pizza", "Topping added",        "Add topping",        "C",   "olives",
         "Pizza", "Topping added",        "Add topping",        "C",   "anchovy, but only on the right half",
         "Pizza", "Topping removed",      "Remove topping",     "C",   "no olives",
+        "Pizza", "Pizza reviewed",       "Review pizza",       "Q",   "",
         "Order", "Order reviewed",       "Review order",       "Q",   "",
         "Order", "Order confirmed",      "Confirm order",      "C",   ""
     )
