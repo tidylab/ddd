@@ -3,15 +3,16 @@
 event_storming <-
     tibble::tribble(
         ~Entity, ~Event,                 ~Command,             ~CQRS, ~Example,
-        "Order", "Order issued",         "Start order",        "C",   "",
-        "Order", "Pizza added to order", "Add pizza to order", "C",   "",
-        "Pizza", "Pizza size selected",  "Select pizza size",  "C",   "medium",
+        "Order", "New order created",    "New",                "C",   "",
+        "Pizza", "New pizza created",    "New",                "C",   "",
+        "Order", "Pizza added to order", "Add pizza",          "C",   "",
+        "Pizza", "Pizza size selected",  "Select size",        "C",   "medium",
         "Pizza", "Topping added",        "Add topping",        "C",   "olives",
         "Pizza", "Topping added",        "Add topping",        "C",   "anchovy, but only on the right half",
         "Pizza", "Topping removed",      "Remove topping",     "C",   "no olives",
-        "Pizza", "Pizza reviewed",       "Review pizza",       "Q",   "",
-        "Order", "Order reviewed",       "Review order",       "Q",   "",
-        "Order", "Order confirmed",      "Confirm order",      "C",   ""
+        "Pizza", "Pizza reviewed",       "Review",             "Q",   "",
+        "Order", "Order reviewed",       "Review",             "Q",   "",
+        "Order", "Order confirmed",      "Confirm",            "C",   ""
     )
 
 

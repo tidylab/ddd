@@ -12,11 +12,11 @@ Order$set("public", "initialize", overwrite = TRUE, function(uid){
 })
 
 # Order Methods -----------------------------------------------------------
-Order$set("public", "summary", function(uid){
+Order$set("public", "review", function(uid){
     pizza_slips <- tibble::tibble()
     for(k in seq_len(self$items$get("pizza")$size)){
         pizza <- self$items$get("pizza")$values[[k]]
-        pizza_slips <- dplyr::bind_rows(pizza_slips, pizza$summary())
+        pizza_slips <- dplyr::bind_rows(pizza_slips, pizza$review())
     }
     pizza_slips <- pizza_slips %>% tibble::add_column(item = "Pizza", .before = 0)
 

@@ -12,7 +12,7 @@ Pizza$set("public", "initialize", overwrite = TRUE, function(uid){
     invisible(self)
 })
 
-Pizza$set("public", "summary", function(size){
+Pizza$set("public", "review", function(size){
     pizza_slip <-
         tibble::tribble(
             ~attribute, ~value,
