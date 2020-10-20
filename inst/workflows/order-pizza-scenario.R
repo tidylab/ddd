@@ -17,9 +17,9 @@ order$add_pizza(Pizza = pizza)
 pizza$select_size("medium")
 pizza$add_topping(name = "olives", side = "both")
 pizza$add_topping(name = "anchovy", side = "right")
+pizza$add_topping(name = "jalapenos", side = "left")
 pizza$remove_topping(name = "olives")
 pizza$summary()
-
 
 # Submit Order ------------------------------------------------------------
 order$summary()
