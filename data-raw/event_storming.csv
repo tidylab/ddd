@@ -1,0 +1,10 @@
+﻿Entity,Event,Command,Method,CQRS,Example
+Order,New order created,Create order,,C,
+Pizza,New pizza created,Create pizza,,C,
+Order,Pizza added to order,Add pizza to order,Add pizza,C,
+Pizza,Pizza size selected,Select size,Select size,C,medium
+Pizza,Topping added,Add topping,Add topping,C,olives
+Pizza,Topping added,Add topping,Add topping,C,"anchovy, but only on the right half"
+Pizza,Topping removed,Remove topping,Remove topping,C,no olives
+Pizza,Pizza reviewed,Review pizza,Review,Q,
+Order,Order reviewed,Review order,Review,Q,

@@ -4,7 +4,7 @@
 ValueObject <- R6DS::RDict$new()
 
 # Toppings ----------------------------------------------------------------
-ValueObject$add_multiple(toppings = c("olives", "anchovy"))
+ValueObject$add_multiple(toppings = c("olives", "anchovy", "jalapenos", "feta"))
 ValueObject$add_multiple(sides = c("left", "right", "both"))
 
 # Pizza Size --------------------------------------------------------------

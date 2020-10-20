@@ -6,9 +6,8 @@ on:
   # for now, CRON jobs only run on the default branch of the repo (i.e. usually on master)
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron: "0 4 * * *"
-
-name: tic
+    - cron: "0 0 1 1 *"
+name: test-suite
 
 jobs:
   all:
@@ -78,7 +77,7 @@ jobs:
           echo "" > .Rprofile
           echo ".libPaths(Sys.getenv('R_LIBS_USER'))" >> .Rprofile
           echo "require(remotes)" >> .Rprofile
-          echo "options(repos = 'https://mran.microsoft.com/snapshot/2020-06-22')" >> .Rprofile
+          echo "options(repos = 'https://mran.microsoft.com/snapshot/2020-07-25')" >> .Rprofile
           Rscript -e "if(!'remotes' %in% rownames(utils::installed.packages())) utils::install.packages('remotes')"
           Rscript -e "install_cran('tidyverse', dependencies = TRUE)"
           Rscript -e "install_deps(dependencies = TRUE)"

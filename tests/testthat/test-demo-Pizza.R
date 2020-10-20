@@ -34,3 +34,22 @@ test_that('calling Pizza$add_topping changes the state of pizza', {
     expect_is(pizza$remove_topping(name = "olives"), "Pizza")
     expect_false(pizza$toppings$has("olives"))
 })
+
+test_that('calling pizza$review returns the desired results', {
+    attach(test_env)
+    expect_is(pizza_slip <- pizza$review(), "data.frame")
+    expect_has_columns(pizza_slip, c("entity", "attribute", "value"))
+})
+
+# Factory -----------------------------------------------------------------
+test_that('calling Pizza$add_topping changes the state of pizza', {
+    attach(test_env)
+    expect_is(pizza.a <- Pizza$new(uid = "a"), "Pizza")
+    expect_is(pizza.b <- Pizza$new(uid = "b"), "Pizza")
+    expect_null(pizza.a$toppings$keys)
+
+    pizza.a$add_topping("olives", "both")
+    expect_equal(pizza.a$toppings$keys, "olives")
+    expect_null(pizza.b$toppings$keys)
+})
+

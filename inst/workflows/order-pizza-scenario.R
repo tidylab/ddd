@@ -4,12 +4,12 @@ seesion <- new.env()
 
 
 # Helpers -----------------------------------------------------------------
-generate_id <- uuid::UUIDgenerate
+generate_uid <- uuid::UUIDgenerate
 
 
 # Issue New Order ---------------------------------------------------------
-order <- Order$new(id = generate_id())
-pizza <- Pizza$new(id = generate_id())
+order <- Order$new(uid = generate_uid())
+pizza <- Pizza$new(uid = generate_uid())
 order$add_pizza(Pizza = pizza)
 
 
@@ -17,11 +17,12 @@ order$add_pizza(Pizza = pizza)
 pizza$select_size("medium")
 pizza$add_topping(name = "olives", side = "both")
 pizza$add_topping(name = "anchovy", side = "right")
-pizza$remove_topping(name = "olives", side = "both")
+pizza$add_topping(name = "jalapenos", side = "left")
+pizza$remove_topping(name = "olives")
 pizza$review()
 
 
 # Submit Order ------------------------------------------------------------
-order$confirm_order()
+order$review()
 
 
