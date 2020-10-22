@@ -1,5 +1,11 @@
 ---
 title: "Step 3: Associate the Entity with Commands and Events"
+bibliography: [references.bib]
+biblio-style: apalike
+link-citations: yes
+editor_options: 
+  markdown: 
+    wrap: 80
 ---
 
 ```{r, include = FALSE}

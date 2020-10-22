@@ -3,6 +3,9 @@ title: "Introduction to Domain-driven Design (ddd)"
 bibliography: [references.bib]
 biblio-style: apalike
 link-citations: yes
+editor_options: 
+  markdown: 
+    wrap: 80
 ---
 
 ```{r, include = FALSE}
