@@ -4,7 +4,7 @@
     "Repositories": [
       {
         "Name": null,
-        "URL": "https://mran.microsoft.com/snapshot/2020-06-22"
+        "URL": "https://mran.microsoft.com/snapshot/2020-07-25"
       }
     ]
   },
@@ -37,40 +37,19 @@
       "Repository": "CRAN",
       "Hash": "08588806cba69f04797dab50627428ed"
     },
-    "R.cache": {
-      "Package": "R.cache",
-      "Version": "0.14.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "1ca02d43e1a4d49e616bd23bb39b17e6"
-    },
-    "R.methodsS3": {
-      "Package": "R.methodsS3",
-      "Version": "1.8.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "23822a838096ceb132e5041c9a68c3ef"
-    },
-    "R.oo": {
-      "Package": "R.oo",
-      "Version": "1.23.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "6be65e89d25f79fb4d147d65e19601e8"
-    },
-    "R.utils": {
-      "Package": "R.utils",
-      "Version": "2.9.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "63cdbbf467a00d0ed2aa3391f4918d6e"
-    },
     "R6": {
       "Package": "R6",
       "Version": "2.4.1",
       "Source": "Repository",
       "Repository": "RSPM",
       "Hash": "292b54f8f4b94669b08f94e5acce6be2"
+    },
+    "R6DS": {
+      "Package": "R6DS",
+      "Version": "1.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "e6b611417e29a5dcc05c47c6b96623a5"
     },
     "RColorBrewer": {
       "Package": "RColorBrewer",
@@ -634,10 +613,10 @@
     },
     "tinytex": {
       "Package": "tinytex",
-      "Version": "0.24",
+      "Version": "0.25",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "8f24b65b86f4d6d7b1e2d8a4ce2c02fb"
+      "Repository": "RSPM",
+      "Hash": "a4b9662282097d1033c60420dcb83350"
     },
     "utf8": {
       "Package": "utf8",

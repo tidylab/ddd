@@ -1,3 +1,4 @@
+^renv$
 # Docker
 ^\.dockerignore$
 ^docker-compose\.yml$
@@ -9,9 +10,10 @@
 ^\.app/
 ^\.ccache$
 ^\.github
-data-raw/
-docs/
-renv/
+^data-raw/
+^docs/
+^renv/
+^pkgdown/
 
 # Files
 ^.*\.Rproj$
@@ -25,5 +27,6 @@ renv/
 
 # Demo
 demo-.*\.R$
+
 
 
