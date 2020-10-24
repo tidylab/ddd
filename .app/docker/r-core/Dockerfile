@@ -36,6 +36,8 @@ RUN R -q -e "install_cran(c('devtools', 'testthat', 'covr', 'roxygen2', 'pkgdown
 RUN R -q -e "install_cran(('tinytex')); tinytex::install_tinytex()"
 
 # Install Project Dependencies -------------------------------------------------
+ENV RENV_PATHS_ROOT '/home/rstudio/.local/share/renv'
+RUN mkdir -p $RENV_PATHS_ROOT
 COPY ./DESCRIPTION ./DESCRIPTION
 RUN R -q -e "install_deps(dependencies = 'Depends')"
 RUN R -q -e "install_deps(dependencies = 'Imports')"
@@ -47,12 +49,12 @@ ENV R_USER /home/rstudio
 RUN printenv >> .env
 RUN cp .env home/rstudio/.Renviron
 RUN chown rstudio:rstudio home/rstudio/
-RUN mkdir -p /home/rstudio/.local/share/renv
 ENV PASSWORD 1234
 ENV ROOT true
 
 # Run Rproject -----------------------------------------------------------------
 RUN touch .env .Rprofile
-RUN echo "try(setwd('./rproject'))" >> .Rprofile
-RUN echo "try(source('.Rprofile'))" >> .Rprofile
+RUN echo "try(setwd('./rproject'), silent = TRUE)" >> .Rprofile
+RUN echo "try({source('.Rprofile'); .First()}, silent = TRUE)" >> .Rprofile
 RUN cp .Rprofile home/rstudio/.Rprofile
+
