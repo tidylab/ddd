@@ -5,7 +5,7 @@
 #' @param domain (`character`) Command domain name.
 #' @param testthat_exemption (`logical`) Should the function be excluded from unit-testing?
 #' @param covr_exemption (`logical`) Should the function be excluded from code-coverage?
-#' @includeRmd vignettes/02-commands.Rmd
+#' @includeRmd vignettes/event-storming/02-commands.Rmd
 #' @family domain driven design
 #' @export
 add_step <- function(name, domain = NULL, testthat_exemption = FALSE, covr_exemption = testthat_exemption){

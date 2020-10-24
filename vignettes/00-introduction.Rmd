@@ -1,6 +1,6 @@
 ---
 title: "Introduction to Domain-driven Design (ddd)"
-bibliography: [references.bib]
+bibliography: []
 biblio-style: apalike
 link-citations: yes
 editor_options: 
