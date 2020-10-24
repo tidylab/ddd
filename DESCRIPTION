@@ -5,7 +5,10 @@ URL: https://tidylab.github.io/ddd/, https://github.com/tidylab/ddd
 BugReports: https://github.com/tidylab/ddd/issues
 Version: 0.1.2
 Date: 2020-07-25
-Authors@R: c(person("Harel", "Lustiger", email = "tidylab@gmail.com", role = c("aut", "cre")))
+Authors@R: c(
+    person("Harel", "Lustiger", email = "tidylab@gmail.com", role = c("aut", "cre"),
+    comment = c(ORCID = "0000-0003-2953-9598")
+    )
 Maintainer: Harel Lustiger <tidylab@gmail.com>
 Description: Put Domain Driven Design (DDD) to practice on analytic projects in 
     R. This package includes key DDD classes for instantiating Domain Events, 

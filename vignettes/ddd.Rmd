@@ -1,5 +1,5 @@
 ---
-title: "Introduction to Domain-driven Design (ddd)"
+title: "Get Started with ddd"
 bibliography: []
 biblio-style: apalike
 link-citations: yes
