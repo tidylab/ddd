@@ -24,6 +24,8 @@ services:
       - ".:/home/rstudio/rproject/"
     ports:
       - 8787:8787
+    environment:
+      - DISABLE_AUTH=true
     restart: "no"
   ######################################################
   # R Testing
