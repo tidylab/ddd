@@ -71,20 +71,24 @@ jobs:
           key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
           restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
 
+      - name: "[Stage] Before Install (Linux)"
+        if: runner.os == 'Linux'
+        run: sudo apt install libcurl4-openssl-dev libsodium-dev
+
       # for some strange Windows reason this step and the next one need to be decoupled
       - name: "[Stage] Prepare"
         run: |
           echo "" > .Rprofile
-          echo ".libPaths(Sys.getenv('R_LIBS_USER'))" >> .Rprofile
-          echo "require(remotes)" >> .Rprofile
-          echo "options(repos = 'https://mran.microsoft.com/snapshot/2020-07-25')" >> .Rprofile
+          Rscript -e "Date <- as.character(read.dcf('DESCRIPTION', 'Date'));
+                      URL <- if(is.na(Date)) 'https://cran.rstudio.com/' else paste0('https://mran.microsoft.com/snapshot/', Date);
+                      Rprofile <- file('.Rprofile', open = 'wt');
+                      writeLines('.libPaths(Sys.getenv(\'R_LIBS_USER\'))', Rprofile);
+                      writeLines('require(remotes)', Rprofile);
+                      writeLines(paste0('options(repos = \'', URL, '\')'), Rprofile);
+                      close(Rprofile)"
           Rscript -e "if(!'remotes' %in% rownames(utils::installed.packages())) utils::install.packages('remotes')"
           Rscript -e "install_cran('tidyverse', dependencies = TRUE)"
           Rscript -e "install_deps(dependencies = TRUE)"
-
-      - name: "[Stage] [Linux] Install curl"
-        if: runner.os == 'Linux'
-        run: sudo apt install libcurl4-openssl-dev
 
       - name: "[Stage] Install"
         if: matrix.config.os != 'macOS-latest' || matrix.config.r != 'devel'

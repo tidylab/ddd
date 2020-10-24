@@ -1,5 +1,11 @@
 ---
 title: "Step 2: Create the Commands that Cause Each Domain Event"
+bibliography: [references.bib]
+biblio-style: apalike
+link-citations: yes
+editor_options: 
+  markdown: 
+    wrap: 80
 ---
 
 ```{r, include = FALSE}
@@ -8,13 +14,31 @@ source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 
 ## Conceptual Level
 
+A ***Command*** is the result of some user decision. Commands are actions
+happening in the domain. Here is what you need to do:
+
+1.  Write down the Commands that cause each Domain Event. Often if a user
+    interface, such as a dashboard, is part of the application, a Command will
+    be the outcome of some user gesture. That command will trigger a Domain
+    Event.
+
+2.  State the Command as imperative.
+
+In our example, pairing the Domain Events with Commands, we get the following
+imperatives (ignore the naming style, **ddd** will take care of it
+automatically):
+
 ```{r domain-command-table}
 ddd::event_storming %>% 
     dplyr::transmute(Event = title$event(Event), Command = title$command(Command)) %>% 
     dplyr::distinct(Command, Event) %>% 
     tibble::rowid_to_column("#") %>% 
-    kable(caption = "Pizza-Ordering Steps")
+    kable(caption = "Pizza-Ordering Commands")
 ```
+
+Notice how the Command and Domain Event describe the beginning and end of a
+process. For example, the process of adding a topping to a pizza starts with
+invoking the `add_topping` Command and ends with `ToppingAdded` Domain Event.
 
 ## Implementation Level
 

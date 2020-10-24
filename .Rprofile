@@ -11,12 +11,12 @@ assign(".Rprofile", new.env(), envir = globalenv())
 
     suppressMessages(try({renv::consent(provided = TRUE); unlink("./renv")}))
     options(
-        renv.lockfile = "./.app/renv/renv.lock",
+        renv.lockfile = "renv.lock",
         renv.consent = TRUE,
         renv.clean = FALSE,
         renv.settings = list(
             ignored.packages = c("renv"),
-            snapshot.type = ifelse(utils::packageVersion("renv") > "0.9.3", "explicit", "packrat"),
+            snapshot.type = "explicit",
             auto.snapshot = FALSE,
             package.dependency.fields = c("Imports", "Depends", "LinkingTo", "Suggests")[1:3],
             vcs.ignore.library = TRUE,
@@ -33,7 +33,7 @@ assign(".Rprofile", new.env(), envir = globalenv())
 .Last <- function(){
     try(if(testthat::is_testing()) return())
 
-    unlink("./renv")
+    unlink("./renv", recursive = TRUE)
     try(system('docker-compose down'))
 }
 

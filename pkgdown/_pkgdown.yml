@@ -1,0 +1,24 @@
+# https://pkgdown.r-lib.org/reference/build_site.html
+
+url: https://tidylab.github.io/ddd/
+
+title: "R Domain-driven Design"
+
+development:
+  mode: unreleased
+
+authors:
+  Harel Lustiger:
+    href: https://github.com/harell
+
+articles:
+- title: Domain Driven Design
+  desc: ~
+  contents:
+  - '`00-introduction`'
+- title: Event Storming
+  desc: Rapid design technique enabling fast-paced learning process
+  contents:
+  - '`event-storming/01-domain-events`'
+  - '`event-storming/02-commands`'
+  - '`event-storming/03-entities`'
