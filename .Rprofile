@@ -34,7 +34,7 @@ assign(".Rprofile", new.env(), envir = globalenv())
     try(if(testthat::is_testing()) return())
 
     unlink("./renv", recursive = TRUE)
-    try(system('docker-compose down'))
+    try(system('docker-compose down'), silent = TRUE)
 }
 
 # Docker ------------------------------------------------------------------
