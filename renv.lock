@@ -289,6 +289,13 @@
       "Repository": "RSPM",
       "Hash": "7d651b7131794fe007b1ad6f21aaa401"
     },
+    "htmlwidgets": {
+      "Package": "htmlwidgets",
+      "Version": "1.5.1",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "41bace23583fbc25089edae324de2dc3"
+    },
     "httr": {
       "Package": "httr",
       "Version": "1.4.2",
@@ -394,6 +401,13 @@
       "Repository": "CRAN",
       "Hash": "662f52871983ff3e3ef042c62de126df"
     },
+    "nomnoml": {
+      "Package": "nomnoml",
+      "Version": "0.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "5dadaff1cccab7287d91a8782e19bb64"
+    },
     "openssl": {
       "Package": "openssl",
       "Version": "1.4.2",
@@ -428,6 +442,13 @@
       "Source": "Repository",
       "Repository": "RSPM",
       "Hash": "b6b150cd4709e0c0c9b5d51ac4376282"
+    },
+    "png": {
+      "Package": "png",
+      "Version": "0.1-7",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "03b7076c234cb3331288919983326c55"
     },
     "praise": {
       "Package": "praise",
@@ -638,6 +659,13 @@
       "Source": "Repository",
       "Repository": "RSPM",
       "Hash": "ce4f6271baa94776db692f1cb2055bee"
+    },
+    "webshot": {
+      "Package": "webshot",
+      "Version": "0.5.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "e99d80ad34457a4853674e89d5e806de"
     },
     "whisker": {
       "Package": "whisker",

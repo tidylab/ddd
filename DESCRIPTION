@@ -25,6 +25,7 @@ Suggests:
     testthat,
     withr,
     rmarkdown,
+    nomnoml,
     tidyverse
 Imports: 
     fs,
