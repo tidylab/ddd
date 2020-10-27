@@ -42,6 +42,10 @@ invoking the `add_topping` Command and ends with `ToppingAdded` Domain Event.
 
 ## Implementation Level
 
+```{r render-pizza-ordering-workflow-diagram, out.height="50px"}
+nomnoml::nomnoml("[Hello]-[World!]", svg = TRUE)
+```
+
 In the DDD literature, generating Commands are a way to discover the intrinsic
 properties of classes, i.e. public methods and fields. This is because the
 literature largely caters to ***object-oriented programming*** (OOP) languages.
