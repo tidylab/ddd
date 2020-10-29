@@ -22,14 +22,14 @@ Pizza$set("public", "review", function(size){
 })
 
 Pizza$set("public", "select_size", function(size){
-    size <- match.arg(tolower(size), ValueObject$get("sizes"))
+    size <- match.arg(tolower(size), Constants$get("sizes"))
     self$size <- size
     invisible(self)
 })
 
 Pizza$set("public", "add_topping", function(name, side){
-    name <- match.arg(tolower(name), ValueObject$get("toppings"))
-    side <- match.arg(tolower(side), ValueObject$get("sides"))
+    name <- match.arg(tolower(name), Constants$get("toppings"))
+    side <- match.arg(tolower(side), Constants$get("sides"))
 
     do.call(self$toppings$delete, args = list(key = name))
     do.call(self$toppings$add, args = list(key = name, val = side))
@@ -38,7 +38,7 @@ Pizza$set("public", "add_topping", function(name, side){
 })
 
 Pizza$set("public", "remove_topping", function(name){
-    name <- match.arg(tolower(name), ValueObject$get("toppings"))
+    name <- match.arg(tolower(name), Constants$get("toppings"))
     do.call(self$toppings$delete, args = list(key = name))
     invisible(self)
 })
