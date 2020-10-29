@@ -89,7 +89,18 @@ assign(".Rprofile", new.env(), envir = globalenv())
 }
 
 # pkgdown -----------------------------------------------------------------
-# .Rprofile$pkgdown$site$ <- new.env()
+.Rprofile$pkgdown$site$browse <- function(name){
+    if(missing(name)){
+        path <- "./docs"
+        name <- "index.html"
+    } else {
+        path <- "./docs/articles"
+        name <- match.arg(name, list.files(path, "*.html"))
+    }
+    try(browseURL(stringr::str_glue('{path}/{name}', path = path, name = name)))
+    invisible()
+}
+
 .Rprofile$pkgdown$site$create <- function(){
     path_script <- tempfile("system-", fileext = ".R")
     job_name <- "Rendering Package Website"
@@ -111,18 +122,6 @@ assign(".Rprofile", new.env(), envir = globalenv())
     ), path_script)
 
     .Rprofile$utils$run_script(path_script, job_name)
-}
-
-.Rprofile$pkgdown$site$browse <- function(name){
-    if(missing(name)){
-        path <- "./docs"
-        name <- "index.html"
-    } else {
-        path <- "./docs/articles"
-        name <- match.arg(name, list.files(path, "*.html"))
-    }
-    try(browseURL(stringr::str_glue('{path}/{name}', path = path, name = name)))
-    invisible()
 }
 
 .Rprofile$pkgdown$article$crate <- function(name){
