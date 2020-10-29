@@ -42,21 +42,43 @@ invoking the `add_topping` Command and ends with `ToppingAdded` Domain Event.
 
 ## Implementation Level
 
-### Add Steps
-
-```{r domain-command-add_steps}
-domain_command_snippet <- 
-    ddd::event_storming %>% 
-    dplyr::mutate(Command = title$command(Command)) %>% 
-    dplyr::distinct(Command) %>% 
-    tibble::add_column(Domain = title$domain("pizza ordering")) %>% 
-    stringr::str_glue_data('add_step("{Command}", domain = "{Domain}")')
+```{r render-pizza-ordering-workflow-diagram, out.height="50px"}
+nomnoml::nomnoml("[Hello]-[World!]", svg = TRUE)
 ```
 
-```{r code=domain_command_snippet, eval=FALSE, echo=TRUE}
-```
+In the DDD literature, generating Commands are a way to discover the intrinsic
+properties of classes, i.e. public methods and fields. This is because the
+literature largely caters to ***object-oriented programming*** (OOP) languages.
+In ***functional programming*** (FP) the rules change considerably. This is
+because FP promotes the separation of data and functions. Thus, in the context
+of FP, Commands are functions, not data. This means that a Command receives
+values as input arguments and returns a new value (think about how `base::max()`
+receives one or more numeric values and returns a new value - the largest one).
+The new value is either stored in an environment or passed immediately to
+another Command.
 
-### Organize Steps in a Process
+Since R is neither purely OOP nor purely FP, that is R is both OOP and FP, we
+have the flexibility to adapt the approach which is appropriate for the moment.
+How should we treat Commands in R? From our experience, we find that in the
+early stages of development, formulating the problem in accordance with the FP
+approach is immensely useful. In later stages as our knowledge of the domain
+consolidates, and there is a need to move the solution into a mature structure,
+we may benefit from refactoring the solution to fit the OOP paradigm.
+
+Importantly, R is widely used to develop data-driven applications rather than
+general-purpose software, such as a banking transaction system. In data-driven
+systems, we can often model a business process as a ***set of sequential
+steps***, named ***workflow***, where each step receives data and returns new
+values. Thus, the notion of a workflow aligns with the FP approach.
+
+In what follows, we demonstrate a workflow, explain its major components, and
+elaborate on its merits. Finally, we show how to use **ddd** to facilitate the
+transition from ideation to implementation.
+
+### Commands as Sequential Steps of a Workflow
+
+In the Pizza Ordering example, a workflow that corresponds to the Commands we
+generated is:
 
 ```{r domain-command-organize_steps}
 header <- paste0(c("pkgload::load_all()", "session <- new.env()", ""), collapse = "\n")
@@ -71,4 +93,18 @@ domain_command_workflow <- paste0(header, "\nsession %>%\n", paste(body, collaps
 ```
 
 ```{r code=domain_command_workflow, eval=FALSE, echo=TRUE}
+```
+
+### Add Steps
+
+```{r domain-command-add_steps}
+domain_command_snippet <- 
+    ddd::event_storming %>% 
+    dplyr::mutate(Command = title$command(Command)) %>% 
+    dplyr::distinct(Command) %>% 
+    tibble::add_column(Domain = title$domain("pizza ordering")) %>% 
+    stringr::str_glue_data('add_step("{Command}", domain = "{Domain}")')
+```
+
+```{r code=domain_command_snippet, eval=FALSE, echo=TRUE}
 ```

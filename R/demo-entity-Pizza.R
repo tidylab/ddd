@@ -13,14 +13,11 @@ Pizza$set("public", "initialize", overwrite = TRUE, function(uid){
 })
 
 Pizza$set("public", "review", function(size){
-    pizza_slip <-
-        tibble::tribble(
-            ~attribute, ~value,
-            "toppings", serialize(self$toppings$toList),
-            "size",     serialize(self$size)
-        ) %>%
-        tibble::add_column(entity = self$uid, .before = 0)
-
+    pizza_slip <- PizzaSlip(
+        uid = self$uid,
+        size = self$size,
+        toppings = self$toppings$toList
+    )
     return(pizza_slip)
 })
 

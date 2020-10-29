@@ -2,7 +2,8 @@ library(tic, warn.conflicts = FALSE)
 source("./.app/tic/helpers.R")
 
 # Macros ------------------------------------------------------------------
-if (ci_on_ghactions() & is_master_branch()) do_pkgdown(deploy = TRUE, orphan = TRUE)
+# if (ci_on_ghactions() & is_master_branch()) do_pkgdown(deploy = TRUE, orphan = TRUE)
+if (ci_on_ghactions()) do_pkgdown(deploy = TRUE, orphan = TRUE)
 
 # Stage: Before Script ----------------------------------------------------
 get_stage("before_script") %>%
@@ -25,7 +26,8 @@ get_stage("after_failure")
 get_stage("before_deploy")
 
 # Stage: Deploy -----------------------------------------------------------
-if (ci_on_ghactions() & is_master_branch())
+# if (ci_on_ghactions() & is_master_branch())
+if (ci_on_ghactions())
     get_stage("deploy") %>%
     add_step(step_publish_package_coverage())
 
