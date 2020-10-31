@@ -12,15 +12,15 @@ authors:
     href: https://github.com/harell
 
 articles:
-- title: Domain Driven Design
-  desc: The elements of Domain-driven Design
-  contents:
-  - '`00-introduction`'
-  - '`elements/architecture`'
-  - '`elements/entities`'
-  - '`elements/value-objects`'
-  - '`elements/services`'
-  - '`elements/domain-events`'
+# - title: Domain Driven Design
+#   desc: The elements of Domain-driven Design
+#   contents:
+#   - '`00-introduction`'
+#   - '`elements/architecture`'
+#   - '`elements/entities`'
+#   - '`elements/value-objects`'
+#   - '`elements/services`'
+#   - '`elements/domain-events`'
 - title: Event Storming
   desc: Rapid design technique enabling fast-paced learning process
   contents:
