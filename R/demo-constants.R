@@ -1,4 +1,4 @@
-#' @title Value Object
+#' @title Constants
 #' @noRd
 #' @keywords internal
 Constants <- R6DS::RDict$new()
