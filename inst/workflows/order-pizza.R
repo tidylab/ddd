@@ -1,14 +1,6 @@
 ################################################################################
 ## Order Pizza Workflow
 ################################################################################
-session <- new.env()
-
-session %>%
-    issue_new_order() %>%
-    order_pizza() %>%
-    commit_order()
-
-
 # Steps -------------------------------------------------------------------
 issue_new_order <- function(session){
     generate_uid <- uuid::UUIDgenerate
@@ -31,3 +23,12 @@ commit_order <- function(session){
     session$customer_order$commit()
     return(session)
 }
+
+
+# Workflow ----------------------------------------------------------------
+session <- new.env()
+
+session %>%
+    issue_new_order() %>%
+    order_pizza() %>%
+    commit_order()
