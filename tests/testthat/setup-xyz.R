@@ -1,4 +1,9 @@
 # Create Dummy Project Folder Structure
-# withr::local_dir(tempdir(), .local_envir = testthat::test_env())
-# invisible(file.create(".here"))
-# test_env$proj_path <- fs::path_wd
+options(usethis.quiet = TRUE)
+# suppressMessages({
+    # sink(tempfile("sink-"))
+    path <- tempfile("test-")
+    unlink(path, recursive = TRUE, force = TRUE)
+    # usethis::create_package(path, rstudio = FALSE, check_name = FALSE, open = FALSE)
+    # sink()
+# })

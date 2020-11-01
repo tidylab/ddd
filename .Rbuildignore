@@ -1,4 +1,3 @@
-^renv$
 # Docker
 ^\.dockerignore$
 ^docker-compose\.yml$
@@ -27,7 +26,3 @@
 
 # Demo
 demo-.*\.R$
-
-
-
-^vignettes/articles$

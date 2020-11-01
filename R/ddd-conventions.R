@@ -1,10 +1,3 @@
-#' @title Naming Conventions
-#' @details
-#' * \code{event} ToppingAdded
-#' * \code{handler} add_topping
-#' * \code{command} add_topping
-#' * \code{entity} PizzaOrder
-#' * \code{domain} Ordering Pizza
 #' @noRd
 #' @keywords internal
 title <- new.env()
@@ -19,6 +12,8 @@ title$exammple <- snakecase::to_sentence_case
 title$workflow <- purrr::partial(snakecase::to_snake_case, sep_out = "-")
 
 # File Names --------------------------------------------------------------
+#' @noRd
+#' @keywords internal
 filename <- new.env()
 
 filename$template <- function(entity = NULL, attribute = NULL, value = NULL){

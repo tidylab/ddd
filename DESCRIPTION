@@ -25,7 +25,8 @@ Suggests:
     testthat,
     withr,
     rmarkdown,
-    tidyverse
+    tidyverse,
+    usethis
 Imports:
     assertthat,
     fs,
