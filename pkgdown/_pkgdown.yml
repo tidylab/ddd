@@ -13,14 +13,15 @@ authors:
 
 articles:
 - title: Domain Driven Design
-  desc: The elements of Domain-driven Design
+  desc: The Patterns of Domain-driven Design
   contents:
 #   - '`00-introduction`'
-#   - '`elements/architecture`'
-  - '`elements/entity`'
-#   - '`elements/value-objects`'
-#   - '`elements/services`'
-#   - '`elements/domain-events`'
+#   - '`patterns/architecture`'
+#   - '`patterns/entity`'
+  - '`patterns/workflow`'
+#   - '`patterns/value-objects`'
+#   - '`patterns/services`'
+#   - '`patterns/domain-events`'
 # - title: Event Storming
 #   desc: Rapid design technique enabling fast-paced learning process
 #   contents:
