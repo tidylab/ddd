@@ -25,9 +25,9 @@ Suggests:
     testthat,
     withr,
     rmarkdown,
-    nomnoml,
     tidyverse
-Imports: 
+Imports:
+    assertthat,
     fs,
     R6,
     R6DS,

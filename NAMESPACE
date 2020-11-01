@@ -2,3 +2,6 @@
 
 export(add_entity)
 export(add_step)
+export(add_workflow)
+export(assert)
+import(assertthat)
