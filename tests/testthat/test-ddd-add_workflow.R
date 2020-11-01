@@ -11,7 +11,7 @@ test_that("create R script without unit test", {
     attach(test_env)
     name <- "order one pizza"
     domain <- "pizza ordering"
-    file_path <- file.path(getwd(), "inst", "workflows", "pizza-ordering.R")
-    expect_silent(add_workflow(name, domain, n_step = 3))
-    # expect_file_exists(file_path)
+    file_path <- file.path(getwd(), "inst", "workflows", "order-one-pizza.R")
+    expect_null(add_workflow(name, domain, n_step = 3))
+    expect_file_exists(file_path)
 })
