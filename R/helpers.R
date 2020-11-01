@@ -1,3 +1,3 @@
 # fs ----------------------------------------------------------------------
-file.create <- function(path) {fs::dir_create(dirname(path)); fs::file_create(path)}
+file.create <- function(path) {dir.create(dirname(path), F, T); fs::file_create(path)}
 
