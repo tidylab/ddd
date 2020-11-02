@@ -24,12 +24,13 @@ Depends:
 Suggests: 
     testthat,
     withr,
-    rmarkdown,
-    tidyverse
+    rmarkdown
 Imports:
     assertthat,
     fs,
+    magrittr,
+    purrr,
     R6,
     R6DS,
-    purrr,
-    snakecase
+    snakecase,
+    stringr

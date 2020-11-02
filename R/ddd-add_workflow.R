@@ -44,5 +44,6 @@ add_workflow <- function(name, domain, n_step = 3){
     file.create(file_path)
     writeLines(script$skeleton, con = file_path)
 
+    if(interactive()) fs::file_show(file_path) # nocov
     invisible()
 }
