@@ -1,5 +1,5 @@
-#' @export
 #' @import assertthat
+#' @keywords internal
 #' @noRd
 assert <- new.env()
 

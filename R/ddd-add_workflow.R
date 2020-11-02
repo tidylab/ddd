@@ -3,9 +3,9 @@
 #' @param name (`character`) ***Workflow** name.
 #' @param domain (`character`) sub-domain name.
 #' @param n_step (`character`) Number of steps that constitute the **Workflow**.
-#' @includeRmd vignettes/patterns/workflow.Rmd
 #' @family domain driven design patterns
 #' @export
+#' @includeRmd vignettes/patterns/workflow.Rmd
 add_workflow <- function(name, domain, n_step = 3){
     assert$is_character(name)
     assert$is_character(domain)
