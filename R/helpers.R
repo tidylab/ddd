@@ -13,5 +13,6 @@ file.create <- function(path) {dir.create(dirname(path), F, T); fs::file_create(
 
 # tidyverse ---------------------------------------------------------------
 str_flatten <- purrr::partial(stringr::str_flatten, collapse = "\n")
+str_glue_data <- stringr::str_glue_data
 str_glue <- stringr::str_glue
 bind_rows <- dplyr::bind_rows

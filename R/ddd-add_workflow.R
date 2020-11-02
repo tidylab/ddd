@@ -15,6 +15,7 @@ add_workflow <- function(name, domain, n_step = 3){
     # Acquire Templates -------------------------------------------------------
     template <- new.env()
     template$step <- read_lines(find.template("templates", "workflow", "step.R"))
+    template$workflow <- data.frame(Step = paste0("step_", 1:n_step)) %>% str_glue_data('    {Step}()')
     template$skeleton <- read_lines(find.template("templates", "workflow", "skeleton.R"))
 
 
@@ -26,12 +27,15 @@ add_workflow <- function(name, domain, n_step = 3){
         purrr::map(~ str_glue(template$step, name = .x)) %>%
         str_flatten()
 
+    script$workflow <-
+        paste0("session %>%\n", paste(template$workflow, collapse = " %>%\n"))
+
     script$skeleton <-
         template$skeleton %>%
         str_glue(
-            name = filename$workflow(name, domain),
+            name = title$workflow(name, domain),
             steps = script$step,
-            workflow = ""
+            workflow = script$workflow
         )
 
 
