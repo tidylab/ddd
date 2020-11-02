@@ -11,18 +11,34 @@ add_workflow <- function(name, domain, n_step = 3){
     assert$is_character(domain)
     assert$is_count(n_step)
 
-    file_path <- file.path(getwd(), "inst", "workflows", filename$workflow(name, domain))
-    file.create(file_path)
 
-    template <-
-        readLines(find.template("templates", "workflow", "template.R")) %>%
-        stringr::str_flatten("\n") %>%
-        stringr::str_glue(
-            name = "",
-            steps = "step_1",
+    # Acquire Templates -------------------------------------------------------
+    template <- new.env()
+    template$step <- read_lines(find.template("templates", "workflow", "step.R"))
+    template$skeleton <- read_lines(find.template("templates", "workflow", "skeleton.R"))
+
+
+    # Render Templates --------------------------------------------------------
+    script <- new.env()
+
+    script$step <-
+        paste0("step_", 1:n_step) %>%
+        purrr::map(~ str_glue(template$step, name = .x)) %>%
+        str_flatten()
+
+    script$skeleton <-
+        template$skeleton %>%
+        str_glue(
+            name = filename$workflow(name, domain),
+            steps = script$step,
             workflow = ""
         )
 
-    writeLines(template, con = file_path)
-    invisible(NULL)
+
+    # Export Script -----------------------------------------------------------
+    file_path <- file.path(getwd(), "inst", "workflows", filename$workflow(name, domain))
+    file.create(file_path)
+    writeLines(script$skeleton, con = file_path)
+
+    invisible()
 }

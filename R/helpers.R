@@ -5,6 +5,13 @@ find.template <- function(...){
     if(nchar(path) == 0) stop("Couldn't find template")
     return(path)
 }
+read_lines <- function(con) base::readLines(con) %>% str_flatten()
 
 # fs ----------------------------------------------------------------------
 file.create <- function(path) {dir.create(dirname(path), F, T); fs::file_create(path)}
+
+
+# tidyverse ---------------------------------------------------------------
+str_flatten <- purrr::partial(stringr::str_flatten, collapse = "\n")
+str_glue <- stringr::str_glue
+bind_rows <- dplyr::bind_rows
