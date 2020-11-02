@@ -1,4 +1,4 @@
-invisible(sapply(list.files("./.app/tic", "^step_", full.names = TRUE), source))
+invisible(sapply(list.files("./.dev/tic", "^step_", full.names = TRUE), source))
 
 # high level steps --------------------------------------------------------
 build_steps <- check_package <- function(stage){
