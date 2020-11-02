@@ -6,6 +6,7 @@ expect_class <- function(object, class) testthat::expect(any(base::class(object)
 expect_not_failure <- purrr::partial(testthat::expect_type, type = "environment")
 expect_has_columns <- function(data, cols) testthat::expect(all(cols %in% colnames(data)), "not all column names are in the data.frame")
 expect_file_exists <- function(path) testthat::expect(file.exists(path), "File doesn't exist at " %+% path)
+expect_match <- function(object, regexp) testthat::expect_match(stringr::str_flatten(object, collapse = "\n"), regexp)
 
 # devtools ----------------------------------------------------------------
 create_package <- function(path){

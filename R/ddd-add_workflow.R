@@ -14,6 +14,15 @@ add_workflow <- function(name, domain, n_step = 3){
     file_path <- file.path(getwd(), "inst", "workflows", filename$workflow(name, domain))
     file.create(file_path)
 
-    writeLines(c("Workflow"), con = file_path)
+    template <-
+        readLines(find.template("templates", "workflow", "template.R")) %>%
+        stringr::str_flatten("\n") %>%
+        stringr::str_glue(
+            name = "",
+            steps = "step_1",
+            workflow = ""
+        )
+
+    writeLines(template, con = file_path)
     invisible(NULL)
 }

@@ -17,5 +17,5 @@ test_that("create an R script", {
     expect_file_exists(file_path)
 
     file_content <- readLines(file_path)
-    expect_match(file_content, "Workflow")
+    expect_match(file_content, "step_1")
 })
