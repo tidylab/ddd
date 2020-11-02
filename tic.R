@@ -1,5 +1,5 @@
 library(tic, warn.conflicts = FALSE)
-source("./.deb/tic/helpers.R")
+source("./.dev/tic/helpers.R")
 
 # Macros ------------------------------------------------------------------
 # if (ci_on_ghactions() & is_master_branch()) do_pkgdown(deploy = TRUE, orphan = TRUE)
