@@ -1,8 +1,11 @@
 #' @title Add a Workflow
-#' @description Create a **workflow** of sequential steps.
-#' @param name (`character`) ***Workflow** name.
-#' @param domain (`character`) sub-domain name.
+#' @description Create a **workflow** script with sequential steps.
+#' @param name (`character`) **Workflow** name. Note: \code{workflow} applies
+#'   naming convention automatically.
+#' @param domain (`character`) sub-domain name. Note: \code{workflow} applies
+#'   naming convention automatically.
 #' @param n_step (`character`) Number of steps that constitute the **Workflow**.
+#' @return (`NULL`)
 #' @family domain driven design patterns
 #' @export
 #' @includeRmd vignettes/patterns/workflow.Rmd
