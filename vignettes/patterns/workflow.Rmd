@@ -36,9 +36,9 @@ file_path <- list.files(path, "order-one-pizza.R", recursive = TRUE)
 
 Then the function:
 
-* Creates a workflow boilerplate with three steps;
-* Places the file under ``r dirname(file_path)``; and
-* Opens the file (only in interactive mode).
+-   Creates a workflow boilerplate with three steps;
+-   Places the file under `r dirname(file_path)`; and
+-   Opens the file (only in interactive mode).
 
 ## How to Move from Conception to Implementation?
 
@@ -52,19 +52,19 @@ and organise them in a way that reflect their relationships and dependencies.
 For example, the tasks of fitting a linear model to data includes but not
 limited to the next steps:
 
-1. Gather Data;
-2. Prepare Data;
-3. Train Model; and
-4. Evaluate Model.
+1.  Gather Data;
+2.  Prepare Data;
+3.  Train Model; and
+4.  Evaluate Model.
 
 These four tasks happen sequentially in the order of their writing. In this case
 their order is irreversible, each task is dependent on its predecessors tasks.
 
 Back to the package running example, ordering a pizza includes three steps:
 
-1. Issue new order;
-2. Order pizza; and
-3. Commit order.
+1.  Issue new order;
+2.  Order pizza; and
+3.  Commit order.
 
 We start be generating boilerplate code for a workflow that comprises three
 steps:
@@ -81,11 +81,17 @@ The boilerplate code produced by `add_workflow` looks likes this:
 ### Iteration 1
 
 <!-- In this iteration we rename the generic names of the steps. Each step name, -->
+
 <!-- should reveal you why the step exists, what it does and how it is used. What makes for a good step name? -->
 
 <!-- If this is your first workflow in the project, strive to create as few elements -->
+
 <!-- as possible, and yet have most of the different element types appear once. For -->
+
 <!-- example, if your domain requires you to fit regression models to five target -->
+
 <!-- variables, that is, you need five model objects, then start by modelling a -->
+
 <!-- single model. Yet, include all the necessary steps to fit the single model. In -->
+
 <!-- this case you may want to have the following steps: -->

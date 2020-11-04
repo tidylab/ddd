@@ -5,7 +5,6 @@
 #' @param domain (`character`) sub-domain name. Note: \code{workflow} applies
 #'   naming convention automatically.
 #' @param n_step (`character`) Number of steps that constitute the **Workflow**.
-#' @return (`NULL`)
 #' @family domain driven design patterns
 #' @export
 #' @includeRmd vignettes/patterns/workflow.Rmd
