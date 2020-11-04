@@ -41,7 +41,7 @@ knitr::knit_hooks$set(
     },
     message = function(x, options) {
         paste('\n\n<div class="alert alert-info">',
-              gsub('##', '\n', x),
+              gsub('##|#>', '\n', x),
               '</div>', sep = '\n')
     }
 )

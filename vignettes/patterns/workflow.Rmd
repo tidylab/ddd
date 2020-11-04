@@ -136,3 +136,7 @@ writeLines((
 ### Iteration 2 - ???
 
 <!-- A step is a collection of tasks -->
+
+```{r, message=TRUE}
+message("hello")
+```
