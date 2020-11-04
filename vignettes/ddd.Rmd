@@ -14,7 +14,7 @@ source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 
 <!-- dependent origination -->
 
-1.  Event Storming - modelling the domain on paper
+1.  Modelling the domain on paper with **Event Storming**
 2.  Creating a **Workflow** skeleton via `add_workflow()`
 3.  Creating **Domain Entities** skeletons with commands and queries via
     `add_entity()`
