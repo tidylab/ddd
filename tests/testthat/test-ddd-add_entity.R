@@ -26,3 +26,12 @@ test_that("create an R script", {
     expect_match(file_content, "add_topping")
     expect_match(file_content, "review")
 })
+
+test_that("create abstract base class (ABC) script", {
+    attach(test_env)
+    file_path <- file.path(getwd(), "R", "ddd-abc.R")
+    expect_file_exists(file_path)
+
+    file_content <- readLines(file_path)
+    expect_match(file_content, "Entity")
+})

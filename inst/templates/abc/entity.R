@@ -22,17 +22,3 @@ Entity <- R6::R6Class("Entity", inherit = NULL, public = list(
         self$uid <- uid
     }
 ))
-
-# Public Methods ----------------------------------------------------------
-Entity$set(which = "public", overwrite = TRUE, name = "command", value = function(...){
-    # TODO: Write command code here
-    return(self)
-})
-
-Entity$set(which = "public", overwrite = TRUE, name = "query", value = function(){
-    # TODO: Write query code here
-    query_result <- mtcars
-    return(query_result)
-})
-
-
