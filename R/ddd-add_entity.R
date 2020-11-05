@@ -18,33 +18,10 @@ add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL, tes
     assert$is_logical(testthat_exemption)
     assert$is_logical(covr_exemption)
 
-
     # Add Entity to Abstract Base Class (ABC) ---------------------------------
-    file.not.exists <- Negate(file.exists)
-    file.not.contain <- function(path, regex) all(stringr::str_detect(readLines(path), regex, negate = TRUE))
-    file_path <- file.path(getwd(), "R", "ddd-abc.R")
+    .add_entity$add_Entity_abc()
 
-    if(file.not.exists(file_path)){
-        file.create(file_path)
-        excerpts <- list()
-        excerpts$head <- read_lines(find.template("templates", "abc", "head.R"))
-        excerpts %>%
-            unlist(use.names = FALSE) %>%
-            paste0(collapse = "\n\n") %>%
-            write(file = file_path, append = FALSE, sep = "\n")
-    }
-
-    if(file.exists(file_path) & file.not.contain(file_path, "^Entity")){
-        excerpts <- list()
-        excerpts$entity <- read_lines(find.template("templates", "abc", "entity.R"))
-        excerpts %>%
-            unlist(use.names = FALSE) %>%
-            paste0(collapse = "\n\n") %>%
-            write(file = file_path, append = TRUE, sep = "\n")
-    }
-
-
-    # Export Script -----------------------------------------------------------
+    # Add Entity Object -------------------------------------------------------
     excerpts <- .add_entity$generate_R_script(name, domain, commands, queries)
     file_path <- file.path(getwd(), "R", filename$entity(name, domain))
     file.create(file_path)
@@ -69,6 +46,31 @@ add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL, tes
     excerpts$commands <- .add_entity$add_entity_commands(name, domain, commands, queries)
     excerpts$queries <- .add_entity$add_entity_queries(name, domain, commands, queries)
     return(excerpts)
+}
+
+.add_entity$add_Entity_abc <- function(){
+    file.not.exists <- Negate(file.exists)
+    file.not.contain <- function(path, regex) all(stringr::str_detect(readLines(path), regex, negate = TRUE))
+    file_path <- file.path(getwd(), "R", "ddd-abc.R")
+
+    if(file.not.exists(file_path)){
+        file.create(file_path)
+        excerpts <- list()
+        excerpts$head <- read_lines(find.template("templates", "abc", "head.R"))
+        excerpts %>%
+            unlist(use.names = FALSE) %>%
+            paste0(collapse = "\n\n") %>%
+            write(file = file_path, append = FALSE, sep = "\n")
+    }
+
+    if(file.exists(file_path) & file.not.contain(file_path, "^Entity")){
+        excerpts <- list()
+        excerpts$entity <- read_lines(find.template("templates", "abc", "entity.R"))
+        excerpts %>%
+            unlist(use.names = FALSE) %>%
+            paste0(collapse = "\n\n") %>%
+            write(file = file_path, append = TRUE, sep = "\n")
+    }
 }
 
 
