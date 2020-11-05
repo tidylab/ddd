@@ -17,6 +17,28 @@ add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL, tes
     assert$is_logical(testthat_exemption)
     assert$is_logical(covr_exemption)
 
+    add_entity_head <- function(name, domain){
+        ""
+    }
 
+    add_entity_commands <- function(commands){
+        ""
+    }
+
+    add_entity_queries <- function(queries){
+        ""
+    }
+
+    excerpts <- list()
+    excerpts$head <- add_entity_head(name, domain)
+    excerpts$commands <- add_entity_commands(commands)
+    excerpts$queries <- add_entity_queries(queries)
+
+    # Export Script -----------------------------------------------------------
+    file_path <- file.path(getwd(), "R", filename$entity(name, domain))
+    file.create(file_path)
+    writeLines(purrr::map_chr(excerpts, stringr::str_c), con = file_path)
+
+    if(interactive()) fs::file_show(file_path) # nocov
     invisible()
 }
