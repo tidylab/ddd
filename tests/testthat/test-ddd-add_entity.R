@@ -18,7 +18,11 @@ test_that("create an R script", {
     file_name <- stringr::str_glue("{domain}-entity-{name}.R", name = name, domain = domain)
     file_path <- file.path(getwd(), "R", file_name)
     expect_file_exists(file_path)
-    #
-    # file_content <- readLines(file_path)
-    # expect_match(file_content, "step_1")
+
+    file_content <- readLines(file_path)
+    expect_match(file_content, "Pizza")
+    expect_match(file_content, "Pizza Ordering")
+    expect_match(file_content, "select_size")
+    expect_match(file_content, "add_topping")
+    expect_match(file_content, "review")
 })

@@ -17,27 +17,36 @@ add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL, tes
     assert$is_logical(testthat_exemption)
     assert$is_logical(covr_exemption)
 
-    add_entity_head <- function(name, domain){
-        ""
+    add_entity_head <- function(name, domain, commands, queries){
+        template <- read_lines(find.template("templates", "entity", "head.R"))
+        str_glue(template, name = title$entity(name), domain = title$domain(domain))
     }
 
-    add_entity_commands <- function(commands){
-        ""
+    add_entity_commands <- function(name, domain, commands, queries){
+        if(is.null(commands)) return()
+        template <- read_lines(find.template("templates", "entity", "commands.R"))
+        purrr::map_chr(commands, ~str_glue(template, name = title$entity(name), command = title$command(.x)))
     }
 
-    add_entity_queries <- function(queries){
-        ""
+    add_entity_queries <- function(name, domain, commands, queries){
+        if(is.null(queries)) return()
+        template <- read_lines(find.template("templates", "entity", "queries.R"))
+        purrr::map_chr(queries, ~str_glue(template, name = title$entity(name), query = title$command(.x)))
     }
 
     excerpts <- list()
-    excerpts$head <- add_entity_head(name, domain)
-    excerpts$commands <- add_entity_commands(commands)
-    excerpts$queries <- add_entity_queries(queries)
+    excerpts$head <- add_entity_head(name, domain, commands, queries)
+    excerpts$commands <- add_entity_commands(name, domain, commands, queries)
+    excerpts$queries <- add_entity_queries(name, domain, commands, queries)
 
     # Export Script -----------------------------------------------------------
     file_path <- file.path(getwd(), "R", filename$entity(name, domain))
     file.create(file_path)
-    writeLines(purrr::map_chr(excerpts, stringr::str_c), con = file_path)
+
+    excerpts %>%
+        unlist(use.names = FALSE) %>%
+        paste0(collapse = "\n\n") %>%
+        writeLines(con = file_path)
 
     if(interactive()) fs::file_show(file_path) # nocov
     invisible()
