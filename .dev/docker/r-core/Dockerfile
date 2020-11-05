@@ -36,6 +36,8 @@ RUN R -q -e "install_cran(c('devtools', 'testthat', 'covr', 'roxygen2', 'pkgdown
 RUN R -q -e "install_cran(('tinytex')); tinytex::install_tinytex()"
 
 # Install Project Dependencies -------------------------------------------------
+RUN R -q -e "install_cran(c('nomnoml', 'webshot'))"
+RUN R -q -e "webshot::install_phantomjs()"
 ENV RENV_PATHS_ROOT '/home/rstudio/.local/share/renv'
 RUN mkdir -p $RENV_PATHS_ROOT
 COPY ./DESCRIPTION ./DESCRIPTION

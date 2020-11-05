@@ -1,6 +1,9 @@
-# https://pkgdown.r-lib.org/reference/build_site.html
-
 url: https://tidylab.github.io/ddd/
+template:
+  params:
+    docsearch:
+      api_key: 1cd55a1cf3bcf6d0b863fee2aedf4112
+      index_name: domain-driven-design
 
 title: "R Domain-driven Design"
 
@@ -13,12 +16,19 @@ authors:
 
 articles:
 - title: Domain Driven Design
-  desc: ~
+  desc: The Patterns of Domain-driven Design
   contents:
-  - '`00-introduction`'
-- title: Event Storming
-  desc: Rapid design technique enabling fast-paced learning process
-  contents:
-  - '`event-storming/01-domain-events`'
-  - '`event-storming/02-commands`'
-  - '`event-storming/03-entities`'
+#   - '`00-introduction`'
+#   - '`patterns/architecture`'
+#   - '`patterns/entity`'
+  - '`patterns/workflow`'
+#   - '`patterns/value-objects`'
+#   - '`patterns/services`'
+#   - '`patterns/domain-events`'
+# - title: Event Storming
+#   desc: Rapid design technique enabling fast-paced learning process
+#   contents:
+#   - '`event-storming/01-domain-events`'
+#   - '`event-storming/02-commands`'
+#   - '`event-storming/03-entitises`'
+

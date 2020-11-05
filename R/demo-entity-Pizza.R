@@ -13,26 +13,23 @@ Pizza$set("public", "initialize", overwrite = TRUE, function(uid){
 })
 
 Pizza$set("public", "review", function(size){
-    pizza_slip <-
-        tibble::tribble(
-            ~attribute, ~value,
-            "toppings", serialize(self$toppings$toList),
-            "size",     serialize(self$size)
-        ) %>%
-        tibble::add_column(entity = self$uid, .before = 0)
-
+    pizza_slip <- PizzaSlip(
+        uid = self$uid,
+        size = self$size,
+        toppings = self$toppings$toList
+    )
     return(pizza_slip)
 })
 
 Pizza$set("public", "select_size", function(size){
-    size <- match.arg(tolower(size), ValueObject$get("sizes"))
+    size <- match.arg(tolower(size), Constants$get("sizes"))
     self$size <- size
     invisible(self)
 })
 
 Pizza$set("public", "add_topping", function(name, side){
-    name <- match.arg(tolower(name), ValueObject$get("toppings"))
-    side <- match.arg(tolower(side), ValueObject$get("sides"))
+    name <- match.arg(tolower(name), Constants$get("toppings"))
+    side <- match.arg(tolower(side), Constants$get("sides"))
 
     do.call(self$toppings$delete, args = list(key = name))
     do.call(self$toppings$add, args = list(key = name, val = side))
@@ -41,7 +38,7 @@ Pizza$set("public", "add_topping", function(name, side){
 })
 
 Pizza$set("public", "remove_topping", function(name){
-    name <- match.arg(tolower(name), ValueObject$get("toppings"))
+    name <- match.arg(tolower(name), Constants$get("toppings"))
     do.call(self$toppings$delete, args = list(key = name))
     invisible(self)
 })

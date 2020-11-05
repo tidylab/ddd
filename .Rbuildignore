@@ -1,4 +1,3 @@
-^renv$
 # Docker
 ^\.dockerignore$
 ^docker-compose\.yml$
@@ -7,9 +6,10 @@
 
 # Folders
 .*_cache/
-^\.app/
+^\.dev/
 ^\.ccache$
 ^\.github
+\.gitkeep
 ^data-raw/
 ^docs/
 ^renv/
@@ -27,6 +27,3 @@
 
 # Demo
 demo-.*\.R$
-
-
-

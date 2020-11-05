@@ -34,7 +34,7 @@ assign(".Rprofile", new.env(), envir = globalenv())
     try(if(testthat::is_testing()) return())
 
     unlink("./renv", recursive = TRUE)
-    try(system('docker-compose down'))
+    try(system('docker-compose down'), silent = TRUE)
 }
 
 # Docker ------------------------------------------------------------------
@@ -89,32 +89,7 @@ assign(".Rprofile", new.env(), envir = globalenv())
 }
 
 # pkgdown -----------------------------------------------------------------
-.Rprofile$pkgdown$build_site <- function(){
-    path_script <- tempfile("system-", fileext = ".R")
-    job_name <- "Rendering Package Website"
-
-    writeLines(c(
-        "unlink(usethis::proj_path('docs'), TRUE, TRUE)",
-        "pkgdown::build_site(devel = TRUE)"
-    ), path_script)
-
-    .Rprofile$utils$run_script(path_script, job_name)
-}
-
-.Rprofile$pkgdown$build_article <- function(name){
-    name <- match.arg(name, list.files("./vignettes", "*.Rmd"))
-    name <- fs::path_ext_remove(name)
-    path_script <- tempfile("system-", fileext = ".R")
-    job_name <- "Rendering Package Article"
-
-    writeLines(
-        stringr::str_glue("pkgdown::build_article('{name}')", name = name),
-        path_script
-    )
-    .Rprofile$utils$run_script(path_script, job_name)
-}
-
-.Rprofile$pkgdown$browse_url <- function(name){
+.Rprofile$pkgdown$site$browse <- function(name){
     if(missing(name)){
         path <- "./docs"
         name <- "index.html"
@@ -125,6 +100,43 @@ assign(".Rprofile", new.env(), envir = globalenv())
     try(browseURL(stringr::str_glue('{path}/{name}', path = path, name = name)))
     invisible()
 }
+
+.Rprofile$pkgdown$site$create <- function(){
+    path_script <- tempfile("system-", fileext = ".R")
+    job_name <- "Rendering Package Website"
+
+    writeLines(c(
+        "unlink(usethis::proj_path('docs'), TRUE, TRUE)",
+        "pkgdown::build_site(devel = FALSE, lazy = FALSE)"
+    ), path_script)
+
+    .Rprofile$utils$run_script(path_script, job_name)
+}
+
+.Rprofile$pkgdown$site$update <- function(){
+    path_script <- tempfile("system-", fileext = ".R")
+    job_name <- "Rendering Package Website"
+
+    writeLines(c(
+        "pkgdown::build_site(devel = TRUE, lazy = TRUE)"
+    ), path_script)
+
+    .Rprofile$utils$run_script(path_script, job_name)
+}
+
+.Rprofile$pkgdown$article$crate <- function(name){
+    name <- match.arg(name, list.files("./vignettes", "*.Rmd"))
+    name <- fs::path_ext_remove(name)
+    path_script <- tempfile("system-", fileext = ".R")
+    job_name <- "Rendering Package Article"
+
+    writeLines(
+        stringr::str_glue("pkgdown::build_article('{name}', lazy = FALSE, quiet = FALSE)", name = name),
+        path_script
+    )
+    .Rprofile$utils$run_script(path_script, job_name)
+}
+
 
 # Utils -------------------------------------------------------------------
 .Rprofile$utils$run_script <- function(path, name){

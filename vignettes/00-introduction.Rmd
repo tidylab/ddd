@@ -11,3 +11,45 @@ editor_options:
 ```{r, include = FALSE}
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ```
+
+## Conventions Used in this Package Documentation
+
+The following typographical conventions are used in this package documentation:
+
+-   ***strong italic***: indicates new terms;
+
+-   **bold**: indicates package & file names;
+
+-   `inline code:` mono-spaced highlighted text indicates functions or other
+    commands that could be typed literally by the user; and
+
+-   code chunk: indicates commands or other text that could be typed literally
+    by the user.
+
+    ```{}
+    1+2
+    ## [1] 3
+    ```
+
+In addition to the general text used throughout, you will notice the following
+
+<!-- code chunks with images: -->
+
+```{=html}
+<div class="alert alert-info" <strong="">
+Signifies a tip or suggestion
+</div>
+```
+
+```{=html}
+<div class="alert alert-warning" <strong="">
+Signifies a general note
+</div>
+```
+
+```{=html}
+<div class="alert alert-danger" <strong="">
+Signifies a warning or caution
+</div>
+```
+
