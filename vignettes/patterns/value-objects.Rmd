@@ -11,3 +11,7 @@ editor_options:
 ```{r, include = FALSE}
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ```
+
+
+Value object is the type that can be persisted to storage or communicated to other
+contexts.

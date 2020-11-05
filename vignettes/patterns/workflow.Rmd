@@ -15,6 +15,11 @@ path <- tempfile("docs-")
 dir.create(path, F, T)
 ```
 
+## Highlights
+
+* Create a workflow in R that is readable by a domain expert.
+* Facilitates the transition between concept to implementation.
+
 ## What does `add_workflow` do?
 
 Given the workflow name (order one pizza), the sub-domain name (pizza ordering)
@@ -39,6 +44,22 @@ Then the function:
 -   Creates a workflow boilerplate with three steps;
 -   Places the file under `r dirname(file_path)`; and
 -   Opens the file (only in interactive mode).
+
+## What is a Step
+
+* The input to a step should always be an environment.
+* The output of a step should always be an environment.
+
+```{r, eval=FALSE, echo=TRUE}
+session <- new.env
+
+step <- function(session){
+  
+  session$system <- list(date = Sys.Date(), os = Sys.info()["sysname"])
+
+  return(session)
+}
+```
 
 ## How to Move from Conception to Implementation?
 
