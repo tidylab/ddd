@@ -10,3 +10,4 @@ renv/
 .RData
 .Ruserdata
 *.png
+renv.lock
