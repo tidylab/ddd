@@ -7,7 +7,7 @@
 #' @param testthat_exemption (`logical`) Should the \code{Entity} be excluded from unit-testing?
 #' @param covr_exemption (`logical`) Should the \code{Entity} be excluded from code-coverage?
 #' @includeRmd vignettes/event-storming/03-entities.Rmd
-#' @family domain driven design elements
+#' @family domain driven design patterns
 #' @export
 add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL, testthat_exemption = FALSE, covr_exemption = testthat_exemption){
     stopifnot(

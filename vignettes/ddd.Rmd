@@ -1,5 +1,5 @@
 ---
-title: "Get Started with ddd"
+title: "Get Started with **ddd**"
 bibliography: []
 biblio-style: apalike
 link-citations: yes
@@ -11,3 +11,15 @@ editor_options:
 ```{r, include = FALSE}
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ```
+
+<!-- dependent origination -->
+
+1.  Modelling the domain on paper with **Event Storming**
+2.  Creating a **Workflow** skeleton via `add_workflow()`
+3.  Creating **Domain Entities** skeletons with commands and queries via
+    `add_entity()`
+4.  Populating **Domain Entities** calls within a workflow
+5.  Implementing **Domain Entities** commands and queries with Test-driven
+    Development (TDD)
+6.  Representing business concepts that have data and no identity as **Value
+    Objects** via `add_value_object()`

@@ -1,5 +1,5 @@
 ---
-title: "Entities"
+title: "Entity"
 bibliography: []
 biblio-style: apalike
 link-citations: yes

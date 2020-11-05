@@ -6,7 +6,7 @@ services:
     image: r/core/package:4.0.2
     build:
       context: ./
-      dockerfile: ./.app/docker/r-core/Dockerfile
+      dockerfile: ./.dev/docker/r-core/Dockerfile
     entrypoint: '/bin/bash'
     container_name: r_core
     restart: "no"
@@ -17,7 +17,7 @@ services:
     image: r/core/package:4.0.2
     build:
       context: ./
-      dockerfile: ./.app/docker/r-core/Dockerfile
+      dockerfile: ./.dev/docker/r-core/Dockerfile
     entrypoint: '/init'
     container_name: r_develop
     volumes:
@@ -34,7 +34,7 @@ services:
     image: r/test/package:4.0.2
     build:
       context: ./
-      dockerfile: ./.app/docker/r-testing/Dockerfile
+      dockerfile: ./.dev/docker/r-testing/Dockerfile
     entrypoint: '/bin/bash'
     container_name: r_test
     restart: "no"

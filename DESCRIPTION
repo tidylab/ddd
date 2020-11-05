@@ -24,12 +24,14 @@ Depends:
 Suggests: 
     testthat,
     withr,
-    rmarkdown,
-    nomnoml,
-    tidyverse
-Imports: 
+    rmarkdown
+Imports:
+    assertthat,
     fs,
+    glue,
+    magrittr,
+    purrr,
     R6,
     R6DS,
-    purrr,
-    snakecase
+    snakecase,
+    stringr
