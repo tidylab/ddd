@@ -3,36 +3,22 @@ context("unit test for add_entity")
 # Setup -------------------------------------------------------------------
 testthat::setup({
     assign("test_env", testthat::test_env(), envir = parent.frame())
-    withr::local_dir(tempdir(), .local_envir = test_env)
-    invisible(file.create(".here"))
-    test_env$proj_path <- fs::path_wd
-    test_env$name <- "add_pizza_to_order"
-    test_env$domain <- "pizza_ordering"
+    withr::local_dir(test_wd, .local_envir = test_env)
+    test_env$name <- "Pizza"
+    test_env$domain <- "pizza ordering"
+    test_env$commands <- c("select_size", "add_topping")
+    test_env$queries <- c("review")
 })
 
 # Create R script ---------------------------------------------------------
-test_that("create R script without unit test", {
+test_that("create an R script", {
     attach(test_env)
-    expect_silent(add_entity(name, domain, testthat_exemption = TRUE))
 
-    path <- proj_path("R", domain %+% "-" %+% name, ext = "R")
-    expect_true(file.exists(path))
-    unlink(path)
+    expect_null(add_entity(name, domain, commands, queries))
 
-    path <- proj_path("tests", "testthat", "test" %+% "-" %+% domain %+% "-" %+% name, ext = "R")
-    expect_false(file.exists(path))
-})
-
-# Create R script and unit-test --------------------------------------------
-test_that("create R script with unit test", {
-    attach(test_env)
-    expect_silent(add_entity(name, domain))
-
-    path <- proj_path("R", domain %+% "-" %+% name, ext = "R")
-    expect_true(file.exists(path))
-    unlink(path)
-
-    path <- proj_path("tests", "testthat", "test" %+% "-" %+% domain %+% "-" %+% name, ext = "R")
-    expect_true(file.exists(path))
-    unlink(path)
+    # file_path <- file.path(getwd(), "inst", "workflows", "order-one-pizza.R")
+    # expect_file_exists(file_path)
+    #
+    # file_content <- readLines(file_path)
+    # expect_match(file_content, "step_1")
 })
