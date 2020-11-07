@@ -40,6 +40,6 @@ test_that("create a unit-test", {
     file_path <- file.path(getwd(), "tests", "testthat", paste0("test-", filename$entity(name, domain)))
     expect_file_exists(file_path)
 
-    # file_content <- readLines(file_path)
-    # expect_match(file_content, "Entity")
+    file_content <- readLines(file_path)
+    expect_match(file_content, paste("unit test for entity", name))
 })
