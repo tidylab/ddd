@@ -1,0 +1,16 @@
+---
+title: "Overview"
+editor_options: 
+  markdown: 
+    wrap: 80
+---
+
+```{r, include = FALSE}
+source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
+```
+
+Put Domain-driven Design (DDD) to practice on analytic projects in R.
+This package includes key DDD classes for instantiating Domain Events,
+Commands, Entities, Value Objects, Domain Services and Aggregates.
+
+Although each domain model is different, many patterns occur repeatedly.
