@@ -22,15 +22,7 @@ add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL, tes
     .add_entity$add_Entity_abc()
 
     # Add Entity Object -------------------------------------------------------
-    excerpts <- .add_entity$generate_R_script(name, domain, commands, queries)
-    file_path <- file.path(getwd(), "R", filename$entity(name, domain))
-    file.create(file_path)
-
-    excerpts %>%
-        unlist(use.names = FALSE) %>%
-        paste0(collapse = "\n\n") %>%
-        write(file = file_path, append = FALSE, sep = "\n")
-
+    .add_entity$add_Entity_object(name, domain, commands, queries)
     if(interactive()) fs::file_show(file_path) # nocov
 
 
@@ -44,6 +36,7 @@ add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL, tes
         #     unlist(use.names = FALSE) %>%
         #     paste0(collapse = "\n\n") %>%
         #     write(file = file_path, append = FALSE, sep = "\n")
+        if(interactive()) fs::file_show(file_path) # nocov
     }
 
     # Return ------------------------------------------------------------------
@@ -53,12 +46,21 @@ add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL, tes
 
 
 # High-level functions ----------------------------------------------------
-.add_entity$generate_R_script <- function(name, domain, commands, queries){
+.add_entity$add_Entity_object <- function(name, domain, commands, queries){
+    file_path <- file.path(getwd(), "R", filename$entity(name, domain))
+    file.create(file_path)
+
     excerpts <- list()
     excerpts$head <- .add_entity$add_entity_head(name, domain, commands, queries)
     excerpts$commands <- .add_entity$add_entity_commands(name, domain, commands, queries)
     excerpts$queries <- .add_entity$add_entity_queries(name, domain, commands, queries)
-    return(excerpts)
+
+    excerpts %>%
+        unlist(use.names = FALSE) %>%
+        paste0(collapse = "\n\n") %>%
+        write(file = file_path, append = FALSE, sep = "\n")
+
+    invisible()
 }
 
 .add_entity$add_Entity_abc <- function(){
