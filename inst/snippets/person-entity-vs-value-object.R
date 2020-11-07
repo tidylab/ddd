@@ -1,7 +1,7 @@
-# Customer Entity ---------------------------------------------------------
-Customer <- R6::R6Class("Customer", inherit = Entity)
+# Passenger Entity ---------------------------------------------------------
+Passenger <- R6::R6Class("Passenger", inherit = Entity)
 
-Customer$set(
+Passenger$set(
     "public", "initialize", overwrite = TRUE,
     function(uid = uuid::UUIDgenerate(), given, family){
         super$initialize(uid)
@@ -10,7 +10,27 @@ Customer$set(
 )
 
 
-# Customer Value Object ---------------------------------------------------
-Customer <- function(given = "John", family = "Doe")
-    utils::Customer(given = given, family = family)
+# Passenger Value Object ---------------------------------------------------
+Passenger <- function(given = "John", family = "Doe")
+    utils::person(given = given, family = family)
 
+
+
+# Value Object vs Data Frame  ---------------------------------------------
+Passenger <- function(given = NA_character_, family = NA_character_){
+    stopifnot(is.character(given))
+    stopifnot(is.character(family))
+    base::data.frame(given = given, family = family)
+}
+
+passenger <- Passenger(given = "Bilbo", family = "Baggins")
+
+passenger <- base::data.frame(given = "Bilbo", family = "Baggins")
+
+
+Passenger <- function(given = NA_character_, family = NA_character_, age = NA_integer_){
+    stopifnot(is.character(given))
+    stopifnot(is.character(family))
+    stopifnot(is.numeric(age), age <= 120, age >= 0)
+    base::data.frame(given = given, family = family)
+}
