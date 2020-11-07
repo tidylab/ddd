@@ -33,6 +33,19 @@ add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL, tes
 
     if(interactive()) fs::file_show(file_path) # nocov
 
+
+    # Add Unit Test -----------------------------------------------------------
+    if(testthat_exemption != TRUE){
+        file_path <- file.path(getwd(), "tests", "testthat", paste0("test-", filename$entity(name, domain)))
+        file.create(file_path)
+        # excerpts <- list()
+        # excerpts$test <- read_lines(find.template("templates", "entity", "unit-test.R"))
+        # excerpts %>%
+        #     unlist(use.names = FALSE) %>%
+        #     paste0(collapse = "\n\n") %>%
+        #     write(file = file_path, append = FALSE, sep = "\n")
+    }
+
     # Return ------------------------------------------------------------------
     invisible()
 }
