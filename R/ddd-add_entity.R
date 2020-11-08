@@ -18,6 +18,12 @@ add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL, tes
     assert$is_logical(testthat_exemption)
     assert$is_logical(covr_exemption)
 
+    # Setup -------------------------------------------------------------------
+    name <- title$entity(name)
+    domain <- title$domain(domain)
+    commands <- title$command(commands)
+    queries <- title$command(queries)
+
     # Add Entity to Abstract Base Class (ABC) ---------------------------------
     .add_entity$add_Entity_abc()
 
@@ -31,10 +37,12 @@ add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL, tes
         file.create(file_path)
 
         template <- list()
-        template$test <- read_lines(find.template("templates", "entity", "unit-test.R"))
+        template$test <- read_lines(find.template("templates", "entity", "test-head.R"))
+        template$command <- read_lines(find.template("templates", "entity", "test-command.R"))
 
         excerpts <- list()
-        excerpts$test <- str_glue(template$test, name = title$entity(name), domain = title$domain(domain))
+        excerpts$test <- str_glue(template$test, name = name, domain = domain)
+        excerpts$command <- purrr::map_chr(commands, ~str_glue(template$command, name = name, command = command(.x)))
 
         excerpts %>%
             unlist(use.names = FALSE) %>%
@@ -97,17 +105,17 @@ add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL, tes
 # Low-level functions -----------------------------------------------------
 .add_entity$add_entity_head <- function(name, domain, commands, queries){
     template <- read_lines(find.template("templates", "entity", "head.R"))
-    str_glue(template, name = title$entity(name), domain = title$domain(domain))
+    str_glue(template, name = name, domain = domain)
 }
 
 .add_entity$add_entity_commands <- function(name, domain, commands, queries){
     if(is.null(commands)) return()
     template <- read_lines(find.template("templates", "entity", "commands.R"))
-    purrr::map_chr(commands, ~str_glue(template, name = title$entity(name), command = title$command(.x)))
+    purrr::map_chr(commands, ~str_glue(template, name = name, command = .x))
 }
 
 .add_entity$add_entity_queries <- function(name, domain, commands, queries){
     if(is.null(queries)) return()
     template <- read_lines(find.template("templates", "entity", "queries.R"))
-    purrr::map_chr(queries, ~str_glue(template, name = title$entity(name), query = title$command(.x)))
+    purrr::map_chr(queries, ~str_glue(template, name = name, query = .x))
 }

@@ -9,7 +9,7 @@ testthat::setup({
 # General -----------------------------------------------------------------
 test_that('calling Entity$new instantiates an object with an unique id', {
     attach(test_env)
-    expect_is(entity <- entity(uid = md5), "Entity")
+    expect_is(entity <- Entity$new(uid = md5), "Entity")
     expect_identical(entity$uid, md5)
     test_env$entity <- entity
 })
