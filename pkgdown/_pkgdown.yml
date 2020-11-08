@@ -20,8 +20,8 @@ articles:
   contents:
 #   - '`00-introduction`'
 #   - '`patterns/architecture`'
-#   - '`patterns/entity`'
   - '`patterns/workflow`'
+  - '`patterns/entity`'
 #   - '`patterns/value-objects`'
 #   - '`patterns/services`'
 #   - '`patterns/domain-events`'

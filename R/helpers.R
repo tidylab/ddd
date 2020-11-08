@@ -2,8 +2,7 @@
 # base --------------------------------------------------------------------
 find.template <- function(...){
     path <- base::system.file(..., package = "ddd")
-    if(nchar(path) == 0) path <- base::system.file("inst", ..., package = "ddd")
-    if(nchar(path) == 0) stop("Couldn't find template")
+    if(nchar(path) == 0) path <- base::system.file("inst", ..., package = "ddd", mustWork = TRUE)
     return(path)
 }
 read_lines <- function(con) base::readLines(con) %>% str_flatten()
