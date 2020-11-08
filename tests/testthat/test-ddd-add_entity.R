@@ -41,8 +41,8 @@ test_that("create a unit-test", {
     expect_file_exists(file_path)
 
     file_content <- readLines(file_path)
-    # print(file_content)
     expect_match(file_content, paste0("unit test for entity ", name))
     expect_match(file_content, paste0(name, "\\$new\\("))
     expect_match(file_content, paste0("calling ", commands[1], " changes the state of the object"))
+    expect_match(file_content, paste0("calling ", queries[1], " returns the desired results"))
 })

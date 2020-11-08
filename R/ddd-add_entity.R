@@ -36,23 +36,7 @@ add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL, tes
     # Add Unit Test -----------------------------------------------------------
     if(testthat_exemption != TRUE){
         file_path <- file.path(getwd(), "tests", "testthat", paste0("test-", filename$entity(name, domain)))
-        file.create(file_path)
-
-        template <- list()
-        template$test <- read_lines(find.template("templates", "entity", "test-head.R"))
-        template$command <- read_lines(find.template("templates", "entity", "test-command.R"))
-        template$query <- read_lines(find.template("templates", "entity", "test-query.R"))
-
-        excerpts <- list()
-        excerpts$test <- str_glue(template$test, name = name, domain = domain)
-        excerpts$commands <- purrr::map_chr(commands, ~str_glue(template$command, name = name, command = .x))
-        excerpts$queries <- purrr::map_chr(queries, ~str_glue(template$query, name = name, query = .x))
-
-        excerpts %>%
-            unlist(use.names = FALSE) %>%
-            paste0(collapse = "\n\n") %>%
-            write(file = file_path, append = FALSE, sep = "\n")
-
+        .add_entity$add_Entity_test(file_path, name, domain, commands, queries)
         if(interactive()) fs::file_show(file_path) # nocov
     }
 
@@ -63,13 +47,39 @@ add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL, tes
 
 
 # High-level functions ----------------------------------------------------
-.add_entity$add_Entity_object <- function(file_path, name, domain, commands, queries){
+.add_entity$add_Entity_test <- function(file_path, name, domain, commands, queries){
+    map_chr <- function(.x, .f, ...){ if(is.null(.x)) return(NULL) else purrr::map_chr(.x, .f, ...)}
     file.create(file_path)
 
+    template <- list()
+    template$test <- read_lines(find.template("templates", "entity", "test-head.R"))
+    template$command <- read_lines(find.template("templates", "entity", "test-command.R"))
+    template$query <- read_lines(find.template("templates", "entity", "test-query.R"))
+
     excerpts <- list()
-    excerpts$head <- .add_entity$add_entity_head(name, domain, commands, queries)
-    excerpts$commands <- .add_entity$add_entity_commands(name, domain, commands, queries)
-    excerpts$queries <- .add_entity$add_entity_queries(name, domain, commands, queries)
+    excerpts$test <- str_glue(template$test, name = name, domain = domain)
+    excerpts$commands <- map_chr(commands, ~str_glue(template$command, name = name, command = .x))
+    excerpts$queries <- map_chr(queries, ~str_glue(template$query, name = name, query = .x))
+
+    excerpts %>%
+        unlist(use.names = FALSE) %>%
+        paste0(collapse = "\n\n") %>%
+        write(file = file_path, append = FALSE, sep = "\n")
+}
+
+.add_entity$add_Entity_object <- function(file_path, name, domain, commands, queries){
+    map_chr <- function(.x, .f, ...){ if(is.null(.x)) return(NULL) else purrr::map_chr(.x, .f, ...)}
+    file.create(file_path)
+
+    template <- list()
+    template$head <- read_lines(find.template("templates", "entity", "head.R"))
+    template$command <- read_lines(find.template("templates", "entity", "command.R"))
+    template$query <- read_lines(find.template("templates", "entity", "query.R"))
+
+    excerpts <- list()
+    excerpts$head <- str_glue(template$head, name = name, domain = domain)
+    excerpts$commands <- map_chr(commands, ~str_glue(template$command, name = name, command = .x))
+    excerpts$queries <- map_chr(queries, ~str_glue(template$query, name = name, query = .x))
 
     excerpts %>%
         unlist(use.names = FALSE) %>%
@@ -103,21 +113,3 @@ add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL, tes
     }
 }
 
-
-# Low-level functions -----------------------------------------------------
-.add_entity$add_entity_head <- function(name, domain, commands, queries){
-    template <- read_lines(find.template("templates", "entity", "head.R"))
-    str_glue(template, name = name, domain = domain)
-}
-
-.add_entity$add_entity_commands <- function(name, domain, commands, queries){
-    if(is.null(commands)) return()
-    template <- read_lines(find.template("templates", "entity", "commands.R"))
-    purrr::map_chr(commands, ~str_glue(template, name = name, command = .x))
-}
-
-.add_entity$add_entity_queries <- function(name, domain, commands, queries){
-    if(is.null(queries)) return()
-    template <- read_lines(find.template("templates", "entity", "queries.R"))
-    purrr::map_chr(queries, ~str_glue(template, name = name, query = .x))
-}
