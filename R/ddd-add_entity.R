@@ -25,10 +25,12 @@ add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL, tes
     queries <- title$command(queries)
 
     # Add Entity to Abstract Base Class (ABC) ---------------------------------
-    .add_entity$add_Entity_abc()
+    file_path <- file.path(getwd(), "R", "ddd-abc.R")
+    .add_entity$add_Entity_abc(file_path)
 
     # Add Entity Object -------------------------------------------------------
-    .add_entity$add_Entity_object(name, domain, commands, queries)
+    file_path <- file.path(getwd(), "R", filename$entity(name, domain))
+    .add_entity$add_Entity_object(file_path, name, domain, commands, queries)
     if(interactive()) fs::file_show(file_path) # nocov
 
     # Add Unit Test -----------------------------------------------------------
@@ -39,10 +41,12 @@ add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL, tes
         template <- list()
         template$test <- read_lines(find.template("templates", "entity", "test-head.R"))
         template$command <- read_lines(find.template("templates", "entity", "test-command.R"))
+        template$query <- read_lines(find.template("templates", "entity", "test-query.R"))
 
         excerpts <- list()
         excerpts$test <- str_glue(template$test, name = name, domain = domain)
-        excerpts$command <- purrr::map_chr(commands, ~str_glue(template$command, name = name, command = command(.x)))
+        excerpts$commands <- purrr::map_chr(commands, ~str_glue(template$command, name = name, command = .x))
+        excerpts$queries <- purrr::map_chr(queries, ~str_glue(template$query, name = name, query = .x))
 
         excerpts %>%
             unlist(use.names = FALSE) %>%
@@ -59,8 +63,7 @@ add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL, tes
 
 
 # High-level functions ----------------------------------------------------
-.add_entity$add_Entity_object <- function(name, domain, commands, queries){
-    file_path <- file.path(getwd(), "R", filename$entity(name, domain))
+.add_entity$add_Entity_object <- function(file_path, name, domain, commands, queries){
     file.create(file_path)
 
     excerpts <- list()
@@ -76,10 +79,9 @@ add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL, tes
     invisible()
 }
 
-.add_entity$add_Entity_abc <- function(){
+.add_entity$add_Entity_abc <- function(file_path){
     file.not.exists <- Negate(file.exists)
     file.not.contain <- function(path, regex) all(stringr::str_detect(readLines(path), regex, negate = TRUE))
-    file_path <- file.path(getwd(), "R", "ddd-abc.R")
 
     if(file.not.exists(file_path)){
         file.create(file_path)

@@ -44,5 +44,5 @@ test_that("create a unit-test", {
     # print(file_content)
     expect_match(file_content, paste0("unit test for entity ", name))
     expect_match(file_content, paste0(name, "\\$new\\("))
-    # expect_match(file_content, paste0("calling ", commands[1], " changes the state of the object"))
+    expect_match(file_content, paste0("calling ", commands[1], " changes the state of the object"))
 })
