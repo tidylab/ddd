@@ -1,0 +1,23 @@
+---
+title: "Value Object"
+bibliography: []
+biblio-style: apalike
+link-citations: yes
+editor_options: 
+  markdown: 
+    wrap: 80
+---
+
+```{r, include = FALSE}
+source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
+```
+
+## Highlights
+
+-   Calling a Value Object without any input arguments returns the Null Value
+    Object, which is usually an empty data.frame with column names and classes.
+-   Equating Value Objects is based on field-based implementation, rather than
+    identity based implementation. That means, two records are equal if all
+    their fields are equal.
+-   Value Objects can receive other Value Objects.
+-   Value Objects can receive one or a set of Entities.

@@ -1,0 +1,105 @@
+#' @title Add a Value Object to a Domain
+#' @description Value Object
+#' @param name (`character`) \code{Value Object} name.
+#' @param domain (`character`) \code{Value Object} domain name.
+#' @includeRmd vignettes/patterns/value-object.Rmd
+#' @family domain driven design patterns
+#' @export
+add_value_object <- function(name, domain = NULL){
+    # Defensive Programming ---------------------------------------------------
+    assert$is_character(name)
+    assert$is_character(domain)
+
+    # Setup -------------------------------------------------------------------
+    name <- title$value(name)
+    domain <- title$domain(domain)
+
+    # # Add Entity to Abstract Base Class (ABC) ---------------------------------
+    # file_path <- file.path(getwd(), "R", "ddd-abc.R")
+    # .add_entity$add_Entity_abc(file_path)
+    #
+    # # Add Entity Object -------------------------------------------------------
+    # file_path <- file.path(getwd(), "R", filename$entity(name, domain))
+    # .add_entity$add_Entity_object(file_path, name, domain, commands, queries)
+    # if(interactive()) fs::file_show(file_path) # nocov
+    #
+    # # Add Unit Test -----------------------------------------------------------
+    # if(testthat_exemption != TRUE){
+    #     file_path <- file.path(getwd(), "tests", "testthat", paste0("test-", filename$entity(name, domain)))
+    #     .add_entity$add_Entity_test(file_path, name, domain, commands, queries)
+    #     if(interactive()) fs::file_show(file_path) # nocov
+    # }
+
+    # Return ------------------------------------------------------------------
+    invisible()
+}
+# .add_entity <- new.env()
+
+
+# # High-level functions ----------------------------------------------------
+# .add_entity$add_Entity_test <- function(file_path, name, domain, commands, queries){
+#     map_chr <- function(.x, .f, ...){ if(is.null(.x)) return(NULL) else purrr::map_chr(.x, .f, ...)}
+#     file.create(file_path)
+#
+#     template <- list()
+#     template$test <- read_lines(find.template("templates", "entity", "test-head.R"))
+#     template$command <- read_lines(find.template("templates", "entity", "test-command.R"))
+#     template$query <- read_lines(find.template("templates", "entity", "test-query.R"))
+#
+#     excerpts <- list()
+#     excerpts$test <- str_glue(template$test, name = name, domain = domain)
+#     excerpts$commands <- map_chr(commands, ~str_glue(template$command, name = name, command = .x))
+#     excerpts$queries <- map_chr(queries, ~str_glue(template$query, name = name, query = .x))
+#
+#     excerpts %>%
+#         unlist(use.names = FALSE) %>%
+#         paste0(collapse = "\n\n") %>%
+#         write(file = file_path, append = FALSE, sep = "\n")
+# }
+#
+# .add_entity$add_Entity_object <- function(file_path, name, domain, commands, queries){
+#     map_chr <- function(.x, .f, ...){ if(is.null(.x)) return(NULL) else purrr::map_chr(.x, .f, ...)}
+#     file.create(file_path)
+#
+#     template <- list()
+#     template$head <- read_lines(find.template("templates", "entity", "head.R"))
+#     template$command <- read_lines(find.template("templates", "entity", "command.R"))
+#     template$query <- read_lines(find.template("templates", "entity", "query.R"))
+#
+#     excerpts <- list()
+#     excerpts$head <- str_glue(template$head, name = name, domain = domain)
+#     excerpts$commands <- map_chr(commands, ~str_glue(template$command, name = name, command = .x))
+#     excerpts$queries <- map_chr(queries, ~str_glue(template$query, name = name, query = .x))
+#
+#     excerpts %>%
+#         unlist(use.names = FALSE) %>%
+#         paste0(collapse = "\n\n") %>%
+#         write(file = file_path, append = FALSE, sep = "\n")
+#
+#     invisible()
+# }
+#
+# .add_entity$add_Entity_abc <- function(file_path){
+#     file.not.exists <- Negate(file.exists)
+#     file.not.contain <- function(path, regex) all(stringr::str_detect(readLines(path), regex, negate = TRUE))
+#
+#     if(file.not.exists(file_path)){
+#         file.create(file_path)
+#         excerpts <- list()
+#         excerpts$head <- read_lines(find.template("templates", "abc", "head.R"))
+#         excerpts %>%
+#             unlist(use.names = FALSE) %>%
+#             paste0(collapse = "\n\n") %>%
+#             write(file = file_path, append = FALSE, sep = "\n")
+#     }
+#
+#     if(file.exists(file_path) & file.not.contain(file_path, "^Entity")){
+#         excerpts <- list()
+#         excerpts$entity <- read_lines(find.template("templates", "abc", "entity.R"))
+#         excerpts %>%
+#             unlist(use.names = FALSE) %>%
+#             paste0(collapse = "\n\n") %>%
+#             write(file = file_path, append = TRUE, sep = "\n")
+#     }
+# }
+#
