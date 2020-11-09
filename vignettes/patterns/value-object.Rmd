@@ -10,6 +10,8 @@ editor_options:
 
 ```{r, include = FALSE}
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
+path <- tempfile("docs-")
+dir.create(path, F, T)
 ```
 
 ## Description
@@ -29,5 +31,33 @@ source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
     their fields are equal.
 -   Value Objects can receive other Value Objects.
 -   Value Objects can receive one or a set of Entities.
+
+
+## What does `add_value_object` do?
+
+Given the value object name (Pizza Slip), and the sub-domain name (pizza ordering),
+
+When `add_value_object` is called
+
+```{r, eval = FALSE, echo = TRUE}
+add_value_object(name = "Pizza Slip", domain = "pizza ordering")
+```
+
+```{r, eval = TRUE, echo = FALSE}
+name = "Pizza Slip"; domain = "pizza ordering"
+withr::with_dir(path, add_value_object(name, domain))
+file_path <- list.files(path, filename$value(name, domain), recursive = TRUE)
+```
+
+Then the function:
+
+-   Creates a **Value Object** boilerplate with several input arguments;
+-   Places the file at `r file_path`; and
+-   Opens the file (only in interactive mode).
+
+The boilerplate code produced by `add_value_object` looks likes this:
+
+```{r code = readLines(fs::path(path, file_path)), eval=FALSE, echo=TRUE}
+```
 
 ## References
