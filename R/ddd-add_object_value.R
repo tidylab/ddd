@@ -14,21 +14,10 @@ add_value_object <- function(name, domain = NULL){
     name <- title$value(name)
     domain <- title$domain(domain)
 
-    # # Add Entity to Abstract Base Class (ABC) ---------------------------------
-    # file_path <- file.path(getwd(), "R", "ddd-abc.R")
-    # .add_entity$add_Entity_abc(file_path)
-    #
-    # # Add Entity Object -------------------------------------------------------
-    # file_path <- file.path(getwd(), "R", filename$entity(name, domain))
-    # .add_entity$add_Entity_object(file_path, name, domain, commands, queries)
-    # if(interactive()) fs::file_show(file_path) # nocov
-    #
-    # # Add Unit Test -----------------------------------------------------------
-    # if(testthat_exemption != TRUE){
-    #     file_path <- file.path(getwd(), "tests", "testthat", paste0("test-", filename$entity(name, domain)))
-    #     .add_entity$add_Entity_test(file_path, name, domain, commands, queries)
-    #     if(interactive()) fs::file_show(file_path) # nocov
-    # }
+    # Add Entity Object -------------------------------------------------------
+    file_path <- file.path(getwd(), "R", filename$value(name, domain))
+    file.create(file_path)
+    if(interactive()) fs::file_show(file_path) # nocov
 
     # Return ------------------------------------------------------------------
     invisible()
