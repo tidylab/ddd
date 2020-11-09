@@ -1,6 +1,6 @@
 ---
 title: "Value Object"
-bibliography: []
+bibliography: [../references.bib]
 biblio-style: apalike
 link-citations: yes
 editor_options: 
@@ -12,6 +12,14 @@ editor_options:
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ```
 
+## Description
+
+> When you care only about the attributes of an element of the model, classify
+> it as a **Value Object**. Make it express the meaning of the attributes it
+> conveys and give it related functionality. Treat the **Value Object** as
+> immutable. Don't give it any identity and avoid the design complexities
+> necessary to maintain **Entities**. [@Evans2004, p. 99]
+
 ## Highlights
 
 -   Calling a Value Object without any input arguments returns the Null Value
@@ -21,3 +29,5 @@ source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
     their fields are equal.
 -   Value Objects can receive other Value Objects.
 -   Value Objects can receive one or a set of Entities.
+
+## References

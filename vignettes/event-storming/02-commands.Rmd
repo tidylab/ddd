@@ -1,6 +1,6 @@
 ---
 title: "Step 2: Create the Commands that Cause Each Domain Event"
-bibliography: [references.bib]
+bibliography: [../references.bib]
 biblio-style: apalike
 link-citations: yes
 editor_options: 
