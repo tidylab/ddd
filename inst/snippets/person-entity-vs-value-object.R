@@ -34,3 +34,14 @@ Passenger <- function(given = NA_character_, family = NA_character_, age = NA_in
     stopifnot(is.numeric(age), age <= 120, age >= 0)
     base::data.frame(given = given, family = family)
 }
+
+Pizza <- R6::R6Class("Pizza", Event, public = list(review = function() {
+    PizzaSlip(size = "medium", slices = 8, cheese = TRUE, toppings = list(olives = "left side"))
+    return()
+}))
+
+testthat::test_that("Pizza$review returns the Pizza Slip", {
+    testthat::expect_setequal(1:3, 3:1)
+    testthat::expect_setequal(colnames(Pizza$review()), colname(PizzaSlip()))
+
+}

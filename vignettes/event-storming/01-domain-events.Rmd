@@ -1,6 +1,6 @@
 ---
 title: "Step 1: Create a Series of Domain Events"
-bibliography: [references.bib]
+bibliography: [../references.bib]
 biblio-style: apalike
 link-citations: yes
 editor_options: 

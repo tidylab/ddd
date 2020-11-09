@@ -22,9 +22,9 @@ articles:
 #   - '`patterns/architecture`'
   - '`patterns/workflow`'
   - '`patterns/entity`'
-#   - '`patterns/value-objects`'
-#   - '`patterns/services`'
-#   - '`patterns/domain-events`'
+  - '`patterns/value-object`'
+#   - '`patterns/service`'
+#   - '`patterns/domain-event`'
 # - title: Event Storming
 #   desc: Rapid design technique enabling fast-paced learning process
 #   contents:
