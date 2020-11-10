@@ -36,8 +36,16 @@ Car <- function(
 # Easy to test ------------------------------------------------------------
 assertthat::assert_that(all(colnames(mtcars) %in% colnames(Car())))
 
+test_that('calling Order$get_customer_info() returns the desired results', {
+    expect_setequal(
+        colnames(Order$get_customer_info()),
+        c("given", "family", "phone", "address")
+    )
+})
+
 
 # Easy to use -------------------------------------------------------------
 rbind(NULL, mtcars)
 rbind(Car(), mtcars)
 str(Car())
+

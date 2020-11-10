@@ -21,7 +21,7 @@ Object** is an object that is identified only by its data and doesn't have a
 long-lived identity.
 
 For example, think about the diners, i.e. customers, of a Pizzeria. Associating
-an order and a client requires ephemeral customer identity. The customer name
+an order and a customer requires ephemeral customer identity. The customer name
 matters. It is used to identify for whom a particular Pizza was made. The names
 Hilary and Bill are not equal. However, once the customer leaves the Pizzeria,
 the customer's existence dissipates. On the other hand, if the customer is
@@ -44,7 +44,7 @@ system is both essential and long-lived.
 
 <!-- -   Calling a Value Object without any input arguments returns the Null Value -->
 
-<!--     Object, which is usually an empty data.frame with column names and classes. -->
+<!--     Object, which is usually an empty data.frame with column names and types. -->
 
 <!-- -   Equating Value Objects is based on field-based implementation, rather than -->
 
@@ -94,16 +94,17 @@ First, using the `tibble::tibble` function directly for constructing the
 Customer
 
 ```{r, eval=FALSE, echo=TRUE}
-customer <- tibble::tibble(given = "Bilbo", family = "Baggins")
+customer <- tibble(given = "Bilbo", family = "Baggins")
 ```
 
 Second, using a **Value Object** as a surrogate for constructing the Customer
 
 ```{r, eval=FALSE, echo=TRUE}
-Customer <- function(given = NA_character_, family = NA_character_){
+Customer <- function(given = NA_character_, family = NA_character_)
+{
     stopifnot(is.character(given))
     stopifnot(is.character(family))
-    tibble::tibble(given = given, family = family)
+    tibble(given = given, family = family)
 }
 
 customer <- Customer(given = "Bilbo", family = "Baggins")
@@ -116,8 +117,8 @@ Why would one prefer using a **Value Object** over the direct alternative? There
 are three apparent qualities offered by the **Value Object** pattern which are
 not offered by the alternative:
 
--   Safety. Each input argument belongs to a certain class. This is guaranteed
-    by type checking at the beginning of the function.
+-   Safety. Each input argument belongs to a certain type. This is guaranteed by
+    type checking at the beginning of the function.
 
 -   NULL **Value Object**. Calling the **Value Object** with no input arguments
     returns the structure of the `tibble` with default content, such as `NULL`,
@@ -126,5 +127,62 @@ not offered by the alternative:
 -   Default values for missing input arguments. In this manner, the **Value
     Object** has a well-defined behaviour for a customer without a last name,
     such as Madonna and Bono.
+
+There are more subtle qualities offered by a **Value Object** over direct
+implementation. First, it allows you to capture new knowledge about the domain.
+Say, you have discovered that the Pizzeria makes deliveries. In this case, the
+Customer details need to include an address and a phone number. With a **Value
+Object**, you can rewrite the Customer concept as:
+
+```{r, eval=FALSE, echo=TRUE}
+Customer <- function(given = NA_character_, family = NA_character_, 
+                     phone = NA_integer_, address = NA_character_)
+{
+    stopifnot(is.character(given))
+    stopifnot(is.character(family))
+    stopifnot(is.integer(phone))
+    stopifnot(is.character(address))
+    tibble(given = given, family = family, phone = phone, address = address)
+}
+```
+
+Notice that former calls to `Customer` in the code base, which modelled the
+ordering pizza process for diners, are not impacted by the added input
+arguments. For example, the call of previous diner works well.
+
+```{r, eval=FALSE, echo=TRUE}
+customer <- Customer(given = "Bilbo", family = "Baggins")
+```
+
+The **Value Object** ascribes NA values for the phone number and address of
+diners, that is customers in the restaurant.
+
+The second subtle quality regards tests. With **Value Object** you can replace
+Without a **Value Object**, your test expectations capture only the available
+knowledge at the moment of writing the test. For example, a test that validates
+the structure of a returning data from a function call,
+
+```{r, eval=FALSE, echo=TRUE}
+test_that('calling Order$get_customer_info() returns the desired results', {
+    expect_setequal(
+        colnames(Order$get_customer_info()),
+        c("given", "family", "phone", "address")
+    )
+})
+```
+
+can instead be written against the `Customer` **Value Object**, 
+
+```{r, eval=FALSE, echo=TRUE}
+test_that('calling Order$get_customer_info() returns the desired results', {
+    expect_setequal(
+        colnames(Order$get_customer_info()),
+        colnames(Customer())
+    )
+})
+```
+
+By avoiding hard coding of column names, your tests evolve along side the code
+base.
 
 ## References
