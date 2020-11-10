@@ -14,37 +14,61 @@ path <- tempfile("docs-")
 dir.create(path, F, T)
 ```
 
-## Description
+## What is a Value Object?
 
-When you care only about the attributes of an element of the model, classify it
-as a **Value Object**. Make it express the meaning of the attributes it conveys
-and give it related functionality. Treat the **Value Object** as immutable.
-Don't give it any identity and avoid the design complexities necessary to
-maintain **Entities**. [@Evans2004, p. 99]
+In the context of DDD, a ***Value Object*** models a domain concept. A **Value
+Object** is an object that is identified only by its data and doesn't have a
+long-lived identity.
 
-## Highlights
+For example, think about the diners, i.e. customers, of a Pizzeria. Associating
+an order and a client requires ephemeral customer identity. The customer name
+matters. It is used to identify for whom a particular Pizza was made. The names
+Hilary and Bill are not equal. However, once the customer leaves the Pizzeria,
+the customer's existence dissipates. On the other hand, if the customer is
+enrolled in a restaurant loyalty program, then its unique identifier on the
+system is both essential and long-lived.
 
--   Calling a Value Object without any input arguments returns the Null Value
-    Object, which is usually an empty data.frame with column names and classes.
--   Equating Value Objects is based on field-based implementation, rather than
-    identity based implementation. That means, two records are equal if all
-    their fields are equal.
--   Value Objects can receive other Value Objects.
--   Value Objects can receive one or a set of Entities.
+<!-- ## Description -->
+
+<!-- When you care only about the attributes of an element of the model, classify it -->
+
+<!-- as a **Value Object**. Make it express the meaning of the attributes it conveys -->
+
+<!-- and give it related functionality. Treat the **Value Object** as immutable. -->
+
+<!-- Don't give it any identity and avoid the design complexities necessary to -->
+
+<!-- maintain **Entities**. [@Evans2004, p. 99] -->
+
+<!-- ## Highlights -->
+
+<!-- -   Calling a Value Object without any input arguments returns the Null Value -->
+
+<!--     Object, which is usually an empty data.frame with column names and classes. -->
+
+<!-- -   Equating Value Objects is based on field-based implementation, rather than -->
+
+<!--     identity based implementation. That means, two records are equal if all -->
+
+<!--     their fields are equal. -->
+
+<!-- -   Value Objects can receive other Value Objects. -->
+
+<!-- -   Value Objects can receive one or a set of Entities. -->
 
 ## What does `add_value_object` do?
 
-Given the value object name (Pizza Slip), and the sub-domain name (pizza
+Given the **Value Object** name (Customer), and the sub-domain name (pizza
 ordering),
 
 When `add_value_object` is called
 
 ```{r, eval = FALSE, echo = TRUE}
-add_value_object(name = "Pizza Slip", domain = "pizza ordering")
+add_value_object(name = "Customer", domain = "pizza ordering")
 ```
 
 ```{r, eval = TRUE, echo = FALSE}
-name = "Pizza Slip"; domain = "pizza ordering"
+name = "Customer"; domain = "pizza ordering"
 withr::with_dir(path, add_value_object(name, domain))
 file_path <- list.files(path, filename$value(name, domain), recursive = TRUE)
 ```
@@ -60,23 +84,29 @@ The boilerplate code produced by `add_value_object` looks likes this:
 ```{r code = readLines(fs::path(path, file_path)), eval=FALSE, echo=TRUE}
 ```
 
-## Why should I use Value Objects in my desing?
+## Why should I use Value Objects in my design?
 
 The simplest way to implement a **Value Object** in R is with a function that
 returns a data.frame row. Compare the following two patterns for creating a
-data.frame that holds a pizza slip.
+data.frame that holds a Customer data.
 
-First, using the `tibble::tibble` function directly for constructing the pizza
-slip
+First, using the `tibble::tibble` function directly for constructing the
+Customer
 
 ```{r, eval=FALSE, echo=TRUE}
-slip <- tibble(size = "M", slices = 8, toppings = list(), takeaway = TRUE)
+customer <- tibble::tibble(given = "Bilbo", family = "Baggins")
 ```
 
-Second, using a **Value Object** as a surrogate for constructing the pizza slip
+Second, using a **Value Object** as a surrogate for constructing the Customer
 
 ```{r, eval=FALSE, echo=TRUE}
-slip <- PizzaSlip(size = "M", slices = 8, toppings = list(), takeaway = TRUE)
+Customer <- function(given = NA_character_, family = NA_character_){
+    stopifnot(is.character(given))
+    stopifnot(is.character(family))
+    tibble::tibble(given = given, family = family)
+}
+
+customer <- Customer(given = "Bilbo", family = "Baggins")
 ```
 
 Both patterns return identical objects, equal in content and structure i.e.
@@ -91,10 +121,10 @@ not offered by the alternative:
 
 -   NULL **Value Object**. Calling the **Value Object** with no input arguments
     returns the structure of the `tibble` with default content, such as `NULL`,
-    `NA` or actual values.
+    `NA`, or actual values.
 
 -   Default values for missing input arguments. In this manner, the **Value
-    Object** has a well-defined behaviour for a pizza slip in a dining in only
-    Pizzeria.
+    Object** has a well-defined behaviour for a customer without a last name,
+    such as Madonna and Bono.
 
 ## References
