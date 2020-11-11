@@ -79,10 +79,25 @@ Then the function:
 -   Places the file at `r file_path`; and
 -   Opens the file (only in interactive mode).
 
+## What are the main components of a Value Object?
+
 The boilerplate code produced by `add_value_object` looks likes this:
 
 ```{r code = readLines(fs::path(path, file_path)), eval=FALSE, echo=TRUE}
 ```
+
+The boilerplate code includes three key activities covered by **Value Object**:
+
+-   Assigning default values to input argument values, such as different types
+    of NA.
+-   Validating the type of the input arguments; and
+-   Organizing the input arguments in a data structure, such as a `data.frame`.
+
+In addition, the **Value Object** include transformations on the input arguments
+before enframing them in a data structure. Common transformations include:
+
+-   `base::serialize`; and
+-   `jsonlite::toJSON`.
 
 ## Why should I use Value Objects in my design?
 
@@ -171,7 +186,7 @@ test_that('calling Order$get_customer_info() returns the desired results', {
 })
 ```
 
-can instead be written against the `Customer` **Value Object**, 
+can instead be written against the `Customer` **Value Object**,
 
 ```{r, eval=FALSE, echo=TRUE}
 test_that('calling Order$get_customer_info() returns the desired results', {
@@ -184,5 +199,7 @@ test_that('calling Order$get_customer_info() returns the desired results', {
 
 By avoiding hard coding of column names, your tests evolve along side the code
 base.
+
+## How Should I use Value Objects in my design?
 
 ## References
