@@ -58,8 +58,8 @@ system is both essential and long-lived.
 
 ## What does `add_value_object` do?
 
-Given the **Value Object** name (Customer), and the sub-domain name (pizza
-ordering),
+Given the **Value Object** name \<Customer\>, and its sub-domain name \<pizza
+ordering\>,
 
 When `add_value_object` is called
 
@@ -76,7 +76,7 @@ file_path <- list.files(path, filename$value(name, domain), recursive = TRUE)
 Then the function:
 
 -   Creates a **Value Object** boilerplate with several input arguments;
--   Places the file at `r file_path`; and
+-   Places the file at `R/pizza_ordering-value-Customer.R`; and
 -   Opens the file (only in interactive mode).
 
 ## What are the main components of a Value Object?
@@ -86,18 +86,19 @@ The boilerplate code produced by `add_value_object` looks likes this:
 ```{r code = readLines(fs::path(path, file_path)), eval=FALSE, echo=TRUE}
 ```
 
-The boilerplate code includes three key activities covered by **Value Object**:
+The boilerplate code includes three key activities covered by any **Value
+Object**:
 
 -   Assigning default values to input argument values, such as different types
     of NA.
--   Validating the type of the input arguments; and
+-   Validating the type and value range (if applicable) of the input arguments;
+    and
 -   Organizing the input arguments in a data structure, such as a `data.frame`.
 
 In addition, the **Value Object** include transformations on the input arguments
 before enframing them in a data structure. Common transformations include:
-
--   `base::serialize`; and
--   `jsonlite::toJSON`.
+`base::serialize`, `jsonlite::toJSON`, `tidyr::unite`, and
+`snakecase::to_title_case` to name a few.
 
 ## Why should I use Value Objects in my design?
 
@@ -202,4 +203,29 @@ base.
 
 ## How Should I use Value Objects in my design?
 
-## References
+1.  Calling **Value Object** can happen inside one or more Domain Objects, such
+    as Domain Entity, or another Value Object.
+
+2.  Reusing **Value Object** in tests, such as unit-tests and integration-tests,
+    is useful when the test aims to capture the structure of a returning object.
+    
+The following example shows how to embed the `Customer` **Value Object** in the pizza `Order` Entity
+
+```{r, echo=TRUE, eval=FALSE}
+Order$set("public", "set_customer_info", function(
+  given = NA_character_, family = NA_character_){
+  self$customer <- Customer(given, family)
+  return(self)
+})  
+```
+
+Then we can test the result of a call for this function
+
+```{r, echo=TRUE, eval=FALSE}
+test_that('calling Order$set_customer_info returns the customer info', {
+    expect_setequal(
+        colnames(Order$new(id = 1)$set_customer_info("Bilbo")$customer),
+        colnames(Customer())
+    )
+})
+```
