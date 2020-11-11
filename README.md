@@ -22,3 +22,8 @@ Commands, Entities, Value Objects, Domain Services and Aggregates.
 ## Installation
 
 You can install `ddd` by using:
+
+``` r
+install.packages("remotes")
+remotes::install_github("tidylab/ddd")
+```

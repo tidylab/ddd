@@ -2,16 +2,8 @@
 output: github_document
 ---
 
-```{r setup, echo = FALSE, results = 'hide', message = FALSE, warning = FALSE}
-knitr::opts_chunk$set(
-  echo = TRUE, 
-  message = FALSE,
-  warning = FALSE,
-  fig.align = "center", 
-  out.width = "100%"
-)
-
-pkgload::load_all(usethis::proj_get())
+```{r, include = FALSE}
+source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ```
 
 # `ddd` <img src='https://i.imgur.com/M8Jk1AL.png' align="right" height="75"/>
@@ -37,7 +29,7 @@ knitr::include_graphics("https://i.imgur.com/RLEQkhe.png")
 
 You can install `ddd` by using:
 
-```{r, eval=FALSE}
+```{r, echo=TRUE, eval=FALSE}
 install.packages("remotes")
 remotes::install_github("tidylab/ddd")
 ```
