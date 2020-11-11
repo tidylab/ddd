@@ -3,6 +3,8 @@
 
 <!-- badges: start -->
 
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![test-suite](https://github.com/tidylab/ddd/workflows/test-suite/badge.svg)](https://github.com/tidylab/ddd/actions)
 [![code-coverage](https://codecov.io/gh/tidylab/ddd/branch/master/graph/badge.svg)](https://codecov.io/github/tidylab/ddd/?branch=master)
 <!-- badges: end -->
@@ -22,3 +24,8 @@ Commands, Entities, Value Objects, Domain Services and Aggregates.
 ## Installation
 
 You can install `ddd` by using:
+
+``` r
+install.packages("remotes")
+remotes::install_github("tidylab/ddd")
+```

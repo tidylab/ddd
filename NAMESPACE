@@ -2,7 +2,6 @@
 
 export("%>%")
 export(add_entity)
-export(add_step)
 export(add_value_object)
 export(add_workflow)
 export(filename)

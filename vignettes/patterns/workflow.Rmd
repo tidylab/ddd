@@ -96,8 +96,6 @@ Each step must be independent from its succeeding steps.
 </div>
 ```
 
-
-
 In our running example, the process of ordering pizza includes, but not limited
 to, three steps:
 

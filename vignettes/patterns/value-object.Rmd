@@ -14,37 +14,61 @@ path <- tempfile("docs-")
 dir.create(path, F, T)
 ```
 
-## Description
+## What is a Value Object?
 
-When you care only about the attributes of an element of the model, classify it
-as a **Value Object**. Make it express the meaning of the attributes it conveys
-and give it related functionality. Treat the **Value Object** as immutable.
-Don't give it any identity and avoid the design complexities necessary to
-maintain **Entities**. [@Evans2004, p. 99]
+In the context of DDD, a ***Value Object*** models a domain concept. A **Value
+Object** is an object that is identified only by its data and doesn't have a
+long-lived identity.
 
-## Highlights
+For example, think about the diners, i.e. customers, of a Pizzeria. Associating
+an order and a customer requires ephemeral customer identity. The customer name
+matters. It is used to identify for whom a particular Pizza was made. The names
+Hilary and Bill are not equal. However, once the customer leaves the Pizzeria,
+the customer's existence dissipates. On the other hand, if the customer is
+enrolled in a restaurant loyalty program, then its unique identifier on the
+system is both essential and long-lived.
 
--   Calling a Value Object without any input arguments returns the Null Value
-    Object, which is usually an empty data.frame with column names and classes.
--   Equating Value Objects is based on field-based implementation, rather than
-    identity based implementation. That means, two records are equal if all
-    their fields are equal.
--   Value Objects can receive other Value Objects.
--   Value Objects can receive one or a set of Entities.
+<!-- ## Description -->
+
+<!-- When you care only about the attributes of an element of the model, classify it -->
+
+<!-- as a **Value Object**. Make it express the meaning of the attributes it conveys -->
+
+<!-- and give it related functionality. Treat the **Value Object** as immutable. -->
+
+<!-- Don't give it any identity and avoid the design complexities necessary to -->
+
+<!-- maintain **Entities**. [@Evans2004, p. 99] -->
+
+<!-- ## Highlights -->
+
+<!-- -   Calling a Value Object without any input arguments returns the Null Value -->
+
+<!--     Object, which is usually an empty data.frame with column names and types. -->
+
+<!-- -   Equating Value Objects is based on field-based implementation, rather than -->
+
+<!--     identity based implementation. That means, two records are equal if all -->
+
+<!--     their fields are equal. -->
+
+<!-- -   Value Objects can receive other Value Objects. -->
+
+<!-- -   Value Objects can receive one or a set of Entities. -->
 
 ## What does `add_value_object` do?
 
-Given the value object name (Pizza Slip), and the sub-domain name (pizza
-ordering),
+Given the **Value Object** name \<Customer\>, and its sub-domain name \<pizza
+ordering\>,
 
 When `add_value_object` is called
 
 ```{r, eval = FALSE, echo = TRUE}
-add_value_object(name = "Pizza Slip", domain = "pizza ordering")
+add_value_object(name = "Customer", domain = "pizza ordering")
 ```
 
 ```{r, eval = TRUE, echo = FALSE}
-name = "Pizza Slip"; domain = "pizza ordering"
+name = "Customer"; domain = "pizza ordering"
 withr::with_dir(path, add_value_object(name, domain))
 file_path <- list.files(path, filename$value(name, domain), recursive = TRUE)
 ```
@@ -52,31 +76,54 @@ file_path <- list.files(path, filename$value(name, domain), recursive = TRUE)
 Then the function:
 
 -   Creates a **Value Object** boilerplate with several input arguments;
--   Places the file at `r file_path`; and
+-   Places the file at `R/pizza_ordering-value-Customer.R`; and
 -   Opens the file (only in interactive mode).
+
+## What are the main components of a Value Object?
 
 The boilerplate code produced by `add_value_object` looks likes this:
 
 ```{r code = readLines(fs::path(path, file_path)), eval=FALSE, echo=TRUE}
 ```
 
-## Why should I use Value Objects in my desing?
+The boilerplate code includes three key activities covered by any **Value
+Object**:
+
+-   Assigning default values to input argument values, such as different types
+    of NA.
+-   Validating the type and value range (if applicable) of the input arguments;
+    and
+-   Organizing the input arguments in a data structure, such as a `data.frame`.
+
+In addition, the **Value Object** include transformations on the input arguments
+before enframing them in a data structure. Common transformations include:
+`base::serialize`, `jsonlite::toJSON`, `tidyr::unite`, and
+`snakecase::to_title_case` to name a few.
+
+## Why should I use Value Objects in my design?
 
 The simplest way to implement a **Value Object** in R is with a function that
 returns a data.frame row. Compare the following two patterns for creating a
-data.frame that holds a pizza slip.
+data.frame that holds a Customer data.
 
-First, using the `tibble::tibble` function directly for constructing the pizza
-slip
+First, using the `tibble::tibble` function directly for constructing the
+Customer
 
 ```{r, eval=FALSE, echo=TRUE}
-slip <- tibble(size = "M", slices = 8, toppings = list(), takeaway = TRUE)
+customer <- tibble(given = "Bilbo", family = "Baggins")
 ```
 
-Second, using a **Value Object** as a surrogate for constructing the pizza slip
+Second, using a **Value Object** as a surrogate for constructing the Customer
 
 ```{r, eval=FALSE, echo=TRUE}
-slip <- PizzaSlip(size = "M", slices = 8, toppings = list(), takeaway = TRUE)
+Customer <- function(given = NA_character_, family = NA_character_)
+{
+    stopifnot(is.character(given))
+    stopifnot(is.character(family))
+    tibble(given = given, family = family)
+}
+
+customer <- Customer(given = "Bilbo", family = "Baggins")
 ```
 
 Both patterns return identical objects, equal in content and structure i.e.
@@ -86,15 +133,99 @@ Why would one prefer using a **Value Object** over the direct alternative? There
 are three apparent qualities offered by the **Value Object** pattern which are
 not offered by the alternative:
 
--   Safety. Each input argument belongs to a certain class. This is guaranteed
-    by type checking at the beginning of the function.
+-   Safety. Each input argument belongs to a certain type. This is guaranteed by
+    type checking at the beginning of the function.
 
 -   NULL **Value Object**. Calling the **Value Object** with no input arguments
     returns the structure of the `tibble` with default content, such as `NULL`,
-    `NA` or actual values.
+    `NA`, or actual values.
 
 -   Default values for missing input arguments. In this manner, the **Value
-    Object** has a well-defined behaviour for a pizza slip in a dining in only
-    Pizzeria.
+    Object** has a well-defined behaviour for a customer without a last name,
+    such as Madonna and Bono.
 
-## References
+There are more subtle qualities offered by a **Value Object** over direct
+implementation. First, it allows you to capture new knowledge about the domain.
+Say, you have discovered that the Pizzeria makes deliveries. In this case, the
+Customer details need to include an address and a phone number. With a **Value
+Object**, you can rewrite the Customer concept as:
+
+```{r, eval=FALSE, echo=TRUE}
+Customer <- function(given = NA_character_, family = NA_character_, 
+                     phone = NA_integer_, address = NA_character_)
+{
+    stopifnot(is.character(given))
+    stopifnot(is.character(family))
+    stopifnot(is.integer(phone))
+    stopifnot(is.character(address))
+    tibble(given = given, family = family, phone = phone, address = address)
+}
+```
+
+Notice that former calls to `Customer` in the code base, which modelled the
+ordering pizza process for diners, are not impacted by the added input
+arguments. For example, the call of previous diner works well.
+
+```{r, eval=FALSE, echo=TRUE}
+customer <- Customer(given = "Bilbo", family = "Baggins")
+```
+
+The **Value Object** ascribes NA values for the phone number and address of
+diners, that is customers in the restaurant.
+
+The second subtle quality regards tests. With **Value Object** you can replace
+Without a **Value Object**, your test expectations capture only the available
+knowledge at the moment of writing the test. For example, a test that validates
+the structure of a returning data from a function call,
+
+```{r, eval=FALSE, echo=TRUE}
+test_that('calling Order$get_customer_info() returns the desired results', {
+    expect_setequal(
+        colnames(Order$get_customer_info()),
+        c("given", "family", "phone", "address")
+    )
+})
+```
+
+can instead be written against the `Customer` **Value Object**,
+
+```{r, eval=FALSE, echo=TRUE}
+test_that('calling Order$get_customer_info() returns the desired results', {
+    expect_setequal(
+        colnames(Order$get_customer_info()),
+        colnames(Customer())
+    )
+})
+```
+
+By avoiding hard coding of column names, your tests evolve along side the code
+base.
+
+## How Should I use Value Objects in my design?
+
+1.  Calling **Value Object** can happen inside one or more Domain Objects, such
+    as Domain Entity, or another Value Object.
+
+2.  Reusing **Value Object** in tests, such as unit-tests and integration-tests,
+    is useful when the test aims to capture the structure of a returning object.
+    
+The following example shows how to embed the `Customer` **Value Object** in the pizza `Order` Entity
+
+```{r, echo=TRUE, eval=FALSE}
+Order$set("public", "set_customer_info", function(
+  given = NA_character_, family = NA_character_){
+  self$customer <- Customer(given, family)
+  return(self)
+})  
+```
+
+Then we can test the result of a call for this function
+
+```{r, echo=TRUE, eval=FALSE}
+test_that('calling Order$set_customer_info returns the customer info', {
+    expect_setequal(
+        colnames(Order$new(id = 1)$set_customer_info("Bilbo")$customer),
+        colnames(Customer())
+    )
+})
+```
