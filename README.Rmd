@@ -9,6 +9,7 @@ source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 # `ddd` <img src='https://i.imgur.com/M8Jk1AL.png' align="right" height="75"/>
 
 <!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![test-suite](https://github.com/tidylab/ddd/workflows/test-suite/badge.svg)](https://github.com/tidylab/ddd/actions)
 [![code-coverage](https://codecov.io/gh/tidylab/ddd/branch/master/graph/badge.svg)](https://codecov.io/github/tidylab/ddd/?branch=master)
 <!-- badges: end -->
