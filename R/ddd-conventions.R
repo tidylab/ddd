@@ -1,5 +1,7 @@
+# Naming Style ------------------------------------------------------------
 #' @noRd
 #' @keywords internal
+#' @export
 title <- new.env()
 title$event <- snakecase::to_upper_camel_case
 title$value <- snakecase::to_upper_camel_case
@@ -14,6 +16,7 @@ title$workflow <- purrr::partial(snakecase::to_snake_case, sep_out = "-")
 # File Names --------------------------------------------------------------
 #' @noRd
 #' @keywords internal
+#' @export
 filename <- new.env()
 
 filename$template <- function(entity = NULL, attribute = NULL, value = NULL){

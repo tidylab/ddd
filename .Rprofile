@@ -118,6 +118,7 @@ assign(".Rprofile", new.env(), envir = globalenv())
     job_name <- "Rendering Package Website"
 
     writeLines(c(
+        "devtools::document()",
         "pkgdown::build_site(devel = TRUE, lazy = TRUE)"
     ), path_script)
 
@@ -151,4 +152,3 @@ assign(".Rprofile", new.env(), envir = globalenv())
         ))
     invisible()
 }
-

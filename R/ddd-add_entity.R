@@ -1,103 +1,115 @@
 #' @title Add an Entity to a Domain
-#' @description Represent a command as a step in a sequential process.
+#' @description Domain Entity
 #' @param name (`character`) \code{Entity} name.
 #' @param domain (`character`) \code{Entity} domain name.
 #' @param commands (`character`)
 #' @param queries (`character`)
 #' @param testthat_exemption (`logical`) Should the \code{Entity} be excluded from unit-testing?
 #' @param covr_exemption (`logical`) Should the \code{Entity} be excluded from code-coverage?
-#' @includeRmd vignettes/event-storming/03-entities.Rmd
+#' @includeRmd vignettes/patterns/entity.Rmd
 #' @family domain driven design patterns
 #' @export
 add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL, testthat_exemption = FALSE, covr_exemption = testthat_exemption){
-    stopifnot(
-        is.character(name),
-        is.null(domain) | is.character(domain),
-        is.logical(testthat_exemption),
-        is.logical(covr_exemption)
-    )
+    # Defensive Programming ---------------------------------------------------
+    assert$is_character(name)
+    assert$is_character(domain)
+    assert$are_character(commands)
+    assert$are_character(queries)
+    assert$is_logical(testthat_exemption)
+    assert$is_logical(covr_exemption)
 
-    .add_entity$script(name, domain, covr_exemption)
-    if(!testthat_exemption) .add_entity$test(name, domain)
+    # Setup -------------------------------------------------------------------
+    name <- title$entity(name)
+    domain <- title$domain(domain)
+    commands <- title$command(commands)
+    queries <- title$command(queries)
 
+    # Add Entity to Abstract Base Class (ABC) ---------------------------------
+    file_path <- file.path(getwd(), "R", "ddd-abc.R")
+    .add_entity$add_Entity_abc(file_path)
+
+    # Add Entity Object -------------------------------------------------------
+    file_path <- file.path(getwd(), "R", filename$entity(name, domain))
+    .add_entity$add_Entity_object(file_path, name, domain, commands, queries)
+    if(interactive()) fs::file_show(file_path) # nocov
+
+    # Add Unit Test -----------------------------------------------------------
+    if(testthat_exemption != TRUE){
+        file_path <- file.path(getwd(), "tests", "testthat", paste0("test-", filename$entity(name, domain)))
+        .add_entity$add_Entity_test(file_path, name, domain, commands, queries)
+        if(interactive()) fs::file_show(file_path) # nocov
+    }
+
+    # Return ------------------------------------------------------------------
     invisible()
 }
-
-# Low-lever Functions -----------------------------------------------------
 .add_entity <- new.env()
-.add_entity$script <- function(name, domain, covr_exemption){
-    proj_path <- fs::path_wd
-    `%||%` <- function(a,b) if(is.null(a)) b else a
-    slug <- .add_entity$slug(name, domain)
-    dir.create(proj_path("R"), recursive = TRUE, showWarnings = FALSE)
 
-    start_comments <- ifelse(covr_exemption, "# nocov start", "")
-    end_comments <- ifelse(covr_exemption, "# nocov end", "")
 
-    content <- stringr::str_glue(stringr::str_replace_all(
-        "
-        ~ @title TODO: Write What the Function Does
-        ~ @description  TODO: Write description for`{fct_name}`.
-        ~ @param session (`environment`) A shared environment.
-        ~ @return session
-        ~ @family {domain} domain
-        ~ @export
-        {fct_name} <- function(session) {{ {start_comments}
-            stopifnot(is.environment(session))
-            attach(.{fct_name}, warn.conflicts = FALSE)
-            on.exit(detach(.{fct_name}))
+# High-level functions ----------------------------------------------------
+.add_entity$add_Entity_test <- function(file_path, name, domain, commands, queries){
+    map_chr <- function(.x, .f, ...){ if(is.null(.x)) return(NULL) else purrr::map_chr(.x, .f, ...)}
+    file.create(file_path)
 
-            # Code ...
+    template <- list()
+    template$test <- read_lines(find.template("templates", "entity", "test-head.R"))
+    template$command <- read_lines(find.template("templates", "entity", "test-command.R"))
+    template$query <- read_lines(find.template("templates", "entity", "test-query.R"))
 
-            # Return
-            invisible(session)
-        }} {end_comments}
+    excerpts <- list()
+    excerpts$test <- str_glue(template$test, name = name, domain = domain)
+    excerpts$commands <- map_chr(commands, ~str_glue(template$command, name = name, command = .x))
+    excerpts$queries <- map_chr(queries, ~str_glue(template$query, name = name, query = .x))
 
-        # Steps -------------------------------------------------------------------
-        .{fct_name} <- new.env()
-        .{fct_name}$dummy_step <- function(...) NULL
-        ", "~", "#'"),
-        fct_name = name,
-        domain = domain %||% "",
-        start_comments = start_comments,
-        end_comments = end_comments
-    )
+    excerpts %>%
+        unlist(use.names = FALSE) %>%
+        paste0(collapse = "\n\n") %>%
+        write(file = file_path, append = FALSE, sep = "\n")
+}
 
-    writeLines(content, proj_path("R", slug, ext = "R"))
+.add_entity$add_Entity_object <- function(file_path, name, domain, commands, queries){
+    map_chr <- function(.x, .f, ...){ if(is.null(.x)) return(NULL) else purrr::map_chr(.x, .f, ...)}
+    file.create(file_path)
+
+    template <- list()
+    template$head <- read_lines(find.template("templates", "entity", "head.R"))
+    template$command <- read_lines(find.template("templates", "entity", "command.R"))
+    template$query <- read_lines(find.template("templates", "entity", "query.R"))
+
+    excerpts <- list()
+    excerpts$head <- str_glue(template$head, name = name, domain = domain)
+    excerpts$commands <- map_chr(commands, ~str_glue(template$command, name = name, command = .x))
+    excerpts$queries <- map_chr(queries, ~str_glue(template$query, name = name, query = .x))
+
+    excerpts %>%
+        unlist(use.names = FALSE) %>%
+        paste0(collapse = "\n\n") %>%
+        write(file = file_path, append = FALSE, sep = "\n")
 
     invisible()
 }
 
-.add_entity$test <- function(name, domain){
-    proj_path <- fs::path_wd
-    dir.create(proj_path("tests", "testthat"), recursive = TRUE, showWarnings = FALSE)
-    slug <- .add_entity$slug(name, domain)
-    writeLines(
-        stringr::str_glue("
-        context('unit test for {fct_name}')
+.add_entity$add_Entity_abc <- function(file_path){
+    file.not.exists <- Negate(file.exists)
+    file.not.contain <- function(path, regex) all(stringr::str_detect(readLines(path), regex, negate = TRUE))
 
-        # Setup -------------------------------------------------------------------
-        testthat::setup({{
-            assign('test_env', testthat::test_env(), envir = parent.frame())
-            test_env$session <- new.env()
-        }})
+    if(file.not.exists(file_path)){
+        file.create(file_path)
+        excerpts <- list()
+        excerpts$head <- read_lines(find.template("templates", "abc", "head.R"))
+        excerpts %>%
+            unlist(use.names = FALSE) %>%
+            paste0(collapse = "\n\n") %>%
+            write(file = file_path, append = FALSE, sep = "\n")
+    }
 
-        # General -----------------------------------------------------------------
-        test_that('{fct_name} works', {{
-            attach(test_env)
-            expect_silent({fct_name}(session))
-        }})
-        ", fct_name = name),
-        proj_path("tests", "testthat", paste0("test-", slug), ext = "R")
-    )
-    invisible()
+    if(file.exists(file_path) & file.not.contain(file_path, "^Entity")){
+        excerpts <- list()
+        excerpts$entity <- read_lines(find.template("templates", "abc", "entity.R"))
+        excerpts %>%
+            unlist(use.names = FALSE) %>%
+            paste0(collapse = "\n\n") %>%
+            write(file = file_path, append = TRUE, sep = "\n")
+    }
 }
 
-.add_entity$slug <- function(name, domain){
-    is.not.null <- Negate(is.null)
-    `%+%` <- base::paste0
-
-    slug <- name
-    slug <- if(is.not.null(domain)) domain %+% "-" %+% slug
-    return(slug)
-}

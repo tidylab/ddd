@@ -7,8 +7,8 @@ template:
 
 title: "R Domain-driven Design"
 
-development:
-  mode: unreleased
+# development:
+#   mode: unreleased
 
 authors:
   Harel Lustiger:
@@ -20,11 +20,11 @@ articles:
   contents:
 #   - '`00-introduction`'
 #   - '`patterns/architecture`'
-#   - '`patterns/entity`'
   - '`patterns/workflow`'
-#   - '`patterns/value-objects`'
-#   - '`patterns/services`'
-#   - '`patterns/domain-events`'
+  - '`patterns/entity`'
+  - '`patterns/value-object`'
+#   - '`patterns/service`'
+#   - '`patterns/domain-event`'
 # - title: Event Storming
 #   desc: Rapid design technique enabling fast-paced learning process
 #   contents:

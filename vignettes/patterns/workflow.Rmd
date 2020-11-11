@@ -42,7 +42,7 @@ file_path <- list.files(path, "order-one-pizza.R", recursive = TRUE)
 Then the function:
 
 -   Creates a workflow boilerplate with three steps;
--   Places the file under `r dirname(file_path)`; and
+-   Places the file at `r file_path`; and
 -   Opens the file (only in interactive mode).
 
 ## What is a Step
@@ -71,7 +71,7 @@ Before you call `add_workflow`, think about the process you are about to model.
 Essentially, you need to decompose the process into sequential steps that
 reflect their relationships and dependencies.
 
-<!-- Steps are formed in the impertive -->
+<!-- Steps are formed in the imperative -->
 
 Decomposing a process into steps requires cognitive effort, yet you don't need
 to delve into details in this stage.
@@ -96,8 +96,6 @@ Each step must be independent from its succeeding steps.
 </div>
 ```
 
-
-
 In our running example, the process of ordering pizza includes, but not limited
 to, three steps:
 
@@ -111,10 +109,6 @@ dependent on its predecessors steps.
 
 We start the implementation process by generating boilerplate code for a
 workflow that comprises three steps:
-
-```{r, eval = FALSE, echo = TRUE}
-add_workflow(name = "order one pizza", domain = "pizza ordering", n_step = 3)
-```
 
 The boilerplate code produced by `add_workflow` looks likes this:
 

@@ -3,6 +3,8 @@
 
 <!-- badges: start -->
 
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![test-suite](https://github.com/tidylab/ddd/workflows/test-suite/badge.svg)](https://github.com/tidylab/ddd/actions)
 [![code-coverage](https://codecov.io/gh/tidylab/ddd/branch/master/graph/badge.svg)](https://codecov.io/github/tidylab/ddd/?branch=master)
 <!-- badges: end -->
@@ -16,6 +18,8 @@
 Put Domain-driven Design (DDD) to practice on analytic projects in R.
 This package includes key DDD classes for instantiating Domain Events,
 Commands, Entities, Value Objects, Domain Services and Aggregates.
+
+<!-- Although each domain model is different, many patterns occur repeatedly. -->
 
 ## Installation
 

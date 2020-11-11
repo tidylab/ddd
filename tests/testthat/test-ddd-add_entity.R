@@ -3,36 +3,46 @@ context("unit test for add_entity")
 # Setup -------------------------------------------------------------------
 testthat::setup({
     assign("test_env", testthat::test_env(), envir = parent.frame())
-    withr::local_dir(tempdir(), .local_envir = test_env)
-    invisible(file.create(".here"))
-    test_env$proj_path <- fs::path_wd
-    test_env$name <- "add_pizza_to_order"
-    test_env$domain <- "pizza_ordering"
+    withr::local_dir(test_wd, .local_envir = test_env)
+    test_env$name     <- title$entity("Pizza")
+    test_env$domain   <- title$domain("Pizza Ordering")
+    test_env$commands <- title$command(c("Select Size", "Add Topping"))
+    test_env$queries  <- title$command(c("Review"))
 })
 
 # Create R script ---------------------------------------------------------
-test_that("create R script without unit test", {
+test_that("create an R script", {
     attach(test_env)
-    expect_silent(add_entity(name, domain, testthat_exemption = TRUE))
 
-    path <- proj_path("R", domain %+% "-" %+% name, ext = "R")
-    expect_true(file.exists(path))
-    unlink(path)
+    expect_null(add_entity(name, domain, commands, queries))
+    file_path <- file.path(getwd(), "R", filename$entity(name, domain))
+    expect_file_exists(file_path)
 
-    path <- proj_path("tests", "testthat", "test" %+% "-" %+% domain %+% "-" %+% name, ext = "R")
-    expect_false(file.exists(path))
+    file_content <- readLines(file_path)
+    expect_match(file_content, name)
+    expect_match(file_content, domain)
+    expect_match(file_content, commands[1])
+    expect_match(file_content, commands[2])
+    expect_match(file_content, queries[1])
 })
 
-# Create R script and unit-test --------------------------------------------
-test_that("create R script with unit test", {
+test_that("create abstract base class (ABC) script", {
     attach(test_env)
-    expect_silent(add_entity(name, domain))
+    file_path <- file.path(getwd(), "R", "ddd-abc.R")
+    expect_file_exists(file_path)
 
-    path <- proj_path("R", domain %+% "-" %+% name, ext = "R")
-    expect_true(file.exists(path))
-    unlink(path)
+    file_content <- readLines(file_path)
+    expect_match(file_content, "Entity")
+})
 
-    path <- proj_path("tests", "testthat", "test" %+% "-" %+% domain %+% "-" %+% name, ext = "R")
-    expect_true(file.exists(path))
-    unlink(path)
+test_that("create a unit-test", {
+    attach(test_env)
+    file_path <- file.path(getwd(), "tests", "testthat", paste0("test-", filename$entity(name, domain)))
+    expect_file_exists(file_path)
+
+    file_content <- readLines(file_path)
+    expect_match(file_content, paste0("unit test for entity ", name))
+    expect_match(file_content, paste0(name, "\\$new\\("))
+    expect_match(file_content, paste0("calling ", commands[1], " changes the state of the object"))
+    expect_match(file_content, paste0("calling ", queries[1], " returns the desired results"))
 })
