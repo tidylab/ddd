@@ -21,7 +21,7 @@ transformations, and outputs the results. A light example of a **Value Object**
 is one that receives a character vector, applies the `identity` function, and
 organises the character vector in a `data.frame`.
 
-```{r, eval=TRUE, echo=FALSE}
+```{r, eval=TRUE, echo=TRUE}
 Alphabet <- function(letters = LETTERS){
   stopifnot(is.character(letters)) # Value Object input argument type check
   letters <- identity(letters)     # Value Object transformation
