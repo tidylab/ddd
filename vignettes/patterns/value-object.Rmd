@@ -16,6 +16,21 @@ dir.create(path, F, T)
 
 ## What is a Value Object?
 
+A **Value Object** is a function that receives input, applies some
+transformations, and outputs the results. A light example of a **Value Object**
+is one that receives a character vector, applies the `identity` function, and
+organises the character vector in a `data.frame`.
+
+```{r, eval=TRUE, echo=FALSE}
+Alphabet <- function(letters = LETTERS){
+  stopifnot(is.character(letters)) # Value Object input argument type check
+  letters <- identity(letters)     # Value Object transformation
+  data.frame(letter = letters)     # Value Object return object
+}
+
+head(Alphabet())
+```
+
 In the context of DDD, a ***Value Object*** models a domain concept. A **Value
 Object** is an object that is identified only by its data and doesn't have a
 long-lived identity.
@@ -27,34 +42,6 @@ Hilary and Bill are not equal. However, once the customer leaves the Pizzeria,
 the customer's existence dissipates. On the other hand, if the customer is
 enrolled in a restaurant loyalty program, then its unique identifier on the
 system is both essential and long-lived.
-
-<!-- ## Description -->
-
-<!-- When you care only about the attributes of an element of the model, classify it -->
-
-<!-- as a **Value Object**. Make it express the meaning of the attributes it conveys -->
-
-<!-- and give it related functionality. Treat the **Value Object** as immutable. -->
-
-<!-- Don't give it any identity and avoid the design complexities necessary to -->
-
-<!-- maintain **Entities**. [@Evans2004, p. 99] -->
-
-<!-- ## Highlights -->
-
-<!-- -   Calling a Value Object without any input arguments returns the Null Value -->
-
-<!--     Object, which is usually an empty data.frame with column names and types. -->
-
-<!-- -   Equating Value Objects is based on field-based implementation, rather than -->
-
-<!--     identity based implementation. That means, two records are equal if all -->
-
-<!--     their fields are equal. -->
-
-<!-- -   Value Objects can receive other Value Objects. -->
-
-<!-- -   Value Objects can receive one or a set of Entities. -->
 
 ## What does `add_value_object` do?
 
@@ -203,13 +190,16 @@ base.
 
 ## How Should I use Value Objects in my design?
 
-1.  Calling **Value Object** can happen inside one or more Domain Objects, such
-    as Domain Entity, or another Value Object.
+1.  Querying an **Entity** , that is by using its public query methods, should
+    return a **Value Object**.
 
-2.  Reusing **Value Object** in tests, such as unit-tests and integration-tests,
+2.  Calling **Value Object** can happen inside another **Value Object**.
+
+3.  Reusing **Value Object** in tests, such as unit-tests and integration-tests,
     is useful when the test aims to capture the structure of a returning object.
-    
-The following example shows how to embed the `Customer` **Value Object** in the pizza `Order` Entity
+
+The following example shows how to embed the `Customer` **Value Object** in the
+pizza `Order` Entity
 
 ```{r, echo=TRUE, eval=FALSE}
 Order$set("public", "set_customer_info", function(
