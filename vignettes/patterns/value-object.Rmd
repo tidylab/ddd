@@ -23,7 +23,7 @@ organises the character vector in a `data.frame`.
 
 ```{r, eval=TRUE, echo=TRUE}
 Alphabet <- function(letters = LETTERS){
-  stopifnot(is.character(letters)) # Value Object input argument type check
+  stopifnot(is.character(letters)) # Value Object type check
   letters <- identity(letters)     # Value Object transformation
   data.frame(letter = letters)     # Value Object return object
 }
@@ -37,11 +37,11 @@ long-lived identity.
 
 For example, think about the diners, i.e. customers, of a Pizzeria. Associating
 an order and a customer requires ephemeral customer identity. The customer name
-matters. It is used to identify for whom a particular Pizza was made. The names
-Hilary and Bill are not equal. However, once the customer leaves the Pizzeria,
-the customer's existence dissipates. On the other hand, if the customer is
-enrolled in a restaurant loyalty program, then its unique identifier on the
-system is both essential and long-lived.
+matters. It is used to identify for whom a particular Pizza was made for. The
+names Hilary and Bill are not equal. However, once the customer leaves the
+Pizzeria, the customer's existence dissipates. On the other hand, if the
+customer is enrolled in a restaurant loyalty program, then its unique identifier
+on the system is both essential and long-lived.
 
 ## What does `add_value_object` do?
 
