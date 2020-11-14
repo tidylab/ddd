@@ -37,6 +37,11 @@ test_that('calling Order$add_item changes the state of Order', {
     expect_identical(pizza_order$get_pizza(pizza$uid), pizza)
 })
 
+test_that('calling Order$remove_item changes the state of Order', {
+    attach(test_env)
+    expect_is(pizza_order$remove_item(pizza), "Order")
+})
+
 test_that('calling Order$review returns the desired results', {
     attach(test_env)
     expect_is(order_slip <- pizza_order$review(), "data.frame")

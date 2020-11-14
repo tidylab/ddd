@@ -54,8 +54,20 @@ Order$set("public", "add_item", function(item){
         do.call(self$items$add, args = list(key = item_type, val = R6DS::RDict$new()))
 
     item_dic <- do.call(self$items$get, args = list(key = item_type))
-    do.call(item_dic$delete, args = list(key = item$uid))
+    self$remove_item(item)
     do.call(item_dic$add, args = list(key = item$uid, val = item))
+
+    invisible(self)
+})
+
+Order$set("public", "remove_item", function(item){
+    assert$is_entity(item)
+    item_type <- class(item)[1]
+
+    if(item_type %in% self$items$keys){
+        item_dic <- do.call(self$items$get, args = list(key = item_type))
+        do.call(item_dic$delete, args = list(key = item$uid))
+    }
 
     invisible(self)
 })
