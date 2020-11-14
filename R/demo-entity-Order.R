@@ -7,11 +7,9 @@ Order <- R6::R6Class("Order", inherit = Entity, lock_objects = FALSE, cloneable 
 Order$set("public", "initialize", overwrite = TRUE, function(uid){
     super$initialize(uid)
     self$items <- R6DS::RDict$new()
-    self$items$add("Pizza", R6DS::RDict$new())
     invisible(self)
 })
 
-# Order Methods -----------------------------------------------------------
 Order$set("public", "review", function(uid){
     pizza_slips <- list()
 
@@ -29,7 +27,6 @@ Order$set("public", "review", function(uid){
     return(order_slip)
 })
 
-# Pizza CRUD Methods ------------------------------------------------------
 Order$set("public", "add_pizza", function(Pizza){
     stopifnot("Pizza" %in% class(Pizza))
     self$add_item(Pizza)
@@ -37,7 +34,10 @@ Order$set("public", "add_pizza", function(Pizza){
 })
 
 Order$set("public", "get_pizza", function(uid){
-    Pizza <- do.call(self$items$get("Pizza")$get, args = list(key = uid))
+    Pizza <- tryCatch(
+        do.call(self$items$get("Pizza")$get, args = list(key = uid)),
+        error = function(e) return(NULL)
+    )
     return(Pizza)
 })
 
