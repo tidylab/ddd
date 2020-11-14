@@ -7,42 +7,67 @@ Order <- R6::R6Class("Order", inherit = Entity, lock_objects = FALSE, cloneable 
 Order$set("public", "initialize", overwrite = TRUE, function(uid){
     super$initialize(uid)
     self$items <- R6DS::RDict$new()
-    self$items$add("pizza", R6DS::RDict$new())
     invisible(self)
 })
 
-# Order Methods -----------------------------------------------------------
 Order$set("public", "review", function(uid){
-    pizza_slips <- list()
+    slips <- list()
 
-    for(k in seq_len(self$items$get("pizza")$size)){
-        pizza <- self$items$get("pizza")$values[[k]]
-        pizza_slip <- pizza$review()
-        pizza_slips <- append(pizza_slips, list(pizza_slip))
+    item_types <- self$items$keys
+    for(item_type in item_types){
+        item_dic <- do.call(self$items$get, args = list(key = item_type))
+        for(item_key in item_dic$keys){
+            item <- do.call(item_dic$get, args = list(key = item_key))
+            slip <- tryCatch(
+                tibble::add_column(item$review(), item = item_type, .before = 0),
+                error = function(e) return(NULL))
+            slips <- append(slips, list(slip))
+        }
     }
 
-    order_slip <- OrderSlip(
-        uid = self$uid,
-        pizza_slips = pizza_slips
-    )
-
+    order_slip <- OrderSlip(uid = self$uid, slips = slips)
     return(order_slip)
 })
 
-# Pizza CRUD Methods ------------------------------------------------------
-Order$set("public", "add_pizza", function(Pizza){
-    stopifnot("Pizza" %in% class(Pizza))
-    self$remove_pizza(Pizza$uid)
-    do.call(self$items$get("pizza")$add, args = list(key = Pizza$uid, val = Pizza))
+Order$set("public", "get_item", function(uid, item_type){
+    assert$is_character(uid)
+    assert$is_character(item_type)
+
+    item <- tryCatch(
+        expr = {
+            item_dic <- do.call(self$items$get, args = list(key = item_type))
+            do.call(item_dic$get, args = list(key = uid))
+        },
+        error = function(e){
+            return(NULL)
+        }
+    )
+
+    return(item)
+})
+
+Order$set("public", "add_item", function(item){
+    assert$is_entity(item)
+    item_type <- class(item)[1]
+
+    if(item_type %not_in% self$items$keys)
+        do.call(self$items$add, args = list(key = item_type, val = R6DS::RDict$new()))
+
+    item_dic <- do.call(self$items$get, args = list(key = item_type))
+    self$remove_item(item)
+    do.call(item_dic$add, args = list(key = item$uid, val = item))
+
     invisible(self)
 })
 
-Order$set("public", "get_pizza", function(uid){
-    Pizza <- do.call(self$items$get("pizza")$get, args = list(key = uid))
-    return(Pizza)
-})
+Order$set("public", "remove_item", function(item){
+    assert$is_entity(item)
+    item_type <- class(item)[1]
 
-Order$set("public", "remove_pizza", function(uid){
-    do.call(self$items$get("pizza")$delete, args = list(key = uid))
+    if(item_type %in% self$items$keys){
+        item_dic <- do.call(self$items$get, args = list(key = item_type))
+        do.call(item_dic$delete, args = list(key = item$uid))
+    }
+
     invisible(self)
 })

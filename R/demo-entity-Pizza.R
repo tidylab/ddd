@@ -12,7 +12,7 @@ Pizza$set("public", "initialize", overwrite = TRUE, function(uid){
     invisible(self)
 })
 
-Pizza$set("public", "review", function(size){
+Pizza$set("public", "review", function(){
     pizza_slip <- PizzaSlip(
         uid = self$uid,
         size = self$size,
