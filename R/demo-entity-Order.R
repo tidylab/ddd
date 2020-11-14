@@ -29,14 +29,6 @@ Order$set("public", "review", function(uid){
     return(order_slip)
 })
 
-Order$set("public", "get_pizza", function(uid){
-    Pizza <- tryCatch(
-        do.call(self$items$get("Pizza")$get, args = list(key = uid)),
-        error = function(e) return(NULL)
-    )
-    return(Pizza)
-})
-
 Order$set("public", "get_item", function(uid, item_type){
     assert$is_character(uid)
     assert$is_character(item_type)

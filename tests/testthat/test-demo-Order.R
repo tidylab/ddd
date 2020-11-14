@@ -19,13 +19,12 @@ test_that("calling Order$new instantiates an object with unique id", {
 test_that('calling Order$remove_item changes the state of Order', {
     attach(test_env)
     expect_is(pizza_order$remove_item(pizza), "Order")
+    expect_null(pizza_order$get_item(pizza$uid, "Pizza"))
 })
 
 test_that('calling Order$add_item changes the state of Order', {
     attach(test_env)
-    expect_null(pizza_order$get_pizza(pizza$uid))
     expect_is(pizza_order$add_item(pizza), "Order")
-    expect_identical(pizza_order$get_pizza(pizza$uid), pizza)
     expect_identical(pizza_order$get_item(pizza$uid, "Pizza"), pizza)
 })
 
