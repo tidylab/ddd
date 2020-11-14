@@ -11,17 +11,21 @@ Order$set("public", "initialize", overwrite = TRUE, function(uid){
 })
 
 Order$set("public", "review", function(uid){
-    pizza_slips <- list()
+    slips <- list()
 
-    for(k in seq_len(self$items$get("Pizza")$size)){
-        pizza <- self$items$get("Pizza")$values[[k]]
-        pizza_slip <- pizza$review()
-        pizza_slips <- append(pizza_slips, list(pizza_slip))
+    item_types <- self$items$keys
+    for(item_type in item_types){
+        item_dic <- do.call(self$items$get, args = list(key = item_type))
+        for(item_key in item_dic$keys){
+            item <- do.call(item_dic$get, args = list(key = item_key))
+            slip <- tryCatch(item$review(), error = function(e) return(NULL))
+            slips <- append(slips, list(slip))
+        }
     }
 
     order_slip <- OrderSlip(
         uid = self$uid,
-        pizza_slips = pizza_slips
+        pizza_slips = slips
     )
 
     return(order_slip)
