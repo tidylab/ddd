@@ -18,16 +18,14 @@ Order$set("public", "review", function(uid){
         item_dic <- do.call(self$items$get, args = list(key = item_type))
         for(item_key in item_dic$keys){
             item <- do.call(item_dic$get, args = list(key = item_key))
-            slip <- tryCatch(item$review(), error = function(e) return(NULL))
+            slip <- tryCatch(
+                tibble::add_column(item$review(), item = item_type, .before = 0),
+                error = function(e) return(NULL))
             slips <- append(slips, list(slip))
         }
     }
 
-    order_slip <- OrderSlip(
-        uid = self$uid,
-        pizza_slips = slips
-    )
-
+    order_slip <- OrderSlip(uid = self$uid, slips = slips)
     return(order_slip)
 })
 
