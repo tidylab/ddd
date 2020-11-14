@@ -9,7 +9,7 @@ OrderSlip <- function(
     pizza_slips = list(PizzaSlip())
 ){
     stopifnot(is.character(uid), is.list(pizza_slips))
-
+    if(length(pizza_slips) == 0) pizza_slips <- list(PizzaSlip())
     order_slip <-
         dplyr::bind_rows(
             pizza = dplyr::bind_rows(pizza_slips),
