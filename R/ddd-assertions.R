@@ -12,4 +12,6 @@ assert$is_character <- function(x) assert_that(is.character(x), is.scalar(x))
 assert$is_numeric <- function(x) assert_that(is.numeric(x), is.scalar(x))
 assert$is_count <- function(x) assert_that(is.count(x))
 assert$is_logical <- function(x) assert_that(is.logical(x), is.scalar(x))
+assert$is_class <- function(x, class) assert_that(any(class(x) %in% class), msg = paste("object inherits from", paste(class(x), collapse  = ", "), "not",  paste(class, collapse  = ", ")))
+assert$is_entity <- function(x) assert_that(any(class(x) %in% "Entity"), msg = paste("object inherits from", paste(class(x), collapse  = ", "), "not Entity"))
 
