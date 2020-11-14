@@ -11,7 +11,6 @@ customer_order <- Order$new(uid = generate_uid())
 pizza <- Pizza$new(uid = generate_uid())
 customer_order$remove_item(pizza)
 customer_order$add_item(pizza)
-customer_order$review()
 
 
 # Order Pizza -------------------------------------------------------------
@@ -23,5 +22,6 @@ pizza$review()
 
 
 # Commit Order ------------------------------------------------------------
+customer_order$review()
 # customer_order$commit()
 

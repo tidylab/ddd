@@ -16,20 +16,6 @@ test_that("calling Order$new instantiates an object with unique id", {
 })
 
 # Public Methods ----------------------------------------------------------
-test_that('calling Order$add_pizza changes the state of Order', {
-    attach(test_env)
-    expect_null(pizza_order$get_pizza(pizza$uid))
-    expect_is(pizza_order$add_pizza(pizza), "Order")
-    expect_identical(pizza_order$get_pizza(pizza$uid), pizza)
-})
-
-test_that('calling Order$remove_pizza changes the state of Order', {
-    attach(test_env)
-    expect_identical(pizza_order$get_pizza(pizza$uid), pizza)
-    expect_is(pizza_order$remove_pizza(pizza$uid), "Order")
-    expect_null(pizza_order$get_pizza(pizza$uid))
-})
-
 test_that('calling Order$remove_item changes the state of Order', {
     attach(test_env)
     expect_is(pizza_order$remove_item(pizza), "Order")

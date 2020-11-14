@@ -29,23 +29,12 @@ Order$set("public", "review", function(uid){
     return(order_slip)
 })
 
-Order$set("public", "add_pizza", function(Pizza){
-    stopifnot("Pizza" %in% class(Pizza))
-    self$add_item(Pizza)
-    invisible(self)
-})
-
 Order$set("public", "get_pizza", function(uid){
     Pizza <- tryCatch(
         do.call(self$items$get("Pizza")$get, args = list(key = uid)),
         error = function(e) return(NULL)
     )
     return(Pizza)
-})
-
-Order$set("public", "remove_pizza", function(uid){
-    do.call(self$items$get("Pizza")$delete, args = list(key = uid))
-    invisible(self)
 })
 
 Order$set("public", "add_item", function(item){
