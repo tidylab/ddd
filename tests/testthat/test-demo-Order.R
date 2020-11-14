@@ -26,6 +26,7 @@ test_that('calling Order$add_item changes the state of Order', {
     expect_null(pizza_order$get_pizza(pizza$uid))
     expect_is(pizza_order$add_item(pizza), "Order")
     expect_identical(pizza_order$get_pizza(pizza$uid), pizza)
+    expect_identical(pizza_order$get_item(pizza$uid, "Pizza"), pizza)
 })
 
 test_that('calling Order$review returns the desired results', {

@@ -37,6 +37,23 @@ Order$set("public", "get_pizza", function(uid){
     return(Pizza)
 })
 
+Order$set("public", "get_item", function(uid, item_type){
+    assert$is_character(uid)
+    assert$is_character(item_type)
+
+    item <- tryCatch(
+        expr = {
+            item_dic <- do.call(self$items$get, args = list(key = item_type))
+            do.call(item_dic$get, args = list(key = uid))
+        },
+        error = function(e){
+            return(NULL)
+        }
+    )
+
+    return(item)
+})
+
 Order$set("public", "add_item", function(item){
     assert$is_entity(item)
     item_type <- class(item)[1]
