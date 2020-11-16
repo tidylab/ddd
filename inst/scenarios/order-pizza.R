@@ -5,7 +5,7 @@ pkgload::load_all()
 
 # Issue New Order ---------------------------------------------------------
 register <- Register$new()
-customer_order <- register$start_order()
+customer_order <- Order$new(uid = uuid::UUIDgenerate())
 pizza <- Pizza$new(uid = uuid::UUIDgenerate())
 
 customer_order$remove_item(pizza)
