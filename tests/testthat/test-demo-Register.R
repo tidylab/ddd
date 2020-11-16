@@ -13,7 +13,16 @@ test_that("calling Register$new instantiates an object", {
 })
 
 # Public Methods ----------------------------------------------------------
-test_that('calling Pizza$select_size changes the state of pizza', {
+test_that('calling Register$start_order retruns an Order', {
     attach(test_env)
-    expect_is(order <- register$start_order(), "Order")
+    expect_is(customer_order <- register$start_order(), "Order")
+    test_env$customer_order <- customer_order
+
 })
+
+test_that('calling Register$commit_order an Order', {
+    attach(test_env)
+    expect_warning(register$commit_order("invalid input"))
+    expect_is(register$commit_order(customer_order), "Register")
+})
+

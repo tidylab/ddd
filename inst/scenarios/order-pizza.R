@@ -2,13 +2,11 @@
 ## Order Pizza Scenario
 ################################################################################
 pkgload::load_all()
-generate_uid <- uuid::UUIDgenerate
-
 
 # Issue New Order ---------------------------------------------------------
-registry <- Registry$new()
-customer_order <- Order$new(uid = generate_uid())
-pizza <- Pizza$new(uid = generate_uid())
+register <- Register$new()
+customer_order <- register$start_order()
+pizza <- Pizza$new(uid = uuid::UUIDgenerate())
 
 customer_order$remove_item(pizza)
 customer_order$get_item(pizza$uid, "Pizza")
@@ -27,5 +25,5 @@ pizza$review()
 
 # Commit Order ------------------------------------------------------------
 customer_order$review()
-# customer_order$commit()
+register$commit_order(customer_order)
 
