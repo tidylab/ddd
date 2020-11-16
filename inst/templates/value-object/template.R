@@ -1,7 +1,7 @@
 #' @title {name} Value Object
 #' @return (`data.frame`)
 #' @export
-#' @family {domain}
+#' @family {domain}, domain-value-objects
 #' @keywords internal
 #' @noRd
 {name} <- function(
