@@ -6,7 +6,7 @@ generate_uid <- uuid::UUIDgenerate
 
 
 # Issue New Order ---------------------------------------------------------
-# Registry$new()
+registry <- Registry$new()
 customer_order <- Order$new(uid = generate_uid())
 pizza <- Pizza$new(uid = generate_uid())
 
