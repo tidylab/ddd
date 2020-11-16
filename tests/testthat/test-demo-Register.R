@@ -13,7 +13,7 @@ test_that("calling Register$new instantiates an object", {
 })
 
 # Public Methods ----------------------------------------------------------
-# test_that('calling Pizza$select_size changes the state of pizza', {
-#     attach(test_env)
-#     expect_is(order <- register$start_order(), "Order")
-# })
+test_that('calling Pizza$select_size changes the state of pizza', {
+    attach(test_env)
+    expect_is(order <- register$start_order(), "Order")
+})
