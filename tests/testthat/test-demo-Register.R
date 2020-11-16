@@ -1,22 +1,28 @@
 context("unit test for service Register")
 
-# # Setup -------------------------------------------------------------------
-# testthat::setup({
-#     assign("test_env", testthat::test_env(), envir = parent.frame())
-#     test_env$pizza_uid <- "cc1d4f32-628f-4da0-97ae-b8995ab7c9ce"
-# })
-#
-# # General -----------------------------------------------------------------
-# test_that("calling Pizza$new instantiates an object with unique id", {
-#     attach(test_env)
-#     expect_is(pizza <- Pizza$new(uid = pizza_uid), "Pizza")
-#     expect_identical(pizza$uid, pizza_uid)
-#     test_env$pizza <- pizza
-# })
-#
-# # Public Methods ----------------------------------------------------------
-# test_that('calling Pizza$select_size changes the state of pizza', {
-#     attach(test_env)
-#     expect_is(pizza$select_size("M"), "Pizza")
-#     expect_identical(pizza$size, "medium")
-# })
+# Setup -------------------------------------------------------------------
+testthat::setup({
+    assign("test_env", testthat::test_env(), envir = parent.frame())
+    test_env$customer_order <- Order$new("2674769e-b0c8-45ee-9b52-d8193c15101f")
+    lgr::threshold("off")
+})
+
+# General -----------------------------------------------------------------
+test_that("calling Register$new instantiates an object", {
+    attach(test_env)
+    expect_is(register <- Register$new(), "Register")
+    test_env$register <- register
+})
+
+# Public Methods ----------------------------------------------------------
+test_that('calling Register$commit_order an Order', {
+    attach(test_env)
+    expect_is(register$commit_order("invalid input"), "Register")
+    expect_is(register$commit_order(customer_order), "Register")
+})
+
+test_that('calling Register$retrieve_order returns an Order', {
+    attach(test_env)
+    expect_null(register$retrieve_order("invalid uid"))
+    expect_identical(register$retrieve_order(customer_order$uid), customer_order)
+})

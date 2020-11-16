@@ -1,5 +1,5 @@
-#' @title {name}
-#' @family {domain}
+#' @title {name} Domain Entity
+#' @family {domain}, domain-entity
 #' @noRd
 {name} <- R6::R6Class("{name}", inherit = Entity, lock_objects = FALSE, cloneable = FALSE)
 
