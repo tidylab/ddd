@@ -26,3 +26,10 @@ test_that('calling Register$commit_order an Order', {
     expect_is(register$commit_order(customer_order), "Register")
 })
 
+test_that('calling Register$retrieve_order returns an Order', {
+    attach(test_env)
+    expect_null(register$retrieve_order("invalid uid"))
+    expect_identical(register$retrieve_order(customer_order$uid), customer_order)
+})
+
+
