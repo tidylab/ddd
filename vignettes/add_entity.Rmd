@@ -1,5 +1,5 @@
 ---
-title: "`add_entity`"
+title: "Add an Entity to a Domain"
 bibliography: []
 biblio-style: apalike
 link-citations: yes
