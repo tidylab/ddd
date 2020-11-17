@@ -1,6 +1,6 @@
 ---
 title: "Add a Service to a Domain"
-bibliography: []
+bibliography: [references.bib]
 biblio-style: apalike
 link-citations: yes
 editor_options: 
@@ -11,3 +11,45 @@ editor_options:
 ```{r, include = FALSE}
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ```
+
+## Characteristics of a good **Service**
+
+1.  The operation relates to a domain concept that is not a natural part of an
+    Entity or Value Object
+2.  The interface is defined in terms of other elements of the domain model
+3.  The operation is stateless.
+
+## Unit of Work (UoW)
+
+There are no complex layers here. At most this component runs a query against
+the query store database and maybe serializes the query result into some format
+for transport (maybe a DTO, but maybe not), if that's necessary. [@Vernon2013,
+p. 141]
+
+### UoW Abstract Base Class
+
+-   Similar to [python abc module](https://docs.python.org/3/library/abc.html)
+
+-   Has the following public methods:
+
+    -   `new` i.e. initialize
+
+    -   `commit` must be implemented
+
+    -   `rollback` must be implemented
+
+    -   `exit` i.e. finalize. This function which calls `rollback`
+
+<!-- https://github.com/cosmicpython/code/blob/chapter_07_aggregate/src/allocation/service_layer/unit_of_work.py -->
+
+### UoW Implementations
+
+#### UoW Database Implementing
+
+-   **DBI**, **dbplyr**, **RSQLite**
+
+#### UoW Data Structure Implementing
+
+-   **R6DS**, mainly `R6DS::RDict`
+
+## References
