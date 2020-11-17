@@ -21,7 +21,7 @@ articles:
 #   - '`00-introduction`'
 #   - '`patterns/architecture`'
   - '`patterns/workflow`'
-  - '`patterns/entity`'
+#  - '`patterns/entity`'
   - '`patterns/value-object`'
   - '`patterns/domain-service`'
 #   - '`patterns/domain-event`'
