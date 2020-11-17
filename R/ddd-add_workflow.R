@@ -1,4 +1,4 @@
-#' @title Add a Workflow
+#' @title Add a Workflow that Models a Domain
 #' @description Create a **workflow** script with sequential steps.
 #' @param name (`character`) **Workflow** name. Note: \code{workflow} applies
 #'   naming convention automatically.
@@ -7,7 +7,7 @@
 #' @param n_step (`character`) Number of steps that constitute the **Workflow**.
 #' @family domain driven design patterns
 #' @export
-#' @includeRmd vignettes/patterns/workflow.Rmd
+#' @includeRmd vignettes/add_workflow.Rmd
 add_workflow <- function(name, domain, n_step = 3){
     assert$is_character(name)
     assert$is_character(domain)

@@ -1,6 +1,6 @@
 ---
-title: "Value Object"
-bibliography: [../references.bib]
+title: "Add a Value Object to a Domain"
+bibliography: [references.bib]
 biblio-style: apalike
 link-citations: yes
 editor_options: 
