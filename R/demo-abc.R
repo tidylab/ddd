@@ -1,6 +1,5 @@
-################################################################################
-## Abstract Base Class
-################################################################################
+# nocov start
+# -------------------------------------------------------------------------
 #' @title Entity
 #' @noRd
 Entity <- R6::R6Class("Entity", inherit = NULL, public = list(
@@ -14,3 +13,15 @@ Entity <- R6::R6Class("Entity", inherit = NULL, public = list(
     }
 ))
 
+# -------------------------------------------------------------------------
+#' @title Unit of Work (UoW)
+#' @description Unit of Work is a context manager.
+#' @noRd
+AbstractUnitOfWork <- R6::R6Class("UnitOfWork", inherit = Singleton, public = list(
+    enter = function() return(self),
+    exit = function() self$rollback(),
+    commit = function() stop("NotImplementedError"),
+    rollback = function() stop("NotImplementedError")
+))
+# -------------------------------------------------------------------------
+# nocov end
