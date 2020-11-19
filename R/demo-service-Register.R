@@ -28,8 +28,6 @@ Register$set("public", "commit_order", function(Order){
 })
 
 Register$set("public", "retrieve_order", function(uid){
-    self$uow$enter()
-
     order <- tryCatch({
         assert$is_character(uid)
         order <- do.call(self$uow$orders$get, args = list(key = uid))
@@ -40,6 +38,5 @@ Register$set("public", "retrieve_order", function(uid){
         return(NULL)
     })
 
-    self$uow$exit()
     return(order)
 })
