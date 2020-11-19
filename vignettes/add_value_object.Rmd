@@ -16,10 +16,21 @@ dir.create(path, F, T)
 
 ## What is a Value Object?
 
-A **Value Object** is a function that receives input, applies some
-transformations, and outputs the results. A light example of a **Value Object**
-is one that receives a character vector, applies the `identity` function, and
-organises the character vector in a `data.frame`.
+A ***Value Object*** is a function that receives input, applies some
+transformations, and outputs the results in some data sturicture such as a
+`vector`, a `list` or a `data.frame`.
+
+```{=html}
+<div class="alert alert-info" <strong="">
+In R, a good practice is to set the Value Object to return a `data.frame` at its
+output. This is because often the Value Object is called during data
+wrangling operations.
+</div>
+```
+
+A light example of a **Value Object** is one that receives a character vector,
+applies the `identity` function, and organises the character vector in a
+`data.frame`.
 
 ```{r, eval=TRUE, echo=TRUE}
 Alphabet <- function(letters = LETTERS){

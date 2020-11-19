@@ -12,6 +12,19 @@ editor_options:
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ```
 
+## Overview
+
+-   Entities and Value Objects are often to fine-grained to provide a convenient
+    access to the capabilities of the domain layer.
+
+-   It can be harder to distinguish application Services from domain Services.
+    We can start investigating the difference by looking at the responsibilities
+    of the layer in which services lives.
+
+    -   The application layer is responsible for ...
+
+    -   The domain layer is responsible for ...
+
 ## Characteristics of a good **Service**
 
 1.  The operation relates to a domain concept that is not a natural part of an
@@ -40,7 +53,7 @@ p. 141]
 
     -   `exit` i.e. finalize. This function which calls `rollback`
 
-<!-- https://github.com/cosmicpython/code/blob/chapter_07_aggregate/src/allocation/service_layer/unit_of_work.py -->
+<!--# https://github.com/cosmicpython/code/blob/chapter_07_aggregate/src/allocation/service_layer/unit_of_work.py -->
 
 ### UoW Implementations
 
