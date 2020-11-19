@@ -1,10 +1,13 @@
 ################################################################################
 ## Order Pizza Scenario
 ################################################################################
+# Setup -------------------------------------------------------------------
 pkgload::load_all()
+uow <- FakeUnitOfWork$new()
+
 
 # Issue New Order ---------------------------------------------------------
-register <- Register$new()
+register <- Register$new(uow)
 customer_order <- Order$new(uid = uuid::UUIDgenerate())
 pizza <- Pizza$new(uid = uuid::UUIDgenerate())
 
@@ -27,3 +30,7 @@ pizza$review()
 customer_order$review()
 register$commit_order(customer_order)
 
+
+# Teardown ----------------------------------------------------------------
+rm(register)
+uow$orders$keys
