@@ -18,7 +18,7 @@ Register$set("public", "commit_order", function(Order){
         assert$is_class(Order, "Order")
         do.call(self$uow$orders$delete, args = list(key = Order$uid))
         do.call(self$uow$orders$add, args = list(key = Order$uid, val = Order))
-        uow$commit()
+        self$uow$commit()
     },
     error = function(e){
         events$invalid_input(msg = e$message)
