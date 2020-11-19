@@ -10,7 +10,7 @@ testthat::setup({
 # General -----------------------------------------------------------------
 test_that("calling Register$new instantiates an object", {
     attach(test_env)
-    expect_is(register <- Register$new(uow = AbstractUnitOfWork$new()), "Register")
+    expect_is(register <- Register$new(uow = FakeUnitOfWork$new()), "Register")
     test_env$register <- register
 })
 

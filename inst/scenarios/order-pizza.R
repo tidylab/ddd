@@ -2,9 +2,10 @@
 ## Order Pizza Scenario
 ################################################################################
 pkgload::load_all()
+uow <- FakeUnitOfWork$new()
 
 # Issue New Order ---------------------------------------------------------
-register <- Register$new()
+register <- Register$new(uow)
 customer_order <- Order$new(uid = uuid::UUIDgenerate())
 pizza <- Pizza$new(uid = uuid::UUIDgenerate())
 
