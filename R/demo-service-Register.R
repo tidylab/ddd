@@ -1,7 +1,11 @@
 #' @title Register Domain Service
 #' @family Pizza Ordering, domain-service
 #' @noRd
-Register <- R6::R6Class("Register", inherit = NULL, lock_objects = FALSE, cloneable = FALSE)
+Register <- R6::R6Class("Register", inherit = NULL, lock_objects = FALSE, cloneable = FALSE, public = list(
+    initialize = function(uow = AbstractUnitOfWork$new()){
+        assert$is_class(uow, "UnitOfWork")
+    }
+))
 
 # Public Methods ----------------------------------------------------------
 Register$set("public", "commit_order", function(Order){
