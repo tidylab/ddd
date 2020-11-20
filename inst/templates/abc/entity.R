@@ -12,7 +12,7 @@
 #'
 #' @export
 #' @family Domain Name
-Entity <- R6::R6Class("Entity", inherit = NULL, public = list(
+AbstractEntity <- R6::R6Class("Entity", inherit = NULL, public = list(
     #' @field  Entity unique identifier.
     uid = character(0),
     #' @description

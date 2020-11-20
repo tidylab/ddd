@@ -1,7 +1,7 @@
 #' @title Pizza
 #' @family Pizza Ordering
 #' @noRd
-Pizza <- R6::R6Class("Pizza", inherit = Entity, lock_objects = FALSE, cloneable = FALSE)
+Pizza <- R6::R6Class("Pizza", inherit = AbstractEntity, lock_objects = FALSE, cloneable = FALSE)
 
 
 # Public Methods ----------------------------------------------------------

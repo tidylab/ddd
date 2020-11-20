@@ -1,7 +1,7 @@
 #' @title Order
 #' @family Pizza Ordering
 #' @noRd
-Order <- R6::R6Class("Order", inherit = Entity, lock_objects = FALSE, cloneable = FALSE)
+Order <- R6::R6Class("Order", inherit = AbstractEntity, lock_objects = FALSE, cloneable = FALSE)
 
 # Public Methods ----------------------------------------------------------
 Order$set("public", "initialize", overwrite = TRUE, function(uid){
