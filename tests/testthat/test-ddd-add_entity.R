@@ -27,15 +27,6 @@ test_that("create an R script", {
     expect_match(file_content, queries[1])
 })
 
-test_that("create abstract base class (ABC) script", {
-    attach(test_env)
-    file_path <- file.path(getwd(), "R", "ddd-abc.R")
-    expect_file_exists(file_path)
-
-    file_content <- readLines(file_path)
-    expect_match(file_content, "Entity")
-})
-
 test_that("create a unit-test", {
     attach(test_env)
     file_path <- file.path(getwd(), "tests", "testthat", paste0("test-", filename$entity(name, domain)))

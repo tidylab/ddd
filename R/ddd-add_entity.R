@@ -20,10 +20,6 @@ add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL){
     commands <- title$command(commands)
     queries <- title$command(queries)
 
-    # Add Entity to Abstract Base Class (ABC) ---------------------------------
-    file_path <- file.path(getwd(), "R", "ddd-abc.R")
-    .add_entity$add_Entity_abc(file_path)
-
     # Add Entity Object -------------------------------------------------------
     file_path <- file.path(getwd(), "R", filename$entity(name, domain))
     .add_entity$add_Entity_object(file_path, name, domain, commands, queries)
@@ -82,28 +78,3 @@ add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL){
 
     invisible()
 }
-
-.add_entity$add_Entity_abc <- function(file_path){
-    file.not.exists <- Negate(file.exists)
-    file.not.contain <- function(path, regex) all(stringr::str_detect(readLines(path), regex, negate = TRUE))
-
-    if(file.not.exists(file_path)){
-        file.create(file_path)
-        excerpts <- list()
-        excerpts$head <- read_lines(find.template("templates", "abc", "head.R"))
-        excerpts %>%
-            unlist(use.names = FALSE) %>%
-            paste0(collapse = "\n\n") %>%
-            write(file = file_path, append = FALSE, sep = "\n")
-    }
-
-    if(file.exists(file_path) & file.not.contain(file_path, "^Entity")){
-        excerpts <- list()
-        excerpts$entity <- read_lines(find.template("templates", "abc", "entity.R"))
-        excerpts %>%
-            unlist(use.names = FALSE) %>%
-            paste0(collapse = "\n\n") %>%
-            write(file = file_path, append = TRUE, sep = "\n")
-    }
-}
-
