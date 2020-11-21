@@ -7,13 +7,21 @@ testthat::setup({
 
 # Dummy Value Object ------------------------------------------------------
 test_that("instantiate a dummy Value Object", {
-    attach(test_env)
-    expect_class(DummyValueObject(), "data.frame")
+    expect_is(value_object <- DummyValueObject(), "data.frame")
+    test_env$value_object <- value_object
 })
-
 
 # Dummy Entity ------------------------------------------------------------
 test_that("instantiate a dummy Entity", {
+    expect_is(entity <- DummyEntity$new(uid = "placeholder"), "Entity")
+    test_env$entity <- entity
+})
+
+# # Dummy Domain Service ----------------------------------------------------
+test_that("instantiate a dummy Domain Service", {
     attach(test_env)
-    expect_class(DummyEntity$new(uid = "placeholder"), "Entity")
+    expect_is(
+        DummyDomainService$new(entity = entity, value_object = value_object),
+        "ContextManager"
+    )
 })
