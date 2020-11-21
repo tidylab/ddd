@@ -4,19 +4,15 @@
 #' @param domain (`character`) \code{Entity} domain name.
 #' @param commands (`character`)
 #' @param queries (`character`)
-#' @param testthat_exemption (`logical`) Should the \code{Entity} be excluded from unit-testing?
-#' @param covr_exemption (`logical`) Should the \code{Entity} be excluded from code-coverage?
 #' @includeRmd vignettes/add_entity.Rmd
 #' @family domain driven design patterns
 #' @export
-add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL, testthat_exemption = FALSE, covr_exemption = testthat_exemption){
+add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL){
     # Defensive Programming ---------------------------------------------------
     assert$is_character(name)
     assert$is_character(domain)
     assert$are_character(commands)
     assert$are_character(queries)
-    assert$is_logical(testthat_exemption)
-    assert$is_logical(covr_exemption)
 
     # Setup -------------------------------------------------------------------
     name <- title$entity(name)
@@ -34,11 +30,9 @@ add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL, tes
     if(interactive()) fs::file_show(file_path) # nocov
 
     # Add Unit Test -----------------------------------------------------------
-    if(testthat_exemption != TRUE){
-        file_path <- file.path(getwd(), "tests", "testthat", paste0("test-", filename$entity(name, domain)))
-        .add_entity$add_Entity_test(file_path, name, domain, commands, queries)
-        if(interactive()) fs::file_show(file_path) # nocov
-    }
+    file_path <- file.path(getwd(), "tests", "testthat", paste0("test-", filename$entity(name, domain)))
+    .add_entity$add_Entity_test(file_path, name, domain, commands, queries)
+    if(interactive()) fs::file_show(file_path) # nocov
 
     # Return ------------------------------------------------------------------
     invisible()
