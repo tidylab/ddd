@@ -11,3 +11,9 @@ test_that("instantiate a dummy Value Object", {
     expect_class(DummyValueObject(), "data.frame")
 })
 
+
+# Dummy Entity ------------------------------------------------------------
+test_that("instantiate a dummy Entity", {
+    attach(test_env)
+    expect_class(DummyEntity$new(uid = "placeholder"), "Entity")
+})
