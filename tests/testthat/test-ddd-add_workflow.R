@@ -3,6 +3,7 @@ context("unit test for add_workflow")
 # Setup -------------------------------------------------------------------
 testthat::setup({
     assign("test_env", testthat::test_env(), envir = parent.frame())
+    create_package(test_wd)
     withr::local_dir(test_wd, .local_envir = test_env)
 })
 

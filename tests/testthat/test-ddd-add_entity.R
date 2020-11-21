@@ -3,6 +3,7 @@ context("unit test for add_entity")
 # Setup -------------------------------------------------------------------
 testthat::setup({
     assign("test_env", testthat::test_env(), envir = parent.frame())
+    create_package(test_wd)
     withr::local_dir(test_wd, .local_envir = test_env)
     test_env$name     <- title$entity("Pizza")
     test_env$domain   <- title$domain("Pizza Ordering")
@@ -24,15 +25,6 @@ test_that("create an R script", {
     expect_match(file_content, commands[1])
     expect_match(file_content, commands[2])
     expect_match(file_content, queries[1])
-})
-
-test_that("create abstract base class (ABC) script", {
-    attach(test_env)
-    file_path <- file.path(getwd(), "R", "ddd-abc.R")
-    expect_file_exists(file_path)
-
-    file_content <- readLines(file_path)
-    expect_match(file_content, "Entity")
 })
 
 test_that("create a unit-test", {
