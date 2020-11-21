@@ -3,6 +3,7 @@ context("unit test for add_entity")
 # Setup -------------------------------------------------------------------
 testthat::setup({
     assign("test_env", testthat::test_env(), envir = parent.frame())
+    create_package(test_wd)
     withr::local_dir(test_wd, .local_envir = test_env)
     test_env$name     <- title$entity("Pizza")
     test_env$domain   <- title$domain("Pizza Ordering")
