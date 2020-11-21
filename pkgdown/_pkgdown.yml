@@ -29,3 +29,11 @@ articles:
 #   - '`event-storming/02-commands`'
 #   - '`event-storming/03-entitises`'
 
+reference:
+- title: Add Domain Objects
+- contents:
+  - starts_with("add_")
+- title: Dummy Operators
+  desc: Operators that do literally nothing. Use as placeholders to facilitate development.
+- contents:
+  - starts_with("Dummy")
