@@ -21,7 +21,7 @@ articles:
   - 'add_workflow'
   - 'add_entity'
   - 'add_value_object'
-  - 'add_service'
+  - 'add_domain_service'
 # - title: Event Storming
 #   desc: Rapid design technique enabling fast-paced learning process
 #   contents:
