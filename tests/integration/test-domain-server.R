@@ -1,4 +1,4 @@
-context("integration test for domain objects")
+context("integration test for domain objects independence of ddd")
 
 # Setup -------------------------------------------------------------------
 setup({
@@ -10,15 +10,22 @@ setup({
 
 
 # Tests -------------------------------------------------------------------
-test_that("ValueObject works out-of-the-box", {
-    attach(test_env)
-    expect_null(ddd::add_value_object("Diner", "dummy"))
+describe("domain objects",{
 
-    devtools::document(quiet = TRUE)
-    pkgload::load_all()
+    it("creates domain objects", {
+        expect_null(ddd::add_value_object("Diner", "dummy"))
+        devtools::document(quiet = TRUE)
+    })
 
-    detach("package:ddd", unload = TRUE)
-    expect_is(Diner(), "data.frame")
+    it("works when ddd is loaded", {
+        expect_is(Diner(), "data.frame")
+    })
+
+    it("works when ddd is unloaded", {
+        detach("package:ddd", unload = TRUE)
+        expect_is(Diner(), "data.frame")
+    })
+
 })
 
 # test_that("run server with ddd uninstalled", {
