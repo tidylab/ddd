@@ -27,7 +27,7 @@ DummyDomainService <- R6::R6Class("DummyDomainService", inherit = AbstractContex
     #' @description Initialize a Domain Service
     #' @param entity \link{DummyEntity}
     #' @param value_object \link{DummyValueObject}
-    initialize = function(entity = DummyEntity(), value_object = DummyValueObject()){
+    initialize = function(entity = DummyEntity$new(NULL), value_object = DummyValueObject()){
         stopifnot(any(class(entity) %in% "Entity"))
         stopifnot(any(class(value_object) %in% "data.frame"))
     }
