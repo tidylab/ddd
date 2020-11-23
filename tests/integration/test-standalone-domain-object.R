@@ -31,11 +31,11 @@ describe("domain objects", {
         devtools::document(quiet = TRUE)
         detach("package:ddd", unload = TRUE)
 
-        expect_is(Diner(), "data.frame")
-        expect_is(Pizza$new(uid = NULL), "Pizza")
-        expect_is(Registry$new(), "Registry")
-        expect_is(Registry$new()$command(), "Registry")
-        expect_null(Registry$new()$query())
+        expect_is(value_object <- Diner(), "data.frame")
+        expect_is(entity <- Pizza$new(uid = NULL), "Pizza")
+        expect_is(registry <- Registry$new(), "Registry")
+        expect_is(registry$command(entity, value_object), "Registry")
+        expect_null(registry$query(character(0)))
     })
 
 })

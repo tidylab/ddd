@@ -2,6 +2,7 @@
 #' @title Dummy Value Object
 #' @description A Value Object that does literally nothing. It can be used as a
 #' placeholder to facilitate software development.
+#' @param ... Any object
 #' @family Dummy Domain Objects
 #' @return (`data.frame`) mtcars dataset.
 #' @export
@@ -43,7 +44,7 @@ DummyDomainService <- R6::R6Class("DummyDomainService", inherit = AbstractDomain
     #' @description Domain service query
     #' @param uid (`character`) Entity uid
     query = function(uid = character(0)){
-        # stopifnot(is.character(uid))
+        stopifnot(is.character(uid))
 
         entity <- tryCatch({
             # TODO: Write code that uses uow interface
