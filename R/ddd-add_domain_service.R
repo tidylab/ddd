@@ -17,16 +17,16 @@ add_domain_service <- function(name, domain = NULL){
     # Add Domain Server -------------------------------------------------------
     file_path <- file.path(getwd(), "R", filename$service(name, domain))
     file.create(file_path)
-    #
-    # template <- read_lines(find.template("templates", "value-object", "template.R"))
-    # excerpts <- str_glue(template, name = name, domain = domain)
-    #
-    # excerpts %>%
-    #     unlist(use.names = FALSE) %>%
-    #     paste0(collapse = "\n\n") %>%
-    #     write(file = file_path, append = FALSE, sep = "\n")
-    #
-    # if(interactive()) fs::file_show(file_path) # nocov
+
+    template <- read_lines(find.template("templates", "domain-service", "template.R"))
+    excerpts <- str_glue(template, name = name, domain = domain)
+
+    excerpts %>%
+        unlist(use.names = FALSE) %>%
+        paste0(collapse = "\n\n") %>%
+        write(file = file_path, append = FALSE, sep = "\n")
+
+    if(interactive()) fs::file_show(file_path) # nocov
 
     # Return ------------------------------------------------------------------
     invisible()

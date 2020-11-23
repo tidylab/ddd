@@ -16,10 +16,10 @@ test_that("create an R script", {
     expect_null(add_domain_service(name, domain))
     file_path <- file.path(getwd(), "R", filename$service(name, domain))
     expect_file_exists(file_path)
-#
-#     file_content <- readLines(file_path)
-#     expect_match(file_content, name)
-#     expect_match(file_content, domain)
+
+    file_content <- readLines(file_path)
+    expect_match(file_content, name)
+    expect_match(file_content, domain)
 #     expect_match(file_content, commands[1])
 #     expect_match(file_content, commands[2])
 #     expect_match(file_content, queries[1])

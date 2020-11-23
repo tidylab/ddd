@@ -15,6 +15,7 @@ describe("domain objects", {
     it("creates domain objects", {
         expect_null(ddd::add_value_object("Diner", "dummy"))
         expect_null(ddd::add_entity("Pizza", "dummy",  commands = "command", queries = "query"))
+        expect_null(ddd::add_domain_service("Registry", "dummy"))
     })
 
     it("works when ddd is loaded", {
@@ -22,7 +23,7 @@ describe("domain objects", {
 
         expect_is(Diner(), "data.frame")
         expect_is(Pizza$new(uid = NULL), "Pizza")
-
+        expect_is(Registry$new(), "Registry")
     })
 
     it("works when ddd is unloaded", {
@@ -32,15 +33,12 @@ describe("domain objects", {
 
         expect_is(Diner(), "data.frame")
         expect_is(Pizza$new(uid = NULL), "Pizza")
+        expect_is(Registry$new(), "Registry")
+        # expect_is(Registry$new()$query(), "Registry")
+        # expect_is(Registry$new()$command(), "Registry")
     })
 
 })
-
-# test_that("run server with ddd uninstalled", {
-#     detach("package:ddd", unload = TRUE)
-#     expect_is(DummyDomainService$new(), "DummyDomainService")
-#     attach(test_env)
-# })
 
 
 # Teardown ----------------------------------------------------------------
