@@ -8,9 +8,10 @@
     entity = DummyEntity$new(uid = NULL),
     value_object = DummyValueObject()
 ){{
+    stopifnot(any(class(entity) %in% "Entity"))
+    stopifnot(any(class(value_object) %in% "data.frame"))
+
     tryCatch({{
-        stopifnot(any(class(entity) %in% "Entity"))
-        stopifnot(any(class(value_object) %in% "data.frame"))
         # TODO: Write code that uses uow interface
         self$uow$commit()
     }},
@@ -23,8 +24,9 @@
 }})
 
 {name}$set("public", "query", function(uid = character(0)){{
+    stopifnot(is.character(uid))
+
     entity <- tryCatch({{
-        stopifnot(is.character(uid))
         # TODO: Write code that uses uow interface
         entity <- NULL
         if(is.null(entity)) stop("entity uid doen't exist") else entity

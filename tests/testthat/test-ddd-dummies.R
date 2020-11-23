@@ -20,6 +20,7 @@ test_that("instantiate a dummy Entity", {
 # # Dummy Domain Service ----------------------------------------------------
 test_that("instantiate a dummy Domain Service", {
     attach(test_env)
-    expect_is(domain_service <- DummyDomainService$new(),"DomainService")
+    expect_is(domain_service <- DummyDomainService$new(), "DomainService")
     expect_is(domain_service$command(entity = entity, value_object = value_object), "DomainService")
+    expect_null(domain_service$query(uid = character(0)))
 })

@@ -24,7 +24,7 @@ DummyEntity <- R6::R6Class("DummyEntity", inherit = AbstractEntity, lock_objects
 #' @return (`DomainService`) Access to a bunch of services.
 #' @export
 DummyDomainService <- R6::R6Class("DummyDomainService", inherit = AbstractDomainService, lock_objects = FALSE, cloneable = FALSE, public = list(
-    #' @description Domain service example
+    #' @description Domain service command
     #' @param entity \link{DummyEntity}
     #' @param value_object \link{DummyValueObject}
     command = function(entity = DummyEntity$new(NULL), value_object = DummyValueObject()){
@@ -39,6 +39,23 @@ DummyDomainService <- R6::R6Class("DummyDomainService", inherit = AbstractDomain
         }) #nocov end
 
         return(self)
+    },
+    #' @description Domain service query
+    #' @param uid (`character`) Entity uid
+    query = function(uid = character(0)){
+        # stopifnot(is.character(uid))
+
+        entity <- tryCatch({
+            # TODO: Write code that uses uow interface
+            entity <- NULL
+            if(is.null(entity)) stop("entity uid doen't exist") else entity
+        },
+        error = function(e){
+            # TODO: Raise event handler
+            return(NULL)
+        })
+
+        return(entity)
     }
 ))
 

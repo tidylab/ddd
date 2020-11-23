@@ -34,8 +34,8 @@ describe("domain objects", {
         expect_is(Diner(), "data.frame")
         expect_is(Pizza$new(uid = NULL), "Pizza")
         expect_is(Registry$new(), "Registry")
-        # expect_is(Registry$new()$query(), "Registry")
-        # expect_is(Registry$new()$command(), "Registry")
+        expect_is(Registry$new()$command(), "Registry")
+        expect_null(Registry$new()$query())
     })
 
 })
