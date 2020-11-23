@@ -7,6 +7,6 @@
 #' into the "R" folder of your project.
 #' @export
 use_ddd <- function(){
-    fs::dir_copy(find.template("templates", "R"), file.path(getwd(), "R"))
+    fs::dir_copy(find.template("templates", "R"), file.path(getwd()))
     invisible()
 }
