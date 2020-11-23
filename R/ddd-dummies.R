@@ -21,7 +21,7 @@ DummyEntity <- R6::R6Class("DummyEntity", inherit = AbstractEntity, lock_objects
 #' @description An Domain Service that does literally nothing. It can be used as
 #'   a placeholder to facilitate software development.
 #' @family Dummy Domain Objects
-#' @return (`ContextManager`) Access to a bunch of services.
+#' @return (`DomainService`) Access to a bunch of services.
 #' @export
 DummyDomainService <- R6::R6Class("DummyDomainService", inherit = AbstractDomainService, lock_objects = FALSE, cloneable = FALSE, public = list(
     #' @description Domain service example
@@ -34,10 +34,9 @@ DummyDomainService <- R6::R6Class("DummyDomainService", inherit = AbstractDomain
         tryCatch({
             self$uow$commit()
         },
-        error = function(e){
-            events$invalid_input(msg = e$message)
+        error = function(e){ #nocov start
             self$uow$rollback()
-        })
+        }) #nocov end
 
         return(self)
     }
