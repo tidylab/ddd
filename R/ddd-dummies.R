@@ -5,7 +5,7 @@
 #' @family Dummy Domain Objects
 #' @return (`data.frame`) mtcars dataset.
 #' @export
-DummyValueObject <- function() return(mtcars)
+DummyValueObject <- function(...) return(mtcars)
 
 # -------------------------------------------------------------------------
 #' @title Dummy Entity

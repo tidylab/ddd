@@ -1,4 +1,4 @@
-context("integration test for domain objects independence of ddd")
+context("integration test for standalone domain objects")
 
 # Setup -------------------------------------------------------------------
 setup({
@@ -14,16 +14,23 @@ describe("domain objects",{
 
     it("creates domain objects", {
         expect_null(ddd::add_value_object("Diner", "dummy"))
-        devtools::document(quiet = TRUE)
+        expect_null(ddd::add_entity("Pizza", "dummy",  commands = "command", queries = "query"))
     })
 
     it("works when ddd is loaded", {
+        devtools::document(quiet = TRUE)
+
         expect_is(Diner(), "data.frame")
+        expect_is(Pizza$new(uid = NULL), "Pizza")
     })
 
     it("works when ddd is unloaded", {
+        expect_null(use_ddd())
+        devtools::document(quiet = TRUE)
         detach("package:ddd", unload = TRUE)
+
         expect_is(Diner(), "data.frame")
+        expect_is(Pizza$new(uid = NULL), "Pizza")
     })
 
 })
