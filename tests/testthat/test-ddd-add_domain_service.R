@@ -20,9 +20,8 @@ test_that("create an R script", {
     file_content <- readLines(file_path)
     expect_match(file_content, name)
     expect_match(file_content, domain)
-#     expect_match(file_content, commands[1])
-#     expect_match(file_content, commands[2])
-#     expect_match(file_content, queries[1])
+    expect_match(file_content, "command")
+    expect_match(file_content, "query")
 })
 #
 # test_that("create a unit-test", {

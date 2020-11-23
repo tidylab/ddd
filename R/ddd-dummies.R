@@ -27,7 +27,7 @@ DummyDomainService <- R6::R6Class("DummyDomainService", inherit = AbstractDomain
     #' @description Domain service example
     #' @param entity \link{DummyEntity}
     #' @param value_object \link{DummyValueObject}
-    foo = function(entity = DummyEntity$new(NULL), value_object = DummyValueObject()){
+    command = function(entity = DummyEntity$new(NULL), value_object = DummyValueObject()){
         stopifnot(any(class(entity) %in% "Entity"))
         stopifnot(any(class(value_object) %in% "data.frame"))
 
