@@ -35,7 +35,10 @@ reference:
 - contents: use_ddd
 - title: Add Domain Objects
 - contents:
-  - starts_with("add_")
+  - 'add_workflow'
+  - 'add_entity'
+  - 'add_value_object'
+  - 'add_domain_service'
 - title: Dummy Operators
   desc: Operators that do literally nothing. Use as placeholders to facilitate development.
 - contents:
