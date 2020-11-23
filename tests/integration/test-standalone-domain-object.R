@@ -10,7 +10,7 @@ setup({
 
 
 # Tests -------------------------------------------------------------------
-describe("domain objects",{
+describe("domain objects", {
 
     it("creates domain objects", {
         expect_null(ddd::add_value_object("Diner", "dummy"))
@@ -22,6 +22,7 @@ describe("domain objects",{
 
         expect_is(Diner(), "data.frame")
         expect_is(Pizza$new(uid = NULL), "Pizza")
+
     })
 
     it("works when ddd is unloaded", {
