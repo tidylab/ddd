@@ -36,7 +36,7 @@ AbstractUnitOfWork <- R6::R6Class("UnitOfWork", inherit = Singleton, public = li
 AbstractDomainService <- R6::R6Class("DomainService", public = list(
     uow = AbstractUnitOfWork$new(),
     initialize = function(uow = AbstractUnitOfWork$new()){
-        assert$is_class(uow, "UnitOfWork")
+        stopifnot(any(class(uow) %in% "UnitOfWork"))
         self$uow <- uow$enter()
     },
     finalize = function(){

@@ -42,5 +42,5 @@ describe("domain objects", {
 
 
 # Teardown ----------------------------------------------------------------
-# teardown(unlink(test_env$test_wd, recursive = TRUE, force = TRUE))
+teardown(unlink(test_env$test_wd, recursive = TRUE, force = TRUE))
 

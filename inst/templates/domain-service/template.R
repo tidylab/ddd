@@ -22,7 +22,7 @@
     invisible(self)
 }})
 
-{name}$set("public", "query", function(uid){{
+{name}$set("public", "query", function(uid = character(0)){{
     entity <- tryCatch({{
         stopifnot(is.character(uid))
         # TODO: Write code that uses uow interface

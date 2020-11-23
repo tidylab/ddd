@@ -23,6 +23,7 @@ test_that("create an R script", {
     expect_match(file_content, "command")
     expect_match(file_content, "query")
 })
+
 #
 # test_that("create a unit-test", {
 #     attach(test_env)
