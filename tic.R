@@ -10,14 +10,14 @@ get_stage("before_script") %>%
     add_code_step(try(devtools::uninstall(), silent = TRUE))
 
 # Stage: Script -----------------------------------------------------------
-get_stage("script") %>%
-    add_code_step(unlink(list.files(pattern = "demo-.*.R", full.names = TRUE, recursive = TRUE))) %>%
-    check_package() %>%
-    run_unit_tests() %>%
-    run_code_coverage()
-
-if (is_master_branch() | is_develop_branch() | is_hotfix_branch())
-    get_stage("script") %>% integration_test_steps()
+(
+    get_stage("script")
+    %>% add_code_step(unlink(list.files(pattern = "demo-.*.R", full.names = TRUE, recursive = TRUE)))
+    %>% check_package()
+    %>% add_code_step(devtools::load_all(export_all = FALSE))
+    %>% add_code_step(testthat::test_dir("./tests/testthat", stop_on_failure = TRUE))
+    %>% add_code_step(testthat::test_dir("./tests/integration", stop_on_failure = TRUE))
+)
 
 # Stage: After Success ----------------------------------------------------
 get_stage("after_success")
