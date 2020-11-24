@@ -13,7 +13,7 @@ get_stage("before_script") %>%
 (
     get_stage("script")
     %>% add_code_step(unlink(list.files(pattern = "demo-.*.R", full.names = TRUE, recursive = TRUE)))
-    %>% check_package()
+    %>% add_step(step_rcmdcheck(error_on = "error"))
     %>% add_code_step(devtools::load_all(export_all = FALSE))
     %>% add_code_step(testthat::test_dir("./tests/testthat", stop_on_failure = TRUE))
     %>% add_code_step(testthat::test_dir("./tests/integration", stop_on_failure = TRUE))
