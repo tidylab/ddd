@@ -1,6 +1,5 @@
 ---
-title: "Workflow"
-subtitle: "Sequential Steps"
+title: "Add a Workflow that Models a Domain"
 bibliography: []
 biblio-style: apalike
 link-citations: yes
@@ -17,8 +16,9 @@ dir.create(path, F, T)
 
 ## Highlights
 
-* Create a workflow in R that is readable by a domain expert.
-* Facilitates the transition between concept to implementation.
+-   Create a workflow in R that is readable by a domain expert.
+-   Facilitates the transition between concept to implementation of the domain
+    model.
 
 ## What does `add_workflow` do?
 
@@ -47,8 +47,8 @@ Then the function:
 
 ## What is a Step
 
-* The input to a step should always be an environment.
-* The output of a step should always be an environment.
+-   The input to a step should always be an environment.
+-   The output of a step should always be an environment.
 
 ```{r, eval=FALSE, echo=TRUE}
 session <- new.env
@@ -76,26 +76,22 @@ reflect their relationships and dependencies.
 Decomposing a process into steps requires cognitive effort, yet you don't need
 to delve into details in this stage.
 
-
 ```{=html}
 <div class="alert alert-info" <strong="">
 Aim to capure 20% of the steps that are roughly 80% of the process. 
 </div>
 ```
-
 ```{=html}
 <div class="alert alert-warning" <strong="">
 Even the best planning is not so omniscient as to get it right the first time.
 </div>
 ```
-
 ```{=html}
 <div class="alert alert-danger" <strong="">
 Each step may (but don't have to) be dependent on its predecessors steps.<br>
 Each step must be independent from its succeeding steps.
 </div>
 ```
-
 In our running example, the process of ordering pizza includes, but not limited
 to, three steps:
 

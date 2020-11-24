@@ -2,7 +2,7 @@
 #' @description Value Object
 #' @param name (`character`) \code{Value Object} name.
 #' @param domain (`character`) \code{Value Object} domain name.
-#' @includeRmd vignettes/patterns/value-object.Rmd
+#' @includeRmd vignettes/add_value_object.Rmd
 #' @family domain driven design patterns
 #' @export
 add_value_object <- function(name, domain = NULL){

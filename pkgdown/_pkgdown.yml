@@ -18,13 +18,10 @@ articles:
 - title: Domain Driven Design
   desc: The Patterns of Domain-driven Design
   contents:
-#   - '`00-introduction`'
-#   - '`patterns/architecture`'
-  - '`patterns/workflow`'
-  - '`patterns/entity`'
-  - '`patterns/value-object`'
-#   - '`patterns/service`'
-#   - '`patterns/domain-event`'
+  - 'add_workflow'
+  - 'add_entity'
+  - 'add_value_object'
+  - 'add_domain_service'
 # - title: Event Storming
 #   desc: Rapid design technique enabling fast-paced learning process
 #   contents:
@@ -32,3 +29,17 @@ articles:
 #   - '`event-storming/02-commands`'
 #   - '`event-storming/03-entitises`'
 
+reference:
+- title: Deploy ddd Classes and Types
+  desc: Call use_ddd at the project outset. Only use once per project.
+- contents: use_ddd
+- title: Add Domain Objects
+- contents:
+  - 'add_workflow'
+  - 'add_entity'
+  - 'add_value_object'
+  - 'add_domain_service'
+- title: Dummy Operators
+  desc: Operators that do literally nothing. Use as placeholders to facilitate development.
+- contents:
+  - starts_with("Dummy")

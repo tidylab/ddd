@@ -34,3 +34,8 @@ You can install `ddd` by using:
 install.packages("remotes")
 remotes::install_github("tidylab/ddd")
 ```
+
+Optionally, you can make a project independent of the `ddd` package by calling
+`use_ddd()`. `ddd` is needed for software development and has no added value in
+production. `use_ddd()` will copy the necessary R classes and functions into
+your project.

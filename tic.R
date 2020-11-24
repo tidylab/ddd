@@ -16,6 +16,9 @@ get_stage("script") %>%
     run_unit_tests() %>%
     run_code_coverage()
 
+if (is_master_branch() | is_develop_branch() | is_hotfix_branch())
+    get_stage("script") %>% integration_test_steps()
+
 # Stage: After Success ----------------------------------------------------
 get_stage("after_success")
 

@@ -1,7 +1,7 @@
 #' @title Pizza
 #' @family Pizza Ordering
 #' @noRd
-Pizza <- R6::R6Class("Pizza", inherit = Entity, lock_objects = FALSE, cloneable = FALSE)
+Pizza <- R6::R6Class("Pizza", inherit = AbstractEntity, lock_objects = FALSE, cloneable = FALSE)
 
 
 # Public Methods ----------------------------------------------------------
@@ -12,7 +12,7 @@ Pizza$set("public", "initialize", overwrite = TRUE, function(uid){
     invisible(self)
 })
 
-Pizza$set("public", "review", function(size){
+Pizza$set("public", "review", function(){
     pizza_slip <- PizzaSlip(
         uid = self$uid,
         size = self$size,

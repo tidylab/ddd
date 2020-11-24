@@ -27,6 +27,7 @@ assign(".Rprofile", new.env(), envir = globalenv())
     # Programming Logic
     pkgs <- c("usethis", "devtools", "magrittr", "testthat")
     invisible(sapply(pkgs, require, warn.conflicts = FALSE, character.only = TRUE))
+    .Rprofile$tasks$update_template()
 }
 
 # .Last -------------------------------------------------------------------
@@ -141,6 +142,8 @@ assign(".Rprofile", new.env(), envir = globalenv())
 
 # Utils -------------------------------------------------------------------
 .Rprofile$utils$run_script <- function(path, name){
+    .Rprofile$tasks$update_template()
+
     withr::with_envvar(
         c(TESTTHAT = "true"),
         rstudioapi::jobRunScript(
@@ -151,4 +154,11 @@ assign(".Rprofile", new.env(), envir = globalenv())
             exportEnv = ""
         ))
     invisible()
+}
+
+.Rprofile$tasks$update_templates <- function(){
+    fs::file_copy(
+        path = file.path("./R", c("ddd-abc.R", "R6-Singleton.R")),
+        new_path = "./inst/templates/R/", overwrite = TRUE
+    )
 }

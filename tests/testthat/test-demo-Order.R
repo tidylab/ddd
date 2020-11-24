@@ -16,15 +16,20 @@ test_that("calling Order$new instantiates an object with unique id", {
 })
 
 # Public Methods ----------------------------------------------------------
-test_that('calling Order$add_pizza changes the state of Order', {
+test_that('calling Order$remove_item changes the state of Order', {
     attach(test_env)
-    expect_null(pizza_order$get_pizza(pizza$uid))
-    expect_is(pizza_order$add_pizza(pizza), "Order")
-    expect_identical(pizza_order$get_pizza(pizza$uid), pizza)
+    expect_is(pizza_order$remove_item(pizza), "Order")
+    expect_null(pizza_order$get_item(pizza$uid, "Pizza"))
+})
+
+test_that('calling Order$add_item changes the state of Order', {
+    attach(test_env)
+    expect_is(pizza_order$add_item(pizza), "Order")
+    expect_identical(pizza_order$get_item(pizza$uid, "Pizza"), pizza)
 })
 
 test_that('calling Order$review returns the desired results', {
     attach(test_env)
     expect_is(order_slip <- pizza_order$review(), "data.frame")
-    expect_has_columns(order_slip, c("item", "entity", "attribute", "value"))
+    expect_has_columns(order_slip, colnames(OrderSlip()))
 })

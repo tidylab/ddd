@@ -6,13 +6,12 @@
 #' @noRd
 OrderSlip <- function(
     uid = NA_character_,
-    pizza_slips = list(PizzaSlip())
+    slips = list(PizzaSlip())
 ){
-    stopifnot(is.character(uid), is.list(pizza_slips))
-
+    stopifnot(is.character(uid), is.list(slips))
     order_slip <-
         dplyr::bind_rows(
-            pizza = dplyr::bind_rows(pizza_slips),
+            pizza = dplyr::bind_rows(slips),
             .id = "item"
         ) %>%
         tidyr::drop_na()
