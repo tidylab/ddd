@@ -12,25 +12,40 @@ editor_options:
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ```
 
+```{=html}
+<div class="alert alert-danger" <strong="">
+Don't confuse a <b>Domain Service</b> with an <b>Application Service</b>. If you are looking for a component that enables a remote client to interact with your system, then you need an <b>Application Service</b>, not a <b>Domain Service</b>.
+</div>
+```
+```{=html}
+<div class="alert alert-warning" <strong="">
+<b>Application Services</b> serve clients by orchestrating <b>Domain Services</b>. <b>Domain Services</b> are not aware and have no knowledge of any <b>Application Service</b>.
+</div>
+```
 ## Overview
 
 -   Entities and Value Objects are often to fine-grained to provide a convenient
     access to the capabilities of the domain layer.
 
--   It can be harder to distinguish application Services from domain Services.
-    We can start investigating the difference by looking at the responsibilities
-    of the layer in which services lives.
+-   Domain Service is part of the domain model. That means it expresses
+    Ubiquitous
 
-    -   The application layer is responsible for ...
+    Language in its Bounded Context.
 
-    -   The domain layer is responsible for ...
+## What is a Domain Service?
 
-## Characteristics of a good **Service**
+## Characteristics of a good Domain **Service**
 
 1.  The operation relates to a domain concept that is not a natural part of an
-    Entity or Value Object
-2.  The interface is defined in terms of other elements of the domain model
+    Entity or Value Object.
+2.  The interface is defined in terms of other elements of the domain model.
 3.  The operation is stateless.
+
+```{=html}
+<div class="alert alert-danger" <strong="">
+Make sure you need a service. Stripping away behaviors that belong to Entity overzealously, lead to Anemic Domain Model, where Entities comprise data but not behavior. This is similar to representing an Entity with only a `data.frame`.
+</div>
+```
 
 ## Unit of Work (UoW)
 

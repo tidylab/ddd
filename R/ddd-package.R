@@ -1,9 +1,3 @@
-#' @title Domain-driven Design in R
-#' @includeRmd vignettes/readme/overview.Rmd
-#' @docType package
-#' @name ddd
-NULL
-
 #' @keywords internal
 "_PACKAGE"
 

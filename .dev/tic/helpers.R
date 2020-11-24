@@ -8,10 +8,10 @@ build_steps <- check_package <- function(stage){
         add_step(step_rcmdcheck(error_on = "error"))
 }
 
-test_suite_steps <- function(stage){
+run_test_suite <- function(stage){
     stage %>%
         unit_test_steps() %>%
-        component_test_steps()
+        integration_test_steps()
 }
 
 run_unit_tests <- unit_test_steps <- function(stage){
@@ -27,8 +27,8 @@ run_code_coverage <- function(stage){
         add_code_step(print(covr::package_coverage(type = c("tests"), pre_clean = FALSE, quiet = FALSE)))
 }
 
-component_test_steps <- function(stage){
-    if(dir.exists("./tests/component-tests"))
+integration_test_steps <- function(stage){
+    if(dir.exists("./tests/integration"))
         stage <-
             stage %>%
             add_step(step_message(c(sep(), "\n## Test: Component-Tests", sep()))) %>%

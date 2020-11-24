@@ -1,12 +1,12 @@
 #' @title {name} Value Object
 #' @return (`data.frame`)
 #' @export
-#' @family {domain}, domain-value-objects
+#' @family {domain}
 #' @keywords internal
 #' @noRd
 {name} <- function(
     size = NA_character_,
-    slices = NA_integer_,
+    slices = 4L,
     toppings = list(),
     takeaway = NA
 ){{
