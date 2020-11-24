@@ -8,7 +8,6 @@ setup({
     withr::local_dir(test_wd, .local_envir = test_env)
 })
 
-
 # Tests -------------------------------------------------------------------
 describe("domain objects", {
 
@@ -26,6 +25,12 @@ describe("domain objects", {
         expect_is(Registry$new(), "Registry")
     })
 
+    it("passes all the unit-tests", {
+        cat(banner("Internal Unit-Tests"))
+        testthat::test_dir("./tests/testthat/")
+        cat(line_break())
+    })
+
     it("works when ddd is unloaded", {
         expect_null(use_ddd())
         devtools::document(quiet = TRUE)
@@ -37,9 +42,7 @@ describe("domain objects", {
         expect_is(registry$command(entity, value_object), "Registry")
         expect_null(registry$query(character(0)))
     })
-
 })
-
 
 # Teardown ----------------------------------------------------------------
 teardown(unlink(test_env$test_wd, recursive = TRUE, force = TRUE))
