@@ -28,6 +28,20 @@ add_domain_service <- function(name, domain = NULL){
 
     if(interactive()) fs::file_show(file_path) # nocov
 
+    # Add Unit Test -----------------------------------------------------------
+    file_path <- file.path(getwd(), "tests", "testthat", paste0("test-", filename$service(name, domain)))
+    file.create(file_path)
+
+    template <- read_lines(find.template("templates", "domain-service", "test-template.R"))
+    excerpts <- str_glue(template, name = name, domain = domain)
+
+    excerpts %>%
+        unlist(use.names = FALSE) %>%
+        paste0(collapse = "\n\n") %>%
+        write(file = file_path, append = FALSE, sep = "\n")
+
+    if(interactive()) fs::file_show(file_path) # nocov
+
     # Return ------------------------------------------------------------------
     invisible()
 }

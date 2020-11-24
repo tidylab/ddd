@@ -17,10 +17,22 @@ test_that("instantiate a dummy Entity", {
     test_env$entity <- entity
 })
 
-# # Dummy Domain Service ----------------------------------------------------
+# Dummy Domain Service ----------------------------------------------------
 test_that("instantiate a dummy Domain Service", {
     attach(test_env)
     expect_is(domain_service <- DummyDomainService$new(), "DomainService")
+    test_env$domain_service <- domain_service
+})
+
+test_that("calling DummyDomainService$command performs an action", {
+    attach(test_env)
     expect_is(domain_service$command(entity = entity, value_object = value_object), "DomainService")
+})
+
+test_that("calling DummyDomainService$query returns the desired results", {
+    attach(test_env)
     expect_null(domain_service$query(uid = character(0)))
 })
+
+# Cleanup -----------------------------------------------------------------
+testthat::teardown(rm(domain_service, envir = test_env))

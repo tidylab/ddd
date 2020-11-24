@@ -11,7 +11,7 @@ testthat::setup({
     test_env$queries  <- title$command(c("Review"))
 })
 
-# Create R script ---------------------------------------------------------
+# Tests -------------------------------------------------------------------
 test_that("create an R script", {
     attach(test_env)
 
@@ -27,6 +27,7 @@ test_that("create an R script", {
     expect_match(file_content, queries[1])
 })
 
+
 test_that("create a unit-test", {
     attach(test_env)
     file_path <- file.path(getwd(), "tests", "testthat", paste0("test-", filename$entity(name, domain)))
@@ -38,3 +39,7 @@ test_that("create a unit-test", {
     expect_match(file_content, paste0("calling ", commands[1], " changes the state of the object"))
     expect_match(file_content, paste0("calling ", queries[1], " returns the desired results"))
 })
+
+
+# Cleanup -----------------------------------------------------------------
+testthat::teardown(unlink(test_wd, recursive = TRUE, force = TRUE))

@@ -9,7 +9,7 @@ testthat::setup({
     test_env$domain   <- title$domain("Pizza Ordering")
 })
 
-# Create R script ---------------------------------------------------------
+# Tests -------------------------------------------------------------------
 test_that("create an R script", {
     attach(test_env)
 
@@ -24,15 +24,15 @@ test_that("create an R script", {
     expect_match(file_content, "query")
 })
 
-#
-# test_that("create a unit-test", {
-#     attach(test_env)
-#     file_path <- file.path(getwd(), "tests", "testthat", paste0("test-", filename$entity(name, domain)))
-#     expect_file_exists(file_path)
-#
-#     file_content <- readLines(file_path)
-#     expect_match(file_content, paste0("unit test for entity ", name))
-#     expect_match(file_content, paste0(name, "\\$new\\("))
-#     expect_match(file_content, paste0("calling ", commands[1], " changes the state of the object"))
-#     expect_match(file_content, paste0("calling ", queries[1], " returns the desired results"))
-# })
+test_that("create a unit-test", {
+    attach(test_env)
+    file_path <- file.path(getwd(), "tests", "testthat", paste0("test-", filename$service(name, domain)))
+    expect_file_exists(file_path)
+
+    file_content <- readLines(file_path)
+    expect_match(file_content, paste0("unit test for domain-service ", name))
+    expect_match(file_content, paste0(name, "\\$new\\("))
+})
+
+# Cleanup -----------------------------------------------------------------
+testthat::teardown(unlink(test_wd, recursive = TRUE, force = TRUE))
