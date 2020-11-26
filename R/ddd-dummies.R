@@ -49,7 +49,7 @@ DummyDomainService <- R6::R6Class("DummyDomainService", inherit = AbstractDomain
         entity <- tryCatch({
             # TODO: Write code that uses uow interface
             entity <- NULL
-            if(is.null(entity)) stop("entity uid doen't exist") else entity
+            if(is.null(entity)) stop("entity uid doen't exist") else entity # nocov
         },
         error = function(e){
             # TODO: Raise event handler
