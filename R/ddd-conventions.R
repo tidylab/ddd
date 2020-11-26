@@ -11,7 +11,6 @@ title$handler <- snakecase::to_snake_case
 title$command <- snakecase::to_snake_case
 title$domain <-  snakecase::to_title_case
 title$exammple <- snakecase::to_sentence_case
-title$workflow <- purrr::partial(snakecase::to_snake_case, sep_out = "-")
 
 # File Names --------------------------------------------------------------
 #' @noRd
@@ -53,8 +52,3 @@ filename$service <- function(name = "unnamed", domain = "domain"){
 filename$command <- function(name = "unnamed", domain = "domain"){
     filename$template(domain, "command", title$command(name))
 }
-
-filename$workflow <- function(name = "unnamed", domain = "domain"){
-    filename$template(NULL, NULL, title$workflow(name))
-}
-
