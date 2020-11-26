@@ -24,7 +24,8 @@ Depends:
 Suggests: 
     testthat,
     withr,
-    rmarkdown
+    rmarkdown,
+    knitr
 Imports:
     assertthat,
     fs,
@@ -34,3 +35,4 @@ Imports:
     R6DS,
     snakecase,
     stringr
+VignetteBuilder: knitr

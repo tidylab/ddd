@@ -1,5 +1,5 @@
 ---
-title: "Get Started with **ddd**"
+title: "Get Started with the ddd package"
 bibliography: []
 biblio-style: apalike
 link-citations: yes

@@ -15,8 +15,10 @@ authors:
     href: https://github.com/harell
 
 articles:
-- title: Domain Driven Design
-  desc: The Patterns of Domain-driven Design
+- title: Domain Driven Design Philosophy
+  contents:
+  - 'what-is-domain-driven-design'
+- title: Domain Driven Design Patterns
   contents:
   - 'add_workflow'
   - 'add_entity'
