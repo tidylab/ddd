@@ -18,7 +18,6 @@ articles:
 - title: Domain Driven Design
   desc: The Patterns of Domain-driven Design
   contents:
-  - 'add_workflow'
   - 'add_entity'
   - 'add_value_object'
   - 'add_domain_service'
@@ -32,10 +31,10 @@ articles:
 reference:
 - title: Deploy ddd Classes and Types
   desc: Call use_ddd at the project outset. Only use once per project.
-- contents: use_ddd
+- contents:
+  - 'use_ddd'
 - title: Add Domain Objects
 - contents:
-  - 'add_workflow'
   - 'add_entity'
   - 'add_value_object'
   - 'add_domain_service'
