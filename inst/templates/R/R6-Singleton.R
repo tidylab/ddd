@@ -19,6 +19,3 @@ Singleton <- R6::R6Class("Singleton", public = list(
         text = paste0("attach(new.env(), name = '", private$name, "', warn.conflicts = FALSE)")
     ))
 ))
-
-
-

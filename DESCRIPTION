@@ -29,7 +29,6 @@ Suggests:
 Imports:
     assertthat,
     fs,
-    magrittr,
     purrr,
     R6,
     R6DS,

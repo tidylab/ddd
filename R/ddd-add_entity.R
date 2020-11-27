@@ -4,7 +4,7 @@
 #' @param domain (`character`) \code{Entity} domain name.
 #' @param commands (`character`)
 #' @param queries (`character`)
-#' @includeRmd vignettes/add_entity.Rmd
+#' @includeRmd vignettes/articles/add_entity.Rmd
 #' @family domain driven design patterns
 #' @export
 add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL){
