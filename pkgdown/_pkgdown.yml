@@ -41,7 +41,11 @@ reference:
   - add_entity
   - add_value_object
   - add_domain_service
-- title: Dummy Operators
-  desc: Operators that do literally nothing. Use as placeholders to facilitate development.
-- contents:
-  - starts_with("Dummy")
+# - title: Abstract Base Classes
+#   desc: Infrastructure for defining abstract base classes of core domain objects.
+# - contents:
+#   - starts_with("Abstract")
+# - title: Dummy Operators
+#   desc: Operators that do literally nothing. Use as placeholders to facilitate development.
+# - contents:
+#   - starts_with("Dummy")

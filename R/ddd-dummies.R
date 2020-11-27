@@ -3,8 +3,10 @@
 #' @description A Value Object that does literally nothing. It can be used as a
 #' placeholder to facilitate software development.
 #' @param ... Any object
-#' @family Dummy Domain Objects
+#' @family dummy domain objects
 #' @return (`data.frame`) mtcars dataset.
+#' @noRd
+#' @keywords internal
 #' @export
 DummyValueObject <- function(...) return(data.frame(UpperAlphabet = LETTERS, LowerAlphabet = letters)[0,])
 
@@ -12,8 +14,10 @@ DummyValueObject <- function(...) return(data.frame(UpperAlphabet = LETTERS, Low
 #' @title Dummy Entity
 #' @description An Entity that does literally nothing. It can be used as a
 #' placeholder to facilitate software development.
-#' @family Dummy Domain Objects
+#' @family dummy domain objects
 #' @return (`Entity`) A domain entity.
+#' @noRd
+#' @keywords internal
 #' @export
 DummyEntity <- R6::R6Class("DummyEntity", inherit = AbstractEntity, lock_objects = FALSE, cloneable = FALSE)
 
@@ -21,13 +25,15 @@ DummyEntity <- R6::R6Class("DummyEntity", inherit = AbstractEntity, lock_objects
 #' @title Dummy Domain Service
 #' @description An Domain Service that does literally nothing. It can be used as
 #'   a placeholder to facilitate software development.
-#' @family Dummy Domain Objects
+#' @family dummy domain objects
 #' @return (`DomainService`) Access to a bunch of services.
+#' @noRd
+#' @keywords internal
 #' @export
 DummyDomainService <- R6::R6Class("DummyDomainService", inherit = AbstractDomainService, lock_objects = FALSE, cloneable = FALSE, public = list(
     #' @description Domain service command
-    #' @param entity \link{DummyEntity}
-    #' @param value_object \link{DummyValueObject}
+    #' @param entity Instance of \code{DummyEntity}
+    #' @param value_object Instance of \code{DummyValueObject}
     command = function(entity = DummyEntity$new(NULL), value_object = DummyValueObject()){
         stopifnot(any(class(entity) %in% "Entity"))
         stopifnot(any(class(value_object) %in% "data.frame"))
