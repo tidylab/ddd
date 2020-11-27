@@ -12,6 +12,10 @@ Singleton <- R6::R6Class("Singleton", public = list(
 ), private = list(
     name = NULL,
     exists = function() private$name %in% search(),
-    del = function() detach(private$name, unload = TRUE, force = TRUE, character.only = TRUE),
-    set = function() attach(new.env(), name = private$name, warn.conflicts = FALSE)
+    del = function() eval(parse(
+        text = paste0("detach('", private$name, "', unload = TRUE, force = TRUE, character.only = TRUE)")
+    )),
+    set = function() eval(parse(
+        text = paste0("attach(new.env(), name = '", private$name, "', warn.conflicts = FALSE)")
+    ))
 ))
