@@ -1,6 +1,6 @@
 ---
 title: "Add a Service to a Domain"
-bibliography: [references.bib]
+bibliography: [../references.bib]
 biblio-style: apalike
 link-citations: yes
 editor_options: 
@@ -32,7 +32,7 @@ Don't confuse a <b>Domain Service</b> with an <b>Application Service</b>. If you
 
     Language in its Bounded Context.
 
-## What is a Domain Service?
+<!-- ## What is a Domain Service? -->
 
 ## Characteristics of a good Domain **Service**
 

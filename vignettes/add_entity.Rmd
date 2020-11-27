@@ -12,4 +12,6 @@ editor_options:
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ```
 
-## What is an Entity?
+<!-- ## What is an Entity? -->
+
+
