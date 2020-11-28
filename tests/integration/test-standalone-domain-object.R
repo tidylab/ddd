@@ -26,13 +26,13 @@ describe("domain objects", {
     })
 
     it("passes all the unit-tests", {
-        cat(banner("Internal Unit-Tests"))
+        cat(banner("Unit-Tests inside the Analytic Project"))
         testthat::test_dir("./tests/testthat/")
         cat(line_break())
     })
 
     it("works when ddd is unloaded", {
-        expect_null(use_ddd())
+        expect_null(ddd::use_ddd())
         devtools::document(quiet = TRUE)
         detach("package:ddd", unload = TRUE)
 

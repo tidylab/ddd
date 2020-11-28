@@ -14,6 +14,7 @@ expect_match <- function(object, regexp) testthat::expect_match(stringr::str_fla
 create_package <- function(path){
     unlink(path, recursive = TRUE, force = TRUE)
     fs::dir_create(path)
+    fs::file_create(file.path(path, ".Rprofile"))
     writeLines(c(
         "Package: dummy.package",
         "Title: What the Package Does (One Line, Title Case)",
