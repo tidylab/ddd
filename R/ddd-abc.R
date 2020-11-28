@@ -3,12 +3,11 @@
 #' @description
 #' This class provides the infrastructure for defining abstract base classes of
 #' core domain objects.
-#' @family Abstract Base Class
-#' @noRd
+#' @family abstract base classes
 #' @keywords internal
 #' @export
 AbstractEntity <- R6::R6Class("Entity", inherit = NULL, public = list(
-    #' @field Entity unique identifier.
+    #' @field uid Entity unique identifier.
     uid = character(0),
     #' @description Instantiate Entity object.
     #' @param uid (`character`) Entity unique identifier.
@@ -20,12 +19,11 @@ AbstractEntity <- R6::R6Class("Entity", inherit = NULL, public = list(
 # -------------------------------------------------------------------------
 #' @title Unit of Work (UoW)
 #' @description Unit of Work hides database details.
-#' @family Abstract Base Class
+#' @family abstract base classes
 #' @references
 #' * \href{https://docs.python.org/3/library/stdtypes.html#typecontextmanager}{context manager}
 #' * \href{https://docs.python.org/3/reference/datamodel.html#object.__enter__}{enter}
 #' * \href{https://docs.python.org/3/reference/datamodel.html#object.__exit__}{exit}
-#' @noRd
 #' @keywords internal
 #' @export
 AbstractUnitOfWork <- R6::R6Class("UnitOfWork", inherit = Singleton, public = list(
@@ -48,17 +46,20 @@ AbstractUnitOfWork <- R6::R6Class("UnitOfWork", inherit = Singleton, public = li
 # -------------------------------------------------------------------------
 #' @title AbstractDomainService
 #' @description Use \code{Unit of Work} as a context manager.
-#' @family Abstract Base Class
-#' @noRd
+#' @family abstract base classes
 #' @keywords internal
 #' @export
 AbstractDomainService <- R6::R6Class("DomainService", public = list(
-    uow = AbstractUnitOfWork$new(),
+    #' @description Instantiate a domain service
+    #' @param uow (`UnitOfWork`) instance. See \link{AbstractUnitOfWork}.
     initialize = function(uow = AbstractUnitOfWork$new()){
         stopifnot(any(class(uow) %in% "UnitOfWork"))
-        self$uow <- uow$enter()
+        private$uow <- uow$enter()
     },
+    #' @description Tear down a domain service
     finalize = function(){
-        self$uow$exit()
+        private$uow$exit()
     }
+), private = list(
+    uow = AbstractUnitOfWork$new()
 ))

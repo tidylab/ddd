@@ -19,6 +19,7 @@
 #' retrieved_conter <- Counter$new()
 #' retrieved_conter$count # 2
 #' }
+#' @family software design patterns
 #' @export
 Singleton <- R6::R6Class("Singleton", public = list(
     #' @description Create or retrieve an object
