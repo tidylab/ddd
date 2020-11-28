@@ -29,10 +29,10 @@ Suggests:
 Imports:
     assertthat,
     fs,
-    glue
+    glue,
     purrr,
     R6,
     R6DS,
     snakecase,
-    stringr,
+    stringr
 VignetteBuilder: knitr
