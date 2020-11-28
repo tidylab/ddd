@@ -1,5 +1,5 @@
 
-# `ddd` <img src='https://i.imgur.com/M8Jk1AL.png' align="right" height="75"/>
+# `ddd` <img src="https://i.imgur.com/M8Jk1AL.png" align="right" height="75"/>
 
 <!-- badges: start -->
 
@@ -7,17 +7,52 @@
 status](https://www.r-pkg.org/badges/version/ddd)](https://CRAN.R-project.org/package=ddd)
 [![test-suite](https://github.com/tidylab/ddd/workflows/test-suite/badge.svg)](https://github.com/tidylab/ddd/actions)
 [![code-coverage](https://codecov.io/gh/tidylab/ddd/branch/master/graph/badge.svg)](https://codecov.io/github/tidylab/ddd/?branch=master)
+
 <!-- badges: end -->
 
 ## `Domain-driven Design (ddd)`
 
 <img src="https://i.imgur.com/RLEQkhe.png" width="100%" style="display: block; margin: auto;" />
 
-## Overview
+## Hurry please, I have a short attention span, what is `ddd`?
 
-Put Domain-driven Design (DDD) to practice on analytic projects in R.
-This package includes key DDD classes for instantiating Domain Events,
-Commands, Entities, Value Objects, Domain Services and Aggregates.
+Sorry, most likely `ddd` is not for you.
+
+## Who is `ddd` for?
+
+Here are a few assumptions about you:
+
+  - You are an R user
+
+  - You are an experienced Data Scientist
+
+  - You have seen and created clunkers, that is, analytic applications
+    with an abundance of cruft
+
+  - You have a passion for producing analytic applications of
+    high-quality every day
+
+If you belong to the intersection of all the sets above, then ddd may
+benefit you.
+
+## What `ddd` is (but first, what it is not)
+
+Because `ddd` is an R package that caters for Data Scientists, it is
+natural to think it may contain a new learning algorithm, statistical
+method, a visualisation tool, or data processing toolkit. `ddd` offers
+none of these things. Instead, `ddd` automates repetitive tasks that
+arise during software development in R. In that sense, `ddd` is akin to
+the [`usethis`](https://usethis.r-lib.org/) package.
+
+`ddd` is an acronym of a software development approach called
+[***Domain-driven
+development***](https://en.wikipedia.org/wiki/Domain-driven_design), or
+DDD for short. `ddd` facilitates the implementation of key DDD patterns
+including Entity, Value Object and Domain Services. Together these
+building blocks form a domain model.
+
+Before getting into specifics about **Domain-driven Design**, lets first
+discuss the importance of software design and how it is inevitable.
 
 <!-- Although each domain model is different, many patterns occur repeatedly. -->
 
@@ -34,3 +69,5 @@ Optionally, you can make a project independent of the `ddd` package by
 calling `use_ddd()`. `ddd` is needed for software development and has no
 added value in production. `use_ddd()` will copy the necessary R classes
 and functions into your project.
+
+-----
