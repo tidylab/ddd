@@ -78,7 +78,7 @@ jobs:
       # for some strange Windows reason this step and the next one need to be decoupled
       - name: "[Stage] Prepare"
         run: |
-          echo "chooseCRANmirror(graphics=FALSE, ind = 1)" > .Rprofile
+          echo "utils::chooseCRANmirror(graphics=FALSE, ind = 1)" > .Rprofile
           Rscript -e "if(!'remotes' %in% rownames(utils::installed.packages())) utils::install.packages('remotes')"
 
       - name: "[Stage] [Linux] Install curl"

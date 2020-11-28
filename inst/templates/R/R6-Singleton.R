@@ -1,3 +1,4 @@
+#nocov start
 #' @title Singleton
 #' @description Restricts the instantiation of a class to one "single" instance.
 #'   Singleton takes the control of object creation out of the hands of the
@@ -39,3 +40,4 @@ Singleton <- R6::R6Class("Singleton", public = list(
         text = paste0("attach(new.env(), name = '", private$name, "', warn.conflicts = FALSE)")
     ))
 ))
+#nocov end
