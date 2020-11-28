@@ -6,6 +6,7 @@ find.template <- function(...){
     return(path)
 }
 read_lines <- function(con) base::readLines(con) %>% str_flatten()
+`%|>|%` <- function(a, b = identity){ if(is.null(a)) return(NULL) else return(b(a)) }
 
 # fs ----------------------------------------------------------------------
 file.create <- function(path) {dir.create(dirname(path), F, T); fs::file_create(path)}

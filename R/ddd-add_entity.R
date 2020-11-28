@@ -1,5 +1,7 @@
 #' @title Add an Entity to a Domain
-#' @description Domain Entity
+#' @description
+#' \code{add_entity} makes it easy to create an class that encapsulates the data
+#' and behaviours of an \code{Entity} in a domain.
 #' @param name (`character`) \code{Entity} name.
 #' @param domain (`character`) \code{Entity} domain name.
 #' @param commands (`character`)
@@ -11,14 +13,14 @@ add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL){
     # Defensive Programming ---------------------------------------------------
     assert$is_character(name)
     assert$is_character(domain)
-    assert$are_character(commands)
-    assert$are_character(queries)
+    assert$are_character_or_null(commands)
+    assert$are_character_or_null(queries)
 
     # Setup -------------------------------------------------------------------
-    name <- title$entity(name)
-    domain <- title$domain(domain)
-    commands <- title$command(commands)
-    queries <- title$command(queries)
+    name     <- name %|>|% title$entity
+    domain   <- domain %|>|% title$domain
+    commands <- commands %|>|% title$command
+    queries  <- queries %|>|% title$command
 
     # Add Entity Object -------------------------------------------------------
     file_path <- file.path(getwd(), "R", filename$entity(name, domain))

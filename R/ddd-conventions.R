@@ -19,10 +19,6 @@ title$exammple <- snakecase::to_sentence_case
 filename <- new.env(parent = emptyenv())
 
 filename$template <- function(entity = NULL, attribute = NULL, value = NULL){
-    # NULL protection
-    `%|>|%` <- function(a, b = identity){ if(is.null(a)) return(NULL) else return(b(a)) }
-
-
     paste0(paste(
         entity %|>|% snakecase::to_snake_case,
         attribute %|>|% snakecase::to_snake_case,

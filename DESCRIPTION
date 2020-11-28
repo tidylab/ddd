@@ -12,7 +12,7 @@ Authors@R: c(
 Maintainer: Harel Lustiger <tidylab@gmail.com>
 Description: Put Domain Driven Design (DDD) to practice on analytic projects in 
     R. This package includes key DDD classes for instantiating domain objects including 
-    Entities, Value Objects, and Domain Services.
+    Entities, Value Objects, and Domain Services. See the package website for more information.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
