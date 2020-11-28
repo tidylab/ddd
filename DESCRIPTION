@@ -1,18 +1,18 @@
 Package: ddd
 Type: Package
-Title: Domain Driven Design
+Title: Build Applications that Match their Business Domain
 URL: https://tidylab.github.io/ddd/, https://github.com/tidylab/ddd
 BugReports: https://github.com/tidylab/ddd/issues
 Version: 0.4.8
 Date: 2020-07-25
 Authors@R: c(
-    person("Harel", "Lustiger", email = "tidylab@gmail.com", role = c("aut", "cre"),
+    person("Harel", "Lustiger", email = "tidylab@gmail.com", role = c("aut", "cre", "cph"),
     comment = c(ORCID = "0000-0003-2953-9598"))
     )
 Maintainer: Harel Lustiger <tidylab@gmail.com>
 Description: Put Domain Driven Design (DDD) to practice on analytic projects in 
-    R. This package includes key DDD classes for instantiating Domain Events, 
-    Commands, Entities, Value Objects, Domain Services and Aggregates.
+    R. This package includes key DDD classes for instantiating domain objects including 
+    Entities, Value Objects, and Domain Services. See the package website for more information.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

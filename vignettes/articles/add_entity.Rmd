@@ -10,9 +10,58 @@ editor_options:
 
 ```{r, include = FALSE}
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
+name <- "Order"
+domain <- "Pizza Ordering"
+commands <- "Add Item to Order"
+queries <- "Review Order"
+
+path_proj <- tempfile("article-")
+path_script <- file.path("R", filename$entity(name, domain))
+path_test <- file.path("tests", "testthat", "test-" %+% filename$entity(name, domain))
+fs::dir_create(path_proj)
 ```
 
-## What is an Entity?
+## What does `add_entity` do?
 
-Entities are the first natural place we should aim to place business logic in
-domain-driven applications.
+Given the **Entity** `name`, and its `domain` name, and optionally `commands`
+and `queries` methods,
+
+When `add_entity` is called
+
+```{r, eval = TRUE, echo = FALSE}
+command <- "add_entity(name = '" %+% name %+% 
+    "', domain = '" %+% domain %+% 
+    "', commands = '" %+% commands %+% 
+    "', queries = '" %+% queries %+%
+    "')"
+withr::with_dir(path_proj, eval(parse(text=command)))
+```
+
+```{r, code = command, eval = FALSE, echo = TRUE}
+```
+
+Then the function:
+
+-   Generates boilerplate code for the **Entity** and saves it at **`r path_script`**; 
+-   Generates a unit-test for the **Entity** and saves it at **`r path_test`**; and
+-   Opens the files (only in interactive mode).
+
+## What are the main components of an **Entity**?
+
+The boilerplate code produced by `add_entity` looks likes this:
+
+**`r path_script`**
+
+```{r code = readLines(file.path(path_proj, path_script)), eval = FALSE, echo = TRUE}
+```
+
+**`r path_test`**
+
+```{r code = readLines(file.path(path_proj, path_test)), eval = FALSE, echo = TRUE}
+```
+
+
+<!-- ## What is an Entity? -->
+
+<!-- Entities are the first natural place we should aim to place business logic in -->
+<!-- domain-driven applications. -->

@@ -22,6 +22,7 @@
 ^\.Rproj\.user$
 ^\.travis\.yml$
 ^codecov\.yml$
+^cran-comments\.md$
 ^renv\.lock$
 ^tic\.R$
 ^README\.Rmd$
@@ -31,4 +32,5 @@
 
 # Demo
 demo-.*\.R$
+
 

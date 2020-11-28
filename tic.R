@@ -21,7 +21,7 @@ get_stage("before_script") %>%
 )
 
 # Stage: After Success ----------------------------------------------------
-get_stage("after_success")
+get_stage("after_success") %>% add_code_step(print(utils::sessionInfo()))
 
 # Stage: After Failure ----------------------------------------------------
 get_stage("after_failure")
