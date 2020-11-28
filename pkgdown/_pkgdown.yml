@@ -19,7 +19,7 @@ articles:
 - title: Domain Driven Design Patterns
   contents:
   - articles/add_entity
-  - add_value_object
+  - articles/add_value_object
   - articles/add_domain_service
 
 
