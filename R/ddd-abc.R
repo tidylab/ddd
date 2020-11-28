@@ -1,3 +1,4 @@
+#nocov start
 # -------------------------------------------------------------------------
 #' @title Abstract Entity Class
 #' @description
@@ -63,3 +64,6 @@ AbstractDomainService <- R6::R6Class("DomainService", public = list(
 ), private = list(
     uow = AbstractUnitOfWork$new()
 ))
+
+# -------------------------------------------------------------------------
+#nocov end
