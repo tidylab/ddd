@@ -17,11 +17,11 @@ RUN R -q -e "system.time({\
                devtools::load_all(export_all = FALSE, helpers = FALSE);\
                testthat::test_dir('./tests/testthat', stop_on_failure = TRUE)\
              })"
-RUN R -q -e "if(dir.exists('./tests/integration')) system.time({\
-               remotes::install_local(usethis::proj_get(), force = TRUE, upgrade = FALSE);\
-               library('ddd');\
-               testthat::test_dir('./tests/integration', stop_on_failure = TRUE)\
-             })"
+#RUN R -q -e "if(dir.exists('./tests/integration')) system.time({\
+#               remotes::install_local(usethis::proj_get(), force = TRUE, upgrade = FALSE);\
+#               library('ddd');\
+#               testthat::test_dir('./tests/integration', stop_on_failure = TRUE)\
+#             })"
 #RUN R -q -e "pkgdown::build_site(devel = TRUE)"
 
 # Teardown ---------------------------------------------------------------------

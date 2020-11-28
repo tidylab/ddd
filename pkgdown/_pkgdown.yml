@@ -9,25 +9,18 @@ title: "R Domain-driven Design"
 authors:
   Harel Lustiger:
     href: https://github.com/harell
-# development:
-#   mode: unreleased
+
 
 # Articles ----------------------------------------------------------------
 articles:
 - title: Domain Driven Design Philosophy
   contents:
-  - 'what-is-domain-driven-design'
+  - articles/what-is-domain-driven-design
 - title: Domain Driven Design Patterns
   contents:
   - articles/add_entity
   - add_value_object
   - articles/add_domain_service
-# - title: Event Storming
-#   desc: Rapid design technique enabling fast-paced learning process
-#   contents:
-#   - '`event-storming/01-domain-events`'
-#   - '`event-storming/02-commands`'
-#   - '`event-storming/03-entitises`'
 
 
 # Functions ---------------------------------------------------------------
@@ -41,11 +34,3 @@ reference:
   - add_entity
   - add_value_object
   - add_domain_service
-# - title: Abstract Base Classes
-#   desc: Infrastructure for defining abstract base classes of core domain objects.
-# - contents:
-#   - starts_with("Abstract")
-# - title: Dummy Operators
-#   desc: Operators that do literally nothing. Use as placeholders to facilitate development.
-# - contents:
-#   - starts_with("Dummy")
