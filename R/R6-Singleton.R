@@ -1,5 +1,8 @@
 #' @title Singleton
 #' @description Restricts the instantiation of a class to one "single" instance.
+#'   Singleton takes the control of object creation out of the hands of the
+#'   programmer. If the object doesn't exist, then Singleton instantiate an
+#'   object. Else, Singleton retrieves the existing object instance.
 #' @examples
 #' \donttest{
 #' # Example: A Counter Implementation
@@ -16,17 +19,14 @@
 #' retrieved_conter <- Counter$new()
 #' retrieved_conter$count # 2
 #' }
-#' @noRd
 #' @export
 Singleton <- R6::R6Class("Singleton", public = list(
-    #' @description Singleton takes the control of object creation out of the
-    #'   hands of the programmer. Create or retrieve a new. If the object
-    #'   doesn't exists, then Singleton instantiate an object. Else, Singleton
-    #'   retrieves the existing object instance.
+    #' @description Create or retrieve an object
     initialize = function(){
         private$name <- gsub("\\$new\\(.*\\)", "", deparse(sys.calls()[[sys.nframe()-1]]))
         if(!private$exists()) private$set()
     },
+    #' @description Remove an object
     finalize = function() while(private$exists()) private$del()
 ), private = list(
     name = NULL,
