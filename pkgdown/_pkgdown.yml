@@ -13,9 +13,9 @@ authors:
 
 # Articles ----------------------------------------------------------------
 articles:
-- title: Domain Driven Design Philosophy
-  contents:
-  - articles/what-is-domain-driven-design
+# - title: Domain Driven Design Philosophy
+#   contents:
+#   - articles/what-is-domain-driven-design
 - title: Domain Driven Design Patterns
   contents:
   - '`articles/add_entity`'
