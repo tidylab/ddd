@@ -1,8 +1,8 @@
 # Naming Style ------------------------------------------------------------
+#' @title Generate Object Names which are DDD compliant
 #' @noRd
 #' @keywords internal
-#' @export
-title <- new.env()
+title <- new.env(parent = emptyenv())
 title$event <- snakecase::to_upper_camel_case
 title$value <- snakecase::to_upper_camel_case
 title$entity <- snakecase::to_upper_camel_case
@@ -13,10 +13,10 @@ title$domain <-  snakecase::to_title_case
 title$exammple <- snakecase::to_sentence_case
 
 # File Names --------------------------------------------------------------
+#' @title Generate File Names which are DDD compliant
 #' @noRd
 #' @keywords internal
-#' @export
-filename <- new.env()
+filename <- new.env(parent = emptyenv())
 
 filename$template <- function(entity = NULL, attribute = NULL, value = NULL){
     # NULL protection
