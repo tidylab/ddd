@@ -10,8 +10,11 @@ editor_options:
 
 ```{r, include = FALSE}
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
-name <- "Customer"
+name <- "Order"
 domain <- "Pizza Ordering"
+commands <- "Add Item to Order"
+queries <- "Review Order"
+
 path_proj <- tempfile("article-")
 path_script <- file.path("R", filename$entity(name, domain))
 path_test <- file.path("tests", "testthat", "test-" %+% filename$entity(name, domain))
@@ -20,12 +23,17 @@ fs::dir_create(path_proj)
 
 ## What does `add_entity` do?
 
-Given the **Entity** name \<`r name`\>, and its sub-domain name \<`r domain`\>,
+Given the **Entity** `name`, and its `domain` name, and optionally `commands`
+and `queries` methods,
 
 When `add_entity` is called
 
 ```{r, eval = TRUE, echo = FALSE}
-command <- "add_entity(name = '" %+% name %+% "', domain = '" %+% domain %+% "')"
+command <- "add_entity(name = '" %+% name %+% 
+    "', domain = '" %+% domain %+% 
+    "', commands = '" %+% commands %+% 
+    "', queries = '" %+% queries %+%
+    "')"
 withr::with_dir(path_proj, eval(parse(text=command)))
 ```
 
@@ -42,8 +50,16 @@ Then the function:
 
 The boilerplate code produced by `add_entity` looks likes this:
 
+**`r path_script`**
+
 ```{r code = readLines(file.path(path_proj, path_script)), eval = FALSE, echo = TRUE}
 ```
+
+**`r path_test`**
+
+```{r code = readLines(file.path(path_proj, path_test)), eval = FALSE, echo = TRUE}
+```
+
 
 <!-- ## What is an Entity? -->
 
