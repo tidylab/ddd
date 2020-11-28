@@ -78,7 +78,7 @@ jobs:
       # for some strange Windows reason this step and the next one need to be decoupled
       - name: "[Stage] Prepare"
         run: |
-          echo "options(repos='http://cran.us.r-project.org')" > .Rprofile
+          echo "chooseCRANmirror(graphics=FALSE, ind = 1)" > .Rprofile
           Rscript -e "if(!'remotes' %in% rownames(utils::installed.packages())) utils::install.packages('remotes')"
 
       - name: "[Stage] [Linux] Install curl"
@@ -117,12 +117,12 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
-      - name: "[Stage] Before Deploy"
-        run: |
-          Rscript -e "tic::before_deploy()"
-
-      - name: "[Stage] Deploy"
-        run: Rscript -e "tic::deploy()"
-
-      - name: "[Stage] After Deploy"
-        run: Rscript -e "tic::after_deploy()"
+      # - name: "[Stage] Before Deploy"
+      #   run: |
+      #     Rscript -e "tic::before_deploy()"
+      #
+      # - name: "[Stage] Deploy"
+      #   run: Rscript -e "tic::deploy()"
+      #
+      # - name: "[Stage] After Deploy"
+      #   run: Rscript -e "tic::after_deploy()"
