@@ -3,8 +3,8 @@
 
 <!-- badges: start -->
 
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/ddd)](https://CRAN.R-project.org/package=ddd)
 [![test-suite](https://github.com/tidylab/ddd/workflows/test-suite/badge.svg)](https://github.com/tidylab/ddd/actions)
 [![code-coverage](https://codecov.io/gh/tidylab/ddd/branch/master/graph/badge.svg)](https://codecov.io/github/tidylab/ddd/?branch=master)
 <!-- badges: end -->
