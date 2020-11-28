@@ -80,6 +80,7 @@ jobs:
         run: |
           Rscript -e "if (!requireNamespace('remotes')) install.packages('remotes', type = 'source')"
           Rscript -e "if (getRversion() < '3.2' && !requireNamespace('curl')) install.packages('curl', type = 'source')"
+          Rscript -e "remotes::install_deps(dependencies = TRUE)"
 
       - name: "[Stage] [Linux] Install curl"
         if: runner.os == 'Linux'
