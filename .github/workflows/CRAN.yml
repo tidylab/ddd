@@ -78,9 +78,9 @@ jobs:
       # for some strange Windows reason this step and the next one need to be decoupled
       - name: "[Stage] Prepare"
         run: |
+          echo "" > .Rprofile
           Rscript -e "if(!'remotes' %in% rownames(utils::installed.packages())) utils::install.packages('remotes')"
           Rscript -e "print(list.files(all.files = TRUE, recursive = TRUE, full.names = TRUE))"
-          Rscript -e "remotes::install_deps(dependencies = TRUE)"
 
       - name: "[Stage] [Linux] Install curl"
         if: runner.os == 'Linux'
