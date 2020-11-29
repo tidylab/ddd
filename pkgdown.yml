@@ -1,14 +1,15 @@
 pandoc: 2.7.3
-pkgdown: 1.6.1.9000
-pkgdown_sha: 6094ac3dd80a1f3f1d4e2f47d0ed4716d51362b0
+pkgdown: 1.6.1
+pkgdown_sha: ~
 articles:
   articles/add_domain_service: add_domain_service.html
   articles/add_entity: add_entity.html
   articles/add_value_object: add_value_object.html
+  articles/ddd: ddd.html
   articles/what-is-domain-driven-design: what-is-domain-driven-design.html
   readme/00-introduction: 00-introduction.html
   readme/overview: overview.html
-last_built: 2020-11-29T08:10Z
+last_built: 2020-11-29T08:43Z
 urls:
   reference: https://tidylab.github.io/ddd//reference
   article: https://tidylab.github.io/ddd//articles
