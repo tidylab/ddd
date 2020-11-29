@@ -18,11 +18,13 @@ jobs:
 
       - uses: r-lib/actions/setup-tinytex@v1
 
+      - name: Prepare
+        run: |
+          echo "utils::chooseCRANmirror(graphics=FALSE, ind = 1)" > .Rprofile
+          Rscript -e "if(!'remotes' %in% rownames(utils::installed.packages())) utils::install.packages('remotes')"
+
       - name: Query dependencies
         run: |
-          unlink(".Rprofile")
-          utils::chooseCRANmirror(graphics=FALSE, ind = 1)
-          install.packages('remotes')
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
@@ -36,9 +38,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          unlink(".Rprofile")
-          utils::chooseCRANmirror(graphics=FALSE, ind = 1)
-          install.packages("remotes")
           # To get links for homepage
           remotes::install_cran("devtools")
           remotes::install_deps(dependencies = TRUE)
