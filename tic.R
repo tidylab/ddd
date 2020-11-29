@@ -3,7 +3,7 @@ source("./.dev/tic/helpers.R")
 
 # Macros ------------------------------------------------------------------
 # if (ci_on_ghactions() & is_master_branch()) do_pkgdown(deploy = TRUE, orphan = TRUE)
-if (ci_on_ghactions()) do_pkgdown(deploy = TRUE, orphan = TRUE)
+# if (ci_on_ghactions()) do_pkgdown(deploy = TRUE, orphan = TRUE)
 
 # Stage: Before Script ----------------------------------------------------
 get_stage("before_script") %>%
