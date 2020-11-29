@@ -46,15 +46,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="../../articles/articles/ddd.html">Get started</a>
-</li>
-<li>
   <a href="../../reference/index.html">Reference</a>
 </li>
 <li>
@@ -110,20 +101,21 @@ output. This is because often the Value Object is called during data
 wrangling operations.
 </div>
 <p>A light example of a <strong>Value Object</strong> is one that receives a character vector, applies the <code>identity</code> function, and organises the character vector in a <code>data.frame</code>.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="no">Alphabet</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">letters</span> <span class="kw">=</span> <span class="no">LETTERS</span>){
-  <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span>(<span class="no">letters</span>)) <span class="co"># Value Object type check</span>
-  <span class="no">letters</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span>(<span class="no">letters</span>)     <span class="co"># Value Object transformation</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">letter</span> <span class="kw">=</span> <span class="no">letters</span>)     <span class="co"># Value Object return object</span>
-}
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">Alphabet</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">letters</span> <span class="op">=</span> <span class="va">LETTERS</span><span class="op">)</span><span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">letters</span><span class="op">)</span><span class="op">)</span> <span class="co"># Value Object type check</span>
+  <span class="va">letters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span><span class="op">(</span><span class="va">letters</span><span class="op">)</span>     <span class="co"># Value Object transformation</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>letter <span class="op">=</span> <span class="va">letters</span><span class="op">)</span>     <span class="co"># Value Object return object</span>
+<span class="op">}</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fu">Alphabet</span>())
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu">Alphabet</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;   letter</span>
 <span class="co">#&gt; 1      A</span>
 <span class="co">#&gt; 2      B</span>
 <span class="co">#&gt; 3      C</span>
 <span class="co">#&gt; 4      D</span>
 <span class="co">#&gt; 5      E</span>
-<span class="co">#&gt; 6      F</span></pre></body></html></div>
+<span class="co">#&gt; 6      F</span></code></pre></div>
 <p>In the context of DDD, a <strong><em>Value Object</em></strong> models a domain concept. A <strong>Value Object</strong> is an object that is identified only by its data and doesn’t have a long-lived identity.</p>
 <p>For example, think about the diners, i.e. customers, of a Pizzeria. Associating an order and a customer requires ephemeral customer identity. The customer name matters. It is used to identify for whom a particular Pizza was made for. The names Hilary and Bill are not equal. However, once the customer leaves the Pizzeria, the customer’s existence dissipates. On the other hand, if the customer is enrolled in a restaurant loyalty program, then its unique identifier on the system is both essential and long-lived.</p>
 </div>
@@ -132,7 +124,8 @@ wrangling operations.
 <a href="#what-does-add_value_object-do" class="anchor"></a>What does <code>add_value_object</code> do?</h2>
 <p>Given the <strong>Value Object</strong> name &lt;Customer&gt;, and its sub-domain name &lt;pizza ordering&gt;,</p>
 <p>When <code>add_value_object</code> is called</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu">add_value_object</span>(<span class="kw">name</span> <span class="kw">=</span> <span class="st">"Customer"</span>, <span class="kw">domain</span> <span class="kw">=</span> <span class="st">"pizza ordering"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">add_value_object</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Customer"</span>, domain <span class="op">=</span> <span class="st">"pizza ordering"</span><span class="op">)</span></code></pre></div>
 <p>Then the function:</p>
 <ul>
 <li>Creates a <strong>Value Object</strong> boilerplate with several input arguments;</li>
@@ -144,53 +137,56 @@ wrangling operations.
 <h2 class="hasAnchor">
 <a href="#what-are-the-main-components-of-a-value-object" class="anchor"></a>What are the main components of a Value Object?</h2>
 <p>The boilerplate code produced by <code>add_value_object</code> looks likes this:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co">#' @title Customer Value Object</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#' @title Customer Value Object</span>
 <span class="co">#' @return (`data.frame`)</span>
 <span class="co">#' @export</span>
 <span class="co">#' @family Pizza Ordering</span>
 <span class="co">#' @keywords internal</span>
 <span class="co">#' @noRd</span>
-<span class="no">Customer</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(
-    <span class="no">size</span> <span class="kw">=</span> <span class="fl">NA_character_</span>,
-    <span class="no">slices</span> <span class="kw">=</span> <span class="fl">4L</span>,
-    <span class="no">toppings</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(),
-    <span class="no">takeaway</span> <span class="kw">=</span> <span class="fl">NA</span>
-){
-    <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span>(<span class="no">size</span>))
-    <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/integer.html">is.integer</a></span>(<span class="no">slices</span>), <span class="no">slices</span> <span class="kw">&gt;</span> <span class="fl">0</span>, <span class="no">slices</span> <span class="kw">&lt;=</span> <span class="fl">8</span>)
-    <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">is.list</a></span>(<span class="no">toppings</span>))
-    <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/logical.html">is.logical</a></span>(<span class="no">takeaway</span>))
+<span class="va">Customer</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span>
+    <span class="va">size</span> <span class="op">=</span> <span class="cn">NA_character_</span>,
+    <span class="va">slices</span> <span class="op">=</span> <span class="fl">4L</span>,
+    <span class="va">toppings</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span>,
+    <span class="va">takeaway</span> <span class="op">=</span> <span class="cn">NA</span>
+<span class="op">)</span><span class="op">{</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">size</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html">is.integer</a></span><span class="op">(</span><span class="va">slices</span><span class="op">)</span>, <span class="va">slices</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="va">slices</span> <span class="op">&lt;=</span> <span class="fl">8</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">is.list</a></span><span class="op">(</span><span class="va">toppings</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/logical.html">is.logical</a></span><span class="op">(</span><span class="va">takeaway</span><span class="op">)</span><span class="op">)</span>
 
-    <span class="kw pkg">tibble</span><span class="kw ns">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span>(
-        <span class="kw">size</span> <span class="kw">=</span> <span class="no">size</span>,
-        <span class="kw">slices</span> <span class="kw">=</span> <span class="no">slices</span>,
-        <span class="kw">toppings</span> <span class="kw">=</span> <span class="no">toppings</span>,
-        <span class="kw">takeaway</span> <span class="kw">=</span> <span class="no">takeaway</span>
-    )
-}</pre></body></html></div>
+    <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
+        size <span class="op">=</span> <span class="va">size</span>,
+        slices <span class="op">=</span> <span class="va">slices</span>,
+        toppings <span class="op">=</span> <span class="va">toppings</span>,
+        takeaway <span class="op">=</span> <span class="va">takeaway</span>
+    <span class="op">)</span>
+<span class="op">}</span></code></pre></div>
 <p>The boilerplate code includes three key activities covered by any <strong>Value Object</strong>:</p>
 <ul>
 <li>Assigning default values to input argument values, such as different types of NA.</li>
 <li>Validating the type and value range (if applicable) of the input arguments; and</li>
 <li>Organizing the input arguments in a data structure, such as a <code>data.frame</code>.</li>
 </ul>
-<p>In addition, the <strong>Value Object</strong> include transformations on the input arguments before enframing them in a data structure. Common transformations include: <code><a href="https://rdrr.io/r/base/serialize.html">base::serialize</a></code>, <code><a href="https://jeroen.cran.dev/jsonlite/reference/fromJSON.html">jsonlite::toJSON</a></code>, <code><a href="https://tidyr.tidyverse.org/reference/unite.html">tidyr::unite</a></code>, and <code><a href="https://rdrr.io/pkg/snakecase/man/caseconverter.html">snakecase::to_title_case</a></code> to name a few.</p>
+<p>In addition, the <strong>Value Object</strong> include transformations on the input arguments before enframing them in a data structure. Common transformations include: <code><a href="https://rdrr.io/r/base/serialize.html">base::serialize</a></code>, <code><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html">jsonlite::toJSON</a></code>, <code>tidyr::unite</code>, and <code><a href="https://rdrr.io/pkg/snakecase/man/caseconverter.html">snakecase::to_title_case</a></code> to name a few.</p>
 </div>
 <div id="why-should-i-use-value-objects-in-my-design" class="section level2">
 <h2 class="hasAnchor">
 <a href="#why-should-i-use-value-objects-in-my-design" class="anchor"></a>Why should I use Value Objects in my design?</h2>
 <p>The simplest way to implement a <strong>Value Object</strong> in R is with a function that returns a data.frame row. Compare the following two patterns for creating a data.frame that holds a Customer data.</p>
 <p>First, using the <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble::tibble</a></code> function directly for constructing the Customer</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">customer</span> <span class="kw">&lt;-</span> <span class="fu">tibble</span>(<span class="kw">given</span> <span class="kw">=</span> <span class="st">"Bilbo"</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="st">"Baggins"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">customer</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Bilbo"</span>, family <span class="op">=</span> <span class="st">"Baggins"</span><span class="op">)</span></code></pre></div>
 <p>Second, using a <strong>Value Object</strong> as a surrogate for constructing the Customer</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">Customer</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">given</span> <span class="kw">=</span> <span class="fl">NA_character_</span>, <span class="no">family</span> <span class="kw">=</span> <span class="fl">NA_character_</span>)
-{
-    <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span>(<span class="no">given</span>))
-    <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span>(<span class="no">family</span>))
-    <span class="fu">tibble</span>(<span class="kw">given</span> <span class="kw">=</span> <span class="no">given</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="no">family</span>)
-}
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">Customer</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">given</span> <span class="op">=</span> <span class="cn">NA_character_</span>, <span class="va">family</span> <span class="op">=</span> <span class="cn">NA_character_</span><span class="op">)</span>
+<span class="op">{</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">given</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">family</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu">tibble</span><span class="op">(</span>given <span class="op">=</span> <span class="va">given</span>, family <span class="op">=</span> <span class="va">family</span><span class="op">)</span>
+<span class="op">}</span>
 
-<span class="no">customer</span> <span class="kw">&lt;-</span> <span class="fu">Customer</span>(<span class="kw">given</span> <span class="kw">=</span> <span class="st">"Bilbo"</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="st">"Baggins"</span>)</pre></body></html></div>
+<span class="va">customer</span> <span class="op">&lt;-</span> <span class="fu">Customer</span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Bilbo"</span>, family <span class="op">=</span> <span class="st">"Baggins"</span><span class="op">)</span></code></pre></div>
 <p>Both patterns return identical objects, equal in content and structure i.e. column names and classes.</p>
 <p>Why would one prefer using a <strong>Value Object</strong> over the direct alternative? There are three apparent qualities offered by the <strong>Value Object</strong> pattern which are not offered by the alternative:</p>
 <ul>
@@ -199,32 +195,36 @@ wrangling operations.
 <li><p>Default values for missing input arguments. In this manner, the <strong>Value Object</strong> has a well-defined behaviour for a customer without a last name, such as Madonna and Bono.</p></li>
 </ul>
 <p>There are more subtle qualities offered by a <strong>Value Object</strong> over direct implementation. First, it allows you to capture new knowledge about the domain. Say, you have discovered that the Pizzeria makes deliveries. In this case, the Customer details need to include an address and a phone number. With a <strong>Value Object</strong>, you can rewrite the Customer concept as:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">Customer</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">given</span> <span class="kw">=</span> <span class="fl">NA_character_</span>, <span class="no">family</span> <span class="kw">=</span> <span class="fl">NA_character_</span>,
-                     <span class="no">phone</span> <span class="kw">=</span> <span class="fl">NA_integer_</span>, <span class="no">address</span> <span class="kw">=</span> <span class="fl">NA_character_</span>)
-{
-    <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span>(<span class="no">given</span>))
-    <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span>(<span class="no">family</span>))
-    <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/integer.html">is.integer</a></span>(<span class="no">phone</span>))
-    <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span>(<span class="no">address</span>))
-    <span class="fu">tibble</span>(<span class="kw">given</span> <span class="kw">=</span> <span class="no">given</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="no">family</span>, <span class="kw">phone</span> <span class="kw">=</span> <span class="no">phone</span>, <span class="kw">address</span> <span class="kw">=</span> <span class="no">address</span>)
-}</pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">Customer</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">given</span> <span class="op">=</span> <span class="cn">NA_character_</span>, <span class="va">family</span> <span class="op">=</span> <span class="cn">NA_character_</span>, 
+                     <span class="va">phone</span> <span class="op">=</span> <span class="cn">NA_integer_</span>, <span class="va">address</span> <span class="op">=</span> <span class="cn">NA_character_</span><span class="op">)</span>
+<span class="op">{</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">given</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">family</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html">is.integer</a></span><span class="op">(</span><span class="va">phone</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">address</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu">tibble</span><span class="op">(</span>given <span class="op">=</span> <span class="va">given</span>, family <span class="op">=</span> <span class="va">family</span>, phone <span class="op">=</span> <span class="va">phone</span>, address <span class="op">=</span> <span class="va">address</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
 <p>Notice that former calls to <code>Customer</code> in the code base, which modelled the ordering pizza process for diners, are not impacted by the added input arguments. For example, the call of previous diner works well.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">customer</span> <span class="kw">&lt;-</span> <span class="fu">Customer</span>(<span class="kw">given</span> <span class="kw">=</span> <span class="st">"Bilbo"</span>, <span class="kw">family</span> <span class="kw">=</span> <span class="st">"Baggins"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">customer</span> <span class="op">&lt;-</span> <span class="fu">Customer</span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Bilbo"</span>, family <span class="op">=</span> <span class="st">"Baggins"</span><span class="op">)</span></code></pre></div>
 <p>The <strong>Value Object</strong> ascribes NA values for the phone number and address of diners, that is customers in the restaurant.</p>
 <p>The second subtle quality regards tests. With <strong>Value Object</strong> you can replace Without a <strong>Value Object</strong>, your test expectations capture only the available knowledge at the moment of writing the test. For example, a test that validates the structure of a returning data from a function call,</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu">test_that</span>(<span class="st">'calling Order$get_customer_info() returns the desired results'</span>, {
-    <span class="fu">expect_setequal</span>(
-        <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(<span class="no">Order</span>$<span class="fu">get_customer_info</span>()),
-        <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"given"</span>, <span class="st">"family"</span>, <span class="st">"phone"</span>, <span class="st">"address"</span>)
-    )
-})</pre></body></html></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">test_that</span><span class="op">(</span><span class="st">'calling Order$get_customer_info() returns the desired results'</span>, <span class="op">{</span>
+    <span class="fu">expect_setequal</span><span class="op">(</span>
+        <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">Order</span><span class="op">$</span><span class="fu">get_customer_info</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,
+        <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"given"</span>, <span class="st">"family"</span>, <span class="st">"phone"</span>, <span class="st">"address"</span><span class="op">)</span>
+    <span class="op">)</span>
+<span class="op">}</span><span class="op">)</span></code></pre></div>
 <p>can instead be written against the <code>Customer</code> <strong>Value Object</strong>,</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu">test_that</span>(<span class="st">'calling Order$get_customer_info() returns the desired results'</span>, {
-    <span class="fu">expect_setequal</span>(
-        <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(<span class="no">Order</span>$<span class="fu">get_customer_info</span>()),
-        <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(<span class="fu">Customer</span>())
-    )
-})</pre></body></html></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">test_that</span><span class="op">(</span><span class="st">'calling Order$get_customer_info() returns the desired results'</span>, <span class="op">{</span>
+    <span class="fu">expect_setequal</span><span class="op">(</span>
+        <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">Order</span><span class="op">$</span><span class="fu">get_customer_info</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,
+        <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="fu">Customer</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+    <span class="op">)</span>
+<span class="op">}</span><span class="op">)</span></code></pre></div>
 <p>By avoiding hard coding of column names, your tests evolve along side the code base.</p>
 </div>
 <div id="how-should-i-use-value-objects-in-my-design" class="section level2">
@@ -236,18 +236,20 @@ wrangling operations.
 <li><p>Reusing <strong>Value Object</strong> in tests, such as unit-tests and integration-tests, is useful when the test aims to capture the structure of a returning object.</p></li>
 </ol>
 <p>The following example shows how to embed the <code>Customer</code> <strong>Value Object</strong> in the pizza <code>Order</code> Entity</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">Order</span>$<span class="fu">set</span>(<span class="st">"public"</span>, <span class="st">"set_customer_info"</span>, <span class="kw">function</span>(
-  <span class="no">given</span> <span class="kw">=</span> <span class="fl">NA_character_</span>, <span class="no">family</span> <span class="kw">=</span> <span class="fl">NA_character_</span>){
-  <span class="no">self</span>$<span class="no">customer</span> <span class="kw">&lt;-</span> <span class="fu">Customer</span>(<span class="no">given</span>, <span class="no">family</span>)
-  <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">self</span>)
-})</pre></body></html></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">Order</span><span class="op">$</span><span class="fu">set</span><span class="op">(</span><span class="st">"public"</span>, <span class="st">"set_customer_info"</span>, <span class="kw">function</span><span class="op">(</span>
+  <span class="va">given</span> <span class="op">=</span> <span class="cn">NA_character_</span>, <span class="va">family</span> <span class="op">=</span> <span class="cn">NA_character_</span><span class="op">)</span><span class="op">{</span>
+  <span class="va">self</span><span class="op">$</span><span class="va">customer</span> <span class="op">&lt;-</span> <span class="fu">Customer</span><span class="op">(</span><span class="va">given</span>, <span class="va">family</span><span class="op">)</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">self</span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span>  </code></pre></div>
 <p>Then we can test the result of a call for this function</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu">test_that</span>(<span class="st">'calling Order$set_customer_info returns the customer info'</span>, {
-    <span class="fu">expect_setequal</span>(
-        <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(<span class="no">Order</span>$<span class="fu">new</span>(<span class="kw">id</span> <span class="kw">=</span> <span class="fl">1</span>)$<span class="fu">set_customer_info</span>(<span class="st">"Bilbo"</span>)$<span class="no">customer</span>),
-        <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(<span class="fu">Customer</span>())
-    )
-})</pre></body></html></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">test_that</span><span class="op">(</span><span class="st">'calling Order$set_customer_info returns the customer info'</span>, <span class="op">{</span>
+    <span class="fu">expect_setequal</span><span class="op">(</span>
+        <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">Order</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>id <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">$</span><span class="fu">set_customer_info</span><span class="op">(</span><span class="st">"Bilbo"</span><span class="op">)</span><span class="op">$</span><span class="va">customer</span><span class="op">)</span>,
+        <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="fu">Customer</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+    <span class="op">)</span>
+<span class="op">}</span><span class="op">)</span></code></pre></div>
 </div>
   </div>
 
@@ -266,7 +268,7 @@ wrangling operations.
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

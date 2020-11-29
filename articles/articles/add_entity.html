@@ -46,15 +46,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="../../articles/articles/ddd.html">Get started</a>
-</li>
-<li>
   <a href="../../reference/index.html">Reference</a>
 </li>
 <li>
@@ -105,7 +96,8 @@
 <a href="#what-does-add_entity-do" class="anchor"></a>What does <code>add_entity</code> do?</h2>
 <p>Given the <strong>Entity</strong> <code>name</code>, and its <code>domain</code> name, and optionally <code>commands</code> and <code>queries</code> methods,</p>
 <p>When <code>add_entity</code> is called</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu">add_entity</span>(<span class="kw">name</span> <span class="kw">=</span> <span class="st">'Order'</span>, <span class="kw">domain</span> <span class="kw">=</span> <span class="st">'Pizza Ordering'</span>, <span class="kw">commands</span> <span class="kw">=</span> <span class="st">'Add Item to Order'</span>, <span class="kw">queries</span> <span class="kw">=</span> <span class="st">'Review Order'</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">add_entity</span><span class="op">(</span>name <span class="op">=</span> <span class="st">'Order'</span>, domain <span class="op">=</span> <span class="st">'Pizza Ordering'</span>, commands <span class="op">=</span> <span class="st">'Add Item to Order'</span>, queries <span class="op">=</span> <span class="st">'Review Order'</span><span class="op">)</span></code></pre></div>
 <p>Then the function:</p>
 <ul>
 <li>Generates boilerplate code for the <strong>Entity</strong> and saves it at <strong>R/pizza_ordering-entity-Order.R</strong>;</li>
@@ -118,54 +110,56 @@
 <a href="#what-are-the-main-components-of-an-entity" class="anchor"></a>What are the main components of an <strong>Entity</strong>?</h2>
 <p>The boilerplate code produced by <code>add_entity</code> looks likes this:</p>
 <p><strong>R/pizza_ordering-entity-Order.R</strong></p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co">#' @title Order Domain Entity</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#' @title Order Domain Entity</span>
 <span class="co">#' @family Pizza Ordering</span>
 <span class="co">#' @noRd</span>
-<span class="no">Order</span> <span class="kw">&lt;-</span> <span class="kw pkg">R6</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/R6/man/R6Class.html">R6Class</a></span>(<span class="st">"Order"</span>, <span class="kw">inherit</span> <span class="kw">=</span> <span class="no">AbstractEntity</span>, <span class="kw">lock_objects</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">cloneable</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<span class="va">Order</span> <span class="op">&lt;-</span> <span class="fu">R6</span><span class="fu">::</span><span class="kw"><a href="https://r6.r-lib.org/reference/R6Class.html">R6Class</a></span><span class="op">(</span><span class="st">"Order"</span>, inherit <span class="op">=</span> <span class="va">AbstractEntity</span>, lock_objects <span class="op">=</span> <span class="cn">FALSE</span>, cloneable <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
 <span class="co"># Public Methods ----------------------------------------------------------</span>
-<span class="no">Order</span>$<span class="fu">set</span>(<span class="st">"public"</span>, <span class="st">"initialize"</span>, <span class="kw">overwrite</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">function</span>(<span class="no">uid</span>){
-    <span class="no">super</span>$<span class="fu">initialize</span>(<span class="no">uid</span>)
-    <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">self</span>)
-})
+<span class="va">Order</span><span class="op">$</span><span class="fu">set</span><span class="op">(</span><span class="st">"public"</span>, <span class="st">"initialize"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span>, <span class="kw">function</span><span class="op">(</span><span class="va">uid</span><span class="op">)</span><span class="op">{</span>
+    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">uid</span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">self</span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span>
 
-<span class="no">Order</span>$<span class="fu">set</span>(<span class="kw">which</span> <span class="kw">=</span> <span class="st">"public"</span>, <span class="kw">overwrite</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">name</span> <span class="kw">=</span> <span class="st">"add_item_to_order"</span>, <span class="kw">value</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">...</span>){
+<span class="va">Order</span><span class="op">$</span><span class="fu">set</span><span class="op">(</span>which <span class="op">=</span> <span class="st">"public"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span>, name <span class="op">=</span> <span class="st">"add_item_to_order"</span>, value <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span><span class="op">{</span>
     <span class="co"># TODO: Write command code here</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">self</span>)
-})
+    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">self</span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span>
 
-<span class="no">Order</span>$<span class="fu">set</span>(<span class="kw">which</span> <span class="kw">=</span> <span class="st">"public"</span>, <span class="kw">overwrite</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">name</span> <span class="kw">=</span> <span class="st">"review_order"</span>, <span class="kw">value</span> <span class="kw">=</span> <span class="kw">function</span>(){
+<span class="va">Order</span><span class="op">$</span><span class="fu">set</span><span class="op">(</span>which <span class="op">=</span> <span class="st">"public"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span>, name <span class="op">=</span> <span class="st">"review_order"</span>, value <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span><span class="op">{</span>
     <span class="co"># TODO: Write query code here</span>
-    <span class="no">query_result</span> <span class="kw">&lt;-</span> <span class="no">mtcars</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">query_result</span>)
-})</pre></body></html></div>
+    <span class="va">query_result</span> <span class="op">&lt;-</span> <span class="va">mtcars</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">query_result</span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span></code></pre></div>
 <p><strong>tests/testthat/test-pizza_ordering-entity-Order.R</strong></p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu">context</span>(<span class="st">'unit test for entity Order'</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">context</span><span class="op">(</span><span class="st">'unit test for entity Order'</span><span class="op">)</span>
 
 <span class="co"># Setup -------------------------------------------------------------------</span>
-<span class="kw pkg">testthat</span><span class="kw ns">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/teardown.html">setup</a></span>({
-    <span class="fu"><a href="https://rdrr.io/r/base/assign.html">assign</a></span>(<span class="st">'test_env'</span>, <span class="kw pkg">testthat</span><span class="kw ns">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_env.html">test_env</a></span>(), <span class="kw">envir</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html">parent.frame</a></span>())
-    <span class="no">test_env</span>$<span class="no">md5</span> <span class="kw">&lt;-</span> <span class="kw pkg">digest</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/digest/man/digest.html">digest</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span>())
-})
+<span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/teardown.html">setup</a></span><span class="op">(</span><span class="op">{</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/assign.html">assign</a></span><span class="op">(</span><span class="st">'test_env'</span>, <span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_env.html">test_env</a></span><span class="op">(</span><span class="op">)</span>, envir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html">parent.frame</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">test_env</span><span class="op">$</span><span class="va">md5</span> <span class="op">&lt;-</span> <span class="fu">digest</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/digest/man/digest.html">digest</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span>
 
 <span class="co"># General -----------------------------------------------------------------</span>
-<span class="fu">test_that</span>(<span class="st">'calling Order$new instantiates an object with a unique id'</span>, {
-    <span class="fu"><a href="https://rdrr.io/r/base/attach.html">attach</a></span>(<span class="no">test_env</span>)
-    <span class="fu">expect_is</span>(<span class="no">entity</span> <span class="kw">&lt;-</span> <span class="no">Order</span>$<span class="fu">new</span>(<span class="kw">uid</span> <span class="kw">=</span> <span class="no">md5</span>), <span class="st">"Order"</span>)
-    <span class="no">test_env</span>$<span class="no">entity</span> <span class="kw">&lt;-</span> <span class="no">entity</span>
-})
+<span class="fu">test_that</span><span class="op">(</span><span class="st">'calling Order$new instantiates an object with a unique id'</span>, <span class="op">{</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/attach.html">attach</a></span><span class="op">(</span><span class="va">test_env</span><span class="op">)</span>
+    <span class="fu">expect_is</span><span class="op">(</span><span class="va">entity</span> <span class="op">&lt;-</span> <span class="va">Order</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>uid <span class="op">=</span> <span class="va">md5</span><span class="op">)</span>, <span class="st">"Order"</span><span class="op">)</span>
+    <span class="va">test_env</span><span class="op">$</span><span class="va">entity</span> <span class="op">&lt;-</span> <span class="va">entity</span>
+<span class="op">}</span><span class="op">)</span>
 
 <span class="co"># Public Methods ----------------------------------------------------------</span>
 
-<span class="fu">test_that</span>(<span class="st">'calling add_item_to_order changes the state of the object'</span>, {
-    <span class="fu"><a href="https://rdrr.io/r/base/attach.html">attach</a></span>(<span class="no">test_env</span>)
-    <span class="fu">expect_is</span>(<span class="no">entity</span>$<span class="fu">add_item_to_order</span>(), <span class="st">"Order"</span>)
-})
+<span class="fu">test_that</span><span class="op">(</span><span class="st">'calling add_item_to_order changes the state of the object'</span>, <span class="op">{</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/attach.html">attach</a></span><span class="op">(</span><span class="va">test_env</span><span class="op">)</span>
+    <span class="fu">expect_is</span><span class="op">(</span><span class="va">entity</span><span class="op">$</span><span class="fu">add_item_to_order</span><span class="op">(</span><span class="op">)</span>, <span class="st">"Order"</span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span>
 
-<span class="fu">test_that</span>(<span class="st">'calling review_order returns the desired results'</span>, {
-    <span class="fu"><a href="https://rdrr.io/r/base/attach.html">attach</a></span>(<span class="no">test_env</span>)
-    <span class="fu">expect_equivalent</span>(<span class="no">entity</span>$<span class="fu">review_order</span>(), <span class="no">mtcars</span>)
-})</pre></body></html></div>
+<span class="fu">test_that</span><span class="op">(</span><span class="st">'calling review_order returns the desired results'</span>, <span class="op">{</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/attach.html">attach</a></span><span class="op">(</span><span class="va">test_env</span><span class="op">)</span>
+    <span class="fu">expect_equivalent</span><span class="op">(</span><span class="va">entity</span><span class="op">$</span><span class="fu">review_order</span><span class="op">(</span><span class="op">)</span>, <span class="va">mtcars</span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span></code></pre></div>
 <!-- ## What is an Entity? -->
 <!-- Entities are the first natural place we should aim to place business logic in -->
 <!-- domain-driven applications. -->
@@ -187,7 +181,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>
