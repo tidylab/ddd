@@ -1,10 +1,6 @@
 library(tic, warn.conflicts = FALSE)
 source("./.dev/tic/helpers.R")
 
-# Macros ------------------------------------------------------------------
-# if (ci_on_ghactions() & is_master_branch()) do_pkgdown(deploy = TRUE, orphan = TRUE)
-# if (ci_on_ghactions()) do_pkgdown(deploy = TRUE, orphan = TRUE)
-
 # Stage: Before Script ----------------------------------------------------
 get_stage("before_script") %>%
     add_code_step(try(devtools::uninstall(), silent = TRUE)) %>%
@@ -27,7 +23,8 @@ get_stage("after_success")
 get_stage("after_failure")
 
 # Stage: Before Deploy ----------------------------------------------------
-get_stage("before_deploy")
+get_stage("before_deploy") %>%
+    add_code_step(rmarkdown::render('README.Rmd', 'md_document'))
 
 # Stage: Deploy -----------------------------------------------------------
 if (ci_on_ghactions())

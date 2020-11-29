@@ -108,6 +108,7 @@ assign(".Rprofile", new.env(), envir = globalenv())
 
     writeLines(c(
         "unlink(usethis::proj_path('docs'), TRUE, TRUE)",
+        "rmarkdown::render('README.Rmd', 'md_document')",
         "pkgdown::build_site(devel = FALSE, lazy = FALSE)"
     ), path_script)
 
@@ -120,6 +121,7 @@ assign(".Rprofile", new.env(), envir = globalenv())
 
     writeLines(c(
         "devtools::document()",
+        "rmarkdown::render('README.Rmd', 'md_document')",
         "pkgdown::build_site(devel = TRUE, lazy = TRUE)"
     ), path_script)
 

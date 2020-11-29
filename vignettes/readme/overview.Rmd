@@ -56,7 +56,7 @@ sitting in the front seat. Have you ever tried driving to a new location without
 any guidance? If so, how well did it go for you?
 
 When you develop software to solve a new business problem, what guides your
-software design? Obviously, you strive to eliminate unintended behaviors (bugs)
+software design? Obviously, you strive to eliminate unintended behaviours (bugs)
 from the software. Perhaps you are using tests and even a Test-Driven
 Development (TDD) approach. However, guiding your design with tests is analogous
 to driving a car by using the guardrails. It keeps you safe from the bar ditches

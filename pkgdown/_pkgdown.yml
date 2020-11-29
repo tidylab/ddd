@@ -33,10 +33,6 @@ reference:
   - 'add_entity'
   - 'add_value_object'
   - 'add_domain_service'
-- title: Abstrac Base Classes
-  desc: Infrastructure for defining ddd domain objects.
-  contents:
-  - starts_with("Abstract")
 - title: Software Design Patterns
   contents:
   - 'Singleton'

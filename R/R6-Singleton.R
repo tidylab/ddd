@@ -5,7 +5,6 @@
 #'   programmer. If the object doesn't exist, then Singleton instantiate an
 #'   object. Else, Singleton retrieves the existing object instance.
 #' @examples
-#' \donttest{
 #' # Example: A Counter Implementation
 #' Counter <- R6::R6Class(inherit = Singleton, public = list(
 #'     count = 0,
@@ -13,13 +12,14 @@
 #' ))
 #'
 #' counter <- Counter$new()
-#' counter$count # = 0
-#' counter$add_1()$count # = 1
-#' counter$add_1()$count # = 2
+#' counter$count
+#' counter$add_1()$count
+#' counter$add_1()$count
 #'
 #' retrieved_conter <- Counter$new()
-#' retrieved_conter$count # 2
-#' }
+#' retrieved_conter$count
+#'
+#' rm(retrieved_conter)
 #' @family software design patterns
 #' @export
 Singleton <- R6::R6Class("Singleton", public = list(
