@@ -20,6 +20,7 @@ jobs:
 
       - name: Query dependencies
         run: |
+          unlink(".Rprofile")
           utils::chooseCRANmirror(graphics=FALSE, ind = 1)
           install.packages('remotes')
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
@@ -35,6 +36,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          unlink(".Rprofile")
           utils::chooseCRANmirror(graphics=FALSE, ind = 1)
           install.packages("remotes")
           # To get links for homepage
