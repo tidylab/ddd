@@ -41,7 +41,7 @@ jobs:
       - name: Install dependencies
         run: |
           # To get links for homepage
-          remotes::install_cran(c("devtools", "pkgdown")
+          remotes::install_cran(c("devtools", "pkgdown"))
           remotes::update_packages("pkgdown")
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
