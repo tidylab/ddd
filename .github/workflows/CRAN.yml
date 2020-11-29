@@ -83,6 +83,7 @@ jobs:
         run: |
           echo "utils::chooseCRANmirror(graphics=FALSE, ind = 1)" > .Rprofile
           Rscript -e "if(!'remotes' %in% rownames(utils::installed.packages())) utils::install.packages('remotes')"
+          Rscript -e "remotes::install_deps(dependencies = TRUE)"
 
       - name: "[Stage] [Linux] Install curl"
         if: runner.os == 'Linux'
@@ -120,12 +121,4 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
-      # - name: "[Stage] Before Deploy"
-      #   run: |
-      #     Rscript -e "tic::before_deploy()"
-      #
-      # - name: "[Stage] Deploy"
-      #   run: Rscript -e "tic::deploy()"
-      #
-      # - name: "[Stage] After Deploy"
-      #   run: Rscript -e "tic::after_deploy()"
+
