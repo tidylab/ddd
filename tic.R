@@ -21,7 +21,7 @@ get_stage("before_script") %>%
 )
 
 # Stage: After Success ----------------------------------------------------
-get_stage("after_success") %>% add_code_step(print(utils::sessionInfo()))
+get_stage("after_success")
 
 # Stage: After Failure ----------------------------------------------------
 get_stage("after_failure")
@@ -30,7 +30,6 @@ get_stage("after_failure")
 get_stage("before_deploy")
 
 # Stage: Deploy -----------------------------------------------------------
-# if (ci_on_ghactions() & is_master_branch())
 if (ci_on_ghactions())
     get_stage("deploy") %>%
     add_step(step_publish_package_coverage())
