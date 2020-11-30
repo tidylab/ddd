@@ -54,4 +54,4 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           Rscript -e 'rmarkdown::render("README.Rmd", "md_document")'
-          Rscript -e 'pkgdown::deploy_to_branch(new_process = FALSE, devel = TRUE)'
+          Rscript -e 'pkgdown::deploy_to_branch(new_process = FALSE)'
