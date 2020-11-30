@@ -109,6 +109,7 @@ assign(".Rprofile", new.env(), envir = globalenv())
     writeLines(c(
         "unlink(usethis::proj_path('docs'), TRUE, TRUE)",
         "rmarkdown::render('README.Rmd', 'md_document')",
+        paste0("try(detach('package:",read.dcf("DESCRIPTION", "Package")[[1]], "', unload = TRUE, force = TRUE))"),
         "pkgdown::build_site(devel = FALSE, lazy = FALSE)"
     ), path_script)
 
@@ -122,6 +123,7 @@ assign(".Rprofile", new.env(), envir = globalenv())
     writeLines(c(
         "devtools::document()",
         "rmarkdown::render('README.Rmd', 'md_document')",
+        paste0("try(detach('package:",read.dcf("DESCRIPTION", "Package")[[1]], "', unload = TRUE, force = TRUE))"),
         "pkgdown::build_site(devel = TRUE, lazy = TRUE)"
     ), path_script)
 

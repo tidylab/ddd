@@ -82,7 +82,7 @@ significance of good design.
 design process as an over-engineering task-->
 
 No design is a fallacy. This is because design still flows from the
-brains of the data scientists through their fingertips as they wrangle
+brains of the Data Scientists through their fingertips as they wrangle
 with the code. Thus, questions about whether a design is necessary or
 affordable are quite beside the point: design is inevitable. The
 alternative to good design is bad design, not no design at all.
