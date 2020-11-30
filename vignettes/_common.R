@@ -5,7 +5,6 @@ suppressPackageStartupMessages(
         pkgload::load_all(export_all = !FALSE, helpers = FALSE, quiet = TRUE, warn_conflicts = FALSE)
     )
 )
-
 filename <- ddd:::filename
 
 # global options ----------------------------------------------------------
@@ -50,7 +49,7 @@ knitr::knit_hooks$set(
 )
 
 # helpers -----------------------------------------------------------------
-read_snippet <- function(name) readLines(system.file("inst", "snippets", paste0(name,".R"), package = devtools::loaded_packages()[1,1]))
+read_snippet <- function(name) read_lines(system.file("inst", "snippets", paste0(name,".R"), package = devtools::loaded_packages()[1,1]))
 `%+%` <- base::paste0
 
 # rmarkdown ---------------------------------------------------------------
