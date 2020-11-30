@@ -107,18 +107,22 @@
 <p>Given the <strong>Entity</strong> <code>name</code>, and its <code>domain</code> name, and optionally <code>commands</code> and <code>queries</code> methods,</p>
 <p>When <code>add_entity</code> is called</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">add_entity</span><span class="op">(</span>name <span class="op">=</span> <span class="st">'Order'</span>, domain <span class="op">=</span> <span class="st">'Pizza Ordering'</span>, commands <span class="op">=</span> <span class="st">'Add Item to Order'</span>, queries <span class="op">=</span> <span class="st">'Review Order'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">add_entity</span><span class="op">(</span>name <span class="op">=</span> <span class="st">'Order'</span>, domain <span class="op">=</span> <span class="st">'Pizza Ordering'</span>, commands <span class="op">=</span> <span class="st">'add_item_to_order'</span>, queries <span class="op">=</span> <span class="st">'review_order'</span><span class="op">)</span></code></pre></div>
 <p>Then the function:</p>
 <ul>
 <li>Generates boilerplate code for the <strong>Entity</strong> and saves it at <strong>R/pizza_ordering-entity-Order.R</strong>;</li>
 <li>Generates a unit-test for the <strong>Entity</strong> and saves it at <strong>tests/testthat/test-pizza_ordering-entity-Order.R</strong>; and</li>
 <li>Opens the files (only in interactive mode).</li>
 </ul>
+<div class="alert alert-info">
+You don't need to remember the naming style for the different DDD components.
+Instead, <code>ddd</code> takes care of naming style for all domain objects. This way DDD file names, classes and functions are congruent with each other.
+</div>
 </div>
 <div id="what-are-the-main-components-of-an-entity" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-are-the-main-components-of-an-entity" class="anchor"></a>What are the main components of an <strong>Entity</strong>?</h2>
-<p>The boilerplate code produced by <code>add_entity</code> looks likes this:</p>
+<p>The boilerplate code for the Order Entity class produced by <code>add_entity</code> looks likes this:</p>
 <p><strong>R/pizza_ordering-entity-Order.R</strong></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#' @title Order Domain Entity</span>
@@ -142,6 +146,13 @@
     <span class="va">query_result</span> <span class="op">&lt;-</span> <span class="va">mtcars</span>
     <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">query_result</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span></code></pre></div>
+<p>Notice the three public methods created by <code>add_entity</code>:</p>
+<ol style="list-style-type: decimal">
+<li>
+<code>initialize</code> constructs a new object. By DDD definition, every entity must have a unique id (<code>uid</code>) which distinguishes it from other entities.</li>
+<li><code>add_item_to_order</code></li>
+<li><code>review_order</code></li>
+</ol>
 <p><strong>tests/testthat/test-pizza_ordering-entity-Order.R</strong></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">context</span><span class="op">(</span><span class="st">'unit test for entity Order'</span><span class="op">)</span>
@@ -149,13 +160,13 @@
 <span class="co"># Setup -------------------------------------------------------------------</span>
 <span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/teardown.html">setup</a></span><span class="op">(</span><span class="op">{</span>
     <span class="fu"><a href="https://rdrr.io/r/base/assign.html">assign</a></span><span class="op">(</span><span class="st">'test_env'</span>, <span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_env.html">test_env</a></span><span class="op">(</span><span class="op">)</span>, envir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html">parent.frame</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-    <span class="va">test_env</span><span class="op">$</span><span class="va">md5</span> <span class="op">&lt;-</span> <span class="fu">digest</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/digest/man/digest.html">digest</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">test_env</span><span class="op">$</span><span class="va">entity_uid</span> <span class="op">&lt;-</span> <span class="st">"738a742a"</span>
 <span class="op">}</span><span class="op">)</span>
 
 <span class="co"># General -----------------------------------------------------------------</span>
 <span class="fu">test_that</span><span class="op">(</span><span class="st">'calling Order$new instantiates an object with a unique id'</span>, <span class="op">{</span>
     <span class="kw"><a href="https://rdrr.io/r/base/attach.html">attach</a></span><span class="op">(</span><span class="va">test_env</span><span class="op">)</span>
-    <span class="fu">expect_is</span><span class="op">(</span><span class="va">entity</span> <span class="op">&lt;-</span> <span class="va">Order</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>uid <span class="op">=</span> <span class="va">md5</span><span class="op">)</span>, <span class="st">"Order"</span><span class="op">)</span>
+    <span class="fu">expect_is</span><span class="op">(</span><span class="va">entity</span> <span class="op">&lt;-</span> <span class="va">Order</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>uid <span class="op">=</span> <span class="va">entity_uid</span><span class="op">)</span>, <span class="st">"Order"</span><span class="op">)</span>
     <span class="va">test_env</span><span class="op">$</span><span class="va">entity</span> <span class="op">&lt;-</span> <span class="va">entity</span>
 <span class="op">}</span><span class="op">)</span>
 
