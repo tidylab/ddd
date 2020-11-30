@@ -119,20 +119,25 @@
 <li><p>You have seen and created clunkers, that is, analytic applications with an abundance of cruft</p></li>
 <li><p>You have a passion for producing analytic applications of high-quality every day</p></li>
 </ul>
-<p>If you belong to the intersection of all the sets above, then ddd may benefit you.</p>
+<p>If you belong to the intersection of all the sets above, then <code>ddd</code> may benefit you.</p>
 </div>
 <div id="what-ddd-is-but-first-what-it-is-not" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-ddd-is-but-first-what-it-is-not" class="anchor"></a>What <code>ddd</code> is (but first, what it is not)</h2>
 <p>Because <code>ddd</code> is an R package that caters for Data Scientists, it is natural to think it may contain a new learning algorithm, statistical method, a visualisation tool, or data processing toolkit. <code>ddd</code> offers none of these things. Instead, <code>ddd</code> automates repetitive tasks that arise during software development in R. In that sense, <code>ddd</code> is akin to the <a href="https://usethis.r-lib.org/"><code>usethis</code></a> package.</p>
-<p><code>ddd</code> is an acronym of a software development approach called <a href="https://en.wikipedia.org/wiki/Domain-driven_design"><strong><em>Domain-driven design</em></strong></a>, or DDD for short. <code>ddd</code> facilitates the implementation of key DDD patterns including Entity, Value Object and Domain Services. Together these building blocks form a domain model.</p>
-<p>Before getting into specifics about <strong>Domain-driven Design</strong>, lets first discuss the importance of software design and how it is inevitable.</p>
+<p><code>ddd</code> is an acronym of a software development approach called <a href="https://en.wikipedia.org/wiki/Domain-driven_design"><strong><em>domain-driven design</em></strong></a>, or DDD for short. <code>ddd</code> facilitates the implementation of key DDD patterns including Entity, Value Object and Domain Services. Together these building blocks form a domain model.</p>
+<p>Before getting into specifics about <strong>domain-driven design</strong>, lets first discuss the importance of software design and how it is inevitable.</p>
 </div>
 <div id="why-should-i-use-software-design" class="section level2">
 <h2 class="hasAnchor">
 <a href="#why-should-i-use-software-design" class="anchor"></a>Why should I use software design?</h2>
-<p>When you drive to a new place, especially if the destination is far or in an unfamiliar location, something guides you. It could be a GPS, a map or a friend sitting in the front seat. Have you ever tried driving to a new location without any guidance? If so, how well did it go for you?</p>
+<p><img src="https://i.imgur.com/pSbxSxl.png" title="guardrails and guiderails"></p>
 <p>When you develop software to solve a new business problem, what guides your software design? Obviously, you strive to eliminate unintended behaviours (bugs) from the software. Perhaps you are using tests and even a Test-Driven Development (TDD) approach. However, guiding your design with tests is analogous to driving a car by using the guardrails. It keeps you safe from the bar ditches while you drive, though it has no navigation utility.</p>
+<p>All too often, Data Scientists produce software without thoughtful design. On the one hand, Data Scientists are typically not Software Engineers, nor are they taught good practices of software engineering. On the other hand, Data Scientists often take the role of Software Engineers when they develop analytic applications. Perhaps, the lack of software engineering knowledge, leads Data Scientists to overlook the significance of good design. <!--While some Data Scientists are unaware of the concept, others may see any 
+design process as an over-engineering task--></p>
+<p>No design is a fallacy. This is because design still flows from the brains of the Data Scientists through their fingertips as they wrangle with the code. Thus, questions about whether a design is necessary or affordable are quite beside the point: design is inevitable. The alternative to good design is bad design, not no design at all.</p>
+<!-- There common (guiderails) driven-desing approaches are Database-driven design, -->
+<!-- Class-driven design and Domain-driven design. -->
 <!-- Although each domain model is different, many patterns occur repeatedly. -->
 </div>
 <div id="installation" class="section level2">
