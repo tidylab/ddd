@@ -4,12 +4,12 @@
 #' and behaviours of an \code{Entity} in a domain.
 #' @param name (`character`) \code{Entity} name.
 #' @param domain (`character`) \code{Entity} domain name.
-#' @param commands (`character`)
-#' @param queries (`character`)
+#' @param commands (`character`) Optional: names of public method that perform an action.
+#' @param queries (`character`) Optional: names of public method that return data to the caller.
 #' @includeRmd vignettes/articles/add_entity.Rmd
 #' @family domain driven design patterns
 #' @export
-add_entity <- function(name, domain = NULL, commands = NULL, queries = NULL){
+add_entity <- function(name, domain, commands = NULL, queries = NULL){
     # Defensive Programming ---------------------------------------------------
     assert$is_character(name)
     assert$is_character(domain)
