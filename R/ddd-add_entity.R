@@ -6,6 +6,11 @@
 #' @param domain (`character`) \code{Entity} domain name.
 #' @param commands (`character`) Optional: names of public method that perform an action.
 #' @param queries (`character`) Optional: names of public method that return data to the caller.
+#' @section workflow:
+#' 1. Optional: Call \code{\link{use_ddd}} maximum once per project; this will make the project independent of `ddd`
+#' 2. Call \code{\link{add_entity}} with its respective arguments
+#' 3. Call \code{devtools::document} (or Ctrl+Shift+D on windows) to make the Entity part of the project
+#' 4. Call \code{devtools::test} (or Ctrl+Shift+T on windows) to validate that all the entity unit-test pass
 #' @includeRmd vignettes/articles/add_entity.Rmd
 #' @family domain driven design patterns
 #' @export
