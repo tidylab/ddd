@@ -104,49 +104,55 @@
 <div id="what-is-a-value-object" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-is-a-value-object" class="anchor"></a>What is a Value Object?</h2>
-<p>A <strong><em>Value Object</em></strong> is a function that receives input, applies some transformations, and outputs the results in some data sturicture such as a <code>vector</code>, a <code>list</code> or a <code>data.frame</code>.</p>
+<p>A <strong><em>Value Object</em></strong> is a function that receives input, applies some transformations, and outputs the results in some data structure such as a <code>vector</code>, a <code>list</code> or a <code>data.frame</code>.</p>
 <div class="alert alert-info">
-In R, a good practice is to set the Value Object to return a `data.frame` at its
-output. This is because often the Value Object is called during data
-wrangling operations.
+In R, a good practice is to set the Value Object to return a
+<code>data.frame</code> at its output. This is because often the Value Object is
+called during data wrangling operations.
 </div>
-<p>A light example of a <strong>Value Object</strong> is one that receives a character vector, applies the <code>identity</code> function, and organises the character vector in a <code>data.frame</code>.</p>
+<p>A light example of a <strong>Value Object</strong> is one that receives a character vector, applies the <code>tolower</code> function, and organises the character vector in a <code>data.frame</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Alphabet</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">letters</span> <span class="op">=</span> <span class="va">LETTERS</span><span class="op">)</span><span class="op">{</span>
   <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">letters</span><span class="op">)</span><span class="op">)</span> <span class="co"># Value Object type check</span>
-  <span class="va">letters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/identity.html">identity</a></span><span class="op">(</span><span class="va">letters</span><span class="op">)</span>     <span class="co"># Value Object transformation</span>
+  <span class="va">letters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/chartr.html">tolower</a></span><span class="op">(</span><span class="va">letters</span><span class="op">)</span>      <span class="co"># Value Object transformation</span>
   <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>letter <span class="op">=</span> <span class="va">letters</span><span class="op">)</span>     <span class="co"># Value Object return object</span>
 <span class="op">}</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu">Alphabet</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;   letter</span>
-<span class="co">#&gt; 1      A</span>
-<span class="co">#&gt; 2      B</span>
-<span class="co">#&gt; 3      C</span>
-<span class="co">#&gt; 4      D</span>
-<span class="co">#&gt; 5      E</span>
-<span class="co">#&gt; 6      F</span></code></pre></div>
+<span class="co">#&gt; 1      a</span>
+<span class="co">#&gt; 2      b</span>
+<span class="co">#&gt; 3      c</span>
+<span class="co">#&gt; 4      d</span>
+<span class="co">#&gt; 5      e</span>
+<span class="co">#&gt; 6      f</span></code></pre></div>
 <p>In the context of DDD, a <strong><em>Value Object</em></strong> models a domain concept. A <strong>Value Object</strong> is an object that is identified only by its data and doesn’t have a long-lived identity.</p>
-<p>For example, think about the diners, i.e. customers, of a Pizzeria. Associating an order and a customer requires ephemeral customer identity. The customer name matters. It is used to identify for whom a particular Pizza was made for. The names Hilary and Bill are not equal. However, once the customer leaves the Pizzeria, the customer’s existence dissipates. On the other hand, if the customer is enrolled in a restaurant loyalty program, then its unique identifier on the system is both essential and long-lived.</p>
+<p>For example, think about the diners, i.e. customers, of a Pizzeria. Associating a food order and a customer requires ephemeral customer identity. The customer name matters. It is used to identify for whom a particular Pizza was made for. The names Hilary and Bill are not equal. However, once the customer leaves the Pizzeria, the customer’s existence dissipates. On the other hand, if the customer is enrolled in a restaurant loyalty program, then its unique identifier on the system is both essential and long-lived.</p>
 </div>
 <div id="what-does-add_value_object-do" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-does-add_value_object-do" class="anchor"></a>What does <code>add_value_object</code> do?</h2>
-<p>Given the <strong>Value Object</strong> name &lt;Customer&gt;, and its sub-domain name &lt;pizza ordering&gt;,</p>
+<p>Given the <strong>Value Object</strong> <code>name</code>, and its <code>domain</code> name,</p>
 <p>When <code>add_value_object</code> is called</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../../reference/add_value_object.html">add_value_object</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Customer"</span>, domain <span class="op">=</span> <span class="st">"pizza ordering"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../../reference/add_value_object.html">add_value_object</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">'Customer'</span>, domain <span class="op">=</span> <span class="st">'Pizza Ordering'</span><span class="op">)</span></code></pre></div>
 <p>Then the function:</p>
 <ul>
 <li>Creates a <strong>Value Object</strong> boilerplate with several input arguments;</li>
-<li>Places the file at <code>R/pizza_ordering-value-Customer.R</code>; and</li>
+<li>Places the file at <strong>R/pizza_ordering-value-Customer.R</strong>; and</li>
 <li>Opens the file (only in interactive mode).</li>
 </ul>
+<div class="alert alert-info">
+You don't need to remember the naming style for the different DDD components.
+Instead, <code>ddd</code> takes care of naming style for all domain objects.
+This way DDD file names, classes and functions are congruent with each other.
+</div>
 </div>
 <div id="what-are-the-main-components-of-a-value-object" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-are-the-main-components-of-a-value-object" class="anchor"></a>What are the main components of a Value Object?</h2>
 <p>The boilerplate code produced by <code>add_value_object</code> looks likes this:</p>
+<p><strong>R/pizza_ordering-value-Customer.R</strong></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#' @title Customer Value Object</span>
 <span class="co">#' @return (`data.frame`)</span>
@@ -183,7 +189,8 @@ wrangling operations.
 <div id="why-should-i-use-value-objects-in-my-design" class="section level2">
 <h2 class="hasAnchor">
 <a href="#why-should-i-use-value-objects-in-my-design" class="anchor"></a>Why should I use Value Objects in my design?</h2>
-<p>The simplest way to implement a <strong>Value Object</strong> in R is with a function that returns a data.frame row. Compare the following two patterns for creating a data.frame that holds a Customer data.</p>
+<p>The need that <strong>Value Object</strong> serve is not new. Until now you have probably been using a degenerated version of a <strong>Value Object</strong> in different places of the software.</p>
+<p>The simplest way to implement a <strong>Value Object</strong> in R is with a function that returns a <code>data.frame</code> row. Compare the following two patterns for creating a <code>data.frame</code> that holds a Customer data.</p>
 <p>First, using the <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble::tibble</a></code> function directly for constructing the Customer</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">customer</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Bilbo"</span>, family <span class="op">=</span> <span class="st">"Baggins"</span><span class="op">)</span></code></pre></div>
@@ -219,7 +226,7 @@ wrangling operations.
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">customer</span> <span class="op">&lt;-</span> <span class="fu">Customer</span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Bilbo"</span>, family <span class="op">=</span> <span class="st">"Baggins"</span><span class="op">)</span></code></pre></div>
 <p>The <strong>Value Object</strong> ascribes NA values for the phone number and address of diners, that is customers in the restaurant.</p>
-<p>The second subtle quality regards tests. With <strong>Value Object</strong> you can replace Without a <strong>Value Object</strong>, your test expectations capture only the available knowledge at the moment of writing the test. For example, a test that validates the structure of a returning data from a function call,</p>
+<p>The second subtle quality regards tests. If you write unit-test test cases against returning objects, then without a <strong>Value Object</strong>, your test expectations capture only the available knowledge at the moment of writing the test. For example, a test that validates the structure of a returning data from a function call,</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">test_that</span><span class="op">(</span><span class="st">'calling Order$get_customer_info() returns the desired results'</span>, <span class="op">{</span>
     <span class="fu">expect_setequal</span><span class="op">(</span>
@@ -241,25 +248,10 @@ wrangling operations.
 <h2 class="hasAnchor">
 <a href="#how-should-i-use-value-objects-in-my-design" class="anchor"></a>How Should I use Value Objects in my design?</h2>
 <ol style="list-style-type: decimal">
-<li><p>Querying an <strong>Entity</strong> , that is by using its public query methods, should return a <strong>Value Object</strong>.</p></li>
+<li><p>Querying an <strong>Entity</strong>, that is by using its public query methods, should return a <strong>Value Object</strong>.</p></li>
 <li><p>Calling <strong>Value Object</strong> can happen inside another <strong>Value Object</strong>.</p></li>
 <li><p>Reusing <strong>Value Object</strong> in tests, such as unit-tests and integration-tests, is useful when the test aims to capture the structure of a returning object.</p></li>
 </ol>
-<p>The following example shows how to embed the <code>Customer</code> <strong>Value Object</strong> in the pizza <code>Order</code> Entity</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">Order</span><span class="op">$</span><span class="fu">set</span><span class="op">(</span><span class="st">"public"</span>, <span class="st">"set_customer_info"</span>, <span class="kw">function</span><span class="op">(</span>
-  <span class="va">given</span> <span class="op">=</span> <span class="cn">NA_character_</span>, <span class="va">family</span> <span class="op">=</span> <span class="cn">NA_character_</span><span class="op">)</span><span class="op">{</span>
-  <span class="va">self</span><span class="op">$</span><span class="va">customer</span> <span class="op">&lt;-</span> <span class="fu">Customer</span><span class="op">(</span><span class="va">given</span>, <span class="va">family</span><span class="op">)</span>
-  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">self</span><span class="op">)</span>
-<span class="op">}</span><span class="op">)</span>  </code></pre></div>
-<p>Then we can test the result of a call for this function</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">test_that</span><span class="op">(</span><span class="st">'calling Order$set_customer_info returns the customer info'</span>, <span class="op">{</span>
-    <span class="fu">expect_setequal</span><span class="op">(</span>
-        <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">Order</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>id <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">$</span><span class="fu">set_customer_info</span><span class="op">(</span><span class="st">"Bilbo"</span><span class="op">)</span><span class="op">$</span><span class="va">customer</span><span class="op">)</span>,
-        <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="fu">Customer</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-    <span class="op">)</span>
-<span class="op">}</span><span class="op">)</span></code></pre></div>
 </div>
   </div>
 
