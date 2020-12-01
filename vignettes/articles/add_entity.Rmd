@@ -51,7 +51,8 @@ Then the function:
 ```{=html}
 <div class="alert alert-info" <strong="">
 You don't need to remember the naming style for the different DDD components.
-Instead, <code>ddd</code> takes care of naming style for all domain objects. This way DDD file names, classes and functions are congruent with each other.
+Instead, <code>ddd</code> takes care of naming style for all domain objects.
+This way DDD file names, classes and functions are congruent with each other.
 </div>
 ```
 ## What are the main components of an **Entity**?

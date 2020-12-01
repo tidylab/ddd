@@ -5,7 +5,7 @@
 #' @includeRmd vignettes/articles/add_value_object.Rmd
 #' @family domain driven design patterns
 #' @export
-add_value_object <- function(name, domain = NULL){
+add_value_object <- function(name, domain){
     # Defensive Programming ---------------------------------------------------
     assert$is_character(name)
     assert$is_character(domain)

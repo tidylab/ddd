@@ -36,3 +36,4 @@ reference:
 - title: Software Design Patterns
   contents:
   - 'Singleton'
+  - starts_with("Abstract")

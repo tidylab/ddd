@@ -10,32 +10,36 @@ editor_options:
 
 ```{r, include = FALSE}
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
-path <- tempfile("docs-")
-dir.create(path, F, T)
+name <- "Customer"
+domain <- "Pizza Ordering"
+
+path_proj <- tempfile("article-")
+path_script <- file.path("R", filename$value(name, domain))
+path_test <- file.path("tests", "testthat", "test-" %+% filename$value(name, domain))
+fs::dir_create(path_proj)
 ```
 
 ## What is a Value Object?
 
 A ***Value Object*** is a function that receives input, applies some
-transformations, and outputs the results in some data sturicture such as a
+transformations, and outputs the results in some data structure such as a
 `vector`, a `list` or a `data.frame`.
 
 ```{=html}
 <div class="alert alert-info" <strong="">
-In R, a good practice is to set the Value Object to return a `data.frame` at its
-output. This is because often the Value Object is called during data
-wrangling operations.
+In R, a good practice is to set the Value Object to return a
+<code>data.frame</code> at its output. This is because often the Value Object is
+called during data wrangling operations.
 </div>
 ```
-
 A light example of a **Value Object** is one that receives a character vector,
-applies the `identity` function, and organises the character vector in a
+applies the `tolower` function, and organises the character vector in a
 `data.frame`.
 
 ```{r, eval=TRUE, echo=TRUE}
 Alphabet <- function(letters = LETTERS){
   stopifnot(is.character(letters)) # Value Object type check
-  letters <- identity(letters)     # Value Object transformation
+  letters <- tolower(letters)      # Value Object transformation
   data.frame(letter = letters)     # Value Object return object
 }
 
@@ -47,41 +51,50 @@ Object** is an object that is identified only by its data and doesn't have a
 long-lived identity.
 
 For example, think about the diners, i.e. customers, of a Pizzeria. Associating
-an order and a customer requires ephemeral customer identity. The customer name
-matters. It is used to identify for whom a particular Pizza was made for. The
-names Hilary and Bill are not equal. However, once the customer leaves the
+a food order and a customer requires ephemeral customer identity. The customer
+name matters. It is used to identify for whom a particular Pizza was made for.
+The names Hilary and Bill are not equal. However, once the customer leaves the
 Pizzeria, the customer's existence dissipates. On the other hand, if the
 customer is enrolled in a restaurant loyalty program, then its unique identifier
 on the system is both essential and long-lived.
 
 ## What does `add_value_object` do?
 
-Given the **Value Object** name \<Customer\>, and its sub-domain name \<pizza
-ordering\>,
+Given the **Value Object** `name`, and its `domain` name,
 
 When `add_value_object` is called
 
-```{r, eval = FALSE, echo = TRUE}
-add_value_object(name = "Customer", domain = "pizza ordering")
+```{r, eval = TRUE, echo = FALSE}
+command <- 
+  "add_value_object(name = '" %+% name %+% 
+  "', domain = '" %+% domain %+% 
+  "')"
+withr::with_dir(path_proj, eval(parse(text=command)))
 ```
 
-```{r, eval = TRUE, echo = FALSE}
-name = "Customer"; domain = "pizza ordering"
-withr::with_dir(path, add_value_object(name, domain))
-file_path <- list.files(path, filename$value(name, domain), recursive = TRUE)
+```{r, code = command, eval = FALSE, echo = TRUE}
 ```
 
 Then the function:
 
 -   Creates a **Value Object** boilerplate with several input arguments;
--   Places the file at `R/pizza_ordering-value-Customer.R`; and
+-   Places the file at **`r path_script`**; and
 -   Opens the file (only in interactive mode).
 
+```{=html}
+<div class="alert alert-info" <strong="">
+You don't need to remember the naming style for the different DDD components.
+Instead, <code>ddd</code> takes care of naming style for all domain objects.
+This way DDD file names, classes and functions are congruent with each other.
+</div>
+```
 ## What are the main components of a Value Object?
 
 The boilerplate code produced by `add_value_object` looks likes this:
 
-```{r code = readLines(fs::path(path, file_path)), eval=FALSE, echo=TRUE}
+**`r path_script`**
+
+```{r code = readLines(file.path(path_proj, path_script)), eval = FALSE, echo = TRUE}
 ```
 
 The boilerplate code includes three key activities covered by any **Value
@@ -100,9 +113,13 @@ before enframing them in a data structure. Common transformations include:
 
 ## Why should I use Value Objects in my design?
 
+The need that **Value Object** serve is not new. Until now you have probably
+been using a degenerated version of a **Value Object** in different places of
+the software.
+
 The simplest way to implement a **Value Object** in R is with a function that
-returns a data.frame row. Compare the following two patterns for creating a
-data.frame that holds a Customer data.
+returns a `data.frame` row. Compare the following two patterns for creating a
+`data.frame` that holds a Customer data.
 
 First, using the `tibble::tibble` function directly for constructing the
 Customer
@@ -171,10 +188,11 @@ customer <- Customer(given = "Bilbo", family = "Baggins")
 The **Value Object** ascribes NA values for the phone number and address of
 diners, that is customers in the restaurant.
 
-The second subtle quality regards tests. With **Value Object** you can replace
-Without a **Value Object**, your test expectations capture only the available
-knowledge at the moment of writing the test. For example, a test that validates
-the structure of a returning data from a function call,
+The second subtle quality regards tests. If you write unit-test test cases
+against returning objects, then without a **Value Object**, your test
+expectations capture only the available knowledge at the moment of writing the
+test. For example, a test that validates the structure of a returning data from
+a function call,
 
 ```{r, eval=FALSE, echo=TRUE}
 test_that('calling Order$get_customer_info() returns the desired results', {
@@ -201,32 +219,10 @@ base.
 
 ## How Should I use Value Objects in my design?
 
-1.  Querying an **Entity** , that is by using its public query methods, should
+1.  Querying an **Entity**, that is by using its public query methods, should
     return a **Value Object**.
 
 2.  Calling **Value Object** can happen inside another **Value Object**.
 
 3.  Reusing **Value Object** in tests, such as unit-tests and integration-tests,
     is useful when the test aims to capture the structure of a returning object.
-
-The following example shows how to embed the `Customer` **Value Object** in the
-pizza `Order` Entity
-
-```{r, echo=TRUE, eval=FALSE}
-Order$set("public", "set_customer_info", function(
-  given = NA_character_, family = NA_character_){
-  self$customer <- Customer(given, family)
-  return(self)
-})  
-```
-
-Then we can test the result of a call for this function
-
-```{r, echo=TRUE, eval=FALSE}
-test_that('calling Order$set_customer_info returns the customer info', {
-    expect_setequal(
-        colnames(Order$new(id = 1)$set_customer_info("Bilbo")$customer),
-        colnames(Customer())
-    )
-})
-```

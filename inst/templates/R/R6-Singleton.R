@@ -1,5 +1,5 @@
 #nocov start
-#' @title Singleton
+#' @title Singleton Pattern
 #' @description Restricts the instantiation of a class to one "single" instance.
 #'   Singleton takes the control of object creation out of the hands of the
 #'   programmer. If the object doesn't exist, then Singleton instantiate an
