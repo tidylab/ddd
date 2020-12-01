@@ -1,12 +1,12 @@
 #' @title Add an Entity to a Domain
 #' @description
-#' \code{add_entity} makes it easy to create an class that encapsulates the data
+#' \code{add_entity} makes it easy to create a class that encapsulates the data
 #' and behaviours of an \code{Entity} in a domain.
 #' @param name (`character`) \code{Entity} name.
 #' @param domain (`character`) \code{Entity} domain name.
 #' @param commands (`character`) Optional: names of public method that perform an action.
 #' @param queries (`character`) Optional: names of public method that return data to the caller.
-#' @section workflow:
+#' @section Workflow:
 #' 1. Optional: Call \code{\link{use_ddd}} maximum once per project; this will make the project independent of `ddd`
 #' 2. Call \code{\link{add_entity}} with its respective arguments
 #' 3. Call \code{devtools::document} (or Ctrl+Shift+D on windows) to make the Entity part of the project
