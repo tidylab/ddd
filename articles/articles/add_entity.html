@@ -107,7 +107,7 @@
 <p>Given the <strong>Entity</strong> <code>name</code>, and its <code>domain</code> name, and optionally <code>commands</code> and <code>queries</code> methods,</p>
 <p>When <code>add_entity</code> is called</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">add_entity</span><span class="op">(</span>name <span class="op">=</span> <span class="st">'Order'</span>, domain <span class="op">=</span> <span class="st">'Pizza Ordering'</span>, commands <span class="op">=</span> <span class="st">'add_item_to_order'</span>, queries <span class="op">=</span> <span class="st">'review_order'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../../reference/add_entity.html">add_entity</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">'Order'</span>, domain <span class="op">=</span> <span class="st">'Pizza Ordering'</span>, commands <span class="op">=</span> <span class="st">'add_item_to_order'</span>, queries <span class="op">=</span> <span class="st">'review_order'</span><span class="op">)</span></code></pre></div>
 <p>Then the function:</p>
 <ul>
 <li>Generates boilerplate code for the <strong>Entity</strong> and saves it at <strong>R/pizza_ordering-entity-Order.R</strong>;</li>
@@ -122,7 +122,7 @@ Instead, <code>ddd</code> takes care of naming style for all domain objects. Thi
 <div id="what-are-the-main-components-of-an-entity" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-are-the-main-components-of-an-entity" class="anchor"></a>What are the main components of an <strong>Entity</strong>?</h2>
-<p>The boilerplate code for the Order Entity class produced by <code>add_entity</code> looks likes this:</p>
+<p>The boilerplate code for the Order Entity class produced by <code>add_entity</code> looks like this:</p>
 <p><strong>R/pizza_ordering-entity-Order.R</strong></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#' @title Order Domain Entity</span>
@@ -149,10 +149,28 @@ Instead, <code>ddd</code> takes care of naming style for all domain objects. Thi
 <p>Notice the three public methods created by <code>add_entity</code>:</p>
 <ol style="list-style-type: decimal">
 <li>
-<code>initialize</code> constructs a new object. By DDD definition, every entity must have a unique id (<code>uid</code>) which distinguishes it from other entities.</li>
-<li><code>add_item_to_order</code></li>
-<li><code>review_order</code></li>
+<p><code>initialize</code> is a constructor for new entities.</p>
+<ul>
+<li>By DDD definition, every Entity must have a unique id (<code>uid</code>) which distinguishes it from other Entities.</li>
+</ul>
+</li>
+<li>
+<p><code>add_item_to_order</code> is a command boilerplate. You’ll need to:</p>
+<ul>
+<li>Replace <code>...</code> with explicit (if any) input arguments; and</li>
+<li>Implement the method behaviour. Remember, command doesn’t return data.</li>
+</ul>
+</li>
+<li>
+<p><code>review_order</code> is a query boilerplate. You’ll need to:</p>
+<ul>
+<li>Replace its content to retrieve data from the object</li>
+<li>Remember, query does not change the state of the system.</li>
+</ul>
+</li>
 </ol>
+<hr>
+<p>The boilerplate code for the Order Entity unit-test produced by <code>add_entity</code> looks like this:</p>
 <p><strong>tests/testthat/test-pizza_ordering-entity-Order.R</strong></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">context</span><span class="op">(</span><span class="st">'unit test for entity Order'</span><span class="op">)</span>
