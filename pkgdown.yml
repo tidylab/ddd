@@ -6,10 +6,11 @@ articles:
   articles/add_entity: add_entity.html
   articles/add_value_object: add_value_object.html
   articles/ddd: ddd.html
+  articles/use_ddd: use_ddd.html
   articles/what-is-domain-driven-design: what-is-domain-driven-design.html
   readme/00-introduction: 00-introduction.html
   readme/overview: overview.html
-last_built: 2020-12-01T08:24Z
+last_built: 2020-12-02T06:29Z
 urls:
   reference: https://tidylab.github.io/ddd//reference
   article: https://tidylab.github.io/ddd//articles

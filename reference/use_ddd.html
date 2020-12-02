@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Copy ddd Classes and Types to your Project — use_ddd • R Domain-driven Design</title>
+<title>Make a Project Independent of the ddd Package — use_ddd • R Domain-driven Design</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -52,10 +52,8 @@
 
 
 
-<meta property="og:title" content="Copy ddd Classes and Types to your Project — use_ddd" />
-<meta property="og:description" content="The function makes a project independent of the ddd package.
-ddd is needed for software development and has no added value in
-production." />
+<meta property="og:title" content="Make a Project Independent of the ddd Package — use_ddd" />
+<meta property="og:description" content="Make a Project Independent of the ddd Package" />
 
 
 
@@ -138,24 +136,50 @@ production." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Copy <code>ddd</code> Classes and Types to your Project</h1>
+    <h1>Make a Project Independent of the <code>ddd</code> Package</h1>
     <small class="dont-index">Source: <a href='https://github.com/tidylab/ddd/blob/master/R/ddd-use_ddd.R'><code>R/ddd-use_ddd.R</code></a></small>
     <div class="hidden name"><code>use_ddd.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The function makes a project independent of the <code>ddd</code> package.
-<code>ddd</code> is needed for software development and has no added value in
-production.</p>
+    <p>Make a Project Independent of the <code>ddd</code> Package</p>
     </div>
 
-    <pre class="usage"><span class='fu'>use_ddd</span><span class='op'>(</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>use_ddd</span><span class='op'>(</span>path <span class='op'>=</span> <span class='st'>"."</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>path</th>
+      <td><p>(<code>character</code>) Path to the root folder of the project.</p></td>
+    </tr>
+    </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function copies the necessary R classes and functions
-into the "R" folder of your project.</p>
+    
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>What does <code>use_ddd</code> do?</h3>
+
+
+<p>Given a <code>path</code> of the project root folder,</p>
+<p>When <code>use_ddd</code> is called<div class="r"></p><pre><span class='fu'>use_ddd</span><span class='op'>(</span>path <span class='op'>=</span> <span class='st'>'.'</span><span class='op'>)</span>
+</pre><p></div></p>
+<p>Then the function copies the following files into the <strong>path/R</strong>:<div class="r"></p><pre><span class='va'>ddd</span><span class='op'>-</span><span class='va'>abc.R</span>
+<span class='va'>R6</span><span class='op'>-</span><span class='va'>Singleton.R</span>
+</pre><p></div></p>
+<p>With these files, a project can run domain objects created by <code>ddd</code>
+without having the package installed.</p>
+
+    <h2 class="hasAnchor" id="workflow"><a class="anchor" href="#workflow"></a>Workflow</h2>
+
+    
+
+<ol>
+<li><p>Call <code>use_ddd</code> maximum once per project; this will make the project independent of <code>ddd</code></p></li>
+<li><p>Call <code><a href='https://devtools.r-lib.org//reference/document.html'>devtools::document</a></code> (or Ctrl+Shift+D on windows) to include the copied classes in the project NAMESPACE file</p></li>
+</ol>
+
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
