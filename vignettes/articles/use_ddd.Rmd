@@ -37,8 +37,5 @@ copied_files <- list.files(path = file.path(path_proj, "R"))
 ```{r, code = copied_files, eval = FALSE, echo = TRUE}
 ```
 
-
-## Workflow
-
-1. a
-2. b
+With these files, a project can run domain objects created by `ddd` without
+having the package installed.
