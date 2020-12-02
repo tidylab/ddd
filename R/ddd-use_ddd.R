@@ -1,12 +1,9 @@
-#' @title Copy \code{ddd} Classes and Types to your Project
-#' @description
-#' The function makes a project independent of the \code{ddd} package.
-#' \code{ddd} is needed for software development and has no added value in
-#' production.
-#' @details This function copies the necessary R classes and functions
-#' into the "R" folder of your project.
+#' @title Make a Project Independent of the \code{ddd} Package
+#' @param path (`character`) Path to the root folder of the project.
+#' @includeRmd vignettes/articles/use_ddd.Rmd
 #' @export
-use_ddd <- function(){
-    fs::dir_copy(find.template("templates", "R"), file.path(getwd()))
+use_ddd <- function(path = "."){
+    fs::dir_exists(path)
+    fs::dir_copy(find.template("templates", "R"), file.path(path))
     invisible()
 }
