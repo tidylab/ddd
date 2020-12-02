@@ -102,88 +102,130 @@
     
     
 <div class="alert alert-danger">
-Don't confuse a <b>Domain Service</b> with an <b>Application Service</b>. If you are looking for a component that enables a remote client to interact with your system, then you need an <b>Application Service</b>, not a <b>Domain Service</b>.
+Don't confuse a <b>Domain Service</b> with an <b>Application Service</b>. If you
+are looking for a component that enables a remote client to interact with your
+system, then you need an <b>Application Service</b>, not a <b>Domain
+Service</b>.
 </div>
 <div class="alert alert-warning">
-<b>Application Services</b> serve clients by orchestrating <b>Domain Services</b>. <b>Domain Services</b> are not aware and have no knowledge of any <b>Application Service</b>.
+<b>Application Services</b> serve clients by orchestrating <b>Domain
+Services</b>. <b>Domain Services</b> are not aware and have no knowledge of any
+<b>Application Service</b>.
 </div>
-<div id="overview" class="section level2">
+<div id="what-does-add_domain_service-do" class="section level2">
 <h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
+<a href="#what-does-add_domain_service-do" class="anchor"></a>What does <code>add_domain_service</code> do?</h2>
+<p>Given a <strong>Domain Service</strong> <code>name</code>, and its <code>domain</code> name,</p>
+<p>When <code>add_domain_service</code> is called</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../../reference/add_domain_service.html">add_domain_service</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">'Registry'</span>, domain <span class="op">=</span> <span class="st">'Pizza Ordering'</span><span class="op">)</span></code></pre></div>
+<p>Then the function:</p>
 <ul>
-<li><p>Entities and Value Objects are often to fine-grained to provide a convenient access to the capabilities of the domain layer.</p></li>
-<li>
-<p>Domain Service is part of the domain model. That means it expresses Ubiquitous</p>
-<p>Language in its Bounded Context.</p>
-</li>
+<li>Generates boilerplate code for the <strong>Domain Service</strong> and saves it at <strong>R/pizza_ordering-service-Registry.R</strong>;</li>
+<li>Generates a unit-test for the <strong>Domain Service</strong> and saves it at <strong>tests/testthat/test-pizza_ordering-service-Registry.R</strong>; and</li>
+<li>Opens the files (only in interactive mode).</li>
 </ul>
-<!-- ## What is a Domain Service? -->
+<div class="alert alert-info">
+You don't need to remember the naming style for the different DDD components.
+Instead, <code>ddd</code> takes care of naming style for all domain objects.
+This way DDD file names, classes and functions are congruent with each other.
 </div>
-<div id="characteristics-of-a-good-domain-service" class="section level2">
+</div>
+<div id="what-are-the-main-components-of-a-domain-service" class="section level2">
 <h2 class="hasAnchor">
-<a href="#characteristics-of-a-good-domain-service" class="anchor"></a>Characteristics of a good Domain <strong>Service</strong>
-</h2>
+<a href="#what-are-the-main-components-of-a-domain-service" class="anchor"></a>What are the main components of a <strong>Domain Service</strong>?</h2>
+<p>The boilerplate code for the Registry Domain Service class produced by <code>add_domain_service</code> looks like this:</p>
+<p><strong>R/pizza_ordering-service-Registry.R</strong></p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#' @title Registry Domain Service</span>
+<span class="co">#' @family Pizza Ordering</span>
+<span class="co">#' @noRd</span>
+<span class="va">Registry</span> <span class="op">&lt;-</span> <span class="fu">R6</span><span class="fu">::</span><span class="kw"><a href="https://r6.r-lib.org/reference/R6Class.html">R6Class</a></span><span class="op">(</span><span class="st">"Registry"</span>, inherit <span class="op">=</span> <span class="va">AbstractDomainService</span>, lock_objects <span class="op">=</span> <span class="cn">FALSE</span>, cloneable <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+
+<span class="co"># Public Methods ----------------------------------------------------------</span>
+<span class="va">Registry</span><span class="op">$</span><span class="fu">set</span><span class="op">(</span><span class="st">"public"</span>, <span class="st">"command"</span>, <span class="kw">function</span><span class="op">(</span>
+    <span class="va">entity</span> <span class="op">=</span> <span class="va">DummyEntity</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>uid <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>,
+    <span class="va">value_object</span> <span class="op">=</span> <span class="fu">DummyValueObject</span><span class="op">(</span><span class="op">)</span>
+<span class="op">)</span><span class="op">{</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">entity</span><span class="op">)</span> <span class="op">%in%</span> <span class="st">"Entity"</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">value_object</span><span class="op">)</span> <span class="op">%in%</span> <span class="st">"data.frame"</span><span class="op">)</span><span class="op">)</span>
+
+    <span class="kw"><a href="https://rdrr.io/r/base/conditions.html">tryCatch</a></span><span class="op">(</span><span class="op">{</span>
+        <span class="co"># TODO: Write code that uses uow interface</span>
+        <span class="va">self</span><span class="op">$</span><span class="va">uow</span><span class="op">$</span><span class="fu">commit</span><span class="op">(</span><span class="op">)</span>
+    <span class="op">}</span>,
+    error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">e</span><span class="op">)</span><span class="op">{</span>
+        <span class="co"># TODO: Raise event handler</span>
+        <span class="va">self</span><span class="op">$</span><span class="va">uow</span><span class="op">$</span><span class="fu">rollback</span><span class="op">(</span><span class="op">)</span>
+    <span class="op">}</span><span class="op">)</span>
+
+    <span class="fu"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span><span class="op">(</span><span class="va">self</span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span>
+
+<span class="va">Registry</span><span class="op">$</span><span class="fu">set</span><span class="op">(</span><span class="st">"public"</span>, <span class="st">"query"</span>, <span class="kw">function</span><span class="op">(</span><span class="va">uid</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">character</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">uid</span><span class="op">)</span><span class="op">)</span>
+
+    <span class="va">entity</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/conditions.html">tryCatch</a></span><span class="op">(</span><span class="op">{</span>
+        <span class="co"># TODO: Write code that uses uow interface</span>
+        <span class="va">entity</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
+        <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">entity</span><span class="op">)</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"entity uid doen't exist"</span><span class="op">)</span> <span class="kw">else</span> <span class="va">entity</span>
+    <span class="op">}</span>,
+    error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">e</span><span class="op">)</span><span class="op">{</span>
+        <span class="co"># TODO: Raise event handler</span>
+        <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span>
+    <span class="op">}</span><span class="op">)</span>
+
+    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">entity</span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span></code></pre></div>
+<p>Notice the two public methods created by <code>add_domain_service</code>:</p>
 <ol style="list-style-type: decimal">
-<li>The operation relates to a domain concept that is not a natural part of an Entity or Value Object.</li>
-<li>The interface is defined in terms of other elements of the domain model.</li>
-<li>The operation is stateless.</li>
+<li>
+<code>command</code> is a boilerplate for a service that updates data</li>
+<li>
+<code>query</code> is a boilerplate for a service that returns data</li>
 </ol>
-<div class="alert alert-danger">
-Make sure you need a service. Stripping away behaviors that belong to Entity overzealously, lead to Anemic Domain Model, where Entities comprise data but not behavior. This is similar to representing an Entity with only a `data.frame`.
-</div>
-</div>
-<div id="unit-of-work-uow" class="section level2">
-<h2 class="hasAnchor">
-<a href="#unit-of-work-uow" class="anchor"></a>Unit of Work (UoW)</h2>
-<p>There are no complex layers here. At most this component runs a query against the query store database and maybe serializes the query result into some format for transport (maybe a DTO, but maybe not), if that’s necessary. <span class="citation">(Vernon <a href="#ref-Vernon2013" role="doc-biblioref">2013</a>, 141)</span></p>
-<div id="uow-abstract-base-class" class="section level3">
-<h3 class="hasAnchor">
-<a href="#uow-abstract-base-class" class="anchor"></a>UoW Abstract Base Class</h3>
-<ul>
-<li><p>Similar to <a href="https://docs.python.org/3/library/abc.html">python abc module</a></p></li>
-<li>
-<p>Has the following public methods:</p>
-<ul>
-<li><p><code>new</code> i.e. initialize</p></li>
-<li><p><code>commit</code> must be implemented</p></li>
-<li><p><code>rollback</code> must be implemented</p></li>
-<li><p><code>exit</code> i.e. finalize. This function which calls <code>rollback</code></p></li>
-</ul>
-</li>
-</ul>
-<!--# https://github.com/cosmicpython/code/blob/chapter_07_aggregate/src/allocation/service_layer/unit_of_work.py -->
-</div>
-<div id="uow-implementations" class="section level3">
-<h3 class="hasAnchor">
-<a href="#uow-implementations" class="anchor"></a>UoW Implementations</h3>
-<div id="uow-database-implementing" class="section level4">
-<h4 class="hasAnchor">
-<a href="#uow-database-implementing" class="anchor"></a>UoW Database Implementing</h4>
-<ul>
-<li>
-<strong>DBI</strong>, <strong>dbplyr</strong>, <strong>RSQLite</strong>
-</li>
-</ul>
-</div>
-<div id="uow-data-structure-implementing" class="section level4">
-<h4 class="hasAnchor">
-<a href="#uow-data-structure-implementing" class="anchor"></a>UoW Data Structure Implementing</h4>
-<ul>
-<li>
-<strong>R6DS</strong>, mainly <code><a href="https://rdrr.io/pkg/R6DS/man/RDict.html">R6DS::RDict</a></code>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div id="references" class="section level2 unnumbered">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
-<div id="refs" class="references">
-<div id="ref-Vernon2013">
-<p>Vernon, Vaughn. 2013. <em>Implementing Domain-Driven Design</em>. 1st Editio. Addison-Wesley Professional.</p>
-</div>
-</div>
+<p>Domain Services are stateless by design. That means that once a service is done serving, the environment in which it had lived is deleted. If you need to track information from call to call, you would have to use a persistent storage.</p>
+<p>There are several common implementation of a persistent storage.</p>
+<p>The boilerplate code for the Registry Domain Service unit-test produced by <code>add_domain_service</code> looks like this:</p>
+<p><strong>tests/testthat/test-pizza_ordering-service-Registry.R</strong></p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">context</span><span class="op">(</span><span class="st">'unit test for domain-service Registry'</span><span class="op">)</span>
+
+<span class="co"># Setup -------------------------------------------------------------------</span>
+<span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/teardown.html">setup</a></span><span class="op">(</span><span class="op">{</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/assign.html">assign</a></span><span class="op">(</span><span class="st">"test_env"</span>, <span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_env.html">test_env</a></span><span class="op">(</span><span class="op">)</span>, envir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html">parent.frame</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span>
+
+<span class="co"># Tests -------------------------------------------------------------------</span>
+<span class="fu">test_that</span><span class="op">(</span><span class="st">"instantiate a Registry Domain Service"</span>, <span class="op">{</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/attach.html">attach</a></span><span class="op">(</span><span class="va">test_env</span><span class="op">)</span>
+    <span class="fu">expect_is</span><span class="op">(</span><span class="va">domain_service</span> <span class="op">&lt;-</span> <span class="va">Registry</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span>, <span class="st">"DomainService"</span><span class="op">)</span>
+    <span class="va">test_env</span><span class="op">$</span><span class="va">domain_service</span> <span class="op">&lt;-</span> <span class="va">domain_service</span>
+<span class="op">}</span><span class="op">)</span>
+
+<span class="fu">test_that</span><span class="op">(</span><span class="st">"calling Registry$command performs an action"</span>, <span class="op">{</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/attach.html">attach</a></span><span class="op">(</span><span class="va">test_env</span><span class="op">)</span>
+    <span class="fu">expect_is</span><span class="op">(</span><span class="va">domain_service</span><span class="op">$</span><span class="fu">command</span><span class="op">(</span><span class="op">)</span>, <span class="st">"DomainService"</span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span>
+
+<span class="fu">test_that</span><span class="op">(</span><span class="st">"calling Registry$query returns the desired results"</span>, <span class="op">{</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/attach.html">attach</a></span><span class="op">(</span><span class="va">test_env</span><span class="op">)</span>
+    <span class="fu">expect_null</span><span class="op">(</span><span class="va">domain_service</span><span class="op">$</span><span class="fu">query</span><span class="op">(</span>uid <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">character</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span>
+
+<span class="co"># Cleanup -----------------------------------------------------------------</span>
+<span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/teardown.html">teardown</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span><span class="va">domain_service</span>, envir <span class="op">=</span> <span class="va">test_env</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<!-- One persistent storage solution is establishing a database connection with -->
+<!-- `DBI::dbConnect` and using it to read and write data in and from the database. -->
+<!-- Given a database connection named `con` -->
+<!-- ``` -->
+<!-- con <- DBIdbConnect(RSQLite::SQLite(), dbname = ":memory:") -->
+<!-- ``` -->
+<!-- When `DomainService$command is called -->
+<!-- Then `command` writes data to the database using -->
+<!-- ``` -->
+<!-- dbWriteTable(con, "mtcars", mtcars) -->
+<!-- ``` -->
 </div>
   </div>
 
