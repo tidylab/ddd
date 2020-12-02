@@ -82,8 +82,6 @@ Notice the three public methods created by `add_entity`:
     -   Replace its content to retrieve data from the object
     -   Remember, query does not change the state of the system.
 
---------------------------------------------------------------------------------
-
 The boilerplate code for the `r name` Entity unit-test produced by `add_entity`
 looks like this:
 
