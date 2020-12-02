@@ -5,7 +5,7 @@
 #' @includeRmd vignettes/articles/add_domain_service.Rmd
 #' @family domain driven design patterns
 #' @export
-add_domain_service <- function(name, domain = NULL){
+add_domain_service <- function(name, domain){
     # Defensive Programming ---------------------------------------------------
     assert$is_character(name)
     assert$is_character(domain)

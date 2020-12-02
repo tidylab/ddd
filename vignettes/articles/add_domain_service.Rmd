@@ -10,74 +10,111 @@ editor_options:
 
 ```{r, include = FALSE}
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
+name <- "Registry"
+domain <- "Pizza Ordering"
+
+path_proj <- tempfile("article-")
+path_script <- file.path("R", filename$service(name, domain))
+path_test <- file.path("tests", "testthat", "test-" %+% filename$service(name, domain))
+fs::dir_create(path_proj)
 ```
 
 ```{=html}
 <div class="alert alert-danger" <strong="">
-Don't confuse a <b>Domain Service</b> with an <b>Application Service</b>. If you are looking for a component that enables a remote client to interact with your system, then you need an <b>Application Service</b>, not a <b>Domain Service</b>.
+Don't confuse a <b>Domain Service</b> with an <b>Application Service</b>. If you
+are looking for a component that enables a remote client to interact with your
+system, then you need an <b>Application Service</b>, not a <b>Domain
+Service</b>.
 </div>
 ```
 ```{=html}
 <div class="alert alert-warning" <strong="">
-<b>Application Services</b> serve clients by orchestrating <b>Domain Services</b>. <b>Domain Services</b> are not aware and have no knowledge of any <b>Application Service</b>.
+<b>Application Services</b> serve clients by orchestrating <b>Domain
+Services</b>. <b>Domain Services</b> are not aware and have no knowledge of any
+<b>Application Service</b>.
 </div>
 ```
-## Overview
+## What does `add_domain_service` do?
 
--   Entities and Value Objects are often to fine-grained to provide a convenient
-    access to the capabilities of the domain layer.
+Given a **Domain Service** `name`, and its `domain` name,
 
--   Domain Service is part of the domain model. That means it expresses
-    Ubiquitous
+When `add_domain_service` is called
 
-    Language in its Bounded Context.
+```{r, eval = TRUE, echo = FALSE}
+command <- "add_domain_service(name = '" %+% name %+% 
+    "', domain = '" %+% domain %+% 
+    "')"
+withr::with_dir(path_proj, eval(parse(text=command)))
+```
 
-<!-- ## What is a Domain Service? -->
+```{r, code = command, eval = FALSE, echo = TRUE}
+```
 
-## Characteristics of a good Domain **Service**
+Then the function:
 
-1.  The operation relates to a domain concept that is not a natural part of an
-    Entity or Value Object.
-2.  The interface is defined in terms of other elements of the domain model.
-3.  The operation is stateless.
+-   Generates boilerplate code for the **Domain Service** and saves it at
+    **`r path_script`**;
+-   Generates a unit-test for the **Domain Service** and saves it at
+    **`r path_test`**; and
+-   Opens the files (only in interactive mode).
 
 ```{=html}
-<div class="alert alert-danger" <strong="">
-Make sure you need a service. Stripping away behaviors that belong to Entity overzealously, lead to Anemic Domain Model, where Entities comprise data but not behavior. This is similar to representing an Entity with only a `data.frame`.
+<div class="alert alert-info" <strong="">
+You don't need to remember the naming style for the different DDD components.
+Instead, <code>ddd</code> takes care of naming style for all domain objects.
+This way DDD file names, classes and functions are congruent with each other.
 </div>
 ```
 
-## Unit of Work (UoW)
+## What are the main components of a **Domain Service**?
 
-There are no complex layers here. At most this component runs a query against
-the query store database and maybe serializes the query result into some format
-for transport (maybe a DTO, but maybe not), if that's necessary. [@Vernon2013,
-p. 141]
+The boilerplate code for the `r name` Domain Service class produced by
+`add_domain_service` looks like this:
 
-### UoW Abstract Base Class
+**`r path_script`**
 
--   Similar to [python abc module](https://docs.python.org/3/library/abc.html)
+```{r code = readLines(file.path(path_proj, path_script)), eval = FALSE, echo = TRUE}
+```
 
--   Has the following public methods:
+Notice the two public methods created by `add_domain_service`:
 
-    -   `new` i.e. initialize
+1. `command` is a boilerplate for a service that updates data
+2. `query` is a boilerplate for a service that returns data
 
-    -   `commit` must be implemented
+Domain Services are stateless by design. That means that once a service is done
+serving, the environment in which it had lived is deleted. If you need to track
+information from call to call, you would have to use a persistent storage. 
 
-    -   `rollback` must be implemented
+There are several common implementation of a persistent storage.
 
-    -   `exit` i.e. finalize. This function which calls `rollback`
 
-<!--# https://github.com/cosmicpython/code/blob/chapter_07_aggregate/src/allocation/service_layer/unit_of_work.py -->
 
-### UoW Implementations
+The boilerplate code for the `r name` Domain Service unit-test produced by
+`add_domain_service` looks like this:
 
-#### UoW Database Implementing
+**`r path_test`**
 
--   **DBI**, **dbplyr**, **RSQLite**
+```{r code = readLines(file.path(path_proj, path_test)), eval = FALSE, echo = TRUE}
+```
 
-#### UoW Data Structure Implementing
 
--   **R6DS**, mainly `R6DS::RDict`
+<!-- One persistent storage solution is establishing a database connection with -->
+<!-- `DBI::dbConnect` and using it to read and write data in and from the database. -->
 
-## References
+
+<!-- Given a database connection named `con` -->
+
+<!-- ``` -->
+<!-- con <- DBIdbConnect(RSQLite::SQLite(), dbname = ":memory:") -->
+<!-- ``` -->
+
+<!-- When `DomainService$command is called -->
+
+<!-- Then `command` writes data to the database using -->
+
+<!-- ``` -->
+<!-- dbWriteTable(con, "mtcars", mtcars) -->
+<!-- ``` -->
+
+
+
