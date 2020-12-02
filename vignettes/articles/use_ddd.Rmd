@@ -1,0 +1,41 @@
+---
+title: "Make a Project Independent of the ddd Package"
+bibliography: [../references.bib]
+biblio-style: apalike
+link-citations: yes
+editor_options: 
+  markdown: 
+    wrap: 80
+---
+
+```{r, include = FALSE}
+source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
+path_proj <- tempfile("article-")
+fs::dir_create(path_proj)
+```
+
+## What does `use_ddd` do?
+
+Given a `path` of the project root folder,
+
+When `use_ddd` is called
+
+```{r, eval = TRUE, echo = FALSE}
+command <- "use_ddd(path = '" %+% "." %+% "')"
+withr::with_dir(path_proj, eval(parse(text=command)))
+```
+
+```{r, code = command, eval = FALSE, echo = TRUE}
+```
+
+Then the function copies the following files into the **path/R**:
+
+```{r, eval = TRUE, echo = FALSE}
+copied_files <- list.files(path = file.path(path_proj, "R"))
+```
+
+```{r, code = copied_files, eval = FALSE, echo = TRUE}
+```
+
+With these files, a project can run domain objects created by `ddd` without
+having the package installed.
