@@ -1,5 +1,3 @@
-context("unit test for add_entity")
-
 # Setup -------------------------------------------------------------------
 testthat::setup({
     assign("test_env", testthat::test_env(), envir = parent.frame())

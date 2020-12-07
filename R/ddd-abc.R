@@ -1,13 +1,15 @@
+#nocov start
 # -------------------------------------------------------------------------
 #' @title Abstract Entity Class
-#' @family Abstract Base Class
+#' @description
+#' This class provides the infrastructure for defining abstract base classes of
+#' core domain objects.
+#' @family abstract base classes
 #' @export
-#' @noRd
 AbstractEntity <- R6::R6Class("Entity", inherit = NULL, public = list(
-    #' @field  Entity unique identifier.
+    #' @field uid Entity unique identifier.
     uid = character(0),
-    #' @description
-    #' Instantiate Entity object.
+    #' @description Instantiate Entity object.
     #' @param uid (`character`) Entity unique identifier.
     initialize = function(uid){
         self$uid <- uid
@@ -15,31 +17,16 @@ AbstractEntity <- R6::R6Class("Entity", inherit = NULL, public = list(
 ))
 
 # -------------------------------------------------------------------------
-#' @title Unit of Work (UoW)
-#' @description Unit of Work hides database details.
-#' @family Abstract Base Class
+#' @title Abstract Domain Service
+#' @description Use \code{Unit of Work} as a context manager.
+#' @family abstract base classes
 #' @export
-#' @noRd
-AbstractUnitOfWork <- R6::R6Class("UnitOfWork", inherit = Singleton, public = list(
-    enter = function() return(self),
-    exit = function() self$rollback(),
-    commit = function() NULL,
-    rollback = function() NULL
+AbstractDomainService <- R6::R6Class("DomainService", public = list(
+    #' @description Instantiate a domain service
+    initialize = function(){},
+    #' @description Tear down a domain service
+    finalize = function(){}
 ))
 
 # -------------------------------------------------------------------------
-#' @title AbstractDomainService
-#' @description Use \code{Unit of Work} as a context manager.
-#' @family Abstract Base Class
-#' @export
-#' @noRd
-AbstractDomainService <- R6::R6Class("DomainService", public = list(
-    uow = AbstractUnitOfWork$new(),
-    initialize = function(uow = AbstractUnitOfWork$new()){
-        stopifnot(any(class(uow) %in% "UnitOfWork"))
-        self$uow <- uow$enter()
-    },
-    finalize = function(){
-        self$uow$exit()
-    }
-))
+#nocov end
