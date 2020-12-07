@@ -34,6 +34,16 @@ assert_default_classes <- function(){
         actual_class <- class(actual_args[[arg]])
         stopifnot(any(actual_class %in% expected_class))
     }
+
     invisible()
 }
 
+#' @title Bind Input Arguments into a data.frame
+#' @family domain driven design utilities
+#' @export
+bind_input_arguments <- function(){
+    caller_name <- sys.call(sys.parent())[[1]]
+    expected_args <- as.data.frame(as.list(formals(eval(parse(text = caller_name)), envir = parent.frame(2))))
+    actual_args <- lapply(names(expected_args), base::dynGet) %>% stats::setNames(names(expected_args)) %>% as.data.frame()
+    as.data.frame(purrr::list_modify(as.list(expected_args), !!!as.list(actual_args)))
+}

@@ -7,15 +7,7 @@ DummyValueObject <- function(
     am = NA_real_, gear = NA_real_, carb = NA_real_)
 {
     assert_default_classes()
-
-    caller_name <- match.call()[[1]]
-    row_default <- parse(text = caller_name) %>% eval() %>% formals() %>% as.list()
-    row_updated <- tryCatch(
-        purrr::list_modify(row_default, match.call()[[-1]]),
-        error = function(e) return(row_default)
-    )
-
-    as.data.frame(row_updated)
+    bind_input_arguments()
 }
 
 #' @title Dummy Entity
