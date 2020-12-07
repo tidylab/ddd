@@ -12,7 +12,7 @@
 #' 2. Call \code{\link{add_entity}} with its respective arguments
 #' 3. Call \code{devtools::document} (or Ctrl+Shift+D on windows) to include the Entity in the project NAMESPACE file.
 #' 4. Call \code{devtools::test} (or Ctrl+Shift+T on windows) to validate that the Entity's unit-test pass
-#' @family domain driven design patterns
+#' @family domain driven design helpers
 #' @export
 add_entity <- function(name, domain, commands = NULL, queries = NULL){
     # Defensive Programming ---------------------------------------------------
