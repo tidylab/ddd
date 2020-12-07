@@ -149,7 +149,7 @@ assign(".Rprofile", new.env(), envir = globalenv())
 
 .Rprofile$tasks$update_templates <- function(){
     fs::file_copy(
-        path = file.path("./R", c("ddd-abc.R", "R6-Singleton.R")),
+        path = file.path("./R", c("ddd-abc.R")),
         new_path = "./inst/templates/R/", overwrite = TRUE
     )
 }

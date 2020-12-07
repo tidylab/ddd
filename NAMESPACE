@@ -3,8 +3,6 @@
 export("%>%")
 export(AbstractDomainService)
 export(AbstractEntity)
-export(AbstractUnitOfWork)
-export(Singleton)
 export(add_domain_service)
 export(add_entity)
 export(add_value_object)

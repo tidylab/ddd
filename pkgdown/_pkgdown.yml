@@ -33,7 +33,6 @@ reference:
   - 'add_entity'
   - 'add_value_object'
   - 'add_domain_service'
-- title: Software Design Patterns
+- title: Abstract Base Classes
   contents:
-  - 'Singleton'
   - starts_with("Abstract")

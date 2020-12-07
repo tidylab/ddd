@@ -15,6 +15,7 @@
 ^renv/
 ^pkgdown/
 ^vignettes/articles
+^vignettes/patterns
 ^vignettes/readme
 
 # Files

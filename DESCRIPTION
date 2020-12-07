@@ -33,6 +33,9 @@ Imports:
     purrr,
     R6,
     R6DS,
+    R6P,
     snakecase,
     stringr
 VignetteBuilder: knitr
+Remotes:
+    tidylab/R6P
