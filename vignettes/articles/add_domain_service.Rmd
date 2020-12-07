@@ -19,21 +19,19 @@ path_test <- file.path("tests", "testthat", "test-" %+% filename$service(name, d
 fs::dir_create(path_proj)
 ```
 
-```{=html}
-<div class="alert alert-danger" <strong="">
-Don't confuse a <b>Domain Service</b> with an <b>Application Service</b>. If you
+```{r, error=TRUE}
+stop("Don't confuse a <b>Domain Service</b> with an <b>Application Service</b>. If you
 are looking for a component that enables a remote client to interact with your
 system, then you need an <b>Application Service</b>, not a <b>Domain
-Service</b>.
-</div>
+Service")
 ```
-```{=html}
-<div class="alert alert-warning" <strong="">
-<b>Application Services</b> serve clients by orchestrating <b>Domain
+
+```{r, warning=TRUE}
+warning("<b>Application Services</b> serve clients by orchestrating <b>Domain
 Services</b>. <b>Domain Services</b> are not aware and have no knowledge of any
-<b>Application Service</b>.
-</div>
+<b>Application Service</b>.")
 ```
+
 ## What does `add_domain_service` do?
 
 Given a **Domain Service** `name`, and its `domain` name,
@@ -58,12 +56,11 @@ Then the function:
     **`r path_test`**; and
 -   Opens the files (only in interactive mode).
 
-```{=html}
-<div class="alert alert-info" <strong="">
-You don't need to remember the naming style for the different DDD components.
+```{r, message=TRUE}
+message("You don't need to remember the naming style for the different DDD components.
 Instead, <code>ddd</code> takes care of naming style for all domain objects.
-This way DDD file names, classes and functions are congruent with each other.
-</div>
+This way DDD file names, classes and functions are congruent with each other."
+)
 ```
 
 ## What are the main components of a **Domain Service**?

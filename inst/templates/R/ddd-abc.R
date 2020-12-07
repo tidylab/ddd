@@ -17,7 +17,7 @@ AbstractEntity <- R6::R6Class("Entity", inherit = NULL, public = list(
 ))
 
 # -------------------------------------------------------------------------
-#' @title AbstractDomainService
+#' @title Abstract Domain Service
 #' @description Use \code{Unit of Work} as a context manager.
 #' @family abstract base classes
 #' @export
