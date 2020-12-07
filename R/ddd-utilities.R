@@ -1,28 +1,51 @@
-#' @title Data Type Check
-#' @description Assert that the classes of the \strong{actual input arguments}
-#'   are equal to the classes of the \strong{default input arguments}.
-#' @keywords internal
-#' @examples
-#' foo <- function(name = NA_character_, age = 0L){
-#'   assert_default_classes()
+#' @title Utility Functions
+#' @description These functions complement and facilitate common tasks of **Value Objects**.
+#' @details
 #'
-#'   caller_name <- match.call()[[1]]
-#'   row_default <- parse(text = caller_name) %>% eval() %>% formals() %>% as.list()
-#'   row_updated <- tryCatch(
-#'       purrr::list_modify(row_default, match.call()[[-1]]),
-#'       error = function(e) return(row_default)
-#'   )
-#'   as.data.frame(row_updated)
+#' * `assert_default_classes` compares the classes of the \strong{actual input arguments}
+#'   are equal to the classes of the \strong{default input arguments}. This replaces:
+#'
+#' 1. Multiple assertion calls such as `stopifnot(class(arg) %in%
+#' <expected_class>)`; and
+#' 2. Hardcoding of assertions. Instead the function automatically detects what
+#' is the expected class of the input argument by looking on the class of the
+#' default value.
+#'
+#' * `bind_input_arguments` binds the input argument of the calling functions into a `data.frame`.
+#'
+#' @name ddd_utils
+#' @examples
+#'
+#' # The following Value Object does two things:
+#' # * Defensive programming, specifically, data type check; and
+#' # * Organizing the input arguments into a data.frame.
+#'
+#' foo <<- function(name = NA_character_, age = 0L){
+#'   assert_default_classes()
+#'   bind_input_arguments()
 #' }
 #'
+#' ## No input arguments
 #' foo() # Works (returns the NULL value object)
+#'
+#' ## Some input arguments
+#' foo(age = 18L) # Works
+#'
+#' ## All input arguments
 #' foo(name = "Bilbo", age = 18L) # Works
 #'
-#' \donttest{foo(name = Sys.Date(), age = 18L)} # Fails
+#' ## Some invalid input arguments
+#' try(foo(name = Sys.Date(), age = 18L)) # Fails
 #'
-#' @return Error if there is any actual class different than the default class,
-#'   otherwise returns \code{NULL}.
-#' @family domain driven design utilities
+#' @references {
+#'
+#' \href{https://en.wikipedia.org/wiki/Defensive_programming}{Defensive programming}
+#'
+#' }
+NULL
+
+#' @title Data type check
+#' @rdname ddd_utils
 #' @export
 assert_default_classes <- function(){
     caller_name <- sys.call(sys.parent())[[1]]
@@ -38,8 +61,8 @@ assert_default_classes <- function(){
     invisible()
 }
 
-#' @title Bind Input Arguments into a data.frame
-#' @family domain driven design utilities
+#' @title Bind input arguments
+#' @rdname ddd_utils
 #' @export
 bind_input_arguments <- function(){
     caller_name <- sys.call(sys.parent())[[1]]
