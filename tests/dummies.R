@@ -1,3 +1,23 @@
+#' @title Dummy Value Object
+#' @keywords internal
+#' @noRd
+DummyValueObject <- function(
+    mpg = NA_real_, cyl = NA_real_, disp = NA_real_, hp = NA_real_,
+    drat = NA_real_, wt = NA_real_, qsec = NA_real_, vs = NA_real_,
+    am = NA_real_, gear = NA_real_, carb = NA_real_)
+{
+    assert_default_classes()
+
+    caller_name <- match.call()[[1]]
+    row_default <- parse(text = caller_name) %>% eval() %>% formals() %>% as.list()
+    row_updated <- tryCatch(
+        purrr::list_modify(row_default, match.call()[[-1]]),
+        error = function(e) return(row_default)
+    )
+
+    as.data.frame(row_updated)
+}
+
 #' @title Dummy Entity
 #' @keywords internal
 #' @noRd
@@ -7,7 +27,11 @@ DummyEntity <- R6::R6Class("Entity", inherit = AbstractEntity, lock_objects = FA
         super$initialize(uid)
         self$specification <- specification
     },
-    query = function(){self$specification %>% tibble::add_column(uid = self$uid, .before = 0)},
+    query = function(){cbind(uid = self$uid, self$specification)},
     command = function(){knitr::kable(self$query()); invisible(self)}
 ))
+
+
+
+
 

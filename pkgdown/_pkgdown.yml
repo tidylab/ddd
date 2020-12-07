@@ -6,7 +6,7 @@ template:
       api_key: 1cd55a1cf3bcf6d0b863fee2aedf4112
       index_name: domain-driven-design
 
-title: "R Domain-driven Design"
+title: "Domain-driven Design in R"
 authors:
   Harel Lustiger:
     href: https://github.com/harell
@@ -36,3 +36,6 @@ reference:
 - title: Abstract Base Classes
   contents:
   - starts_with("Abstract")
+- title: Utilities
+  contents:
+  - 'assert_default_classes'

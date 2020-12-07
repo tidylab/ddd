@@ -3,7 +3,7 @@
 #' @param name (`character`) \code{Value Object} name.
 #' @param domain (`character`) \code{Value Object} domain name.
 #' @includeRmd vignettes/articles/add_value_object.Rmd
-#' @family domain driven design helpers
+#' @family domain object generators
 #' @export
 add_value_object <- function(name, domain){
     # Defensive Programming ---------------------------------------------------

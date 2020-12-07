@@ -10,108 +10,35 @@ editor_options:
 
 ```{r, include = FALSE}
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
-name <- "Registry"
-domain <- "Pizza Ordering"
-
-path_proj <- tempfile("article-")
-path_script <- file.path("R", filename$service(name, domain))
-path_test <- file.path("tests", "testthat", "test-" %+% filename$service(name, domain))
-fs::dir_create(path_proj)
 ```
 
-```{r, error=TRUE}
-stop("Don't confuse a <b>Domain Service</b> with an <b>Application Service</b>. If you
-are looking for a component that enables a remote client to interact with your
-system, then you need an <b>Application Service</b>, not a <b>Domain
-Service")
+<!-- One line about what the function does -->
+
+Mediates between the domain and data mapping layers using a collection-like
+interface for accessing domain objects.
+
+<!-- Introduction Visual -->
+
+<!-- Introduction Text -->
+
+## How It Works
+
+## When to Use It
+
+## Example: Name of Example 1
+
+## Example: Name of Example 2
+
+## Further Reading
+
+```{r, message=TRUE}
+message("Blue text block")
 ```
 
 ```{r, warning=TRUE}
-warning("<b>Application Services</b> serve clients by orchestrating <b>Domain
-Services</b>. <b>Domain Services</b> are not aware and have no knowledge of any
-<b>Application Service</b>.")
+warning("Yello text block")
 ```
 
-## What does `add_domain_service` do?
-
-Given a **Domain Service** `name`, and its `domain` name,
-
-When `add_domain_service` is called
-
-```{r, eval = TRUE, echo = FALSE}
-command <- "add_domain_service(name = '" %+% name %+% 
-    "', domain = '" %+% domain %+% 
-    "')"
-withr::with_dir(path_proj, eval(parse(text=command)))
+```{r, error=TRUE}
+stop("Red text block")
 ```
-
-```{r, code = command, eval = FALSE, echo = TRUE}
-```
-
-Then the function:
-
--   Generates boilerplate code for the **Domain Service** and saves it at
-    **`r path_script`**;
--   Generates a unit-test for the **Domain Service** and saves it at
-    **`r path_test`**; and
--   Opens the files (only in interactive mode).
-
-```{r, message=TRUE}
-message("You don't need to remember the naming style for the different DDD components.
-Instead, <code>ddd</code> takes care of naming style for all domain objects.
-This way DDD file names, classes and functions are congruent with each other."
-)
-```
-
-## What are the main components of a **Domain Service**?
-
-The boilerplate code for the `r name` Domain Service class produced by
-`add_domain_service` looks like this:
-
-**`r path_script`**
-
-```{r code = readLines(file.path(path_proj, path_script)), eval = FALSE, echo = TRUE}
-```
-
-Notice the two public methods created by `add_domain_service`:
-
-1. `command` is a boilerplate for a service that updates data
-2. `query` is a boilerplate for a service that returns data
-
-Domain Services are stateless by design. That means that once a service is done
-serving, the environment in which it had lived is deleted. If you need to track
-information from call to call, you would have to use a persistent storage. 
-
-There are several common implementation of a persistent storage.
-
-
-
-The boilerplate code for the `r name` Domain Service unit-test produced by
-`add_domain_service` looks like this:
-
-**`r path_test`**
-
-```{r code = readLines(file.path(path_proj, path_test)), eval = FALSE, echo = TRUE}
-```
-
-
-<!-- One persistent storage solution is establishing a database connection with -->
-<!-- `DBI::dbConnect` and using it to read and write data in and from the database. -->
-
-
-<!-- Given a database connection named `con` -->
-
-<!-- ``` -->
-<!-- con <- DBIdbConnect(RSQLite::SQLite(), dbname = ":memory:") -->
-<!-- ``` -->
-
-<!-- When `DomainService$command is called -->
-
-<!-- Then `command` writes data to the database using -->
-
-<!-- ``` -->
-<!-- dbWriteTable(con, "mtcars", mtcars) -->
-<!-- ``` -->
-
-
-

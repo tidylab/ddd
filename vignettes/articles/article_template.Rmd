@@ -12,8 +12,10 @@ editor_options:
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ```
 
-> Mediates between the domain and data mapping layers using a collection-like
-> interface for accessing domain objects.
+<!-- One line about what the function does -->
+
+Mediates between the domain and data mapping layers using a collection-like
+interface for accessing domain objects.
 
 <!-- Introduction Visual -->
 
@@ -26,8 +28,6 @@ source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ## Example: Name of Example 1
 
 ## Example: Name of Example 2
-
----
 
 ## Further Reading
 
