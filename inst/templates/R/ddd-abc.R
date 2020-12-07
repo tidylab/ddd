@@ -5,7 +5,6 @@
 #' This class provides the infrastructure for defining abstract base classes of
 #' core domain objects.
 #' @family abstract base classes
-#' @keywords internal
 #' @export
 AbstractEntity <- R6::R6Class("Entity", inherit = NULL, public = list(
     #' @field uid Entity unique identifier.
@@ -18,10 +17,9 @@ AbstractEntity <- R6::R6Class("Entity", inherit = NULL, public = list(
 ))
 
 # -------------------------------------------------------------------------
-#' @title AbstractDomainService
+#' @title Abstract Domain Service
 #' @description Use \code{Unit of Work} as a context manager.
 #' @family abstract base classes
-#' @keywords internal
 #' @export
 AbstractDomainService <- R6::R6Class("DomainService", public = list(
     #' @description Instantiate a domain service

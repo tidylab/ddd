@@ -1,5 +1,5 @@
 ---
-title: "Add a Service to a Domain"
+title: "Article Template"
 bibliography: [../../inst/REFERENCES.bib]
 biblio-style: apalike
 link-citations: yes
@@ -23,30 +23,22 @@ interface for accessing domain objects.
 
 ## How It Works
 
-text
-
 ## When to Use It
-
-text
 
 ## Example: Name of Example 1
 
-text
-
 ## Example: Name of Example 2
-
-text
 
 ## Further Reading
 
 ```{r, message=TRUE}
-message("Blue text block")
+message("Blue Box")
 ```
 
 ```{r, warning=TRUE}
-warning("Yello text block")
+warning("Yello Box")
 ```
 
 ```{r, error=TRUE}
-stop("Red text block")
+stop("Red Box")
 ```

@@ -1,6 +1,6 @@
 ---
 title: "Add a Value Object to a Domain"
-bibliography: [../references.bib]
+bibliography: [../../inst/REFERENCES.bib]
 biblio-style: apalike
 link-citations: yes
 editor_options: 
@@ -25,13 +25,13 @@ A ***Value Object*** is a function that receives input, applies some
 transformations, and outputs the results in some data structure such as a
 `vector`, a `list` or a `data.frame`.
 
-```{=html}
-<div class="alert alert-info" <strong="">
-In R, a good practice is to set the Value Object to return a
+```{r, message=TRUE}
+message("In R, a good practice is to set the Value Object to return a
 <code>data.frame</code> at its output. This is because often the Value Object is
-called during data wrangling operations.
-</div>
+called during data wrangling operations."
+)
 ```
+
 A light example of a **Value Object** is one that receives a character vector,
 applies the `tolower` function, and organises the character vector in a
 `data.frame`.
@@ -81,13 +81,13 @@ Then the function:
 -   Places the file at **`r path_script`**; and
 -   Opens the file (only in interactive mode).
 
-```{=html}
-<div class="alert alert-info" <strong="">
-You don't need to remember the naming style for the different DDD components.
+```{r, message=TRUE}
+message("You don't need to remember the naming style for the different DDD components.
 Instead, <code>ddd</code> takes care of naming style for all domain objects.
-This way DDD file names, classes and functions are congruent with each other.
-</div>
+This way DDD file names, classes and functions are congruent with each other."
+)
 ```
+
 ## What are the main components of a Value Object?
 
 The boilerplate code produced by `add_value_object` looks likes this:
