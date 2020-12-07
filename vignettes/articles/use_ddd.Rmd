@@ -1,6 +1,6 @@
 ---
 title: "Make a Project Independent of the ddd Package"
-bibliography: [../references.bib]
+bibliography: [../../inst/REFERENCES.bib]
 biblio-style: apalike
 link-citations: yes
 editor_options: 
