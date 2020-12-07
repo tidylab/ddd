@@ -1,4 +1,5 @@
 cat(banner("Unit Tests"))
+source("../dummies.R")
 
 # Create dummy project folder structure
 test_wd <- tempfile("test-")
