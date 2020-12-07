@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Add a Value Object to a Domain • R Domain-driven Design</title>
+<title>Add a Value Object to a Domain • Domain-driven Design in R</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../../apple-touch-icon.png">
@@ -38,7 +38,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../../index.html">R Domain-driven Design</a>
+        <a class="navbar-link" href="../../index.html">Domain-driven Design in R</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.8</span>
       </span>
     </div>
@@ -106,9 +106,9 @@
 <a href="#what-is-a-value-object" class="anchor"></a>What is a Value Object?</h2>
 <p>A <strong><em>Value Object</em></strong> is a function that receives input, applies some transformations, and outputs the results in some data structure such as a <code>vector</code>, a <code>list</code> or a <code>data.frame</code>.</p>
 <div class="alert alert-info">
-In R, a good practice is to set the Value Object to return a
-<code>data.frame</code> at its output. This is because often the Value Object is
-called during data wrangling operations.
+<p><strong>Tip:</strong> In R, a good practice is to set the Value Object to return a</p>
+<p><code>data.frame</code> at its output. This is because often the Value Object is</p>
+<p>called during data wrangling operations.</p>
 </div>
 <p>A light example of a <strong>Value Object</strong> is one that receives a character vector, applies the <code>tolower</code> function, and organises the character vector in a <code>data.frame</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -143,9 +143,9 @@ called during data wrangling operations.
 <li>Opens the file (only in interactive mode).</li>
 </ul>
 <div class="alert alert-info">
-You don't need to remember the naming style for the different DDD components.
-Instead, <code>ddd</code> takes care of naming style for all domain objects.
-This way DDD file names, classes and functions are congruent with each other.
+<p><strong>Tip:</strong> You don’t need to remember the naming style for the different DDD components.</p>
+<p>Instead, <code>ddd</code> takes care of naming style for all domain objects.</p>
+<p>This way DDD file names, classes and functions are congruent with each other.</p>
 </div>
 </div>
 <div id="what-are-the-main-components-of-a-value-object" class="section level2">

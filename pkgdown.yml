@@ -5,13 +5,13 @@ articles:
   articles/add_domain_service: add_domain_service.html
   articles/add_entity: add_entity.html
   articles/add_value_object: add_value_object.html
+  articles/article_template: article_template.html
   articles/ddd: ddd.html
   articles/use_ddd: use_ddd.html
   articles/what-is-domain-driven-design: what-is-domain-driven-design.html
-  patterns/domain_service: domain_service.html
   readme/00-introduction: 00-introduction.html
   readme/overview: overview.html
-last_built: 2020-12-07T02:29Z
+last_built: 2020-12-07T22:03Z
 urls:
   reference: https://tidylab.github.io/ddd//reference
   article: https://tidylab.github.io/ddd//articles

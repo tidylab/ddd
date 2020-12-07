@@ -22,6 +22,9 @@
     <loc>https://tidylab.github.io/ddd//reference/ddd-package.html</loc>
   </url>
   <url>
+    <loc>https://tidylab.github.io/ddd//reference/ddd_utils.html</loc>
+  </url>
+  <url>
     <loc>https://tidylab.github.io/ddd//reference/pipe.html</loc>
   </url>
   <url>
@@ -37,6 +40,9 @@
     <loc>https://tidylab.github.io/ddd//articles/articles/add_value_object.html</loc>
   </url>
   <url>
+    <loc>https://tidylab.github.io/ddd//articles/articles/article_template.html</loc>
+  </url>
+  <url>
     <loc>https://tidylab.github.io/ddd//articles/articles/ddd.html</loc>
   </url>
   <url>
@@ -44,9 +50,6 @@
   </url>
   <url>
     <loc>https://tidylab.github.io/ddd//articles/articles/what-is-domain-driven-design.html</loc>
-  </url>
-  <url>
-    <loc>https://tidylab.github.io/ddd//articles/patterns/domain_service.html</loc>
   </url>
   <url>
     <loc>https://tidylab.github.io/ddd//articles/readme/00-introduction.html</loc>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add a Value Object to a Domain — add_value_object • R Domain-driven Design</title>
+<title>Add a Value Object to a Domain — add_value_object • Domain-driven Design in R</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -84,7 +84,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">R Domain-driven Design</a>
+        <a class="navbar-link" href="../index.html">Domain-driven Design in R</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.8</span>
       </span>
     </div>
@@ -169,10 +169,12 @@
 <p>A <em><strong>Value Object</strong></em> is a function that receives input, applies some
 transformations, and outputs the results in some data structure such as
 a <code>vector</code>, a <code>list</code> or a <code>data.frame</code>.
-<div class="alert alert-info" <strong="">
-In R, a good practice is to set the Value Object to return a
-<code>data.frame</code> at its output. This is because often the Value Object is
-called during data wrangling operations.
+<div class="alert alert-info"></p>
+
+<p><strong>Tip:</strong> In R, a good practice is to set the Value Object to return a</p>
+<p><code>data.frame</code> at its output. This is because often the Value
+Object is</p>
+<p>called during data wrangling operations.
 </div></p>
 
 <p>A light example of a <strong>Value Object</strong> is one that receives a character
@@ -214,10 +216,14 @@ both essential and long-lived.</p>
 <li><p>Creates a <strong>Value Object</strong> boilerplate with several input arguments;</p></li>
 <li><p>Places the file at <strong>R/pizza_ordering-value-Customer.R</strong>; and</p></li>
 <li><p>Opens the file (only in interactive mode).</p></li>
-</ul><p><div class="alert alert-info" <strong="">
-You don't need to remember the naming style for the different DDD components.
-Instead, <code>ddd</code> takes care of naming style for all domain objects.
-This way DDD file names, classes and functions are congruent with each other.
+</ul><p><div class="alert alert-info"></p>
+
+<p><strong>Tip:</strong> You don’t need to remember the naming style for the different
+DDD components.</p>
+<p>Instead, <code>ddd</code> takes care of naming style for all domain
+objects.</p>
+<p>This way DDD file names, classes and functions are congruent with each
+other.
 </div></p>
 
 <h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>What are the main components of a Value Object?</h3>
@@ -357,7 +363,7 @@ structure of a returning object.</p></li>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other domain driven design patterns: 
+    <div class='dont-index'><p>Other domain object generators: 
 <code><a href='add_domain_service.html'>add_domain_service</a>()</code>,
 <code><a href='add_entity.html'>add_entity</a>()</code></p></div>
 
