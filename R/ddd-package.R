@@ -1,3 +1,5 @@
+#' @import R6P
+#'
 #' @keywords internal
 "_PACKAGE"
 

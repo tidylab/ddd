@@ -14,16 +14,24 @@
 ^docs/
 ^renv/
 ^pkgdown/
+^vignettes/articles
+^vignettes/patterns
+^vignettes/readme
 
 # Files
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.travis\.yml$
 ^codecov\.yml$
+^cran-comments\.md$
 ^renv\.lock$
 ^tic\.R$
 ^README\.Rmd$
 ^LICENSE\.md$
+^vignettes/_common.R$
+^vignettes/references.bib$
 
 # Demo
 demo-.*\.R$
+
+

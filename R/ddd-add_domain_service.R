@@ -2,10 +2,10 @@
 #' @description Domain Service
 #' @param name (`character`) \code{Domain Service} name.
 #' @param domain (`character`) \code{Domain Service} domain name.
-#' @includeRmd vignettes/add_domain_service.Rmd
-#' @family domain driven design patterns
+#' @includeRmd vignettes/articles/add_domain_service.Rmd
+#' @family domain object generators
 #' @export
-add_domain_service <- function(name, domain = NULL){
+add_domain_service <- function(name, domain){
     # Defensive Programming ---------------------------------------------------
     assert$is_character(name)
     assert$is_character(domain)
