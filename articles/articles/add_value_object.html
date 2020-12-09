@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">Domain-driven Design in R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -110,6 +110,7 @@
 <p><code>data.frame</code> at its output. This is because often the Value Object is</p>
 <p>called during data wrangling operations.</p>
 </div>
+<p>Functions are things <span class="citation">(Wlaschin <a href="#ref-Wlaschin2018" role="doc-biblioref">2018</a>, 149)</span></p>
 <p>A light example of a <strong>Value Object</strong> is one that receives a character vector, applies the <code>tolower</code> function, and organises the character vector in a <code>data.frame</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Alphabet</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">letters</span> <span class="op">=</span> <span class="va">LETTERS</span><span class="op">)</span><span class="op">{</span>
@@ -252,6 +253,15 @@
 <li><p>Calling <strong>Value Object</strong> can happen inside another <strong>Value Object</strong>.</p></li>
 <li><p>Reusing <strong>Value Object</strong> in tests, such as unit-tests and integration-tests, is useful when the test aims to capture the structure of a returning object.</p></li>
 </ol>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2 class="hasAnchor">
+<a href="#references" class="anchor"></a>References</h2>
+<div id="refs" class="references">
+<div id="ref-Wlaschin2018">
+<p>Wlaschin, Scott. 2018. <em>Domain Modeling Made Functional</em>. Pragmatic Bookshelf.</p>
+</div>
+</div>
 </div>
   </div>
 
