@@ -32,6 +32,8 @@ called during data wrangling operations."
 )
 ```
 
+Functions are things [@Wlaschin2018, p. 149]
+
 A light example of a **Value Object** is one that receives a character vector,
 applies the `tolower` function, and organises the character vector in a
 `data.frame`.
@@ -226,3 +228,5 @@ base.
 
 3.  Reusing **Value Object** in tests, such as unit-tests and integration-tests,
     is useful when the test aims to capture the structure of a returning object.
+
+## References

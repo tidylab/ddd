@@ -1,11 +1,9 @@
 # Setup -------------------------------------------------------------------
-testthat::setup({
-    assign("test_env", testthat::test_env(), envir = parent.frame())
-    create_package(test_wd)
-    withr::local_dir(test_wd, .local_envir = test_env)
-    test_env$name     <- title$service("Registry")
-    test_env$domain   <- title$domain("Pizza Ordering")
-})
+assign("test_env", testthat::test_env())
+create_package(test_wd)
+withr::local_dir(test_wd, .local_envir = test_env)
+test_env$name <- title$service("Registry")
+test_env$domain <- title$domain("Pizza Ordering")
 
 # Tests -------------------------------------------------------------------
 test_that("create an R script", {
@@ -31,6 +29,3 @@ test_that("create a unit-test", {
     expect_match(file_content, paste0("unit test for domain-service ", name))
     expect_match(file_content, paste0(name, "\\$new\\("))
 })
-
-# Cleanup -----------------------------------------------------------------
-testthat::teardown(unlink(test_wd, recursive = TRUE, force = TRUE))

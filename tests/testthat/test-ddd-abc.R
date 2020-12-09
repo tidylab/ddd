@@ -1,9 +1,7 @@
 # Setup -------------------------------------------------------------------
-testthat::setup({
-    assign("test_env", testthat::test_env(), envir = parent.frame())
-    create_package(test_wd)
-    withr::local_dir(test_wd, .local_envir = test_env)
-})
+assign("test_env", testthat::test_env())
+create_package(test_wd)
+withr::local_dir(test_wd, .local_envir = test_env)
 
 
 # Value Object ------------------------------------------------------------
@@ -24,7 +22,3 @@ test_that("implementing AbstractEntity returns Entity", {
     expect_is(entity$command(), "Entity")
     expect_is(entity$query(), "data.frame")
 })
-
-
-# Cleanup -----------------------------------------------------------------
-testthat::teardown(unlink(test_wd, recursive = TRUE, force = TRUE))
