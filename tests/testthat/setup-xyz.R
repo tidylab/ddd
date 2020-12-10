@@ -7,3 +7,6 @@ test_wd <- tempfile("test-")
 filename <- ddd:::filename
 title <- ddd:::title
 
+DummyDomainService <- ddd:::DummyDomainService
+DummyEntity <- ddd:::DummyEntity
+DummyValueObject <- ddd:::DummyValueObject
