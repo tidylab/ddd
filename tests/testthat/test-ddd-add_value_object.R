@@ -1,16 +1,11 @@
 # Setup -------------------------------------------------------------------
-testthat::setup({
-    assign("test_env", testthat::test_env(), envir = parent.frame())
-    create_package(test_wd)
-    withr::local_dir(test_wd, .local_envir = test_env)
-    test_env$name   <- title$value("Pizza Slip")
-    test_env$domain <- title$domain("Pizza Ordering")
-})
+create_package(test_wd)
+withr::local_dir(test_wd)
+name <- title$value("Pizza Slip")
+domain <- title$domain("Pizza Ordering")
 
 # Create R script ---------------------------------------------------------
 test_that("create an R script", {
-    attach(test_env)
-
     expect_null(add_value_object(name, domain))
     file_path <- file.path(getwd(), "R", filename$value(name, domain))
     expect_file_exists(file_path)
