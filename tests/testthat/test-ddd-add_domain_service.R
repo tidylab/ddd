@@ -22,6 +22,5 @@ test_that("create a unit-test", {
     expect_file_exists(file_path)
 
     file_content <- readLines(file_path)
-    expect_match(file_content, paste0("unit test for domain-service ", name))
     expect_match(file_content, paste0(name, "\\$new\\("))
 })
