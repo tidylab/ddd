@@ -27,7 +27,21 @@ test_that("calling DummyEntity$query returns DummyValueObject", {
 })
 
 
+# Domain Service ----------------------------------------------------------
+test_that("instantiate a DummyDomainService Domain Service", {
+    expect_s3_class(domain_service <<- DummyDomainService$new(), "DomainService")
+})
+
+test_that("calling DummyDomainService$command performs an action", {
+    expect_s3_class(domain_service$command(), "DomainService")
+})
+
+test_that("calling DummyDomainService$query returns the desired results", {
+    expect_null(domain_service$query(uid = character(0)))
+})
+
+
 # Teardown ----------------------------------------------------------------
-withr::defer(rm(entity, envir = .GlobalEnv))
+withr::defer(rm(entity, domain_service, envir = .GlobalEnv))
 
 
