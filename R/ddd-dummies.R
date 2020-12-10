@@ -1,11 +1,12 @@
 #' @title Dummy Domain Service
 #' @description A dummy for tests, and demonstration purposes.
+#' @param specification (`data.frame`) a data.frame of type DummyValueObject.
+#' @param uid (`character`) A DummyEntity \code{uid}.
 #' @family dummy domain objects
 #' @keywords internal
-#' @export
+#' @noRd
 DummyDomainService <- R6::R6Class("DummyDomainService", inherit = AbstractDomainService, lock_objects = FALSE, cloneable = FALSE, public = list(
     #' @description command function
-    #' @param specification (`data.frame`) a data.frame of type \link{DummyValueObject}.
     command = function(specification = DummyValueObject()){
         stopifnot(any(class(specification) %in% "data.frame"))
         stopifnot(all(colnames(specification) %in% colnames(DummyValueObject())))
@@ -20,7 +21,6 @@ DummyDomainService <- R6::R6Class("DummyDomainService", inherit = AbstractDomain
         invisible(self)
     },
     #' @description query function
-    #' @param uid (`character`) A \link{DummyEntity} \code{uid}.
     query =  function(uid = character(0)){
         stopifnot(is.character(uid))
 
@@ -42,19 +42,19 @@ DummyDomainService <- R6::R6Class("DummyDomainService", inherit = AbstractDomain
 # Entity ------------------------------------------------------------------
 #' @title Dummy Entity
 #' @description A dummy for tests, place-holders and demonstration purposes.
+#' @param uid (`character`) A DummyEntity \code{uid}.
+#' @param specification (`data.frame`) a data.frame of type DummyValueObject.
 #' @family dummy domain objects
 #' @keywords internal
-#' @export
+#' @noRd
 DummyEntity <- R6::R6Class("Entity", inherit = AbstractEntity, lock_objects = FALSE, cloneable = FALSE, public = list(
-    #' @inherit AbstractEntity description
-    #' @param uid (`character`) A \link{DummyEntity} \code{uid}.
+    #' @description  Instantiate a dummy Entity object
     initialize = function(uid = NULL){
         super$initialize(uid)
         self$specification <- list()
         return(self)
     },
     #' @description command function
-    #' @param specification (`data.frame`) a data.frame of type \link{DummyValueObject}.
     command = function(specification = DummyValueObject()){
         # TODO: Write command code here
         stopifnot(all(colnames(specification) %in% colnames(DummyValueObject())))
@@ -74,7 +74,7 @@ DummyEntity <- R6::R6Class("Entity", inherit = AbstractEntity, lock_objects = FA
 #' @description A dummy for tests, place-holders and demonstration purposes.
 #' @family dummy domain objects
 #' @keywords internal
-#' @export
+#' @noRd
 DummyValueObject <- function(
     mpg = NA_real_, cyl = NA_real_, disp = NA_real_, hp = NA_real_,
     drat = NA_real_, wt = NA_real_, qsec = NA_real_, vs = NA_real_,

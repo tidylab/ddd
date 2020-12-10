@@ -9,7 +9,7 @@
 AbstractEntity <- R6::R6Class("Entity", inherit = NULL, public = list(
     #' @field uid Entity unique identifier.
     uid = character(0),
-    #' @description Instantiate Entity object.
+    #' @description Instantiate an Entity object.
     #' @param uid (`character`) Entity unique identifier.
     initialize = function(uid){
         self$uid <- uid
