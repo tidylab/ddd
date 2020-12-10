@@ -15,11 +15,11 @@ test_that("implementing Value Object returns data.frame", {
 
 # Entity ------------------------------------------------------------------
 test_that("implementing AbstractEntity returns Entity", {
-    expect_s3_class(entity <<- DummyEntity$new(uid = rownames(mtcars[1,]), specification = mtcars[1,]), "Entity")
+    expect_s3_class(entity <<- DummyEntity$new(uid = rownames(mtcars[1,])), "Entity")
 })
 
 test_that("calling DummyEntity$command returns Entity", {
-    expect_s3_class(entity$command(), "Entity")
+    expect_s3_class(entity$command(specification = mtcars[1,]), "Entity")
 })
 
 test_that("calling DummyEntity$query returns DummyValueObject", {
@@ -33,7 +33,7 @@ test_that("instantiate a DummyDomainService Domain Service", {
 })
 
 test_that("calling DummyDomainService$command performs an action", {
-    expect_s3_class(domain_service$command(), "DomainService")
+    expect_s3_class(domain_service$command(specification = mtcars[1,]), "DomainService")
 })
 
 test_that("calling DummyDomainService$query returns the desired results", {
