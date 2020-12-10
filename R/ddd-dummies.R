@@ -5,7 +5,7 @@
 #' @export
 DummyDomainService <- R6::R6Class("DummyDomainService", inherit = AbstractDomainService, lock_objects = FALSE, cloneable = FALSE, public = list(
     #' @description command function
-    #' @param specification (`data.frame`) a data.frame of type \link{DummyValueObject}.
+    #' @param specification (`data.frame`) a data.frame of type \link[ddd]{DummyValueObject}.
     command = function(specification = DummyValueObject()){
         stopifnot(any(class(specification) %in% "data.frame"))
         stopifnot(all(colnames(specification) %in% colnames(DummyValueObject())))
@@ -20,7 +20,7 @@ DummyDomainService <- R6::R6Class("DummyDomainService", inherit = AbstractDomain
         invisible(self)
     },
     #' @description query function
-    #' @param uid (`character`) A \link{DummyEntity} \code{uid}.
+    #' @param uid (`character`) A \link[ddd]{DummyEntity} \code{uid}.
     query =  function(uid = character(0)){
         stopifnot(is.character(uid))
 
@@ -47,14 +47,14 @@ DummyDomainService <- R6::R6Class("DummyDomainService", inherit = AbstractDomain
 #' @export
 DummyEntity <- R6::R6Class("Entity", inherit = AbstractEntity, lock_objects = FALSE, cloneable = FALSE, public = list(
     #' @inherit AbstractEntity description
-    #' @param uid (`character`) A \link{DummyEntity} \code{uid}.
+    #' @param uid (`character`) A \link[ddd]{DummyEntity} \code{uid}.
     initialize = function(uid = NULL){
         super$initialize(uid)
         self$specification <- list()
         return(self)
     },
     #' @description command function
-    #' @param specification (`data.frame`) a data.frame of type \link{DummyValueObject}.
+    #' @param specification (`data.frame`) a data.frame of type \link[ddd]{DummyValueObject}.
     command = function(specification = DummyValueObject()){
         # TODO: Write command code here
         stopifnot(all(colnames(specification) %in% colnames(DummyValueObject())))
