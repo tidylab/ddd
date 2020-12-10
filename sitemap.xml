@@ -10,6 +10,15 @@
     <loc>https://tidylab.github.io/ddd//reference/AbstractEntity.html</loc>
   </url>
   <url>
+    <loc>https://tidylab.github.io/ddd//reference/DummyDomainService.html</loc>
+  </url>
+  <url>
+    <loc>https://tidylab.github.io/ddd//reference/DummyEntity.html</loc>
+  </url>
+  <url>
+    <loc>https://tidylab.github.io/ddd//reference/DummyValueObject.html</loc>
+  </url>
+  <url>
     <loc>https://tidylab.github.io/ddd//reference/add_domain_service.html</loc>
   </url>
   <url>
