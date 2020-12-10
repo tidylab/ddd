@@ -15,7 +15,19 @@ test_that("implementing Value Object returns data.frame", {
 
 # Entity ------------------------------------------------------------------
 test_that("implementing AbstractEntity returns Entity", {
-    expect_s3_class(entity <- DummyEntity$new(uid = rownames(mtcars[1,]), specification = mtcars[1,]), "Entity")
-    expect_s3_class(entity$command(), "Entity")
-    expect_s3_class(entity$query(), "data.frame")
+    expect_s3_class(entity <<- DummyEntity$new(uid = rownames(mtcars[1,]), specification = mtcars[1,]), "Entity")
 })
+
+test_that("calling DummyEntity$command returns Entity", {
+    expect_s3_class(entity$command(), "Entity")
+})
+
+test_that("calling DummyEntity$query returns DummyValueObject", {
+    expect_has_columns(entity$query(), colnames(DummyValueObject()))
+})
+
+
+# Teardown ----------------------------------------------------------------
+withr::defer(rm(entity, envir = .GlobalEnv))
+
+

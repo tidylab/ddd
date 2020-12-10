@@ -4,6 +4,7 @@ withr::local_dir(test_wd)
 name <- title$service("Registry")
 domain <- title$domain("Pizza Ordering")
 
+
 # Tests -------------------------------------------------------------------
 test_that("create an R script", {
     expect_null(add_domain_service(name, domain))

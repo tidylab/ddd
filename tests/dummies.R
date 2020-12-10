@@ -15,7 +15,8 @@ DummyValueObject <- function(
 #' @noRd
 DummyEntity <- R6::R6Class("Entity", inherit = AbstractEntity, lock_objects = FALSE, cloneable = FALSE, public = list(
     # specification = Specification(),
-    initialize = function(uid = NULL, specification = NULL){
+    initialize = function(uid = NULL, specification = DummyValueObject()){
+        stopifnot(all(colnames(specification) %in% colnames(DummyValueObject())))
         super$initialize(uid)
         self$specification <- specification
     },
