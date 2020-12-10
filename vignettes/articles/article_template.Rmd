@@ -31,14 +31,15 @@ interface for accessing domain objects.
 
 ## Further Reading
 
+
 ```{r, message=TRUE}
-message("Blue Box")
+message("Signifies a tip or suggestion")
 ```
 
 ```{r, warning=TRUE}
-warning("Yello Box")
+warning("Signifies a general note")
 ```
 
 ```{r, error=TRUE}
-stop("Red Box")
+stop("Signifies a warning or caution")
 ```

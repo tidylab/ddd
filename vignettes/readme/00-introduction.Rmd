@@ -35,21 +35,14 @@ In addition to the general text used throughout, you will notice the following
 
 <!-- code chunks with images: -->
 
-```{=html}
-<div class="alert alert-info" <strong="">
-Signifies a tip or suggestion
-</div>
+```{r, message=TRUE}
+message("Signifies a tip or suggestion")
 ```
 
-```{=html}
-<div class="alert alert-warning" <strong="">
-Signifies a general note
-</div>
+```{r, warning=TRUE}
+warning("Signifies a general note")
 ```
 
-```{=html}
-<div class="alert alert-danger" <strong="">
-Signifies a warning or caution
-</div>
+```{r, error=TRUE}
+stop("Signifies a warning or caution")
 ```
-

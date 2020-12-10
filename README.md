@@ -104,4 +104,18 @@ calling `use_ddd()`. `ddd` is needed for software development and has no
 added value in production. `use_ddd()` will copy the necessary R classes
 and functions into your project.
 
-------------------------------------------------------------------------
+References
+----------
+
+Evans, Eric. 2004. *Domain-driven design: tackling complexity in the
+heart of software*. Addison-Wesley Professional.
+
+Percival, Harry, and Bob Gregory. 2020. *Architecture Patterns with
+Python Enabling Test-Driven Development, Domain-Driven Design, and
+Event-Driven Microservice*. Edited by 1 Edition. O’Reilly Media, Inc.
+
+Vernon, Vaughn. 2013. *Implementing Domain-Driven Design*. 1st Editio.
+Addison-Wesley Professional.
+
+Wlaschin, Scott. 2018. *Domain Modeling Made Functional*. Pragmatic
+Bookshelf.
