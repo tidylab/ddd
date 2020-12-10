@@ -8,13 +8,13 @@ testthat::setup({{
 # Tests -------------------------------------------------------------------
 test_that("instantiate a {name} Domain Service", {{
     attach(test_env)
-    expect_is(domain_service <- {name}$new(), "DomainService")
+    expect_s3_class(domain_service <- {name}$new(), "DomainService")
     test_env$domain_service <- domain_service
 }})
 
 test_that("calling {name}$command performs an action", {{
     attach(test_env)
-    expect_is(domain_service$command(), "DomainService")
+    expect_s3_class(domain_service$command(), "DomainService")
 }})
 
 test_that("calling {name}$query returns the desired results", {{

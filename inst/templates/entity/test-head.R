@@ -9,7 +9,7 @@ testthat::setup({{
 # General -----------------------------------------------------------------
 test_that('calling {name}$new instantiates an object with a unique id', {{
     attach(test_env)
-    expect_is(entity <- {name}$new(uid = entity_uid), "{name}")
+    expect_s3_class(entity <- {name}$new(uid = entity_uid), "{name}")
     test_env$entity <- entity
 }})
 
