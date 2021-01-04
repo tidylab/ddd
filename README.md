@@ -5,8 +5,9 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ddd)](https://CRAN.R-project.org/package=ddd)
-[![test-suite](https://github.com/tidylab/ddd/workflows/test-suite/badge.svg)](https://github.com/tidylab/ddd/actions)
-[![code-coverage](https://codecov.io/gh/tidylab/ddd/branch/master/graph/badge.svg)](https://codecov.io/github/tidylab/ddd/?branch=master)
+[![R build
+status](https://github.com/tidylab/ddd/workflows/R-CMD-check/badge.svg)](https://github.com/tidylab/ddd/actions)
+[![codecov](https://codecov.io/gh/tidylab/ddd/branch/master/graph/badge.svg?token=U6FL5N32FL)](https://codecov.io/gh/tidylab/ddd)
 
 <!-- badges: end -->
 
@@ -104,4 +105,18 @@ calling `use_ddd()`. `ddd` is needed for software development and has no
 added value in production. `use_ddd()` will copy the necessary R classes
 and functions into your project.
 
-------------------------------------------------------------------------
+References
+----------
+
+Evans, Eric. 2004. *Domain-driven design: tackling complexity in the
+heart of software*. Addison-Wesley Professional.
+
+Percival, Harry, and Bob Gregory. 2020. *Architecture Patterns with
+Python Enabling Test-Driven Development, Domain-Driven Design, and
+Event-Driven Microservice*. Edited by 1 Edition. O’Reilly Media, Inc.
+
+Vernon, Vaughn. 2013. *Implementing Domain-Driven Design*. 1st Editio.
+Addison-Wesley Professional.
+
+Wlaschin, Scott. 2018. *Domain Modeling Made Functional*. Pragmatic
+Bookshelf.

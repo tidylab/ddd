@@ -1,5 +1,10 @@
 ---
 title: "Overview"
+bibliography: [../../inst/REFERENCES.bib]
+biblio-style: apalike
+link-citations: yes
+notice: | 
+  @Evans2004, @Vernon2013, @Wlaschin2018, @Percival2020 
 editor_options: 
   markdown: 
     wrap: 80
