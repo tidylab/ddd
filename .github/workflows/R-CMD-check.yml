@@ -54,7 +54,7 @@ jobs:
        - name: Install remotes
          run: |
            if(!'remotes' %in% rownames(utils::installed.packages())){
-               utils::install.packages('remotes', repos = 'https://cloud.r-project.org'}
+               utils::install.packages('remotes', repos = 'https://cloud.r-project.org')
            } else if(packageVersion('remotes') < '2.2.0'){
                try(detach('package:remotes', unload = TRUE, force = TRUE), silent = TRUE)
                utils::install.packages('remotes', repos = 'https://cloud.r-project.org')
