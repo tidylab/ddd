@@ -40,6 +40,16 @@ text
 
 text
 
+## Workflow:
+
+1.  Optional: Call `ddd::use_ddd` maximum once per project; this will make the
+    project independent of `ddd`
+2.  Call `ddd::add_entity` with its respective arguments
+3.  Call `devtools::document` (or Ctrl+Shift+D on windows) to include the Entity
+    in the project NAMESPACE file
+4.  Call `devtools::test` (or Ctrl+Shift+T on windows) to validate that the
+    Entity's unit-test pass
+
 ## Further Reading
 
 ```{r, message=TRUE}
