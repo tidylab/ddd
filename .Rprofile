@@ -9,24 +9,10 @@ assign(".Rprofile", new.env(), envir = globalenv())
     URL <- if(is.na(Date)) "https://cran.rstudio.com/" else paste0("https://mran.microsoft.com/snapshot/", Date)
     options(repos = URL)
 
-    suppressMessages(try({renv::consent(provided = TRUE); unlink("./renv")}))
-    options(
-        renv.lockfile = "renv.lock",
-        renv.consent = TRUE,
-        renv.clean = FALSE,
-        renv.settings = list(
-            ignored.packages = c("renv"),
-            snapshot.type = "explicit",
-            auto.snapshot = FALSE,
-            package.dependency.fields = c("Imports", "Depends", "LinkingTo", "Suggests")[1:3],
-            vcs.ignore.library = TRUE,
-            use.cache = TRUE
-        )
-    )
-
     # Programming Logic
     pkgs <- c("usethis", "devtools", "magrittr", "testthat")
     invisible(sapply(pkgs, require, warn.conflicts = FALSE, character.only = TRUE))
+    .Rprofile$tasks$update_template()
 }
 
 # .Last -------------------------------------------------------------------
@@ -34,7 +20,7 @@ assign(".Rprofile", new.env(), envir = globalenv())
     try(if(testthat::is_testing()) return())
 
     unlink("./renv", recursive = TRUE)
-    try(system('docker-compose down'), silent = TRUE)
+    try(system('utils-compose down'), silent = TRUE)
 }
 
 # Docker ------------------------------------------------------------------
@@ -132,6 +118,8 @@ assign(".Rprofile", new.env(), envir = globalenv())
 
 # Utils -------------------------------------------------------------------
 .Rprofile$utils$run_script <- function(path, name){
+    .Rprofile$tasks$update_template()
+
     withr::with_envvar(
         c(TESTTHAT = "true"),
         rstudioapi::jobRunScript(
@@ -144,3 +132,9 @@ assign(".Rprofile", new.env(), envir = globalenv())
     invisible()
 }
 
+.Rprofile$tasks$update_templates <- function(){
+    fs::file_copy(
+        path = file.path("./R", c("ddd-abc.R")),
+        new_path = "./inst/templates/R/", overwrite = TRUE
+    )
+}

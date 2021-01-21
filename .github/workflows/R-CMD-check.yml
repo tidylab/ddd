@@ -50,7 +50,18 @@ jobs:
                       writeLines('require(remotes)', Rprofile);
                       writeLines(paste0('options(repos = \'', URL, '\')'), Rprofile);
                       close(Rprofile)"
-          Rscript -e "if(!'remotes' %in% rownames(utils::installed.packages())) utils::install.packages('remotes')"
+
+       - name: Install remotes
+        run: |
+          if(!'remotes' %in% rownames(utils::installed.packages()))
+            utils::install.packages('remotes')
+          if (packageVersion('remotes') < '2.2.0'){
+            try(detach('package:remotes', unload = TRUE, force = FALSE))
+            utils::install.packages('remotes', repos = 'https://mran.microsoft.com/snapshot/2020-01-20')
+          }
+
+        shell: Rscript {0}
+
       - name: Query dependencies
         run: |
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
