@@ -19,6 +19,11 @@ path_test <- file.path("tests", "testthat", "test-" %+% filename$value(name, dom
 fs::dir_create(path_proj)
 ```
 
+<!-- Details -->
+
+```{r child="../details/add_value_object.Rmd", eval = FALSE}
+```
+
 ## What is a Value Object?
 
 A ***Value Object*** is a function that receives input, applies some

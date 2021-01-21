@@ -2,7 +2,7 @@
 #' @description Domain Service
 #' @param name (`character`) \code{Domain Service} name.
 #' @param domain (`character`) \code{Domain Service} domain name.
-#' @includeRmd vignettes/articles/add_domain_service.Rmd
+#' @includeRmd vignettes/details/add_domain_service.Rmd
 #' @family domain object generators
 #' @export
 add_domain_service <- function(name, domain){

@@ -43,13 +43,13 @@ text
 ## Further Reading
 
 ```{r, message=TRUE}
-message("Signifies a tip or suggestion")
+message("Blue text block")
 ```
 
 ```{r, warning=TRUE}
-warning("Signifies a general note")
+warning("Yello text block")
 ```
 
 ```{r, error=TRUE}
-stop("Signifies a warning or caution")
+stop("Red text block")
 ```
