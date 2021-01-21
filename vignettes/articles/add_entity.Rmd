@@ -10,88 +10,9 @@ editor_options:
 
 ```{r, include = FALSE}
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
-name <- "Order"
-domain <- "Pizza Ordering"
-commands <- "add_item_to_order"
-queries <- "review_order"
-
-path_proj <- tempfile("article-")
-path_script <- file.path("R", filename$entity(name, domain))
-path_test <- file.path("tests", "testthat", "test-" %+% filename$entity(name, domain))
-fs::dir_create(path_proj)
 ```
 
-## What does `add_entity` do?
+<!-- Details -->
 
-Given the **Entity** `name`, and its `domain` name, and optionally `commands`
-and `queries` methods,
-
-When `add_entity` is called
-
-```{r, eval = TRUE, echo = FALSE}
-command <- "add_entity(name = '" %+% name %+% 
-    "', domain = '" %+% domain %+% 
-    "', commands = '" %+% commands %+% 
-    "', queries = '" %+% queries %+%
-    "')"
-withr::with_dir(path_proj, eval(parse(text=command)))
+```{r child="../details/add_entity.Rmd", eval = TRUE}
 ```
-
-```{r, code = command, eval = FALSE, echo = TRUE}
-```
-
-Then the function:
-
--   Generates boilerplate code for the **Entity** and saves it at
-    **`r path_script`**;
--   Generates a unit-test for the **Entity** and saves it at **`r path_test`**;
-    and
--   Opens the files (only in interactive mode).
-
-```{r, message=TRUE}
-message("You don't need to remember the naming style for the different DDD components.
-Instead, <code>ddd</code> takes care of naming style for all domain objects.
-This way DDD file names, classes and functions are congruent with each other."
-)
-```
-
-## What are the main components of an **Entity**?
-
-The boilerplate code for the `r name` Entity class produced by `add_entity`
-looks like this:
-
-**`r path_script`**
-
-```{r code = readLines(file.path(path_proj, path_script)), eval = FALSE, echo = TRUE}
-```
-
-Notice the three public methods created by `add_entity`:
-
-1.  `initialize` is a constructor for new entities.
-
-    -   By DDD definition, every Entity must have a unique id (`uid`) which
-        distinguishes it from other Entities.
-
-2.  `add_item_to_order` is a command boilerplate. You'll need to:
-
-    -   Replace `...` with explicit (if any) input arguments; and
-    -   Implement the method behaviour. Remember, command doesn't return data.
-
-3.  `review_order` is a query boilerplate. You'll need to:
-
-    -   Replace its content to retrieve data from the object
-    -   Remember, query does not change the state of the system.
-
-The boilerplate code for the `r name` Entity unit-test produced by `add_entity`
-looks like this:
-
-**`r path_test`**
-
-```{r code = readLines(file.path(path_proj, path_test)), eval = FALSE, echo = TRUE}
-```
-
-<!-- ## What is an Entity? -->
-
-<!-- Entities are the first natural place we should aim to place business logic in -->
-
-<!-- domain-driven applications. -->

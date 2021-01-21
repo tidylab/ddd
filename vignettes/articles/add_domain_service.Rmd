@@ -12,41 +12,7 @@ editor_options:
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ```
 
-<!-- One line about what the function does -->
+<!-- Details -->
 
-Mediates between the domain and data mapping layers using a collection-like
-interface for accessing domain objects.
-
-<!-- Introduction Visual -->
-
-<!-- Introduction Text -->
-
-## How It Works
-
-text
-
-## When to Use It
-
-text
-
-## Example: Name of Example 1
-
-text
-
-## Example: Name of Example 2
-
-text
-
-## Further Reading
-
-```{r, message=TRUE}
-message("Blue text block")
-```
-
-```{r, warning=TRUE}
-warning("Yello text block")
-```
-
-```{r, error=TRUE}
-stop("Red text block")
+```{r child="../details/add_entity.Rmd", eval = TRUE}
 ```

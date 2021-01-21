@@ -1,13 +1,8 @@
 ---
-title: "DDD as a Higher Programming Language"
-output: rmarkdown::html_vignette
+title: "Add a Service to a Domain"
 bibliography: [../../inst/REFERENCES.bib]
 biblio-style: apalike
 link-citations: yes
-vignette: >
-  %\VignetteIndexEntry{DDD as a Higher Programming Language}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
 editor_options: 
   markdown: 
     wrap: 80
@@ -17,4 +12,6 @@ editor_options:
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ```
 
-DD
+
+## What does `add_domain_service` do?
+
