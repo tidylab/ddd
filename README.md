@@ -1,5 +1,5 @@
-`ddd` <img src="https://i.imgur.com/M8Jk1AL.png" align="right" height="75"/>
-============================================================================
+
+# `ddd` <img src="https://raw.githubusercontent.com/tidylab/ddd/master/pkgdown/logo.png" align="right" height="75"/>
 
 <!-- badges: start -->
 
@@ -11,18 +11,15 @@ status](https://github.com/tidylab/ddd/workflows/R-CMD-check/badge.svg)](https:/
 
 <!-- badges: end -->
 
-`Domain-driven Design (ddd)`
-----------------------------
+## `Domain-driven Design (ddd)`
 
 <img src="https://i.imgur.com/RLEQkhe.png" width="100%" style="display: block; margin: auto;" />
 
-Hurry please, I have a short attention span, what is `ddd`?
------------------------------------------------------------
+## Hurry please, I have a short attention span, what is `ddd`?
 
 Sorry, most likely `ddd` is not for you.
 
-Who is `ddd` for?
------------------
+## Who is `ddd` for?
 
 Here are a few assumptions about you:
 
@@ -39,8 +36,7 @@ Here are a few assumptions about you:
 If you belong to the intersection of all the sets above, then `ddd` may
 benefit you.
 
-What `ddd` is (but first, what it is not)
------------------------------------------
+## What `ddd` is (but first, what it is not)
 
 Because `ddd` is an R package that caters for Data Scientists, it is
 natural to think it may contain a new learning algorithm, statistical
@@ -59,8 +55,7 @@ building blocks form a domain model.
 Before getting into specifics about **domain-driven design**, lets first
 discuss the importance of software design and how it is inevitable.
 
-Why should I use software design?
----------------------------------
+## Why should I use software design?
 
 ![](https://i.imgur.com/pSbxSxl.png "guardrails and guiderails")
 
@@ -92,31 +87,53 @@ alternative to good design is bad design, not no design at all.
 <!-- Class-driven design and Domain-driven design. -->
 <!-- Although each domain model is different, many patterns occur repeatedly. -->
 
-Installation
-------------
+## Installation
 
 You can install `ddd` by using:
 
-    install.packages("remotes")
-    remotes::install_github("tidylab/ddd")
+``` r
+install.packages("remotes")
+remotes::install_github("tidylab/ddd")
+```
 
 Optionally, you can make a project independent of the `ddd` package by
 calling `use_ddd()`. `ddd` is needed for software development and has no
 added value in production. `use_ddd()` will copy the necessary R classes
 and functions into your project.
 
-References
-----------
+## References
 
-Evans, Eric. 2004. *Domain-driven design: tackling complexity in the
-heart of software*. Addison-Wesley Professional.
+<div id="refs" class="references csl-bib-body hanging-indent">
 
-Percival, Harry, and Bob Gregory. 2020. *Architecture Patterns with
-Python Enabling Test-Driven Development, Domain-Driven Design, and
-Event-Driven Microservice*. Edited by 1 Edition. O’Reilly Media, Inc.
+<div id="ref-Evans2004" class="csl-entry">
+
+Evans, Eric. 2004. *<span class="nocase">Domain-driven design: tackling
+complexity in the heart of software</span>*. Addison-Wesley
+Professional.
+
+</div>
+
+<div id="ref-Percival2020" class="csl-entry">
+
+Percival, Harry, and Bob Gregory. 2020. *<span
+class="nocase">Architecture Patterns with Python Enabling Test-Driven
+Development, Domain-Driven Design, and Event-Driven
+Microservice</span>*. Edited by 1 Edition. O’Reilly Media, Inc.
+
+</div>
+
+<div id="ref-Vernon2013" class="csl-entry">
 
 Vernon, Vaughn. 2013. *Implementing Domain-Driven Design*. 1st Editio.
 Addison-Wesley Professional.
 
+</div>
+
+<div id="ref-Wlaschin2018" class="csl-entry">
+
 Wlaschin, Scott. 2018. *Domain Modeling Made Functional*. Pragmatic
 Bookshelf.
+
+</div>
+
+</div>
