@@ -17,7 +17,7 @@ editor_options:
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ```
 
-# `ddd` <img src="https://i.imgur.com/M8Jk1AL.png" align="right" height="75"/>
+# `ddd` <img src="https://raw.githubusercontent.com/tidylab/ddd/master/pkgdown/logo.png" align="right" height="75"/>
 
 <!-- badges: start -->
 
