@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">Domain-driven Design in R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -100,6 +100,7 @@
 
     
     
+<!-- Details -->
 <div id="what-does-add_entity-do" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-does-add_entity-do" class="anchor"></a>What does <code>add_entity</code> do?</h2>
@@ -195,6 +196,17 @@
 <!-- ## What is an Entity? -->
 <!-- Entities are the first natural place we should aim to place business logic in -->
 <!-- domain-driven applications. -->
+</div>
+<div id="workflow" class="section level2">
+<h2 class="hasAnchor">
+<a href="#workflow" class="anchor"></a>Workflow:</h2>
+<ol style="list-style-type: decimal">
+<li>Optional: Call <code><a href="../../reference/use_ddd.html">ddd::use_ddd</a></code> maximum once per project; this will make the project independent of <code>ddd</code>
+</li>
+<li>Call <code><a href="../../reference/add_entity.html">ddd::add_entity</a></code> with its respective arguments</li>
+<li>Call <code><a href="https://devtools.r-lib.org//reference/document.html">devtools::document</a></code> (or Ctrl+Shift+D on windows) to include the Entity in the project NAMESPACE file</li>
+<li>Call <code><a href="https://devtools.r-lib.org//reference/test.html">devtools::test</a></code> (or Ctrl+Shift+T on windows) to validate that the Entity’s unit-test pass</li>
+</ol>
 </div>
   </div>
 

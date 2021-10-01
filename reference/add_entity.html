@@ -86,7 +86,7 @@ and behaviours of an Entity in a domain." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Domain-driven Design in R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -178,7 +178,7 @@ and behaviours of an <code>Entity</code> in a domain.</p>
 
 <p>Given the <strong>Entity</strong> <code>name</code>, and its <code>domain</code> name, and optionally
 <code>commands</code> and <code>queries</code> methods,</p>
-<p>When <code>add_entity</code> is called<div class="r"></p><pre><span class='fu'>add_entity</span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>'Order'</span>, domain <span class='op'>=</span> <span class='st'>'Pizza Ordering'</span>, commands <span class='op'>=</span> <span class='st'>'add_item_to_order'</span>, queries <span class='op'>=</span> <span class='st'>'review_order'</span><span class='op'>)</span>
+<p>When <code>add_entity</code> is called<div class="sourceCode r"></p><pre><span class='fu'>add_entity</span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>'Order'</span>, domain <span class='op'>=</span> <span class='st'>'Pizza Ordering'</span>, commands <span class='op'>=</span> <span class='st'>'add_item_to_order'</span>, queries <span class='op'>=</span> <span class='st'>'review_order'</span><span class='op'>)</span>
 </pre><p></div></p>
 <p>Then the function:</p><ul>
 <li><p>Generates boilerplate code for the <strong>Entity</strong> and saves it at
@@ -201,7 +201,7 @@ other.
 
 <p>The boilerplate code for the Order Entity class produced by <code>add_entity</code>
 looks like this:</p>
-<p><strong>R/pizza_ordering-entity-Order.R</strong><div class="r"></p><pre><span class='co'>#' @title Order Domain Entity</span>
+<p><strong>R/pizza_ordering-entity-Order.R</strong><div class="sourceCode r"></p><pre><span class='co'>#' @title Order Domain Entity</span>
 <span class='co'>#' @family Pizza Ordering</span>
 <span class='co'>#' @noRd</span>
 <span class='va'>Order</span> <span class='op'>&lt;-</span> <span class='fu'>R6</span><span class='fu'>::</span><span class='kw'><a href='https://r6.r-lib.org/reference/R6Class.html'>R6Class</a></span><span class='op'>(</span><span class='st'>"Order"</span>, inherit <span class='op'>=</span> <span class='va'>AbstractEntity</span>, lock_objects <span class='op'>=</span> <span class='cn'>FALSE</span>, cloneable <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
@@ -241,7 +241,7 @@ data.</p></li>
 
 <p>The boilerplate code for the Order Entity unit-test produced by
 <code>add_entity</code> looks like this:</p>
-<p><strong>tests/testthat/test-pizza_ordering-entity-Order.R</strong><div class="r"></p><pre><span class='fu'>context</span><span class='op'>(</span><span class='st'>'unit test for entity Order'</span><span class='op'>)</span>
+<p><strong>tests/testthat/test-pizza_ordering-entity-Order.R</strong><div class="sourceCode r"></p><pre><span class='fu'>context</span><span class='op'>(</span><span class='st'>'unit test for entity Order'</span><span class='op'>)</span>
 
 <span class='co'># Setup -------------------------------------------------------------------</span>
 <span class='va'>entity_uid</span> <span class='op'>&lt;-</span> <span class='st'>"738a742a"</span>
@@ -270,16 +270,18 @@ data.</p></li>
 
 <!-- domain-driven applications. --></p>
 
-    <h2 class="hasAnchor" id="workflow"><a class="anchor" href="#workflow"></a>Workflow</h2>
-
-    
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Workflow:</h3>
 
 <ol>
-<li><p>Optional: Call <code><a href='use_ddd.html'>use_ddd</a></code> maximum once per project; this will make the project independent of <code>ddd</code></p></li>
-<li><p>Call <code>add_entity</code> with its respective arguments</p></li>
-<li><p>Call <code><a href='https://devtools.r-lib.org//reference/document.html'>devtools::document</a></code> (or Ctrl+Shift+D on windows) to include the Entity in the project NAMESPACE file.</p></li>
-<li><p>Call <code><a href='https://devtools.r-lib.org//reference/test.html'>devtools::test</a></code> (or Ctrl+Shift+T on windows) to validate that the Entity's unit-test pass</p></li>
+<li><p>Optional: Call <code><a href='use_ddd.html'>ddd::use_ddd</a></code> maximum once per project; this will
+make the project independent of <code>ddd</code></p></li>
+<li><p>Call <code>ddd::add_entity</code> with its respective arguments</p></li>
+<li><p>Call <code><a href='https://devtools.r-lib.org//reference/document.html'>devtools::document</a></code> (or Ctrl+Shift+D on windows) to include
+the Entity in the project NAMESPACE file</p></li>
+<li><p>Call <code><a href='https://devtools.r-lib.org//reference/test.html'>devtools::test</a></code> (or Ctrl+Shift+T on windows) to validate that
+the Entity’s unit-test pass</p></li>
 </ol>
+
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
