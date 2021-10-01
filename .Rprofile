@@ -3,24 +3,19 @@ assign(".Rprofile", new.env(), envir = globalenv())
 # .First ------------------------------------------------------------------
 .First <- function(){
     try(if(testthat::is_testing()) return())
-    try(readRenviron(".Renviron"), silent = TRUE)
+    if(file.exists(".Renviron")) readRenviron(".Renviron")
+
     # Package Management System
     Date <- as.character(read.dcf("DESCRIPTION", "Date"));
     URL <- if(is.na(Date)) "https://cran.rstudio.com/" else paste0("https://mran.microsoft.com/snapshot/", Date)
     options(repos = URL)
-
-    # Programming Logic
-    pkgs <- c("usethis", "devtools", "magrittr", "testthat")
-    invisible(sapply(pkgs, require, warn.conflicts = FALSE, character.only = TRUE))
     .Rprofile$tasks$update_template()
 }
 
 # .Last -------------------------------------------------------------------
 .Last <- function(){
     try(if(testthat::is_testing()) return())
-
-    unlink("./renv", recursive = TRUE)
-    try(system('utils-compose down'), silent = TRUE)
+    try(system('docker-compose down'), silent = TRUE)
 }
 
 # Docker ------------------------------------------------------------------
