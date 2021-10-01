@@ -34,19 +34,17 @@ called during data wrangling operations."
 
 Functions are things [@Wlaschin2018, p. 149]
 
-A light example of a **Value Object** is one that receives a character vector,
-applies the `tolower` function, and organises the character vector in a
-`data.frame`.
+Intuitive examples of **Value Objects** are:
 
-```{r, eval=TRUE, echo=TRUE}
-Alphabet <- function(letters = LETTERS){
-  stopifnot(is.character(letters)) # Value Object type check
-  letters <- tolower(letters)      # Value Object transformation
-  data.frame(letter = letters)     # Value Object return object
-}
+* ***Money***: Money is a useful **Value Object** that captures monetary value.
+It is a combination of Amount (`numeric`) and Currency (`character`). For
+instance *20 USD* and *20 NZD*, have different monetary value. However, we can
+create designated functions to add/subtract one Money **Value Object** from
+another.
 
-head(Alphabet())
-```
+* **Person**: Person is a **Value Object** that is representing an Object in our
+earthly life. It is a combination of First Name (`character`), optionally Last
+Name (`character`), Age (`numeric`) or Birthdate (`Date`), etc.
 
 In the context of DDD, a ***Value Object*** models a domain concept. A **Value
 Object** is an object that is identified only by its data and doesn't have a
@@ -55,7 +53,7 @@ long-lived identity.
 For example, think about the diners, i.e. customers, of a Pizzeria. Associating
 a food order and a customer requires ephemeral customer identity. The customer
 name matters. It is used to identify for whom a particular Pizza was made for.
-The names Hilary and Bill are not equal. However, once the customer leaves the
+The names Hilary and Bill are not equal. However, once the customer has left the
 Pizzeria, the customer's existence dissipates. On the other hand, if the
 customer is enrolled in a restaurant loyalty program, then its unique identifier
 on the system is both essential and long-lived.

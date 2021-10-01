@@ -1,5 +1,4 @@
-
-# `ddd` <img src="https://raw.githubusercontent.com/tidylab/ddd/master/pkgdown/logo.png" align="right" height="75"/>
+# `ddd` <img src="https://i.imgur.com/M8Jk1AL.png" align="right" height="75"/>
 
 <!-- badges: start -->
 
@@ -57,7 +56,7 @@ discuss the importance of software design and how it is inevitable.
 
 ## Why should I use software design?
 
-![](https://i.imgur.com/pSbxSxl.png "guardrails and guiderails")
+![](https://i.imgur.com/msQwsiU.png "guardrails and guiderails")
 
 When you develop software to solve a new business problem, what guides
 your software design? Obviously, you strive to eliminate unintended
@@ -91,10 +90,8 @@ alternative to good design is bad design, not no design at all.
 
 You can install `ddd` by using:
 
-``` r
-install.packages("remotes")
-remotes::install_github("tidylab/ddd")
-```
+    install.packages("remotes")
+    remotes::install_github("tidylab/ddd")
 
 Optionally, you can make a project independent of the `ddd` package by
 calling `use_ddd()`. `ddd` is needed for software development and has no
@@ -103,37 +100,17 @@ and functions into your project.
 
 ## References
 
-<div id="refs" class="references csl-bib-body hanging-indent">
-
-<div id="ref-Evans2004" class="csl-entry">
-
 Evans, Eric. 2004. *<span class="nocase">Domain-driven design: tackling
 complexity in the heart of software</span>*. Addison-Wesley
 Professional.
-
-</div>
-
-<div id="ref-Percival2020" class="csl-entry">
 
 Percival, Harry, and Bob Gregory. 2020. *<span
 class="nocase">Architecture Patterns with Python Enabling Test-Driven
 Development, Domain-Driven Design, and Event-Driven
 Microservice</span>*. Edited by 1 Edition. O’Reilly Media, Inc.
 
-</div>
-
-<div id="ref-Vernon2013" class="csl-entry">
-
 Vernon, Vaughn. 2013. *Implementing Domain-Driven Design*. 1st Editio.
 Addison-Wesley Professional.
 
-</div>
-
-<div id="ref-Wlaschin2018" class="csl-entry">
-
 Wlaschin, Scott. 2018. *Domain Modeling Made Functional*. Pragmatic
 Bookshelf.
-
-</div>
-
-</div>
