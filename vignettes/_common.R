@@ -1,4 +1,3 @@
-# ddd ---------------------------------------------------------------------
 suppressPackageStartupMessages(
     withr::with_dir(
         usethis::proj_get(),
@@ -37,7 +36,7 @@ knitr::knit_hooks$set(
     error = function(x, options) {
         paste('\n\n<div class="alert alert-danger">',
               x %>%
-                  stringr::str_replace_all('^#>\ Error in eval\\(expr, envir, enclos\\):', '**Caution:**') %>%
+                  stringr::str_replace_all('^.*:', '**Caution:**') %>%
                   stringr::str_replace_all('#> ', '\n'),
               '</div>', sep = '\n')
     },
@@ -58,13 +57,13 @@ knitr::knit_hooks$set(
 
 # helpers -----------------------------------------------------------------
 read_snippet <- function(name) read_lines(system.file("inst", "snippets", paste0(name,".R"), package = devtools::loaded_packages()[1,1]))
-`%+%` <- base::paste0
 
 # rmarkdown ---------------------------------------------------------------
 kable <- knitr::kable
 
 
 # regex -------------------------------------------------------------------
-discard_comments <- function(string) string[!stringr::str_detect(string, "^(#'|#) ")]
+discard_comments <- function(string) return(string[!stringr::str_detect(string, "^#")])
 discard_null <- function(string) string[!stringr::str_detect(string, "^NULL")]
 discard_empty_lines <- function(string) string[nchar(string)>0]
+
