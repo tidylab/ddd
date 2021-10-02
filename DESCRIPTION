@@ -28,6 +28,7 @@ Suggests:
     rmarkdown,
     knitr
 Imports:
+    desc,
     assertthat,
     fs,
     glue,

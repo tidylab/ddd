@@ -13,6 +13,8 @@ add_value_object <- function(name, domain){
     # Setup -------------------------------------------------------------------
     name <- title$value(name)
     domain <- title$domain(domain)
+    try(desc::description$new()$set_dep("decorators", "Imports")$write(), silent = TRUE)
+
 
     # Add Value Object --------------------------------------------------------
     file_path <- file.path(getwd(), "R", filename$value(name, domain))
