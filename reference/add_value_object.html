@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add a Value Object to a Domain — add_value_object • Domain-driven Design in R</title>
+<title>Add a Value Object to a Domain — add_value_object • ddd</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -84,7 +84,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">Domain-driven Design in R</a>
+        <a class="navbar-link" href="../index.html">ddd</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
@@ -178,23 +178,18 @@ Object is</p>
 </div></p>
 
 <p>Functions are things [@Wlaschin2018, p. 149]</p>
-<p>A light example of a <strong>Value Object</strong> is one that receives a character
-vector, applies the <code>tolower</code> function, and organises the character
-vector in a <code>data.frame</code>.<div class="sourceCode r"></p><pre><span class='va'>Alphabet</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>letters</span> <span class='op'>=</span> <span class='va'>LETTERS</span><span class='op'>)</span><span class='op'>{</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/stopifnot.html'>stopifnot</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/character.html'>is.character</a></span><span class='op'>(</span><span class='va'>letters</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># Value Object type check</span>
-  <span class='va'>letters</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/chartr.html'>tolower</a></span><span class='op'>(</span><span class='va'>letters</span><span class='op'>)</span>      <span class='co'># Value Object transformation</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>letter <span class='op'>=</span> <span class='va'>letters</span><span class='op'>)</span>     <span class='co'># Value Object return object</span>
-<span class='op'>}</span>
+<p>Intuitive examples of <strong>Value Objects</strong> are:</p><ul>
+<li><p><em><strong>Money</strong></em>: Money is a useful <strong>Value Object</strong> that captures
+monetary value. It is a combination of Amount (<code>numeric</code>) and
+Currency (<code>character</code>). For instance <em>20 USD</em> and <em>20 NZD</em>, have
+different monetary value. However, we can create designated
+functions to add/subtract one Money <strong>Value Object</strong> from another.</p></li>
+<li><p><strong>Person</strong>: Person is a <strong>Value Object</strong> that is representing an
+Object in our earthly life. It is a combination of First Name
+(<code>character</code>), optionally Last Name (<code>character</code>), Age (<code>numeric</code>)
+or Birthdate (<code>Date</code>), etc.</p></li>
+</ul>
 
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>Alphabet</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-<span class='co'>#&gt;   letter</span>
-<span class='co'>#&gt; 1      a</span>
-<span class='co'>#&gt; 2      b</span>
-<span class='co'>#&gt; 3      c</span>
-<span class='co'>#&gt; 4      d</span>
-<span class='co'>#&gt; 5      e</span>
-<span class='co'>#&gt; 6      f</span>
-</pre><p></div></p>
 <p>In the context of DDD, a <em><strong>Value Object</strong></em> models a domain concept. A
 <strong>Value Object</strong> is an object that is identified only by its data and
 doesn’t have a long-lived identity.</p>
@@ -202,10 +197,10 @@ doesn’t have a long-lived identity.</p>
 Associating a food order and a customer requires ephemeral customer
 identity. The customer name matters. It is used to identify for whom a
 particular Pizza was made for. The names Hilary and Bill are not equal.
-However, once the customer leaves the Pizzeria, the customer’s existence
-dissipates. On the other hand, if the customer is enrolled in a
-restaurant loyalty program, then its unique identifier on the system is
-both essential and long-lived.</p>
+However, once the customer has left the Pizzeria, the customer’s
+existence dissipates. On the other hand, if the customer is enrolled in
+a restaurant loyalty program, then its unique identifier on the system
+is both essential and long-lived.</p>
 
 <h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>What does <code>add_value_object</code> do?</h3>
 
@@ -231,7 +226,8 @@ other.
 
 
 <p>The boilerplate code produced by <code>add_value_object</code> looks likes this:</p>
-<p><strong>R/pizza_ordering-value-Customer.R</strong><div class="sourceCode r"></p><pre><span class='co'>#' @title Customer Value Object</span>
+<p><strong>R/pizza_ordering-value-Customer.R</strong><div class="sourceCode r"></p><pre><span class='co'># -------------------------------------------------------------------------</span>
+<span class='co'>#' @title Customer Value Object</span>
 <span class='co'>#' @return (`data.frame`)</span>
 <span class='co'>#' @export</span>
 <span class='co'>#' @family Pizza Ordering</span>
@@ -243,11 +239,6 @@ other.
     <span class='va'>toppings</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
     <span class='va'>takeaway</span> <span class='op'>=</span> <span class='cn'>NA</span>
 <span class='op'>)</span><span class='op'>{</span>
-    <span class='fu'><a href='https://rdrr.io/r/base/stopifnot.html'>stopifnot</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/character.html'>is.character</a></span><span class='op'>(</span><span class='va'>size</span><span class='op'>)</span><span class='op'>)</span>
-    <span class='fu'><a href='https://rdrr.io/r/base/stopifnot.html'>stopifnot</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/integer.html'>is.integer</a></span><span class='op'>(</span><span class='va'>slices</span><span class='op'>)</span>, <span class='va'>slices</span> <span class='op'>&gt;</span> <span class='fl'>0</span>, <span class='va'>slices</span> <span class='op'>&lt;=</span> <span class='fl'>8</span><span class='op'>)</span>
-    <span class='fu'><a href='https://rdrr.io/r/base/stopifnot.html'>stopifnot</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>is.list</a></span><span class='op'>(</span><span class='va'>toppings</span><span class='op'>)</span><span class='op'>)</span>
-    <span class='fu'><a href='https://rdrr.io/r/base/stopifnot.html'>stopifnot</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/logical.html'>is.logical</a></span><span class='op'>(</span><span class='va'>takeaway</span><span class='op'>)</span><span class='op'>)</span>
-
     <span class='fu'>tibble</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='op'>(</span>
         size <span class='op'>=</span> <span class='va'>size</span>,
         slices <span class='op'>=</span> <span class='va'>slices</span>,
@@ -255,6 +246,8 @@ other.
         takeaway <span class='op'>=</span> <span class='va'>takeaway</span>
     <span class='op'>)</span>
 <span class='op'>}</span>
+
+<span class='va'>Customer</span> <span class='op'>&lt;-</span> <span class='fu'>decorators</span><span class='fu'>::</span><span class='fu'><a href='https://tidylab.github.io/decorators//reference/validate_arguments.html'>validate_arguments</a></span><span class='op'>(</span><span class='va'>Customer</span><span class='op'>)</span>
 </pre><p></div></p>
 <p>The boilerplate code includes three key activities covered by any
 <strong>Value Object</strong>:</p><ul>

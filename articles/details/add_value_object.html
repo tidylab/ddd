@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Add a Value Object to a Domain • Domain-driven Design in R</title>
+<title>Add a Value Object to a Domain • ddd</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../../apple-touch-icon.png">
@@ -38,7 +38,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../../index.html">Domain-driven Design in R</a>
+        <a class="navbar-link" href="../../index.html">ddd</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
@@ -110,31 +110,20 @@
 <p>called during data wrangling operations.</p>
 </div>
 <p>Functions are things <span class="citation">(Wlaschin <a href="#ref-Wlaschin2018" role="doc-biblioref">2018</a>, 149)</span></p>
-<p>A light example of a <strong>Value Object</strong> is one that receives a character vector, applies the <code>tolower</code> function, and organises the character vector in a <code>data.frame</code>.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">Alphabet</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">letters</span> <span class="op">=</span> <span class="va">LETTERS</span><span class="op">)</span><span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">letters</span><span class="op">)</span><span class="op">)</span> <span class="co"># Value Object type check</span>
-  <span class="va">letters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/chartr.html">tolower</a></span><span class="op">(</span><span class="va">letters</span><span class="op">)</span>      <span class="co"># Value Object transformation</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>letter <span class="op">=</span> <span class="va">letters</span><span class="op">)</span>     <span class="co"># Value Object return object</span>
-<span class="op">}</span>
-
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu">Alphabet</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt;   letter</span>
-<span class="co">#&gt; 1      a</span>
-<span class="co">#&gt; 2      b</span>
-<span class="co">#&gt; 3      c</span>
-<span class="co">#&gt; 4      d</span>
-<span class="co">#&gt; 5      e</span>
-<span class="co">#&gt; 6      f</span></code></pre></div>
+<p>Intuitive examples of <strong>Value Objects</strong> are:</p>
+<ul>
+<li><p><strong><em>Money</em></strong>: Money is a useful <strong>Value Object</strong> that captures monetary value. It is a combination of Amount (<code>numeric</code>) and Currency (<code>character</code>). For instance <em>20 USD</em> and <em>20 NZD</em>, have different monetary value. However, we can create designated functions to add/subtract one Money <strong>Value Object</strong> from another.</p></li>
+<li><p><strong>Person</strong>: Person is a <strong>Value Object</strong> that is representing an Object in our earthly life. It is a combination of First Name (<code>character</code>), optionally Last Name (<code>character</code>), Age (<code>numeric</code>) or Birthdate (<code>Date</code>), etc.</p></li>
+</ul>
 <p>In the context of DDD, a <strong><em>Value Object</em></strong> models a domain concept. A <strong>Value Object</strong> is an object that is identified only by its data and doesn’t have a long-lived identity.</p>
-<p>For example, think about the diners, i.e. customers, of a Pizzeria. Associating a food order and a customer requires ephemeral customer identity. The customer name matters. It is used to identify for whom a particular Pizza was made for. The names Hilary and Bill are not equal. However, once the customer leaves the Pizzeria, the customer’s existence dissipates. On the other hand, if the customer is enrolled in a restaurant loyalty program, then its unique identifier on the system is both essential and long-lived.</p>
+<p>For example, think about the diners, i.e. customers, of a Pizzeria. Associating a food order and a customer requires ephemeral customer identity. The customer name matters. It is used to identify for whom a particular Pizza was made for. The names Hilary and Bill are not equal. However, once the customer has left the Pizzeria, the customer’s existence dissipates. On the other hand, if the customer is enrolled in a restaurant loyalty program, then its unique identifier on the system is both essential and long-lived.</p>
 </div>
 <div id="what-does-add_value_object-do" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-does-add_value_object-do" class="anchor"></a>What does <code>add_value_object</code> do?</h2>
 <p>Given the <strong>Value Object</strong> <code>name</code>, and its <code>domain</code> name,</p>
 <p>When <code>add_value_object</code> is called</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/add_value_object.html">add_value_object</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">'Customer'</span>, domain <span class="op">=</span> <span class="st">'Pizza Ordering'</span><span class="op">)</span></code></pre></div>
 <p>Then the function:</p>
 <ul>
@@ -153,8 +142,9 @@
 <a href="#what-are-the-main-components-of-a-value-object" class="anchor"></a>What are the main components of a Value Object?</h2>
 <p>The boilerplate code produced by <code>add_value_object</code> looks likes this:</p>
 <p><strong>R/pizza_ordering-value-Customer.R</strong></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#' @title Customer Value Object</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># -------------------------------------------------------------------------</span>
+<span class="co">#' @title Customer Value Object</span>
 <span class="co">#' @return (`data.frame`)</span>
 <span class="co">#' @export</span>
 <span class="co">#' @family Pizza Ordering</span>
@@ -166,18 +156,15 @@
     <span class="va">toppings</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span>,
     <span class="va">takeaway</span> <span class="op">=</span> <span class="cn">NA</span>
 <span class="op">)</span><span class="op">{</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">size</span><span class="op">)</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html">is.integer</a></span><span class="op">(</span><span class="va">slices</span><span class="op">)</span>, <span class="va">slices</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="va">slices</span> <span class="op">&lt;=</span> <span class="fl">8</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">is.list</a></span><span class="op">(</span><span class="va">toppings</span><span class="op">)</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/logical.html">is.logical</a></span><span class="op">(</span><span class="va">takeaway</span><span class="op">)</span><span class="op">)</span>
-
     <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
         size <span class="op">=</span> <span class="va">size</span>,
         slices <span class="op">=</span> <span class="va">slices</span>,
         toppings <span class="op">=</span> <span class="va">toppings</span>,
         takeaway <span class="op">=</span> <span class="va">takeaway</span>
     <span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<span class="op">}</span>
+
+<span class="va">Customer</span> <span class="op">&lt;-</span> <span class="fu">decorators</span><span class="fu">::</span><span class="fu"><a href="https://tidylab.github.io/decorators//reference/validate_arguments.html">validate_arguments</a></span><span class="op">(</span><span class="va">Customer</span><span class="op">)</span></code></pre></div>
 <p>The boilerplate code includes three key activities covered by any <strong>Value Object</strong>:</p>
 <ul>
 <li>Assigning default values to input argument values, such as different types of NA.</li>
@@ -192,10 +179,10 @@
 <p>The need that <strong>Value Object</strong> serve is not new. Until now you have probably been using a degenerated version of a <strong>Value Object</strong> in different places of the software.</p>
 <p>The simplest way to implement a <strong>Value Object</strong> in R is with a function that returns a <code>data.frame</code> row. Compare the following two patterns for creating a <code>data.frame</code> that holds a Customer data.</p>
 <p>First, using the <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble::tibble</a></code> function directly for constructing the Customer</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">customer</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Bilbo"</span>, family <span class="op">=</span> <span class="st">"Baggins"</span><span class="op">)</span></code></pre></div>
 <p>Second, using a <strong>Value Object</strong> as a surrogate for constructing the Customer</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Customer</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">given</span> <span class="op">=</span> <span class="cn">NA_character_</span>, <span class="va">family</span> <span class="op">=</span> <span class="cn">NA_character_</span><span class="op">)</span>
 <span class="op">{</span>
     <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">given</span><span class="op">)</span><span class="op">)</span>
@@ -212,7 +199,7 @@
 <li><p>Default values for missing input arguments. In this manner, the <strong>Value Object</strong> has a well-defined behaviour for a customer without a last name, such as Madonna and Bono.</p></li>
 </ul>
 <p>There are more subtle qualities offered by a <strong>Value Object</strong> over direct implementation. First, it allows you to capture new knowledge about the domain. Say, you have discovered that the Pizzeria makes deliveries. In this case, the Customer details need to include an address and a phone number. With a <strong>Value Object</strong>, you can rewrite the Customer concept as:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Customer</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">given</span> <span class="op">=</span> <span class="cn">NA_character_</span>, <span class="va">family</span> <span class="op">=</span> <span class="cn">NA_character_</span>, 
                      <span class="va">phone</span> <span class="op">=</span> <span class="cn">NA_integer_</span>, <span class="va">address</span> <span class="op">=</span> <span class="cn">NA_character_</span><span class="op">)</span>
 <span class="op">{</span>
@@ -223,11 +210,11 @@
     <span class="fu">tibble</span><span class="op">(</span>given <span class="op">=</span> <span class="va">given</span>, family <span class="op">=</span> <span class="va">family</span>, phone <span class="op">=</span> <span class="va">phone</span>, address <span class="op">=</span> <span class="va">address</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <p>Notice that former calls to <code>Customer</code> in the code base, which modelled the ordering pizza process for diners, are not impacted by the added input arguments. For example, the call of previous diner works well.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">customer</span> <span class="op">&lt;-</span> <span class="fu">Customer</span><span class="op">(</span>given <span class="op">=</span> <span class="st">"Bilbo"</span>, family <span class="op">=</span> <span class="st">"Baggins"</span><span class="op">)</span></code></pre></div>
 <p>The <strong>Value Object</strong> ascribes NA values for the phone number and address of diners, that is customers in the restaurant.</p>
 <p>The second subtle quality regards tests. If you write unit-test test cases against returning objects, then without a <strong>Value Object</strong>, your test expectations capture only the available knowledge at the moment of writing the test. For example, a test that validates the structure of a returning data from a function call,</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">test_that</span><span class="op">(</span><span class="st">'calling Order$get_customer_info() returns the desired results'</span>, <span class="op">{</span>
     <span class="fu">expect_setequal</span><span class="op">(</span>
         <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">Order</span><span class="op">$</span><span class="fu">get_customer_info</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,
@@ -235,7 +222,7 @@
     <span class="op">)</span>
 <span class="op">}</span><span class="op">)</span></code></pre></div>
 <p>can instead be written against the <code>Customer</code> <strong>Value Object</strong>,</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">test_that</span><span class="op">(</span><span class="st">'calling Order$get_customer_info() returns the desired results'</span>, <span class="op">{</span>
     <span class="fu">expect_setequal</span><span class="op">(</span>
         <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">Order</span><span class="op">$</span><span class="fu">get_customer_info</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,
