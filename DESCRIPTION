@@ -36,4 +36,5 @@ Imports:
     R6,
     R6P,
     snakecase,
-    stringr
+    stringr,
+    decorators
