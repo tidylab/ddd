@@ -8,8 +8,8 @@ test_that("implementing Value Object returns data.frame", {
     expect_s3_class(null_car <- DummyValueObject(), "data.frame")
     expect_has_columns(null_car, colnames(mtcars))
 
-    expect_s3_class(null_car <- DummyValueObject(hp = 8), "data.frame")
-    expect_equal(null_car$hp, 8)
+    expect_s3_class(null_car <- DummyValueObject(mpg = 8), "data.frame")
+    expect_equal(null_car$mpg, 8)
 })
 
 

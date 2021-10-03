@@ -38,7 +38,3 @@ reference:
 - title: Abstract Base Classes
   contents:
   - starts_with("Abstract")
-- title: DDD Utilities
-  contents:
-  - 'assert_default_classes'
-  - 'bind_input_arguments'

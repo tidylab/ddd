@@ -29,10 +29,13 @@ Suggests:
     knitr
 Imports:
     assertthat,
+    desc,
+    decorators,
     fs,
     glue,
     purrr,
     R6,
-    R6P,
     snakecase,
-    stringr
+    stringr,
+    tibble,
+    tidyr
