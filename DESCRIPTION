@@ -28,13 +28,14 @@ Suggests:
     rmarkdown,
     knitr
 Imports:
-    desc,
     assertthat,
+    desc,
+    decorators,
     fs,
     glue,
     purrr,
     R6,
-    R6P,
     snakecase,
     stringr,
-    decorators
+    tibble,
+    tidyr
