@@ -26,7 +26,8 @@ Suggests:
     testthat,
     withr,
     rmarkdown,
-    knitr
+    knitr,
+    covr
 Imports:
     assertthat,
     desc,

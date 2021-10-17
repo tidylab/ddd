@@ -28,6 +28,8 @@ status](https://github.com/tidylab/ddd/workflows/R-CMD-check/badge.svg)](https:/
 [![codecov](https://codecov.io/gh/tidylab/ddd/branch/master/graph/badge.svg?token=U6FL5N32FL)](https://codecov.io/gh/tidylab/ddd)
 
 
+[![Codecov test coverage](https://codecov.io/gh/tidylab/ddd/branch/master/graph/badge.svg)](https://codecov.io/gh/tidylab/ddd?branch=master)
+[![R-CMD-check](https://github.com/tidylab/ddd/workflows/R-CMD-check/badge.svg)](https://github.com/tidylab/ddd/actions)
 <!-- badges: end -->
 
 ## `Domain-driven Design (ddd)`
