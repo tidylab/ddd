@@ -1,5 +1,5 @@
 .onAttach <- function(lib, pkg, ...) {
-  if (interactive()) {
+  if(interactive() & !identical(Sys.getenv("TESTTHAT"), "true")) {
     packageStartupMessage(paste(
       "\n",
       "Welcome to ddd\n",

@@ -3,6 +3,7 @@
 #' @param name (`character`) \code{Domain Service} name.
 #' @param domain (`character`) \code{Domain Service} domain name.
 #' @includeRmd vignettes/details/add_domain_service.Rmd
+#' @return No return value, called for side effects.
 #' @family domain object generators
 #' @export
 add_domain_service <- function(name, domain) {
@@ -26,7 +27,7 @@ add_domain_service <- function(name, domain) {
     paste0(collapse = "\n\n") %>%
     write(file = file_path, append = FALSE, sep = "\n")
 
-  if (interactive()) fs::file_show(file_path) # nocov
+  file_show(file_path) # nocov
 
   # Add Unit Test -----------------------------------------------------------
   file_path <- file.path(getwd(), "tests", "testthat", paste0("test-", filename$service(name, domain)))
@@ -40,7 +41,7 @@ add_domain_service <- function(name, domain) {
     paste0(collapse = "\n\n") %>%
     write(file = file_path, append = FALSE, sep = "\n")
 
-  if (interactive()) fs::file_show(file_path) # nocov
+  file_show(file_path) # nocov
 
   # Return ------------------------------------------------------------------
   invisible()

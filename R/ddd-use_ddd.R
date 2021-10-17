@@ -1,5 +1,6 @@
 #' @title Make a Project Independent of the \code{ddd} Package
 #' @param path (`character`) Path to the root folder of the project.
+#' @return No return value, called for side effects.
 #' @includeRmd vignettes/articles/use_ddd.Rmd
 #' @section Workflow:
 #' 1. Call \code{\link{use_ddd}} maximum once per project; this will make the

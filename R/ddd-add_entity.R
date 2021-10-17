@@ -6,6 +6,7 @@
 #' @param domain (`character`) \code{Entity} domain name.
 #' @param commands (`character`) Optional: names of public method that perform an action.
 #' @param queries (`character`) Optional: names of public method that return data to the caller.
+#' @return No return value, called for side effects.
 #' @includeRmd vignettes/details/add_entity.Rmd
 #' @family domain object generators
 #' @export
@@ -25,12 +26,12 @@ add_entity <- function(name, domain, commands = NULL, queries = NULL) {
   # Add Entity Object -------------------------------------------------------
   file_path <- file.path(getwd(), "R", filename$entity(name, domain))
   .add_entity$add_Entity_object(file_path, name, domain, commands, queries)
-  if (interactive()) fs::file_show(file_path) # nocov
+  file_show(file_path) # nocov
 
   # Add Unit Test -----------------------------------------------------------
   file_path <- file.path(getwd(), "tests", "testthat", paste0("test-", filename$entity(name, domain)))
   .add_entity$add_Entity_test(file_path, name, domain, commands, queries)
-  if (interactive()) fs::file_show(file_path) # nocov
+  file_show(file_path) # nocov
 
   # Return ------------------------------------------------------------------
   invisible()

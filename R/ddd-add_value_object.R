@@ -2,6 +2,7 @@
 #' @description Value Object
 #' @param name (`character`) \code{Value Object} name.
 #' @param domain (`character`) \code{Value Object} domain name.
+#' @return No return value, called for side effects.
 #' @includeRmd vignettes/details/add_value_object.Rmd
 #' @family domain object generators
 #' @export
@@ -28,7 +29,7 @@ add_value_object <- function(name, domain) {
     paste0(collapse = "\n\n") %>%
     write(file = file_path, append = FALSE, sep = "\n")
 
-  if (interactive()) fs::file_show(file_path) # nocov
+  file_show(file_path) # nocov
 
   # Return ------------------------------------------------------------------
   invisible()
