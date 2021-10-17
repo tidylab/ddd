@@ -1,3 +1,5 @@
+# usethis::use_tidy_github_actions()
+
 remotes::install_cran("styler", quiet = TRUE)
 
 # styler::style_file(
