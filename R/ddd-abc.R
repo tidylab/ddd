@@ -1,4 +1,4 @@
-#nocov start
+# nocov start
 # -------------------------------------------------------------------------
 #' @title Abstract Entity Class
 #' @description
@@ -7,13 +7,13 @@
 #' @family abstract base classes
 #' @export
 AbstractEntity <- R6::R6Class("Entity", cloneable = FALSE, public = list(
-    #' @field uid Entity unique identifier.
-    uid = character(0),
-    #' @description Instantiate an Entity object.
-    #' @param uid (`character`) Entity unique identifier.
-    initialize = function(uid){
-        self$uid <- uid
-    }
+  #' @field uid Entity unique identifier.
+  uid = character(0),
+  #' @description Instantiate an Entity object.
+  #' @param uid (`character`) Entity unique identifier.
+  initialize = function(uid) {
+    self$uid <- uid
+  }
 ))
 
 # -------------------------------------------------------------------------
@@ -22,11 +22,11 @@ AbstractEntity <- R6::R6Class("Entity", cloneable = FALSE, public = list(
 #' @family abstract base classes
 #' @export
 AbstractDomainService <- R6::R6Class("DomainService", cloneable = FALSE, public = list(
-    #' @description Instantiate a domain service
-    initialize = function(){},
-    #' @description Tear down a domain service
-    finalize = function(){}
+  #' @description Instantiate a domain service
+  initialize = function() {},
+  #' @description Tear down a domain service
+  finalize = function() {}
 ))
 
 # -------------------------------------------------------------------------
-#nocov end
+# nocov end

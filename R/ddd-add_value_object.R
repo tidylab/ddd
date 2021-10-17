@@ -5,31 +5,31 @@
 #' @includeRmd vignettes/details/add_value_object.Rmd
 #' @family domain object generators
 #' @export
-add_value_object <- function(name, domain){
-    # Defensive Programming ---------------------------------------------------
-    assert$is_character(name)
-    assert$is_character(domain)
+add_value_object <- function(name, domain) {
+  # Defensive Programming ---------------------------------------------------
+  assert$is_character(name)
+  assert$is_character(domain)
 
-    # Setup -------------------------------------------------------------------
-    name <- title$value(name)
-    domain <- title$domain(domain)
-    try(desc::description$new()$set_dep("decorators", "Imports")$write(), silent = TRUE)
+  # Setup -------------------------------------------------------------------
+  name <- title$value(name)
+  domain <- title$domain(domain)
+  try(desc::description$new()$set_dep("decorators", "Imports")$write(), silent = TRUE)
 
 
-    # Add Value Object --------------------------------------------------------
-    file_path <- file.path(getwd(), "R", filename$value(name, domain))
-    file.create(file_path)
+  # Add Value Object --------------------------------------------------------
+  file_path <- file.path(getwd(), "R", filename$value(name, domain))
+  file.create(file_path)
 
-    template <- read_lines(find.template("templates", "value-object", "template.R"))
-    excerpts <- str_glue(template, name = name, domain = domain)
+  template <- read_lines(find.template("templates", "value-object", "template.R"))
+  excerpts <- str_glue(template, name = name, domain = domain)
 
-    excerpts %>%
-        unlist(use.names = FALSE) %>%
-        paste0(collapse = "\n\n") %>%
-        write(file = file_path, append = FALSE, sep = "\n")
+  excerpts %>%
+    unlist(use.names = FALSE) %>%
+    paste0(collapse = "\n\n") %>%
+    write(file = file_path, append = FALSE, sep = "\n")
 
-    if(interactive()) fs::file_show(file_path) # nocov
+  if (interactive()) fs::file_show(file_path) # nocov
 
-    # Return ------------------------------------------------------------------
-    invisible()
+  # Return ------------------------------------------------------------------
+  invisible()
 }

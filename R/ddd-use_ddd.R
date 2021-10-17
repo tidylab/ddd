@@ -7,8 +7,8 @@
 #' 2. Call \code{devtools::document} (or Ctrl+Shift+D on windows) to include the
 #' copied classes in the project NAMESPACE file
 #' @export
-use_ddd <- function(path = "."){
-    fs::dir_exists(path)
-    fs::dir_copy(find.template("templates", "R"), file.path(path))
-    invisible()
+use_ddd <- function(path = ".") {
+  fs::dir_exists(path)
+  fs::dir_copy(find.template("templates", "R"), file.path(path))
+  invisible()
 }
