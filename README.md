@@ -1,13 +1,13 @@
-# `ddd` <img src="https://i.imgur.com/M8Jk1AL.png" align="right" height="75"/>
+
+# `ddd` <img src="https://raw.githubusercontent.com/tidylab/ddd/master/pkgdown/favicon/apple-touch-icon-120x120.png" align="right" height="75"/>
 
 <!-- badges: start -->
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ddd)](https://CRAN.R-project.org/package=ddd)
-[![R build
-status](https://github.com/tidylab/ddd/workflows/R-CMD-check/badge.svg)](https://github.com/tidylab/ddd/actions)
-[![codecov](https://codecov.io/gh/tidylab/ddd/branch/master/graph/badge.svg?token=U6FL5N32FL)](https://codecov.io/gh/tidylab/ddd)
-
+[![Codecov test
+coverage](https://codecov.io/gh/tidylab/ddd/branch/master/graph/badge.svg)](https://codecov.io/gh/tidylab/ddd?branch=master)
+[![R-CMD-check](https://github.com/tidylab/ddd/workflows/R-CMD-check/badge.svg)](https://github.com/tidylab/ddd/actions)
 <!-- badges: end -->
 
 ## `Domain-driven Design (ddd)`
@@ -90,8 +90,10 @@ alternative to good design is bad design, not no design at all.
 
 You can install `ddd` by using:
 
-    install.packages("remotes")
-    remotes::install_github("tidylab/ddd")
+``` r
+install.packages("remotes")
+remotes::install_github("tidylab/ddd")
+```
 
 Optionally, you can make a project independent of the `ddd` package by
 calling `use_ddd()`. `ddd` is needed for software development and has no
@@ -100,17 +102,37 @@ and functions into your project.
 
 ## References
 
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+<div id="ref-Evans2004" class="csl-entry">
+
 Evans, Eric. 2004. *<span class="nocase">Domain-driven design: tackling
 complexity in the heart of software</span>*. Addison-Wesley
 Professional.
+
+</div>
+
+<div id="ref-Percival2020" class="csl-entry">
 
 Percival, Harry, and Bob Gregory. 2020. *<span
 class="nocase">Architecture Patterns with Python Enabling Test-Driven
 Development, Domain-Driven Design, and Event-Driven
 Microservice</span>*. Edited by 1 Edition. O’Reilly Media, Inc.
 
+</div>
+
+<div id="ref-Vernon2013" class="csl-entry">
+
 Vernon, Vaughn. 2013. *Implementing Domain-Driven Design*. 1st Editio.
 Addison-Wesley Professional.
 
+</div>
+
+<div id="ref-Wlaschin2018" class="csl-entry">
+
 Wlaschin, Scott. 2018. *Domain Modeling Made Functional*. Pragmatic
 Bookshelf.
+
+</div>
+
+</div>

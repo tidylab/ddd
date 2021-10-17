@@ -17,17 +17,11 @@ editor_options:
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ```
 
-# `ddd` <img src="https://i.imgur.com/M8Jk1AL.png" align="right" height="75"/>
+# `ddd` <img src="https://raw.githubusercontent.com/tidylab/ddd/master/pkgdown/favicon/apple-touch-icon-120x120.png" align="right" height="75"/>
 
 <!-- badges: start -->
-
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ddd)](https://CRAN.R-project.org/package=ddd)
-[![R build
-status](https://github.com/tidylab/ddd/workflows/R-CMD-check/badge.svg)](https://github.com/tidylab/ddd/actions)
-[![codecov](https://codecov.io/gh/tidylab/ddd/branch/master/graph/badge.svg?token=U6FL5N32FL)](https://codecov.io/gh/tidylab/ddd)
-
-
 [![Codecov test coverage](https://codecov.io/gh/tidylab/ddd/branch/master/graph/badge.svg)](https://codecov.io/gh/tidylab/ddd?branch=master)
 [![R-CMD-check](https://github.com/tidylab/ddd/workflows/R-CMD-check/badge.svg)](https://github.com/tidylab/ddd/actions)
 <!-- badges: end -->
