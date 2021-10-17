@@ -6,6 +6,8 @@
 #' @return No return value, called for side effects.
 #' @family domain object generators
 #' @export
+#' @examples
+#' add_domain_service("Registry", "Pizza Ordering")
 add_domain_service <- function(name, domain) {
   # Defensive Programming ---------------------------------------------------
   assert$is_character(name)
