@@ -1,0 +1,8 @@
+usethis::use_tidy_github_actions()
+usethis::use_tidy_description()
+# usethis::use_tidy_eval()
+usethis::use_tidy_style()
+# usethis::use_tidy_contributing()
+# usethis::use_tidy_issue_template()
+# usethis::use_tidy_release_test_env()
+# usethis::use_tidy_github()
