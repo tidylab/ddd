@@ -14,5 +14,5 @@ source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 
 <!-- Details -->
 
-```{r child="../details/add_entity.Rmd", eval = TRUE}
+```{r child="../details/add_domain_service.Rmd", eval = TRUE}
 ```
