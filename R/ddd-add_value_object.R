@@ -72,39 +72,39 @@ generate_dynamic_template <- function(name, domain, fields) {
     # Generate @param documentation for each field
     param_docs <- sapply(col_names, function(col) {
         type_str <- infer_type_string(fields[[col]])
-        str_glue("#' @param {col} ('{type_str}') ?")
+        paste0("#' @param ", col, " ('", type_str, "') ?")
     })
     
     # Generate function parameters
     func_params <- sapply(col_names, function(col) {
         default_val <- infer_type_default(fields[[col]])
-        str_glue("    {col} = {default_val}")
+        paste0("    ", col, " = ", default_val)
     })
     
     # Generate tibble add_column calls
     add_column_calls <- sapply(col_names, function(col) {
         conv_func <- infer_conversion_function(fields[[col]])
-        str_glue("   |> tibble::add_column({col} = {conv_func}({col}))")
+        paste0("   |> tibble::add_column(", col, " = ", conv_func, "(", col, "))")
     })
     
-    # Construct the complete template
-    template <- str_glue(
-        "#' @title {name} Value Object",
-        paste(param_docs, collapse = "\n"),
-        "#' @return (`{name}`) {name} Value Object",
+    # Construct the complete template using paste instead of str_glue
+    template_parts <- c(
+        paste0("#' @title ", name, " Value Object"),
+        param_docs,
+        paste0("#' @return (`", name, "`) ", name, " Value Object"),
         "#' @export",
-        "#' @family {domain}",
-        "{name} <- function(",
+        paste0("#' @family ", domain),
+        paste0(name, " <- function("),
         paste(func_params, collapse = ",\n"),
-        "){{",
+        "){",
         "    tibble::tibble()",
-        paste(add_column_calls, collapse = "\n"),
+        add_column_calls,
         "   |> dplyr::distinct()",
         "   |> tidyr::drop_na()",
-        "}}",
-        .sep = "\n"
+        "}"
     )
     
+    template <- paste(template_parts, collapse = "\n")
     return(template)
 }
 
