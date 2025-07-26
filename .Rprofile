@@ -27,7 +27,7 @@ assign(".Rprofile", new.env(), envir = globalenv())
     # Programming Logic
     pkgs <- c("usethis", "devtools", "magrittr", "testthat")
     invisible(sapply(pkgs, require, warn.conflicts = FALSE, character.only = TRUE))
-    .Rprofile$tasks$update_template()
+    .Rprofile$tasks$update_templates()
 }
 
 # .Last -------------------------------------------------------------------
@@ -133,7 +133,7 @@ assign(".Rprofile", new.env(), envir = globalenv())
 
 # Utils -------------------------------------------------------------------
 .Rprofile$utils$run_script <- function(path, name){
-    .Rprofile$tasks$update_template()
+    .Rprofile$tasks$update_templates()
 
     withr::with_envvar(
         c(TESTTHAT = "true"),
